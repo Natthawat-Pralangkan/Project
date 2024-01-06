@@ -1,5 +1,5 @@
-<?php include("../servers/connect.php"); ?>
-<?php include("../header.php"); ?>
+<?php include(".././servers/connect.php"); ?>
+<?php include(".././header.php"); ?>
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
     <!-- Content Wrapper -->
@@ -17,60 +17,73 @@
             <a href=""></a>
         </div>
         <div class="content">
-            <div class="row p-5 m-1">
-                <div class="col-4">
-                    <div class="shadow p-3 mb-5 bg-body rounded" style="width: 300px; height: 250px;">
-                        <i class="fa-regular fa-id-card spani" style="font-size: 60px;"></i>
-                        <span class="menu-text" style='font-size: 16px; text-align:right; display: inline-block; width:100%;'>
-                            คำร้องรอการพิจารณา
-                        </span>
-                        <h1 class="m-2" style='font-size: 30px; text-align:right; display: inline-block; width:90%;'>30</h1>
-                        <div class="text-center mt-5">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                เพิ่มเติม
-                            </button>
+            <div class="content">
+                <div class="row p-5 m-1">
+                    <div class="col-12 col-md-4">
+                        <div class="shadow p-3 mb-5 bg-body rounded custom-card-ho">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <i class="fa-solid fa-newspaper" style="font-size: 40px;color: #27a645"></i>
+                                <p style="color : #555555">คำร้องรอการพิจารณา</p>
+                            </div>
+                            <div class="my-3">
+                                <h1 class="text-center">30</h1>
+                            </div>
+                            <div class="border-top text-center py-3">
+                                <button type="button" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="background-color: #BB6AFB; color :#FFFFFF">
+                                    เพิ่มเติม
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="shadow p-3 mb-5 bg-body rounded custom-card-ho">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <i class="fa-solid fa-newspaper" style="font-size: 40px;color: #FFFF33"></i>
+                                <p style="color : #555555">คำร้องรออนุมัติ</p>
+                            </div>
+                            <div class="my-3">
+                                <h1 class="text-center">40</h1>
+                            </div>
+                            <div class="border-top text-center py-3">
+                                <button type="button" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #BB6AFB; color :#FFFFFF">
+                                    เพิ่มเติม
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="shadow p-3 mb-5 bg-body rounded custom-card-ho">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <i class="fa-solid fa-newspaper" style="font-size: 40px;color: #FF3300"></i>
+                                <p style="color : #555555">คำร้องอนุมัติแล้ว</p>
+                            </div>
+                            <div class="my-3">
+                                <h1 class="text-center">40</h1>
+                            </div>
+                            <div class="border-top text-center py-3">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3"style="background-color: #BB6AFB; color :#FFFFFF">
+                                    เพิ่มเติม
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="shadow p-3 mb-5 bg-body rounded custom-card-ho">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <i class="fa-solid fa-newspaper" style="font-size: 40px;color: #000000"></i>
+                                <p style="color : #555555">คำร้องทั้งหมด</p>
+                            </div>
+                            <div class="my-3">
+                                <h1 class="text-center">60</h1>
+                            </div>
+                            <div class="border-top text-center py-3">
+                                <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal4" style="background-color: #BB6AFB; color :#FFFFFF">
+                                    เพิ่มเติม
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-
-                </div>
-                <div class="col-4">
-                    <div class="shadow p-3 mb-5 bg-body rounded" style="width: 300px;height: 250px;">
-                        <i class="fa-solid fa-newspaper spani" style="font-size: 60px;"></i>
-                        <span class="menu-text" style='font-size: 16px; text-align:right; display: inline-block; width:100%;'>
-                            คำร้องรออนุมัติ
-                        </span>
-                        <h1 class="m-2" style='font-size: 30px; text-align:right; display: inline-block; width:90%;'>30</h1>
-                        <div class="text-center mt-5">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                เพิ่มเติม
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="shadow p-3 mb-5 bg-body rounded" style="width: 300px;height: 250px;">
-                        <i class="fa-solid fa-newspaper spani" style="font-size: 60px;"></i>
-                        <span class="" style='font-size: 16px; text-align:right;width:100%; display: inline-block;'>คำร้องอนุมัติแล้ว</span>
-                        <h1 class="m-2" style='font-size: 30px; text-align:right;width:90%; display: inline-block;'>30</h1>
-                        <div class="text-center mt-5">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-                                เพิ่มเติม
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="shadow p-3 mb-5 bg-body rounded" style="width: 300px;height: 250px;">
-                        <i class="fa-solid fa-newspaper spani" style="font-size: 60px;"></i>
-                        <span class="" style='font-size: 16px; text-align:right;width:100%; display: inline-block;'>คำร้องทั้งหมด</span>
-                        <h1 class="m-2" style='font-size: 30px; text-align:right;width:90%; display: inline-block;'>30</h1>
-                        <div class="text-center mt-5">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-                                เพิ่มเติม
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- Modal คำร้องรอการพิจารณา -->
@@ -178,4 +191,4 @@
         </div>
     </div>
 </div>
-<?php include("../footer.php") ?>
+<?php include(".././footer.php") ?>
