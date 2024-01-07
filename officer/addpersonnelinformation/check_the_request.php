@@ -1,4 +1,4 @@
-<?php include("../header.php"); ?>
+<?php include("../../header.php"); ?>
 
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
@@ -18,7 +18,7 @@
             </div>
             <a href=""></a>
         </div>
-        <div class="content mt-5">
+        <div class="mx-3 mt-5">
             <div class="mt-3">
                 <table id="checktherequest" class="table">
                     <thead>
@@ -35,4 +35,4 @@
             </div>
         </div>
     </div>
-    <?php include("../footer.php") ?>
+    <?php include("../../footer.php") ?>

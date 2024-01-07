@@ -1,5 +1,5 @@
-<?php include("../servers/connect.php"); ?>
-<?php include("../header.php"); ?>
+<?php include("../../servers/connect.php"); ?>
+<?php include("../../header.php"); ?>
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
 
@@ -19,7 +19,7 @@
             </div>
             <a href=""></a>
         </div>
-        <div class="container mt-5">
+        <div class="mx-3 mt-5">
             <div class="d-flex justify-content-end">
                 <div>
                     <a href="#" class="btn btn-success mr-2">Excel</a>

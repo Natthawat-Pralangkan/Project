@@ -4,27 +4,15 @@ body,
 html {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
-.wrapper {
+.wrapper-custom {
   display: flex;
   flex-direction: row;
   /* Change direction to row */
-  height: calc(100vh);
   /* Subtracting the navbar height */
 }
 
-#toggleSidebar {
-  order: -1;
-  /* ย้ายปุ่มไปทางซ้ายสุด */
-}
-
-.sidebar,
-.content-wrapper {
-  transition: all 0.3s ease;
-  /* Adjust the duration (0.3s) as needed */
-}
 
 .navbar {
   width: 100%;
@@ -35,13 +23,12 @@ html {
   padding: 0 20px;
 }
 
-.sidebar {
+.sidebar-custom {
   width: 5px;
   background-color: #222d32;
-  /* AdminLTE sidebar color */
   color: white;
   overflow-y: auto;
-  height: 100%;
+  
 }
 
 .content-wrapper {
@@ -68,41 +55,6 @@ html {
   /* Scroll if content is too long */
 }
 
-.sidebar-collapsed {
-  width: 60px;
-  /* or whatever width you want when collapsed */
-  overflow-x: hidden;
-  /* hide overflowing content */
-}
-
-.content-expanded {
-  flex: 1;
-  width: calc(100% - 60px);
-  /* adjust this value based on your collapsed sidebar width */
-}
-
-.sidebar-collapsed .nav-link {
-  text-align: center;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.sidebar-collapsed .nav-link i {
-  margin-right: 0;
-}
-
-.sidebar-collapsed .nav-link .fas.fa-chevron-down {
-  display: none;
-}
-
-.sidebar-collapsed .nav-link:not(.sub) {
-  justify-content: center;
-}
-
-.sidebar-collapsed .nav-item .collapse {
-  display: none !important;
-}
-
 .box {
   border: 1px solid #ccc;
   /* เส้นขอบกรอบ */
@@ -111,21 +63,6 @@ html {
   /* ระยะห่างภายในกรอบ */
 }
 
-.brand-image {
-  width: 34px;
-  /* Adjust based on your logo's dimensions */
-  height: 34px;
-  margin-right: 10px;
-  /* Space between the logo and the text */
-  border-radius: 50%;
-  /* Makes the image circular */
-}
-
-.brand-text {
-  font-size: 25px;
-  font-weight: 300px;
-  font-family: "Times New Roman", Times, serif;
-}
 
 .brand-link {
   display: flex;
@@ -170,28 +107,6 @@ html {
   border-radius: 0.25rem;
 }
 
-.breadcrumb-item {
-  display: inline-block;
-}
-
-.breadcrumb-item+.breadcrumb-item::before {
-  content: "/";
-  padding: 0 5px;
-  color: #6c757d;
-  /* Grey color for the separator */
-}
-
-.breadcrumb-item a {
-  color: #007bff;
-  /* Blue color for links */
-  text-decoration: none;
-}
-
-.breadcrumb-item.active a {
-  color: #6c757d;
-  /* Grey color for the active item */
-}
-
 .box {
   background-color: #C274FF;
 }
@@ -202,7 +117,7 @@ html {
 }
 
 #nav {
-  background-color: #555157;
+  background-color: #8B39F4;
 }
 
 .shadow-lg {
@@ -220,28 +135,13 @@ html {
   background-color: #E4AFFF;
   color: #000;
   width: auto;
-  
+
 }
 #bgnav{
   background-color: #BB6AFB;
   color: #000;
   width: auto;
   height: 75px;
-}
-
-#footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #BB6AFB;
-  color: rgb(4, 4, 4);
-  text-align: center;
-  height: 40px;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .btn-custom-color {
   background-color: #BB6AFB;
@@ -253,7 +153,6 @@ html {
   padding-top: 50px;
 }
 
-
 .custom-card:hover{
   background: #f0f0f0 !important; 
   cursor: pointer;
@@ -262,4 +161,7 @@ html {
 .active-menu{
   background-color: white !important;
   border-left: 5px solid #e6e6e6;
+}
+.navbar-brand{
+  background-color: #8B39F4;
 }
