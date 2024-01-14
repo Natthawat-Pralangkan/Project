@@ -8,6 +8,9 @@ $(document).ready(function () {
           data: "ชื่อคำร้อง",
         },
         {
+          data: "ประเภท",
+        },
+        {
           data: "จัดการ",
         },
       ],

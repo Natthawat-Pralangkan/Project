@@ -26,20 +26,181 @@
                         <tr>
                             <th>ลำดับ</th>
                             <th>ชื่อคำร้อง</th>
+                            <th>ประเภท</th>
                             <th>จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>การยื่นใบขอเบิกจ่ายค่าพัสดุ</td>
+                            <td>#</td>
+                            <td>รายงานผลการพานักเรียนไปนอกสถานศึกษา</td>
+                            <td>คำร้องวิชาการ</td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     เลือก
                                 </button>
                             </td>
                         </tr>
-
+                        <tr>
+                            <td>#</td>
+                            <td>รายงานการเข้าร่วมกิจกรรม</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>รายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>รายการส่งครูเข้าร่วมสัมมนาอบรม</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>บันทึกการขอแลกเปลี่ยนคาบสอน</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การยื่นฟอร์มปะหน้า</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การยื่นแบบสำรวจอัตรากำลังครู</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การยื่นแบบสำรวจคาบสอนของครูผู้สอน</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การขออนุญาตแลกคุมสอบ</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การขอแลกคาบสอน</td>
+                            <td>คำร้องวิชาการ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การยื่นใบขอเบิกจ่ายค่าพัสดุ</td>
+                            <td>คำร้องงบประมาณ</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>การขออณุญาต ลา คลอด ป่วย กิจ</td>
+                            <td>คำร้องงานบุคคล</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                            <td>สามารถตรวจสอบการขออณุญาตลงเวลา ขาด ลา มาสาย</td>
+                            <td>คำร้องงานบุคคล</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    เลือก
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
