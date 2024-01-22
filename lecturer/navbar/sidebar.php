@@ -1,6 +1,6 @@
-<aside class="sidebar" id="bg">
+<aside id="bg">
     <div class="text-center my-4" style="height : 28px">
-        <h4 id="title_web" class="text-secondary">NUNTABUREE-ครู</h4>
+        <h4 id="title_web" class="text-white">NUNTABUREE-ครู</h4>
     </div>
     <ul class="nav flex-column">
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/home') !== false ? 'active-menu' : ''; ?>">
@@ -51,6 +51,7 @@
         $("#toggleSidebar").click(function() {
             status = !status; // Toggle the status variable
             $("#title_web").toggleClass("d-none", !status).toggleClass("d-block", status);
+            $(".menu-text").toggleClass("d-none", !status).toggleClass("d-block,menu-text", status);
         });
     });
 </script>

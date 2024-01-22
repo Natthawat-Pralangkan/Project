@@ -36,9 +36,7 @@
                             <td>รายงานผลการพานักเรียนไปนอกสถานศึกษา</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    เลือก
-                                </button>
+                                <a type="button" class="btn btn-primary" href="./petition/Report_on_the_results_of_taking_students_outside_of_the_educational_institution.php">เลือก</a>
                             </td>
                         </tr>
                         <tr>
@@ -46,7 +44,7 @@
                             <td>รายงานการเข้าร่วมกิจกรรม</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                     เลือก
                                 </button>
                             </td>
@@ -56,7 +54,7 @@
                             <td>รายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
                                     เลือก
                                 </button>
                             </td>
@@ -66,7 +64,7 @@
                             <td>การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal4">
                                     เลือก
                                 </button>
                             </td>
@@ -76,7 +74,7 @@
                             <td>รายการส่งครูเข้าร่วมสัมมนาอบรม</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal5">
                                     เลือก
                                 </button>
                             </td>
@@ -86,7 +84,7 @@
                             <td>บันทึกการขอแลกเปลี่ยนคาบสอน</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal6">
                                     เลือก
                                 </button>
                             </td>
@@ -96,9 +94,9 @@
                             <td>การยื่นฟอร์มปะหน้า</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    เลือก
-                                </button>
+
+                                <a type="button" class="btn btn-primary" href="./petition/Submitting_a_cover_form.php">เลือก</a>
+
                             </td>
                         </tr>
                         <tr>
@@ -106,7 +104,7 @@
                             <td>การยื่นแบบสำรวจอัตรากำลังครู</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal8">
                                     เลือก
                                 </button>
                             </td>
@@ -116,7 +114,7 @@
                             <td>การยื่นแบบสำรวจคาบสอนของครูผู้สอน</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal9">
                                     เลือก
                                 </button>
                             </td>
@@ -126,7 +124,7 @@
                             <td>การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal10">
                                     เลือก
                                 </button>
                             </td>
@@ -136,7 +134,7 @@
                             <td>การขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal11">
                                     เลือก
                                 </button>
                             </td>
@@ -146,7 +144,7 @@
                             <td>การขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal12">
                                     เลือก
                                 </button>
                             </td>
@@ -156,7 +154,7 @@
                             <td>การขออนุญาตแลกคุมสอบ</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal13">
                                     เลือก
                                 </button>
                             </td>
@@ -166,7 +164,7 @@
                             <td>การขอแลกคาบสอน</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal14">
                                     เลือก
                                 </button>
                             </td>
@@ -176,7 +174,7 @@
                             <td>การยื่นใบขอเบิกจ่ายค่าพัสดุ</td>
                             <td>คำร้องงบประมาณ</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal15">
                                     เลือก
                                 </button>
                             </td>
@@ -186,7 +184,7 @@
                             <td>การขออณุญาต ลา คลอด ป่วย กิจ</td>
                             <td>คำร้องงานบุคคล</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal16">
                                     เลือก
                                 </button>
                             </td>
@@ -196,31 +194,13 @@
                             <td>สามารถตรวจสอบการขออณุญาตลงเวลา ขาด ลา มาสาย</td>
                             <td>คำร้องงานบุคคล</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal17">
                                     เลือก
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
