@@ -3,7 +3,7 @@ $(document).ready(function () {
     $("#follow_up_on_requests").DataTable({
       columns: [
         {
-          data: "วันที่ยื่นำร้ง",
+          data: "วันที่ยื่น",
         },
         {
           data: "ชื่อคำร้อง",
