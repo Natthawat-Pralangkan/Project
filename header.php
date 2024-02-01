@@ -1,6 +1,6 @@
 <?php $baseUrl = "http://localhost/nuntaburee-tis" ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
             font-family: 'Prompt', sans-serif;
         }
     </style>
-    <title>Students_classroom</title>
+    <title>nuntaburee-tis</title>
 </head>
 
 <body>

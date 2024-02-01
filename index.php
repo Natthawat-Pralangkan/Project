@@ -28,7 +28,7 @@
                                 <input type="password" class="form-control" id="paswordcheck" name="password" placeholder="Passeord" aria-label="Password" aria-describedby="basic-addon2">
                             </div>
                             <h6 style="text-align:right;width:100%;">ลืมรหัสผ่าน?</h6>
-                            <a href="./admin/home.php" id="login" class="form-control">เข้าสู่ระบบ</a>
+                            <a href="./admin/home.php" id="login" class=" butn form-control">เข้าสู่ระบบ</a>
                             <!-- <input type="submit" value="เข้าสู่ระบบ" id="login" class="form-control">  -->
                             <div class="text-center">
                                 <br>

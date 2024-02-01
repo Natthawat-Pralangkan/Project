@@ -1,8 +1,6 @@
 <?php include("../../header.php"); ?>
-
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
-
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
         <script src="./js/Check_the_request.js"></script>
@@ -31,6 +29,8 @@
                             <th>จัดการ</th>
                         </tr>
                     </thead>
+                    <tbody>
+
                 </table>
             </div>
         </div>

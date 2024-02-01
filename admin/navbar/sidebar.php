@@ -3,32 +3,32 @@
         <h5 id="title_web" class="text-white">NUNTABUREE-ผู้ดูแลระบบ</h5>
     </div>
     <ul class="nav flex-column">
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/home') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'project/admin/home') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./home.php">
                 <i class="fa-solid fa-house spani"></i><span id="text-a" class="menu-text">หน้าหลัก</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/Manage_requests') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'project/admin/Manage_requests') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./Manage_requests.php">
                 <i class="fa-solid fa-file-lines spani"></i><span id="text-a" class="menu-text">จัดการคำร้อง</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/Report_a_request') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'project/admin/Report_a_request') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./Report_a_request.php">
                 <i class="fa-solid fa-file-lines spani"></i><span id="text-a" class="menu-text">รายงานคำร้อง</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/Check_the_request') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'project/admin/Check_the_request') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./Check_the_request.php">
                 <i class="fa-solid fa-file-lines spani"></i><span id="text-a" class="menu-text">ตรวจสอบคำร้อง</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/Request_a_time_entry_and_exit_report') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'project/admin/Request_a_time_entry_and_exit_report') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./Request_a_time_entry_and_exit_report.php">
                 <i class="fa-solid fa-file-lines spani"></i><span id="text-a" class="menu-text">ตรวจสอบคำร้อง</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/addpersonnelinformation') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'project/admin/addpersonnelinformation') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./addpersonnelinformation.php">
                 <i class="fa-solid fa-user-plus spani"></i><span id="text-a" class="menu-text">จัดการข้อมูลผู้ใช้</span>
             </a>
@@ -37,19 +37,6 @@
 
 </aside>
 <script>
-    $.ajax({
-        url: "../../servers/function",
-        type: "POST",
-        data: {
-            function: "get_userbyid",
-            user_id: localStorage.getItem("user_id")
-        },
-        success: function(res) {
-            var datas = JSON.parse(res)
-            $("#imageUser").attr('src', datas[0].image_user).show();
-            $("#fullnameNav").html(datas[0].user_name)
-        }
-    })
 
     $(document).ready(function() {
         let status = true;
