@@ -1,4 +1,4 @@
-<?php $baseUrl = "http://localhost/nuntaburee-tis" ?>
+<?php $baseUrl = "http://localhost/Project" ?>
 <!DOCTYPE html>
 <html lang="th">
 

@@ -1,4 +1,4 @@
-<aside  id="bg">
+<aside  class="sidebar" id="bg">
     <div class="text-center my-4" style="height : 28px">
         <h4 id="title_web" class="text-secondary">NUNTABUREE-รองผู้อำนวยการ</h4>
     </div>

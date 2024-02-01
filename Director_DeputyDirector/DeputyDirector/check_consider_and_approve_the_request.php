@@ -34,7 +34,7 @@
                         <td>12 มกราคม 2567</td>
                         <td>แบบขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</td>
                         <td>ณัฐวัตร ประลังการ</td>
-                        <td class="status1">รอการอนุมัติ</td>
+                        <td >รอการอนุมัติ</td>
                         <td><button class="btn mr-2" style="background-color: #8B39F4; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal">ตรวจสอบ</button>
                         </td>
                     </tbody>
