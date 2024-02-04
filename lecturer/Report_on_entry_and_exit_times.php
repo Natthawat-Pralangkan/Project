@@ -39,6 +39,20 @@
                     </div>
                 </form>
             </div>
+            <table class="table mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">วัน เดือน ปี</th>
+                        <th scope="col">เวลาเข้างาน</th>
+                        <th scope="col">เวลาออกงาน</th>
+                        <th scope="col">หมายเหตุ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    
+                </tbody>
+            </table>
         </div>
 
     </div>

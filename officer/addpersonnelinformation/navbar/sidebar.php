@@ -1,4 +1,4 @@
-<aside  id="bg">
+<aside class="sidebar" id="bg">
     <div class="text-center my-4" style="height : 28px;">
         <h5 id="title_web" class="text-white" >NUNTABUREE-เจ้าหน้าที่ฝ่ายบุคคล</h5>
     </div>
