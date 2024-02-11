@@ -147,7 +147,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <table class="table">
+                            <table id="myTable" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">วันที่ยื่น</th>
@@ -157,6 +157,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php
+                                    // คำสั่ง SQL เพื่อดึงข้อมูล
+                                    $sql = "SELECT * FROM user ";
+                                    $result = $db->query($sql);
+                                    // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
+                                    if ($result->rowCount() > 0) {
+                                        // แสดงข้อมูลในตาราง
+                                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                            echo "<tr>";
+                                            echo "<td>" . $row['id'] . "</td>";
+                                            echo "<td>" . $row['user_name'] . "</td>";
+                                            echo "<td>" . $row['password'] . "</td>";
+                                            echo "<td>" . $row['type'] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "0 results";
+                                    }
+                                    
+                                    ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -172,7 +193,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <table class="table">
+                            <table id="myTable" class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col">วันที่ยื่น</th>
@@ -182,6 +203,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!-- ข้อมูลจะถูกแสดงที่นี่ -->
                                 </tbody>
                             </table>
                         </div>
@@ -191,29 +213,16 @@
         </div>
     </div>
 </div>
+
 <script>
     if (localStorage.getItem("type") != "1" && localStorage.getItem("id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
-
-    // $(document).ready(function() {
-    //     $.ajax({
-    //         url: "./get",
-    //         type: "POST",
-    //         data: {
-    //             id: localStorage.getItem("id")
-    //         },
-    //         success: function(get) {
-    //             var data = JSON.parse(get);
-    //             console.log(data);
-    //             // console.log(get.password);
-    //             $("#test").val(data.use_name)
-    //             if (data.status === 200) {
-
-    //             }
-    //         }
-    //     })
-    // })
+</script>
+<script >
+    $(document).reaby(function(){
+    $('#myTable').DataTable();
+});
 </script>
 <?php include("../footer.php") ?>

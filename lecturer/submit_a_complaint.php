@@ -64,7 +64,7 @@
                             <td>รายงานการเข้าร่วมกิจกรรม</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addactivityparticipationreportModal">
                                     เลือก
                                 </button>
                             </td>
@@ -85,7 +85,7 @@
                             <td>การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ</td>
                             <td>คำร้องวิชาการ</td>
                             <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal5">
+                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addexampleModal">
                                     เลือก
                                 </button>
                             </td>
@@ -192,7 +192,7 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">รายงานผลการพานักเรียนไปนอกสถานศึกษา</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -258,8 +258,6 @@
                                             <textarea name="std_address" required placeholder="เหตุในการไปควบคุม" class="form-control mt-2"></textarea>
                                         </div>
                                     </div>
-
-
                                 </div>
                                 <div class="row">
                                     <div class="col-3">
@@ -335,13 +333,8 @@
                                     <div class="col-6 mt-4">
                                         <div class="host1"></div>
                                         <div class="row justify-content-center form-group ">
-                                            <!-- <div class="col-12 col-md-4 col-lg-4"> -->
-                                            <!-- <div class="text-center"> -->
                                             <button class="add_fields1 btn btn-primary" style="font-size: 16px;">เพิ่มชื่อครูผู้ควบคุม</button>
                                         </div>
-                                        <!-- </div> -->
-                                        <!-- </div> -->
-                                        <!-- </div> -->
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class=" text-center">
@@ -360,26 +353,26 @@
                 </div>
             </div>
             <!-- รายงานการเข้าร่วมกิจกรรม -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addactivityparticipationreportModal" tabindex="-1" aria-labelledby="addactivityparticipationreportModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <h1 class="modal-title fs-5" id="addactivityparticipationreportModalLabel">รายงานการเข้าร่วมกิจกรรม</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="addfromactivityparticipationreport" method="POST" action="insteractivityparticipationreport.php">
                                 <div class="row ">
                                     <div class="col-6 ">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="รายงานการเข้าร่วมกิจกรรม" readonly />
+                                            <input type="text" class="form-control mt-2" placeholder="รายงานการเข้าร่วมกิจกรรม"  id="name_from" name="name_from" />
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
+                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name" name="petition_name">
                                         </div>
                                     </div>
                                 </div>
@@ -387,13 +380,13 @@
                                     <div class="col-4">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
+                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group" name="subject_group">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ปีการศึกษา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา">
+                                            <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา" id="school_year" name="school_year">
                                         </div>
                                     </div>
                                 </div>
@@ -403,12 +396,13 @@
                                         <button class="add_fields2 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มรายละเอียดรายงานการเข้าร่วมกิจกรรม</button>
                                     </div>
                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                     <button type="submit" class="btn btn-primary" action="addfromactivityparticipationreport.php">บันทึก</button>
+                                </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                            <button type="button" class="btn btn-primary">บันทึก</button>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
@@ -687,26 +681,26 @@
                 </div>
             </div>
             <!-- การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ -->
-            <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="addexampleModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <span aria-hidden="true">&times;</span>
                         </div>
                         <div class="modal-body">
-                            <form>
+                        <form id="addfrom" method="POST"  >
                                 <div class="row mb-3">
                                     <div class="col-4 ">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ" readonly>
+                                            <input type="text" id="first_name" name="first_name" class="form-control mt-2  text-right" placeholder="การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
+                                            <input type="text" id="last_name" name="last_name" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
                                         </div>
                                     </div>
                                 </div>
@@ -714,26 +708,26 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
+                                            <input type="text" id="Learning" name="Learning" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ภาคเรียนที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ภาคเรียนที่">
+                                            <input type="text" id="Semester" name="Semester" class="form-control mt-2" placeholder="ภาคเรียนที่">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ปีการศึกษา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา">
+                                            <input type="text"  id="year" name="year" class="form-control mt-2" placeholder="ปีการศึกษา">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mb-3 mt-3">
+                                <div class="modal-footer mb-3 mt-3">
                                     <div class=" text-center">
-                                        <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                        <button type="submit" class="btn " id="addcustomerBtn" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                        <!-- <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button> -->
                                     </div>
                                 </div>
                         </div>
@@ -1643,4 +1637,5 @@
 
 </div>
 </div>
+
 <?php include("../footer.php") ?>
