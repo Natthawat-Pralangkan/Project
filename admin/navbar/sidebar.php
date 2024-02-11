@@ -1,4 +1,4 @@
-<aside id="bg">
+<aside class="sidebar" id="bg">
     <div class="text-center my-4" style="height : 28px;">
         <h5 id="title_web" class="text-white">NUNTABUREE-ผู้ดูแลระบบ</h5>
     </div>
@@ -44,6 +44,14 @@
             status = !status; // Toggle the status variable
             $("#title_web").toggleClass("d-none", !status).toggleClass("d-block", status);
             $(".menu-text").toggleClass("d-none", !status).toggleClass("d-block,menu-text", status);
+        });
+    });
+
+    $(document).ready(function() {
+        let status = true;
+        $("#toggleSidebar").click(function() {
+            status = !status; // Toggle the status variable
+            $("#title_web").toggleClass("d-none", !status).toggleClass("d-block", status);
         });
     });
 </script>

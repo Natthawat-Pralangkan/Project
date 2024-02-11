@@ -1,4 +1,4 @@
-<?php include(".././servers/connect.php"); ?>
+<?php include("../servers/connect.php"); ?>
 <?php include(".././header.php"); ?>
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
@@ -45,9 +45,10 @@
                                 <h1 class="text-center">40</h1>
                             </div>
                             <div class="border-top text-center py-3">
-                                <button type="button" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #BB6AFB; color :#FFFFFF">
+                                <button type="button" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #BB6AFB; color: #FFFFFF">
                                     เพิ่มเติม
                                 </button>
+
                             </div>
                         </div>
                     </div>
@@ -61,7 +62,7 @@
                                 <h1 class="text-center">40</h1>
                             </div>
                             <div class="border-top text-center py-3">
-                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3"style="background-color: #BB6AFB; color :#FFFFFF">
+                                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3" style="background-color: #BB6AFB; color :#FFFFFF">
                                     เพิ่มเติม
                                 </button>
                             </div>
@@ -83,7 +84,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <!-- Modal คำร้องรอการพิจารณา -->
@@ -178,7 +178,7 @@
                                         <th scope="col">วันที่ยื่น</th>
                                         <th scope="col">ชื่อ</th>
                                         <th scope="col">นามสกุล</th>
-                                        <th scope="col">เรื่อง</th>
+                                        <th scope="col">1</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -191,4 +191,29 @@
         </div>
     </div>
 </div>
-<?php include(".././footer.php") ?>
+<script>
+    if (localStorage.getItem("type") != "1" && localStorage.getItem("id") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
+
+    // $(document).ready(function() {
+    //     $.ajax({
+    //         url: "./get",
+    //         type: "POST",
+    //         data: {
+    //             id: localStorage.getItem("id")
+    //         },
+    //         success: function(get) {
+    //             var data = JSON.parse(get);
+    //             console.log(data);
+    //             // console.log(get.password);
+    //             $("#test").val(data.use_name)
+    //             if (data.status === 200) {
+
+    //             }
+    //         }
+    //     })
+    // })
+</script>
+<?php include("../footer.php") ?>

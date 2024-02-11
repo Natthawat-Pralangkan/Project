@@ -1,34 +1,33 @@
-<?php include("./header.php") ?>
-<?php include("./components/navbar.php") ?>
+<?php
+include("./header.php");
+include("./components/navbar.php");
+include("./servers/connect.php");
+?>
 
 <div class="container">
     <div class="mt-3"></div>
 
     <div class="row justify-content-center">
-        <!-- <div class="col-12 col-md-6 col-lg-6"> -->
-
-
         <div class="row justify-content-center p-4">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="shadow-lg p-3 mb-5  rounded" style="background-color: #C274FF;">
                     <div class="text-center">
                         <img src="./img/logo.png" alt="" srcset="">
                     </div>
-
-                    <div class="row justify-content-center" >
+                    <div class="row justify-content-center">
                         <div class="col-12 col-md-6 col-lg-6">
                             <label for="">Username :</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                                <input type="email" class="form-control" name="email" id="emailcheck" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
                             <label for="">Passeord :</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
-                                <input type="password" class="form-control" id="paswordcheck" name="password" placeholder="Passeord" aria-label="Password" aria-describedby="basic-addon2">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Passeord" aria-label="Password" aria-describedby="basic-addon2">
                             </div>
                             <h6 style="text-align:right;width:100%;">ลืมรหัสผ่าน?</h6>
-                            <a href="./admin/home.php" id="login" class=" butn form-control">เข้าสู่ระบบ</a>
+                            <button id="loginButton" class="butn form-control">เข้าสู่ระบบ</button>
                             <!-- <input type="submit" value="เข้าสู่ระบบ" id="login" class="form-control">  -->
                             <div class="text-center">
                                 <br>
@@ -40,56 +39,86 @@
             </div>
         </div>
     </div>
-
-
 </div>
-
-<!-- <script></script>
+<script>
+    // เมื่อเอกสารโหลดเสร็จสมบูรณ์
+    // เมื่อคลิกปุ่ม "เข้าสู่ระบบ"
     $(document).ready(function() {
-        const Url = './servers/function';
-        const Method = 'POST';
-        $("#login").click(function() {
+        // เมื่อคลิกปุ่ม "เข้าสู่ระบบ"
+        $("#loginButton").click(function() {
+            // ส่งคำขอ GET ไปยังไฟล์ PHP เพื่อดึงข้อมูลอีเมลและรหัสผ่านจากฐานข้อมูล
             $.ajax({
-                url: Url,
-                type: Method,
+                url: "./servers/function", // URL ของไฟล์ PHP ที่มีฟังก์ชัน login
+                type: "POST",
                 data: {
-                    function: "login",
-                    email: $("#emailcheck").val(),
-                    password: $("#paswordcheck").val()
+                    user_name: $("#user_name").val(),
+                    password: $("#password").val()
                 },
-                success: function(res) {
-                    // console.log(res);
-                    var data = JSON.parse(res)
-                    console.log(data);
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    console.log(data)
                     if (data.statusCode == 200) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Login Success'
-                        }).then(function() {
-                            localStorage.setItem("user_id", data.user_id)
-                            localStorage.setItem("user_name", data.user_name)
-                            window.location.href = "./pages/student_classroom/"
-                        });
+                        // ล็อกอินสำเร็จ
+                        alert("เข้าสู่ระบบสำเร็จ!");
+                        switch (data.type) {
+                            case "0":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./admin/home.php";
+                                break;
+                            case "1":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./lecturer/home";
+                                break;
 
+                            case "2":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./Director_DeputyDirector/DeputyDirector/home";
+                                break;
+                            case "3":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./Director_DeputyDirector/director/home";
+                                break;
+                            case "4":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./officer/academicmaster/home";
+                                break;
+                            case "5":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./officer/addpersonnelinformation/home";
+                                break;
+                            case "6":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./officer/BudgetOfficer/home";
+                                break;
+                            case "7":
+                                localStorage.setItem("type", data.type)
+                                localStorage.setItem("id", data.id)
+                                window.location.href = "./officer/generaldepartment/home";
+                                break;
+                            default:
+                                alert("ไม่พบผู้ใช้")
+                        }
+                        // ส่งผู้ใช้ไปยังหน้าหลังจากล็อกอินสำเร็จ
                     } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Login error'
-                        }).then(function() {
-                            window.location.reload()
-                        });
+                        // ล็อกอินไม่สำเร็จ
+                        alert("เข้าสู่ระบบไม่สำเร็จ!");
                     }
+                },
+                error: function(xhr, status, error) {
+                    // ข้อผิดพลาดในการเชื่อมต่อหรือการทำงานของเซิร์ฟเวอร์
+                    console.error("Error: " + error);
                 }
-            })
-        })
+            });
 
-    })
-</script> -->
-
+        });
+    });
+</script>
 
 <?php include("./footer.php") ?>
-<!-- <form action="./action.php" method="POST" enctype="multipart/form-data">
-        <label for="excel_file">Choose an Excel file:</label>
-        <input type="file" name="excel_file" id="excel_file">
-        <input type="submit" value="Upload">
-    </form> -->

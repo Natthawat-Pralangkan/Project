@@ -6,7 +6,7 @@
     <!-- Content Wrapper -->
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/order_inside_outside.js"></script>
+        <script src="./js//order_inside_outside.js"></script>
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
@@ -24,20 +24,24 @@
                 <table id="order_inside_outside" class="table">
                     <thead>
                         <tr>
-                            <th>วัน/เดือน/ปี</th>
-                            <th>ชื่อหัวข้อคำสั่ง</th>
-                            <th>ไฟล์คำสั่งภายใน/ภายนอก</th>
+                            <th>use_name</th>
+                            <th>password</th>
+                            <th>type</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>12/06/66</td>
-                            <td>การยื่นใบขอเบิกจ่ายค่าพัสดุ</td>
-                            <td>คำร้องงบประมาณ</td>
+                       
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+<script>
+    if (localStorage.getItem("type") != "1" && localStorage.getItem("id") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
+</script>
+
 <?php include("../footer.php") ?>

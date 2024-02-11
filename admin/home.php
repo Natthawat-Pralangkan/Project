@@ -39,4 +39,10 @@
         </div>
     </div>
 </div>
+<script>
+    if(localStorage.getItem("type") != "0" && localStorage.getItem("id") == null){
+        localStorage.clear()
+        window.location.href ="../"
+    }
+</script>
 <?php include("../footer.php") ?>

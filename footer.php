@@ -3,7 +3,7 @@
 </div> -->
 
 <script src="<?php echo $baseUrl ?>/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-
+<!-- <script src="./js/order_inside_outside.js"></script> -->
 
 </body>
 
