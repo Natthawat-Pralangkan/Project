@@ -13,9 +13,80 @@ $(document).ready(function() {
         p--;
         x--;
     })
-    //
-})
-var x = 1;
+
+
+    $("#server_from_11").click(function () {
+        // รับข้อมูลจากฟอร์ม Modal
+        var name_from = $("#name_from_10").val();
+        var petition_name = $("#petition_name_10").val();
+        var school_wishes = $("#school_wishes_10").val();
+        var class_student = $("#class_student_10").val();
+        var room = $("#room_10").val();
+        var reason_project = $("#reason_project_10").val();
+        var date_activity = $("#date_activity_10").val();
+        var Time_to_go = $("#Time_to_go_10").val();
+        var Return_time = $("#Return_time_10").val();
+        var Number_of_supervising_teachers = $("#Number_of_supervising_teachers").val();
+        var Place_of_sending_documents = $("#Place_of_sending_documents").val();
+        console.log(
+          name_from +
+            " " +
+            petition_name +
+            " " +
+            school_wishes +
+            " " +
+            class_student +
+            " " +
+            room +
+            " " +
+            reason_project +
+            " " +
+            date_activity +
+            "" +
+            Time_to_go +
+            "" +
+            Return_time +
+            "" +
+            Number_of_supervising_teachers +
+            "" +
+            Place_of_sending_documents 
+        );
+        $.ajax({
+          url: "inster_Requesting_permission_for_students_to_go_to_school_in_special_cases", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
+          method: "POST",
+          data: {
+            id_user:localStorage.getItem("id_user"),
+            
+            name_from: name_from,
+            petition_name: petition_name,
+            school_wishes: school_wishes,
+            class_student: class_student,
+            room: room,
+            reason_project: reason_project,
+            date_activity: date_activity,
+            Time_to_go: Time_to_go,
+            Return_time: Return_time,
+            Number_of_supervising_teachers: Number_of_supervising_teachers,
+            Place_of_sending_documents: Place_of_sending_documents,
+          },
+          success: function (response) {
+            console.log(response);
+            var data = JSON.parse(response);
+            if (data.status === 200) {
+              alert("บันทึกข้อมูลสำเร็จ");
+              window.location.href = "follow_up_on_requests";
+            } else {
+              alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+              window.location.href = "submit_a_complaint";
+            }
+          },
+          error: function () {
+            alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+          },
+        });
+      });
+
+      var x = 1;
 var p = 1;
 
 function addfields9() {
@@ -48,6 +119,8 @@ function addfields9() {
     </div>
 </div>`);
 }
+})
+
 
 
 

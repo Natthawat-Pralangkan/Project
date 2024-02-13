@@ -140,7 +140,7 @@
             </div>
             <!-- Modal คำร้องอนุมัติแล้ว -->
             <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">คำร้องอนุมัติแล้ว</h1>
@@ -151,32 +151,31 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">วันที่ยื่น</th>
-                                        <th scope="col">ชื่อ</th>
-                                        <th scope="col">นามสกุล</th>
+                                        <th scope="col">ชื่อ-นามสกุล</th>
                                         <th scope="col">เรื่อง</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     // คำสั่ง SQL เพื่อดึงข้อมูล
-                                    $sql = "SELECT * FROM user ";
+                                    $sql = "";
                                     $result = $db->query($sql);
                                     // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
                                     if ($result->rowCount() > 0) {
+                                        // เลือกข้อมูลรายการแรกเท่านั้น
+                                        $row = $result->fetch(PDO::FETCH_ASSOC);
                                         // แสดงข้อมูลในตาราง
-                                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                            echo "<tr>";
-                                            echo "<td>" . $row['id'] . "</td>";
-                                            echo "<td>" . $row['user_name'] . "</td>";
-                                            echo "<td>" . $row['password'] . "</td>";
-                                            echo "<td>" . $row['type'] . "</td>";
-                                            echo "</tr>";
-                                        }
+                                        echo "<tr>";
+                                        echo "<td>" . $row['date_report_send'] . "</td>";
+                                        echo "<td>" . $row['petition_name'] . "</td>";
+                                        echo "<td>" . $row['name_from'] . "</td>";
+                                        echo "</tr>";
                                     } else {
                                         echo "0 results";
                                     }
-                                    
+
                                     ?>
+
 
                                 </tbody>
                             </table>
@@ -215,14 +214,15 @@
 </div>
 
 <script>
-    if (localStorage.getItem("type") != "1" && localStorage.getItem("id") == null) {
+    if (localStorage.getItem("id_type") != "1" && localStorage.getItem("id_user") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
 </script>
-<script >
-    $(document).reaby(function(){
-    $('#myTable').DataTable();
-});
+<script>
+    $(document).reaby(function() {
+        $('#myTable').DataTable();
+
+    });
 </script>
 <?php include("../footer.php") ?>

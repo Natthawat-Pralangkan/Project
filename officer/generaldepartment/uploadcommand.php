@@ -47,15 +47,30 @@
             </div>
         </div>
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" >
+            <div class="modal-dialog">
                 <div class="modal-content" style="height: 300px;">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">เพิ่มคำสั่งภายใน - ภายนอก</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="input-group mt-5">
+                    <div class="row mt-3">
+                        <div class="col-12 ">
+                            <div class="form-group ">
+                                <label for="" style="font-size: 18px;">ชื่อคำสั่ง</label>
+                                <input type="text" class="form-control mt-2  text-right" placeholder="ชื่อคำสั่ง" id="name_from_9" name="name_from_9">
+                            </div>
+                        </div>
+                        <div class="col-12 ">
+                            <div class="form-group ">
+                                <label for="" style="font-size: 18px;">ประเภทคำสั่ง</label>
+                                <input type="text" class="form-control mt-2  text-right" placeholder="ประเภทคำสั่ง" id="name_from_9" name="name_from_9">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mt-3">
+
                         <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                        
+
                     </div>
                 </div>
             </div>

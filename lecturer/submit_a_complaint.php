@@ -19,11 +19,13 @@
         <!-- แบบสำรวจคาบสอนของครูผู้สอน -->
         <script src="./js/Survey_of_teachers_teaching_sessions.js"></script>
         <!-- การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา -->
-        <script src="./js/Requesting_permission_from_supervisors_to take_students_outside_of_the_educational_institution..js"></script>
+        <script src="./js/Requesting_permission_from_supervisors_to take_students_outside_of_the_educational_institution.js"></script>
         <!-- ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน -->
         <script src="./js/Request_permission_to_bring_students_to_participate_in_activities_during_class_time.js"></script>
         <!-- การขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ -->
         <script src="./js/Requesting_permission_for_students_to_go_to_school_in_special_cases.js"></script>
+        <script src="./js/Submitting_a_cover_form.js"></script>
+        <script src="./js/inster.js"></script>
 
         <div class="content-header">
             <div class="container-fluid">
@@ -49,141 +51,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#</td>
-                            <td>รายงานผลการพานักเรียนไปนอกสถานศึกษา</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>รายงานการเข้าร่วมกิจกรรม</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addactivityparticipationreportModal">
-                                    เลือก
-                                </button>
-                            </td>
+                        <?php
+                        // คำสั่ง SQL เพื่อดึงข้อมูล
+                        $sql = "SELECT * FROM `petition_name` LEFT JOIN petition_type ON petition_name.id_petition = petition_type.id;";
+                        $result = $db->prepare($sql);
+                        $result->execute();
+                        // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
 
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>รายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal4">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addexampleModal">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>รายงานการประชุม / อบรม / สัมมนา / กิจกรรม / โครงการ / งาน</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal6">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>ฟอร์มปะหน้า</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal8">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>แบบสำรวจอัตรากำลังครู</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal9">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>แบบสำรวจคาบสอนของครูผู้สอน</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal10">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>ขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal11">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal12">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal13">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>ขออนุญาตแลกคุมสอบ</td>
-                            <td>คำร้องวิชาการ</td>
-                            <td>
-                                <a type="button" class="btn btn-primary" href="./petition/">เลือก</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>ใบขอเบิกจ่ายค่าพัสดุ</td>
-                            <td>คำร้องงบประมาณ</td>
-                            <td>
-                                <a type="button" class="btn btn-primary" href="./petition/">เลือก</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#</td>
-                            <td>ขออณุญาต ลา คลอด ป่วย กิจ</td>
-                            <td>คำร้องงานบุคคล</td>
-                            <td>
-                                <a type="button" class="btn btn-primary" href="./petition/">เลือก</a>
-                            </td>
-                        </tr>
+                        // เลือกข้อมูลรายการแรกเท่านั้น
+                        $row = $result->fetchAll(PDO::FETCH_ASSOC);
+                        $key = 1;
+                        $keynew = 1;
+                        foreach ($row as $keyall) {
+                            echo "<tr>";
+                            echo "<td>" . $key++ . "</td>";
+                            echo "<td>" . $keyall['petition_name'] . "</td>";
+                            echo "<td>" . $keyall['request_type_name'] . "</td>";
+                            echo "<td>";
+                            echo "<button type='submit' class='btn ' style='background-color:#BB6AFB ; color:#FFFFFF' data-bs-toggle='modal' data-bs-target='#exampleModal" . $keynew++ . "'>เลือก</button> ";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+
+
+
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -196,22 +88,22 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="row ">
-                                    <div class="col-6 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="รายงานผลการพานักเรียนไปนอกสถานศึกษา ">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="1">
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2" id="name_from_2" name="name_from_2" placeholder="รายงานผลการพานักเรียนไปนอกสถานศึกษา ">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
+                                        <input type="text" class="form-control mt-2" id="petition_name_2" name="petition_name_2" placeholder="ชื่อผู้ยื่น">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row mt-2">
                                     <div class="col-2">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">วันที่</label>
@@ -230,43 +122,43 @@
                                             <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-8">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อสถานที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อสถานที่">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">จำนวนนักเรียน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนนักเรียน">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">จำนวนครูผู้ควบคุม</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ครูผู้ควบคุม">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เหตุในการไปควบคุม</label>
-                                            <textarea name="std_address" required placeholder="เหตุในการไปควบคุม" class="form-control mt-2"></textarea>
-                                        </div>
+                                </div> -->
+                            <div class="row mt-2">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อสถานที่</label>
+                                        <input type="text" class="form-control mt-2" id="school_name" name="school_name" placeholder="ชื่อสถานที่">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่เดินทาง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="วันที่">
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">จำนวนนักเรียน</label>
+                                        <input type="text" class="form-control mt-2" id="student_total" name="student_total" placeholder="จำนวนนักเรียน">
                                     </div>
-                                    <div class="col-3">
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">จำนวนครูผู้ควบคุม</label>
+                                        <input type="text" class="form-control mt-2" id="teacher_total" name="teacher_total" placeholder="ครูผู้ควบคุม">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เหตุในการไปควบคุม</label>
+                                        <textarea name="std_address" required placeholder="เหตุในการไปควบคุม" id="reason_controlling" class="form-control mt-2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่เดินทาง</label>
+                                        <input type="date" class="form-control mt-2" id="date_travel" name="date_travel" placeholder="วันที่">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เดือน</label>
                                             <input type="text" class="form-control mt-2" placeholder="เดือน">
@@ -283,30 +175,30 @@
                                             <label for="" style="font-size: 18px;">เวลาเดินทาง</label>
                                             <input type="text" class="form-control mt-2" placeholder="เวลาเดินทาง">
                                         </div>
+                                    </div> -->
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
+                                        <textarea name="std_address" required placeholder="เส้นทางในการเดินทาง" id="travel_route" class="form-control mt-2"></textarea>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
-                                            <textarea name="std_address" required placeholder="เส้นทางในการเดินทาง" class="form-control mt-2"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พาหนะที่ใช้เดินทาง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พาหนะที่ใช้เดินทาง">
-                                        </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">พาหนะที่ใช้เดินทาง</label>
+                                        <input type="text" class="form-control mt-2" id="trave_vehicle" name="trave_vehicle" placeholder="พาหนะที่ใช้เดินทาง">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่เดินทางกลับ</label>
-                                            <input type="text" class="form-control mt-2" placeholder="วันที่">
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่เดินทางกลับ</label>
+                                        <input type="date" class="form-control mt-2" id="travel_back" name="travel_back">
                                     </div>
-                                    <div class="col-3">
+                                </div>
+                                <!-- <div class="col-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เดือน</label>
                                             <input type="text" class="form-control mt-2" placeholder="เดือน">
@@ -317,43 +209,38 @@
                                             <label for="" style="font-size: 18px;">พ.ศ.</label>
                                             <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
                                         </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เวลา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลาเดินทาง">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">รายละเอียดการเดินทางครั้งนี้</label>
-                                            <textarea name="std_address" required placeholder="รายละเอียดการเดินทางครั้งนี้" class="form-control mt-2"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 mt-4">
-                                        <div class="host1"></div>
-                                        <div class="row justify-content-center form-group ">
-                                            <button class="add_fields1 btn btn-primary" style="font-size: 16px;">เพิ่มชื่อครูผู้ควบคุม</button>
-                                        </div>
-                                    </div>
-                                    <div class="form-group mb-3">
-                                        <div class=" text-center">
-                                            <button type="submit" class="btn "><a href="../submit_a_complaint.php" class="btn" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</a></button>
-                                            <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
-                                        </div>
+                                    </div> -->
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลา</label>
+                                        <input type="text" class="form-control mt-2" id="time" name="time" placeholder="เวลาเดินทาง">
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">รายละเอียดการเดินทางครั้งนี้</label>
+                                        <textarea name="std_address" required placeholder="รายละเอียดการเดินทางครั้งนี้" id="details_of_this_trip" class="form-control mt-2"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <div class="host1"></div>
+                                    <div class="row justify-content-center form-group ">
+                                        <button class="add_fields1 btn btn-primary" style="font-size: 16px;">เพิ่มชื่อครูผู้ควบคุม</button>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class=" text-center">
+                                        <button type="submit" class="btn " id="server_report" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                            <button type="button" class="btn btn-primary">บันทึก</button>
-                        </div> -->
                     </div>
                 </div>
             </div>
             <!-- รายงานการเข้าร่วมกิจกรรม -->
-            <div class="modal fade" id="addactivityparticipationreportModal" tabindex="-1" aria-labelledby="addactivityparticipationreportModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="addactivityparticipationreportModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -361,163 +248,126 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="addfromactivityparticipationreport" method="POST" action="insteractivityparticipationreport.php">
-                                <div class="row ">
-                                    <div class="col-6 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="รายงานการเข้าร่วมกิจกรรม"  id="name_from" name="name_from" />
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name" name="petition_name">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="2">
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="รายงานการเข้าร่วมกิจกรรม" id="name_from" name="name_from" />
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group" name="subject_group">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ปีการศึกษา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา" id="school_year" name="school_year">
-                                        </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group" name="subject_group">
                                     </div>
                                 </div>
-                                <div class="text-center mt-3">
-                                    <div class="host2"></div>
-                                    <div class="row justify-content-center form-group ">
-                                        <button class="add_fields2 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มรายละเอียดรายงานการเข้าร่วมกิจกรรม</button>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ปีการศึกษา</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา" id="school_year" name="school_year">
                                     </div>
                                 </div>
-                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
-                                     <button type="submit" class="btn btn-primary" action="addfromactivityparticipationreport.php">บันทึก</button>
+                            </div>
+                            <div class="text-center mt-3">
+                                <div class="host2"></div>
+                                <div class="row justify-content-center form-group ">
+                                    <button class="add_fields2 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มรายละเอียดรายงานการเข้าร่วมกิจกรรม</button>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                <button type="submit" class="btn btn-primary" id="saveform">บันทึก</button>
+                            </div>
+                            <!-- </form> -->
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
             <!-- การยื่นฟอร์มปะหน้า -->
-            <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ฟอร์มปะหน้า</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="การยื่นฟอร์มปะหน้า" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="3">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2  text-right" name="name_from_1" id="name_from_1" placeholder="การยื่นฟอร์มปะหน้า">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-2">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="วันที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เดือน">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
-                                        </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">วันที่ยื่น</label>
+                                        <input type="date" class="form-control mt-2" name="date_report_send" id="date_report_send" placeholder="วันที่">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อเอกสาร พิจารณา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อเอกสาร พิจารณา">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">กลุ่มบริหาร/กลุ่มสาระฯ/งาน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มบริหาร/กลุ่มสาระฯ/งาน">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อกิจกรรม</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชือกิจกรรม">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ตามโครงการ</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ตามโครงการ">
-                                        </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อเอกสาร พิจารณา</label>
+                                        <input type="text" class="form-control mt-2" id="document_name_consider" name="document_name_consider" placeholder="ชื่อเอกสาร พิจารณา">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-2">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="วันที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เดือน">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
-                                        </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">กลุ่มบริหาร/กลุ่มสาระฯ/งาน</label>
+                                        <input type="text" class="form-control mt-2" id="subject_group_1" name="subject_group_1" placeholder="กลุ่มบริหาร/กลุ่มสาระฯ/งาน">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">สถานที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="สถานที่">
-                                        </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อกิจกรรม</label>
+                                        <input type="text" class="form-control mt-2" id="activity_name" name="activity_name" placeholder="ชือกิจกรรม">
                                     </div>
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">สรุปรายละเอียด</label>
-                                            <textarea name="std_address" required placeholder="สรุปรายละเอียด" class="form-control mt-2"></textarea>
-                                        </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ตามโครงการ</label>
+                                        <input type="text" class="form-control mt-2" id="according_project" name="according_project" placeholder="ตามโครงการ">
                                     </div>
-                                    <div class="form-group mb-3 mt-3">
-                                        <div class=" text-center">
-                                            <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                            <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">วันที่</label>
+                                        <input type="date" class="form-control mt-2" id="date_activity" name="date_activity" placeholder="วันที่">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">สถานที่</label>
+                                        <input type="text" class="form-control mt-2" id="activity_where" name="activity_where" placeholder="สถานที่">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">สรุปรายละเอียด</label>
+                                        <textarea name="std_address" required placeholder="สรุปรายละเอียด" id="summary_details" class="form-control mt-2"></textarea>
                                     </div>
                                 </div>
 
-                            </form>
+                            </div>
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_from" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -527,212 +377,116 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">แบบรายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="row ">
-                                    <div class="col-6 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="รายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ระดับชั้นมัธยมศึกษาปีที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ระดับชั้นมัธยมศึกษาปีที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">สัปดาห์ที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="สัปดาห์ที่">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="4">
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="รายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน" id="name_from_3" name="name_from_3">
                                     </div>
                                 </div>
-                                <div class="row mt-3">
-                                    <?php
-                                    // สมมติว่านี่คืออะเรย์ของวันที่
-                                    $dates = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-                                    $months = array(
-                                        1 => 'มกราคม',
-                                        2 => 'กุมภาพันธ์',
-                                        3 => 'มีนาคม',
-                                        4 => 'เมษายน',
-                                        5 => 'พฤษภาคม',
-                                        6 => 'มิถุนายน',
-                                        7 => 'กรกฎาคม',
-                                        8 => 'สิงหาคม',
-                                        9 => 'กันยายน',
-                                        10 => 'ตุลาคม',
-                                        11 => 'พฤศจิกายน',
-                                        12 => 'ธันวาคม'
-                                    );
-                                    ?>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates as $date) {
-                                                        echo "<option value='{$date}'>{$date}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months as $num => $name) {
-                                                        echo "<option value='{$num}'>{$name}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ">
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-1 mt-5">
-                                        <h5>ระหว่าง</h5>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates as $date) {
-                                                        echo "<option value='{$date}'>{$date}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months as $num => $name) {
-                                                        echo "<option value='{$num}'>{$name}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-1">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ">
-                                        </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ระดับชั้นมัธยมศึกษาปีที่</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ระดับชั้นมัธยมศึกษาปีที่" id="level" name="level">
                                     </div>
                                 </div>
-
-
-                                <div class="text-center mt-4">
-                                    <div class="host4"></div>
-                                    <div class=" justify-content-center form-group ">
-                                        <!-- <div class="col-12 col-md-4 col-lg-4"> -->
-                                        <!-- <div class="text-center"> -->
-                                        <button class="add_fields4 btn btn-primary" style="font-size: 16px; width: 500px;">เพิ่มรายละเอียดไม่ลงนามในแบบสำรวจการเรียนการสอน </button>
-                                    </div>
-                                    <!-- </div> -->
-                                    <!-- </div> -->
-                                    <!-- </div> -->
-                                </div>
-                                <div class="form-group mb-3 mt-3">
-                                    <div class=" text-center">
-                                        <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">สัปดาห์ที่</label>
+                                        <input type="text" class="form-control mt-2" placeholder="สัปดาห์ที่" id="teach_week" name="teach_week">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row mt-3">
 
-                            </form>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่สอนตั้งแต่</label>
+                                        <input type="date" class="form-control mt-2" id="date_teach_start" name="date_teach_start">
+                                    </div>
+                                </div>
+                                <div class="col-1 mt-5">
+                                    <h5>ระหว่าง</h5>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่สอนถึง</label>
+                                        <input type="date" class="form-control mt-2" id="date_teach_end" name="date_teach_end">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <div class="host4"></div>
+                                <div class=" justify-content-center form-group ">
+                                    <button class="add_fields4 btn btn-primary" style="font-size: 16px; width: 500px;">เพิ่มรายละเอียดไม่ลงนามในแบบสำรวจการเรียนการสอน </button>
+                                </div>
+
+                            </div>
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_non" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                </div>
+                            </div>
+
+                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
             </div>
             <!-- การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ -->
-            <div class="modal fade" id="addexampleModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel">
+            <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ</h1>
-                            <span aria-hidden="true">&times;</span>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ</h1>
+                            <!-- <span aria-hidden="true">&times;</span> -->
                         </div>
                         <div class="modal-body">
-                        <form id="addfrom" method="POST"  >
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" id="first_name" name="first_name" class="form-control mt-2  text-right" placeholder="การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" id="last_name" name="last_name" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="5">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" id="name_from_4" name="name_from_4" class="form-control mt-2  text-right" placeholder="การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                            <input type="text" id="Learning" name="Learning" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ภาคเรียนที่</label>
-                                            <input type="text" id="Semester" name="Semester" class="form-control mt-2" placeholder="ภาคเรียนที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ปีการศึกษา</label>
-                                            <input type="text"  id="year" name="year" class="form-control mt-2" placeholder="ปีการศึกษา">
-                                        </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <input type="text" id="subject_group_4" name="subject_group_4" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
                                     </div>
                                 </div>
-                                <div class="modal-footer mb-3 mt-3">
-                                    <div class=" text-center">
-                                        <button type="submit" class="btn " id="addcustomerBtn" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <!-- <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button> -->
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ภาคเรียนที่</label>
+                                        <input type="text" id="semester" name="semester" class="form-control mt-2" placeholder="ภาคเรียนที่">
                                     </div>
                                 </div>
-                        </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ปีการศึกษา</label>
+                                        <input type="text" id="school_year_4" name="school_year_4" class="form-control mt-2" placeholder="ปีการศึกษา">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="ser_from_1" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <!-- <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button> -->
+                                </div>
+                            </div>
+                            <!-- </div> -->
 
-                        </form>
+                            <!-- </form> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -745,239 +499,179 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="รายงานการประชุม/อบรม/สัมมนา/กิจกรรม/โครงการ/งาน" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="6">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2  text-right" placeholder="รายงานการประชุม/อบรม/สัมมนา/กิจกรรม/โครงการ/งาน" id="name_from_5" name="name_from_5">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">สถานที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="สถานที">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เรื่อง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เรื่อง">
-                                        </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">สถานที่</label>
+                                        <input type="text" class="form-control mt-2" placeholder="สถานที" id="location_5" name="location_5">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <?php
-                                    $dates1 = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-                                    // สร้างอะเรย์ของเดือน
-                                    $months1 = array(
-                                        1 => 'มกราคม',
-                                        2 => 'กุมภาพันธ์',
-                                        3 => 'มีนาคม',
-                                        4 => 'เมษายน',
-                                        5 => 'พฤษภาคม',
-                                        6 => 'มิถุนายน',
-                                        7 => 'กรกฎาคม',
-                                        8 => 'สิงหาคม',
-                                        9 => 'กันยายน',
-                                        10 => 'ตุลาคม',
-                                        11 => 'พฤศจิกายน',
-                                        12 => 'ธันวาคม'
-                                    );
-                                    ?>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates1 as $date1) {
-                                                        echo "<option value='{$date1}'>{$date1}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months1 as $num1 => $name1) {
-                                                        echo "<option value='{$num1}'>{$name1}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ผู้จัดงาน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ผู้จัดงาน">
-                                        </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เรื่อง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เรื่อง" id="subject_5" name="subject_5">
                                     </div>
                                 </div>
-                                <div class="row mt-3">
-                                    <div class="col-4 mt-4">
-                                        <div class="host5"></div>
-                                        <div class="row justify-content-center form-group ">
-                                            <button class="add_fields5 btn btn-primary" style="font-size: 16px;">เพิ่มรายชื่อผู้เข้าร่วมงาน</button>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">สรุปผลการเข้าร่วมงาน</label>
-                                            <textarea class="form-control" placeholder="สรุปผลการเข้าร่วมงาน" id="floatingTextarea"></textarea>
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่เข้าร่วม</label>
+                                        <input type="date" class="form-control mt-2" id="joining_date_5" name="joining_date_5">
                                     </div>
                                 </div>
-                                <div class="form-group mb-3 mt-3">
-                                    <div class=" text-center">
-                                        <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ผู้จัดงาน</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ผู้จัดงาน" name="organizer_5" id="organizer_5">
                                     </div>
                                 </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">สรุปผลการเข้าร่วมงาน</label>
+                                        <textarea class="form-control" placeholder="สรุปผลการเข้าร่วมงาน" id="summary_of_results_of_participation_in_the_event" name="summary_of_results_of_participation_in_the_event"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4 mt-4">
+                                    <div class="host5"></div>
+                                    <div class="row justify-content-center form-group ">
+                                        <button class="add_fields5 btn btn-primary" style="font-size: 16px;">เพิ่มรายชื่อผู้เข้าร่วมงาน</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_meeting" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                </div>
+                            </div>
                             </form>
                         </div>
-
-                        </form>
                     </div>
                 </div>
             </div>
             <!-- แบบสำรวจอัตรากำลังครู -->
-            <div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">แบบสำรวจอัตรากำลังครู</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="แบบสำรวจอัตรากำลังครู" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="7">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2  text-right" placeholder="แบบสำรวจอัตรากำลังครู" id="name_from_6" name="name_from_6">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ภาคเรียนที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ภาคเรียนที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ปีการศึกษา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา">
-                                        </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group_6" name="subject_group_6">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">จำนวนครูปัจจุบัน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูปัจจุบัน">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">จำนวนครูที่เกษียณอายุราชการ</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่เกษียณอายุราชการ">
-                                        </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ภาคเรียนที่</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ภาคเรียนที่" id="semester_6" name="semester_6">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">จำนวนครูที่ขาด</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่ขาด">
-                                        </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ปีการศึกษา</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา" id="school_yea_6" name="school_yea_6">
                                     </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เหตุผล</label>
-                                            <textarea class="form-control" placeholder="เหตุผล" id="floatingTextarea2" style="height: 100px"></textarea>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">จำนวนครูปัจจุบัน</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูปัจจุบัน" id="teacher_total_now_6" name="teacher_total_now_6">
                                     </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">จำนวนครูที่เกษียณอายุราชการ</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่เกษียณอายุราชการ" id="teacher_total_out_6" name="teacher_total_out_6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">จำนวนครูที่ขาด</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่ขาด" id="teacher_total_broken_6" name="teacher_total_broken_6">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เหตุผลจำนวนที่ขาด</label>
+                                        <textarea class="form-control" placeholder="เหตุผล" id="teacher_broken_reason_6" style="height: 100px"></textarea>
+                                    </div>
+                                </div>
 
-                                </div>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">จำนวนครูที่เกิน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="สถานที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">เหตุผล</label>
-                                            <textarea name="std_address" required placeholder="เหตุผล" class="form-control mt-2"></textarea>
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">จำนวนครูที่เกิน</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่เกิน" id="teacher_total_over_6" name="teacher_total_over">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">จำนวนครูที่ขอเพิ่ม</label>
-                                            <input type="text" class="form-control mt-2" placeholder="สถานที่">
-                                        </div>
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">เหตุผลจำนวนที่เกิน</label>
+                                        <textarea name="std_address" required placeholder="เหตุผล" id="teacher_over_reason_6" class="form-control mt-2"></textarea>
                                     </div>
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">เหตุผล</label>
-                                            <textarea name="std_address" required placeholder="เหตุผล" class="form-control mt-2"></textarea>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">จำนวนครูที่ขอเพิ่ม</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่ขอเพิ่ม" id="teacher_total_add_6" name="teacher_total_add">
                                     </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">เหตุผลจำนวนครูที่ขอเพิ่ม</label>
+                                        <textarea name="std_address" required placeholder="เหตุผล" id="teacher_add_reason_6" class="form-control mt-2"></textarea>
+                                    </div>
+                                </div>
 
-                                    <div class="form-group mb-3 mt-3">
-                                        <div class=" text-center">
-                                            <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                            <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
-                                        </div>
+                                <div class="form-group mb-3 mt-3">
+                                    <div class=" text-center">
+                                        <button type="submit" class="btn " id="ser_from_6" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
+                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
             </div>
             <!-- การยื่นแบบสำรวจคาบสอนของครูผู้สอน -->
-            <div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal8" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -985,48 +679,35 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="แบบสำรวจคาบสอนของครูผู้สอน" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
+                            <input type="hidden" name="" id="id_from" value="8">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2  text-right" placeholder="แบบสำรวจคาบสอนของครูผู้สอน" id="name_from_7" name="name_from_7">
                                     </div>
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-4">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
+                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group_7" name="subject_group_7">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ภาคเรียนที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ภาคเรียนที่">
+                                            <input type="text" class="form-control mt-2" placeholder="ภาคเรียนที่" id="semester_7" name="semester_7">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ปีการศึกษา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา">
+                                            <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา" id="school_year_7" name="school_year_7">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <!-- <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">สอนวิชาคู่กับครู</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูปัจจุบัน">
-                                        </div>
-                                    </div> -->
                                     <div class="text-center mt-4">
                                         <div class="host6"></div>
                                         <div class=" justify-content-center form-group ">
@@ -1037,93 +718,30 @@
                                 <div class="row">
                                     <div class="form-group mb-3 mt-3">
                                         <div class=" text-center">
-                                            <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                            <button type="submit" class="btn " id="server_from_7" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
                                             <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา -->
-            <div class="modal fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content" style="background-color: #F8F8FF;">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
+                <!-- การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา -->
+                <div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content" style="background-color: #F8F8FF;">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="" id="id_from" value="9">
                                 <div class="row mb-3">
                                     <div class="col-4 ">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <?php
-                                    $dates2 = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-                                    // สร้างอะเรย์ของเดือน
-                                    $months2 = array(
-                                        1 => 'มกราคม',
-                                        2 => 'กุมภาพันธ์',
-                                        3 => 'มีนาคม',
-                                        4 => 'เมษายน',
-                                        5 => 'พฤษภาคม',
-                                        6 => 'มิถุนายน',
-                                        7 => 'กรกฎาคม',
-                                        8 => 'สิงหาคม',
-                                        9 => 'กันยายน',
-                                        10 => 'ตุลาคม',
-                                        11 => 'พฤศจิกายน',
-                                        12 => 'ธันวาคม'
-                                    );
-                                    ?>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates2 as $date2) {
-                                                        echo "<option value='{$date2}'>{$date2}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months2 as $num2 => $name2) {
-                                                        echo "<option value='{$num2}'>{$name2}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
+                                            <input type="text" class="form-control mt-2  text-right" placeholder="การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา" id="name_from_8" name="name_from_8">
                                         </div>
                                     </div>
                                 </div>
@@ -1131,172 +749,77 @@
                                     <div class="col-4 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ขออนุญาตนำนักเรียนไป</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ขออนุญาตนำนักเรียนไป">
+                                            <input type="text" class="form-control mt-2" placeholder="ขออนุญาตนำนักเรียนไป" id="allow_student_8" name="allow_student_8">
                                         </div>
                                     </div>
                                     <div class="col-2 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">จำนวนนักเรียน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนนักเรียน">
+                                            <input type="text" class="form-control mt-2" placeholder="จำนวนนักเรียน" id="student_total_8" name="student_total_8">
                                         </div>
                                     </div>
                                     <div class="col-2 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">จำนวนครูผู้ควบคุม</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ควบคุม">
+                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ควบคุม" id="teacher_total_8" name="teacher_total_8">
                                         </div>
                                     </div>
                                     <div class="col-4 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เหตุผลในการไปควบคุม</label>
-                                            <textarea class="form-control" placeholder="เหตุผลในการไปควบคุม" id="floatingTextarea2"></textarea>
+                                            <textarea class="form-control" placeholder="เหตุผลในการไปควบคุม" id="reason_controll_8"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-4 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ชื่อสถานที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อสถานที่">
+                                            <input type="text" class="form-control mt-2" placeholder="ชื่อสถานที่" id="school_name_8" name="school_name_8">
                                         </div>
                                     </div>
                                 </div>
                                 <h3 class="mt-3  text-center">ออกเดินทาง</h3>
                                 <div class="row">
-                                    <?php
-                                    $dates3 = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-                                    // สร้างอะเรย์ของเดือน
-                                    $months3 = array(
-                                        1 => 'มกราคม',
-                                        2 => 'กุมภาพันธ์',
-                                        3 => 'มีนาคม',
-                                        4 => 'เมษายน',
-                                        5 => 'พฤษภาคม',
-                                        6 => 'มิถุนายน',
-                                        7 => 'กรกฎาคม',
-                                        8 => 'สิงหาคม',
-                                        9 => 'กันยายน',
-                                        10 => 'ตุลาคม',
-                                        11 => 'พฤศจิกายน',
-                                        12 => 'ธันวาคม'
-                                    );
-                                    ?>
+
                                     <div class="col-2 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates3 as $date3) {
-                                                        echo "<option value='{$date3}'>{$date3}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months3 as $num3 => $name3) {
-                                                        echo "<option value='{$num3}'>{$name3}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
+                                            <input type="date" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" name="date_travel_8" id="date_travel_8">
                                         </div>
                                     </div>
                                     <div class="col-2 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เวลาเดินทาง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลาเดินทาง">
+                                            <input type="text" class="form-control mt-2" placeholder="เวลาเดินทาง" id="travel_time_8" name="travel_time_8">
                                         </div>
                                     </div>
                                     <div class="col-4 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เส้นทางในการเดินทาง">
+                                            <input type="text" class="form-control mt-2" placeholder="เส้นทางในการเดินทาง" id="travel_route_8" name="travel_route_8">
                                         </div>
                                     </div>
                                 </div>
                                 <h3 class="mt-3  text-center">เดินทางกลับ</h3>
                                 <div class="row">
-                                    <?php
-                                    $dates4 = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-                                    // สร้างอะเรย์ของเดือน
-                                    $months4 = array(
-                                        1 => 'มกราคม',
-                                        2 => 'กุมภาพันธ์',
-                                        3 => 'มีนาคม',
-                                        4 => 'เมษายน',
-                                        5 => 'พฤษภาคม',
-                                        6 => 'มิถุนายน',
-                                        7 => 'กรกฎาคม',
-                                        8 => 'สิงหาคม',
-                                        9 => 'กันยายน',
-                                        10 => 'ตุลาคม',
-                                        11 => 'พฤศจิกายน',
-                                        12 => 'ธันวาคม'
-                                    );
-                                    ?>
                                     <div class="col-2 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates4 as $date4) {
-                                                        echo "<option value='{$date4}'>{$date4}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months4 as $num4 => $name4) {
-                                                        echo "<option value='{$num4}'>{$name4}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
+                                            <input type="date" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" id="travel_back_8" name="travel_back_8">
                                         </div>
                                     </div>
                                     <div class="col-2 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เวลาถึงสถานศึกษา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา">
+                                            <input type="text" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" id="Time_to_arrive_8" name="Time_to_arrive_8">
                                         </div>
                                     </div>
                                     <div class="col-4 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">จำนวนเงินค่าใช้จ่ายต่อคน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนเงินค่าใช้จ่ายต่อคน">
+                                            <input type="text" class="form-control mt-2" placeholder="จำนวนเงินค่าใช้จ่ายต่อคน" id="amount_person_8" name="amount_person_8">
                                         </div>
                                     </div>
-                                    <div class=" col-4 text-center mt-3">
+                                    <div class=" col-4 text-center mt-5">
                                         <div class="host7"></div>
                                         <div class="row justify-content-center form-group ">
                                             <button class="add_fields7 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มชื่อครูผู้ควบคุม</button>
@@ -1306,168 +829,59 @@
 
                                 <div class="form-group mb-3 mt-3">
                                     <div class=" text-center">
-                                        <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                        <button type="submit" class="btn " id="server_from_8" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
                                         <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                     </div>
                                 </div>
+                            </div>
                         </div>
-
-                        </form>
                     </div>
                 </div>
-            </div>
-            <!-- ออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน -->
-            <div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content" style="background-color: #F8F8FF;">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
+                <!-- ขอนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน -->
+                <div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content" style="background-color: #F8F8FF;">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="" id="id_from" value="10">
                                 <div class="row mb-3">
                                     <div class="col-4 ">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน" disabled>
+                                            <input type="text" class="form-control mt-2  text-right" placeholder="ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน" id="name_from_9" name="name_from_9">
                                         </div>
                                     </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
+                                    <!-- <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_9" name="petition_name_9">
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <?php
-                                    $dates2 = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-                                    // สร้างอะเรย์ของเดือน
-                                    $months2 = array(
-                                        1 => 'มกราคม',
-                                        2 => 'กุมภาพันธ์',
-                                        3 => 'มีนาคม',
-                                        4 => 'เมษายน',
-                                        5 => 'พฤษภาคม',
-                                        6 => 'มิถุนายน',
-                                        7 => 'กรกฎาคม',
-                                        8 => 'สิงหาคม',
-                                        9 => 'กันยายน',
-                                        10 => 'ตุลาคม',
-                                        11 => 'พฤศจิกายน',
-                                        12 => 'ธันวาคม'
-                                    );
-                                    ?>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates2 as $date2) {
-                                                        echo "<option value='{$date2}'>{$date2}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months2 as $num2 => $name2) {
-                                                        echo "<option value='{$num2}'>{$name2}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
-                                        </div>
-                                    </div>
+                                </div> -->
                                 </div>
                                 <div class="row">
                                     <div class="col-4 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ชื่อกิจกรรม งาน/โครงการ</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อกิจกรรม งาน/โครงการ">
+                                            <input type="text" class="form-control mt-2" placeholder="ชื่อกิจกรรม งาน/โครงการ" id="activity_name_9" name="activity_name_9">
                                         </div>
                                     </div>
                                     <div class="col-4 mt-3">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เหตุผลในการนำเข้า</label>
-                                            <textarea class="form-control" placeholder="เหตุผลในการนำเข้า" id="floatingTextarea2"></textarea>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-                                    <?php
-                                    $dates3 = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31);
-                                    // สร้างอะเรย์ของเดือน
-                                    $months3 = array(
-                                        1 => 'มกราคม',
-                                        2 => 'กุมภาพันธ์',
-                                        3 => 'มีนาคม',
-                                        4 => 'เมษายน',
-                                        5 => 'พฤษภาคม',
-                                        6 => 'มิถุนายน',
-                                        7 => 'กรกฎาคม',
-                                        8 => 'สิงหาคม',
-                                        9 => 'กันยายน',
-                                        10 => 'ตุลาคม',
-                                        11 => 'พฤศจิกายน',
-                                        12 => 'ธันวาคม'
-                                    );
-                                    ?>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <div class="">
-                                                <select name="date" class="form-control mt-2" required>
-                                                    <option value="">เลือกวันที่</option>
-                                                    <?php
-                                                    foreach ($dates3 as $date3) {
-                                                        echo "<option value='{$date3}'>{$date3}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
+                                            <textarea class="form-control" placeholder="เหตุผลในการนำเข้า" id="reason_project_9"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-2 mt-3">
                                         <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <div class="">
-                                                <select name="month" class="form-control mt-2" required>
-                                                    <option value="">เลือกเดือน</option>
-                                                    <?php
-                                                    foreach ($months3 as $num3 => $name3) {
-                                                        echo "<option value='{$num3}'>{$name3}</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
+                                            <label for="" style="font-size: 18px;">วันที่เข้าร่วม</label>
+                                            <input type="date" class="form-control mt-2" id="date_activity_9" name="date_activity_9">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mt-3">
                                     <div class=" col-12mt-3">
                                         <div class="host8"></div>
                                         <div class="row justify-content-center form-group ">
@@ -1475,60 +889,37 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group mb-3 mt-3">
                                     <div class=" text-center">
-                                        <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                        <button type="submit" class="btn " id="server_from_10" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
                                         <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                     </div>
                                 </div>
+                            </div>
                         </div>
-
-                        </form>
                     </div>
                 </div>
-            </div>
-            <!-- การขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ -->
-            <div class="modal fade" id="exampleModal13" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
+                <!-- การขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ -->
+                <div class="modal fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="" id="id_from" value="11">
                                 <div class="row mb-3">
                                     <div class="col-4 ">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="การยื่นฟอร์มปะหน้า" readonly>
+                                            <input type="text" class="form-control mt-2  text-right" placeholder="ชื่อคำร้อง" id="name_from_10" name="name_from_10">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-2">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="วันที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เดือน">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
+                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_10" name="petition_name_10">
                                         </div>
                                     </div>
                                 </div>
@@ -1536,25 +927,25 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">โรงเรียนมีความประสงค์</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ที่">
+                                            <input type="text" class="form-control mt-2" placeholder="โรงเรียนมีความประสงค์" id="school_wishes_10" name="school_wishes_10">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">นักเรียนชั้น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อ-นามสกุล">
+                                            <input type="text" class="form-control mt-2" placeholder="นักเรียนชั้น" id="class_student_10" name="class_student_10">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">ห้อง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ตำแหน่ง">
+                                            <input type="text" class="form-control mt-2" placeholder="ห้อง" id="room_10" name="room_10">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เหตุผล</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เหตุผล">
+                                            <input type="text" class="form-control mt-2" placeholder="เหตุผล" id="reason_project_10" name="reason_project_10">
                                         </div>
                                     </div>
                                 </div>
@@ -1562,25 +953,13 @@
                                     <div class="col-2">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="วันที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เดือน">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
+                                            <input type="date" class="form-control mt-2" placeholder="วันที่" id="date_activity_10" name="date_activity_10">
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เวลา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลา">
+                                            <input type="text" class="form-control mt-2" placeholder="เวลา" id="Time_to_go_10" name="Time_to_go_10">
                                         </div>
                                     </div>
                                     <div class="col-1 mt-5">
@@ -1589,7 +968,7 @@
                                     <div class="col-2">
                                         <div class="form-group">
                                             <label for="" style="font-size: 18px;">เวลา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลา">
+                                            <input type="text" class="form-control mt-2" placeholder="เวลา" id="Return_time_10" name="Return_time_10">
                                         </div>
                                     </div>
                                 </div>
@@ -1597,13 +976,13 @@
                                     <div class="col-4">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">จำนวนครูผู้ดูแล</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ดูแล">
+                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ดูแล" id="Number_of_supervising_teachers" name="Number_of_supervising_teachers">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group ">
                                             <label for="" style="font-size: 18px;">สถานที่ส่งเอกสาร</label>
-                                            <input type="text" class="form-control mt-2" placeholder="สถานที่ส่งเอกสาร">
+                                            <input type="text" class="form-control mt-2" placeholder="สถานที่ส่งเอกสาร" id="Place_of_sending_documents" name="Place_of_sending_documents">
                                         </div>
                                     </div>
                                 </div>
@@ -1615,27 +994,22 @@
                                 </div>
                                 <div class="form-group mb-3 mt-3">
                                     <div class=" text-center">
-                                        <button type="submit" class="btn " style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                        <button type="submit" class="btn " id="server_from_11" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
                                         <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                     </div>
                                 </div>
-
-
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
 </div>
-
-
-</div>
-</div>
-
+<script>
+    if (localStorage.getItem("id_type") != "1" && localStorage.getItem("id_user") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
+</script>
 <?php include("../footer.php") ?>

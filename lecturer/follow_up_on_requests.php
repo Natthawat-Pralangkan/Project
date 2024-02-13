@@ -21,7 +21,7 @@
         </div>
         <div class="content">
             <div class="mt-3">
-                <table id="follow_up_on_requests" class="table">
+                <table id="show" class="table">
                     <thead>
                         <tr>
                             <th>วันที่ยื่นคำร้อง</th>
@@ -31,18 +31,7 @@
                             <th>จัดการ</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>12/06/66</td>
-                            <td>การยื่นใบขอเบิกจ่ายค่าพัสดุ</td>
-                            <td>คำร้องงบประมาณ</td>
-                            <td>รอการอนุมัติ</td>
-                            <td>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    เลือก
-                                </button>
-                            </td>
-                        </tr>
+                    <tbody id="show">
 
                     </tbody>
                 </table>
@@ -56,7 +45,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -68,4 +57,38 @@
         </div>
     </div>
 </div>
+<script>
+    if (localStorage.getItem("id_type") != "1" && localStorage.getItem("id_user") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
+    $(document).ready(function() {
+        // console.log(localStorage.getItem("id_user"));
+        $.ajax({
+            url: "get_follw",
+            type: "POST",
+            data: {
+                id_user: localStorage.getItem("id_user")
+            },
+            success: function(datanew) {
+                // สร้างตาราง
+                // var newdata = JSON.parse(data)
+
+                var tableBody = '';
+                $.each(datanew, function (index, item) {
+                    tableBody += '<tr>';
+                    tableBody += '<td>' + item.date + '</td>';
+                    tableBody += '<td>' + item.petition_name + '</td>';
+                    tableBody += '<td>' + item.request_type_name + '</td>';
+                    tableBody += '<td>' + item.status_from + '</td>';
+                    tableBody += '</tr>';
+                });
+                // เพิ่มตารางลงใน tbody
+                console.log(tableBody);
+                $('#show').html(tableBody);
+            }
+
+        });
+    });
+</script>
 <?php include("../footer.php") ?>

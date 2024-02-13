@@ -20,13 +20,13 @@ if (isset($_POST['user_name']) && isset($_POST['password'])) {
         if ($stmt->rowCount() == 1) {
             // Fetch user information
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $user_id = $row['id'];
+            $user_id = $row['id_user'];
             $user_name = $row['user_name'];
 
-            $updatetime = $db->prepare("UPDATE user SET bate_login = now() WHERE id = ?");
+            $updatetime = $db->prepare("UPDATE user SET date_login = now() WHERE id_user = ?");
             $updatetime->bindParam(1, $user_id);
             if ($updatetime->execute()) {
-                echo json_encode(["statusCode" => 200, "id" => $user_id, "user_name" => $user_name, "type" => $row['type']]);
+                echo json_encode(["statusCode" => 200, "id_user" => $user_id, "user_name" => $user_name, "id_type" => $row['id_type']]);
             }
             // Return success status and user information
         } else {
