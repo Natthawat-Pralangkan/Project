@@ -26,8 +26,8 @@
                 </div> -->
                 <div class="mt-5">
                     <!-- <button type="button" class="btn btn-success mr-2"> -->
-                        <a href="./Add_information.php"class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF" >เพิ่มข้อมูลบุคลากร</a>
-                       
+                    <a href="./Add_information.php" class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF">เพิ่มข้อมูลบุคลากร</a>
+
                     <!-- </button> -->
                 </div>
             </div>
@@ -36,8 +36,6 @@
                     <thead>
                         <tr>
                             <th>ลำดับ</th>
-                            <th>รูปภาพ</th>
-                            <th>คำนำหน้า</th>
                             <th>ชื่อ</th>
                             <th>นามสกุล</th>
                             <th>ตำแหน่ง</th>
@@ -45,7 +43,30 @@
                             <th>ลบ</th>
                         </tr>
                     </thead>
-                    <!-- เพิ่มข้อมูลตารางตรงนี้ -->
+                    <?php
+                    // คำสั่ง SQL เพื่อดึงข้อมูล
+                    $sql = "SELECT * FROM `teacher_personnel_information`";
+                    $result = $db->query($sql);
+
+                    // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
+                    if ($result->rowCount() > 0) {
+                        // วนลูปเพื่อแสดงข้อมูลทั้งหมดในตาราง
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<tr>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $row['user_name'] . "</td>";
+                            echo "<td>" . $row['last_name'] . "</td>";
+                            echo "<td>" . $row['id_card_number'] . "</td>";
+                            echo "<td>" . $row['date_month_yearofbirth'] . "</td>";
+                            echo "<td>" . $row['age'] . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+
+
+                    ?>
                 </table>
             </div>
         </div>
@@ -68,5 +89,10 @@
 
     </div>
 </div>
-
+<script>
+    if (localStorage.getItem("id_type") != "6" && localStorage.getItem("id_user") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
+</script>
 <?php include("../../footer.php") ?>

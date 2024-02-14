@@ -27,19 +27,19 @@
 
 </aside>
 <script>
-    $.ajax({
-        url: "../../servers/function",
-        type: "POST",
-        data: {
-            function: "get_userbyid",
-            user_id: localStorage.getItem("user_id")
-        },
-        success: function(res) {
-            var datas = JSON.parse(res)
-            $("#imageUser").attr('src', datas[0].image_user).show();
-            $("#fullnameNav").html(datas[0].user_name)
-        }
-    })
+    // $.ajax({
+    //     url: "../../servers/function",
+    //     type: "POST",
+    //     data: {
+    //         function: "get_userbyid",
+    //         user_id: localStorage.getItem("user_id")
+    //     },
+    //     success: function(res) {
+    //         var datas = JSON.parse(res)
+    //         $("#imageUser").attr('src', datas[0].image_user).show();
+    //         $("#fullnameNav").html(datas[0].user_name)
+    //     }
+    // })
     $(document).ready(function() {
         let status = true;
         $("#toggleSidebar").click(function() {

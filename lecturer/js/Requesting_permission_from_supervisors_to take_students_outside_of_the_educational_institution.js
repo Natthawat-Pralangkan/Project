@@ -14,6 +14,15 @@ $(document).ready(function () {
   });
 
   $("#server_from_8").click(function () {
+    let addIdValues = [];
+        $('input[name="nub_id[]"]').each(function () {
+            addIdValues.push($(this).val());
+        });
+
+        let productNames = [];
+        $('select[name="input_host_name[]"]').each(function () {
+            productNames.push($(this).val());
+        });
     // รับข้อมูลจากฟอร์ม Modal
     var allow_student = $("#allow_student_8").val();
     var student_total = $("#student_total_8").val();
