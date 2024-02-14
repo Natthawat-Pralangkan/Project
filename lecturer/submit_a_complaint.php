@@ -103,26 +103,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="row mt-2">
-                                    <div class="col-2">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="วันที่">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เดือน">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
-                                        </div>
-                                    </div>
-                                </div> -->
                             <div class="row mt-2">
                                 <div class="col-8">
                                     <div class="form-group">
@@ -158,24 +138,6 @@
                                         <input type="date" class="form-control mt-2" id="date_travel" name="date_travel" placeholder="วันที่">
                                     </div>
                                 </div>
-                                <!-- <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เดือน">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เวลาเดินทาง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลาเดินทาง">
-                                        </div>
-                                    </div> -->
                             </div>
                             <div class="row mt-3">
                                 <div class="col-4">
@@ -288,7 +250,7 @@
                 </div>
             </div>
             <!-- การยื่นฟอร์มปะหน้า -->
-            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -373,7 +335,7 @@
                 </div>
             </div>
             <!-- แบบรายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน  -->
-            <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -440,7 +402,7 @@
                 </div>
             </div>
             <!-- การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ -->
-            <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel">
+            <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -491,7 +453,7 @@
                 </div>
             </div>
             <!-- รายงานการประชุม / อบรม / สัมมนา / กิจกรรม / โครงการ / งาน -->
-            <div class="modal fade" id="exampleModal6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -727,282 +689,283 @@
                         </div>
                     </div>
                 </div>
-                <!-- การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา -->
-                <div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content" style="background-color: #F8F8FF;">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="" id="id_from" value="9">
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา" id="name_from_8" name="name_from_8">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ขออนุญาตนำนักเรียนไป</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ขออนุญาตนำนักเรียนไป" id="allow_student_8" name="allow_student_8">
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">จำนวนนักเรียน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนนักเรียน" id="student_total_8" name="student_total_8">
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">จำนวนครูผู้ควบคุม</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ควบคุม" id="teacher_total_8" name="teacher_total_8">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เหตุผลในการไปควบคุม</label>
-                                            <textarea class="form-control" placeholder="เหตุผลในการไปควบคุม" id="reason_controll_8"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อสถานที่</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อสถานที่" id="school_name_8" name="school_name_8">
-                                        </div>
-                                    </div>
-                                </div>
-                                <h3 class="mt-3  text-center">ออกเดินทาง</h3>
-                                <div class="row">
-
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="date" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" name="date_travel_8" id="date_travel_8">
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เวลาเดินทาง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลาเดินทาง" id="travel_time_8" name="travel_time_8">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เส้นทางในการเดินทาง" id="travel_route_8" name="travel_route_8">
-                                        </div>
-                                    </div>
-                                </div>
-                                <h3 class="mt-3  text-center">เดินทางกลับ</h3>
-                                <div class="row">
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="date" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" id="travel_back_8" name="travel_back_8">
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เวลาถึงสถานศึกษา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" id="Time_to_arrive_8" name="Time_to_arrive_8">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">จำนวนเงินค่าใช้จ่ายต่อคน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนเงินค่าใช้จ่ายต่อคน" id="amount_person_8" name="amount_person_8">
-                                        </div>
-                                    </div>
-                                    <div class=" col-4 text-center mt-5">
-                                        <div class="host7"></div>
-                                        <div class="row justify-content-center form-group ">
-                                            <button class="add_fields7 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มชื่อครูผู้ควบคุม</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-3 mt-3">
-                                    <div class=" text-center">
-                                        <button type="submit" class="btn " id="server_from_8" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+            <!-- การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา -->
+            <div class="modal fade" id="exampleModal9" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content" style="background-color: #F8F8FF;">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    </div>
-                </div>
-                <!-- ขอนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน -->
-                <div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content" style="background-color: #F8F8FF;">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="" id="id_from" value="10">
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน" id="name_from_9" name="name_from_9">
-                                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="" id="id_from" value="9">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2  text-right" placeholder="การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา" id="name_from_8" name="name_from_8">
                                     </div>
-                                    <!-- <div class="col-4">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 mt-3">
                                     <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_9" name="petition_name_9">
-                                    </div>
-                                </div> -->
-                                </div>
-                                <div class="row">
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อกิจกรรม งาน/โครงการ</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อกิจกรรม งาน/โครงการ" id="activity_name_9" name="activity_name_9">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เหตุผลในการนำเข้า</label>
-                                            <textarea class="form-control" placeholder="เหตุผลในการนำเข้า" id="reason_project_9"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 mt-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">วันที่เข้าร่วม</label>
-                                            <input type="date" class="form-control mt-2" id="date_activity_9" name="date_activity_9">
-                                        </div>
+                                        <label for="" style="font-size: 18px;">ขออนุญาตนำนักเรียนไป</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ขออนุญาตนำนักเรียนไป" id="allow_student_8" name="allow_student_8">
                                     </div>
                                 </div>
-                                <div class="row mt-3">
-                                    <div class=" col-12mt-3">
-                                        <div class="host8"></div>
-                                        <div class="row justify-content-center form-group ">
-                                            <button class="add_fields8 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มรายชื่อนักเรียน</button>
-                                        </div>
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">จำนวนนักเรียน</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนนักเรียน" id="student_total_8" name="student_total_8">
                                     </div>
                                 </div>
-                                <div class="form-group mb-3 mt-3">
-                                    <div class=" text-center">
-                                        <button type="submit" class="btn " id="server_from_10" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">จำนวนครูผู้ควบคุม</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ควบคุม" id="teacher_total_8" name="teacher_total_8">
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เหตุผลในการไปควบคุม</label>
+                                        <textarea class="form-control" placeholder="เหตุผลในการไปควบคุม" id="reason_controll_8"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อสถานที่</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ชื่อสถานที่" id="school_name_8" name="school_name_8">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- การขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ -->
-                <div class="modal fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h3 class="mt-3  text-center">ออกเดินทาง</h3>
+                            <div class="row">
+
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่</label>
+                                        <input type="date" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" name="date_travel_8" id="date_travel_8">
+                                    </div>
+                                </div>
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลาเดินทาง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เวลาเดินทาง" id="travel_time_8" name="travel_time_8">
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เส้นทางในการเดินทาง" id="travel_route_8" name="travel_route_8">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="" id="id_from" value="11">
-                                <div class="row mb-3">
-                                    <div class="col-4 ">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                            <input type="text" class="form-control mt-2  text-right" placeholder="ชื่อคำร้อง" id="name_from_10" name="name_from_10">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_10" name="petition_name_10">
-                                        </div>
+                            <h3 class="mt-3  text-center">เดินทางกลับ</h3>
+                            <div class="row">
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่</label>
+                                        <input type="date" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" id="travel_back_8" name="travel_back_8">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">โรงเรียนมีความประสงค์</label>
-                                            <input type="text" class="form-control mt-2" placeholder="โรงเรียนมีความประสงค์" id="school_wishes_10" name="school_wishes_10">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">นักเรียนชั้น</label>
-                                            <input type="text" class="form-control mt-2" placeholder="นักเรียนชั้น" id="class_student_10" name="class_student_10">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">ห้อง</label>
-                                            <input type="text" class="form-control mt-2" placeholder="ห้อง" id="room_10" name="room_10">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เหตุผล</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เหตุผล" id="reason_project_10" name="reason_project_10">
-                                        </div>
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลาถึงสถานศึกษา</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เวลาถึงสถานศึกษา" id="Time_to_arrive_8" name="Time_to_arrive_8">
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-2">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">วันที่</label>
-                                            <input type="date" class="form-control mt-2" placeholder="วันที่" id="date_activity_10" name="date_activity_10">
-                                        </div>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เวลา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลา" id="Time_to_go_10" name="Time_to_go_10">
-                                        </div>
-                                    </div>
-                                    <div class="col-1 mt-5">
-                                        <h5>ถึง</h5>
-                                    </div>
-                                    <div class="col-2">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เวลา</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เวลา" id="Return_time_10" name="Return_time_10">
-                                        </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">จำนวนเงินค่าใช้จ่ายต่อคน</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนเงินค่าใช้จ่ายต่อคน" id="amount_person_8" name="amount_person_8">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">จำนวนครูผู้ดูแล</label>
-                                            <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ดูแล" id="Number_of_supervising_teachers" name="Number_of_supervising_teachers">
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group ">
-                                            <label for="" style="font-size: 18px;">สถานที่ส่งเอกสาร</label>
-                                            <input type="text" class="form-control mt-2" placeholder="สถานที่ส่งเอกสาร" id="Place_of_sending_documents" name="Place_of_sending_documents">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" mt-3">
-                                    <div class="host9"></div>
+                                <div class=" col-4 text-center mt-5">
+                                    <div class="host7"></div>
                                     <div class="row justify-content-center form-group ">
-                                        <button class="add_fields9 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มรายชื่อครูผู้ดูแล</button>
+                                        <button class="add_fields7 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มชื่อครูผู้ควบคุม</button>
                                     </div>
                                 </div>
-                                <div class="form-group mb-3 mt-3">
-                                    <div class=" text-center">
-                                        <button type="submit" class="btn " id="server_from_11" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
-                                    </div>
+                            </div>
+
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_from_8" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- ขอนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน -->
+            <div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content" style="background-color: #F8F8FF;">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="" id="id_from" value="10">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2  text-right" placeholder="ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน" id="name_from_9" name="name_from_9">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_9" name="petition_name_9">
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อกิจกรรม งาน/โครงการ</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ชื่อกิจกรรม งาน/โครงการ" id="activity_name_9" name="activity_name_9">
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เหตุผลในการนำเข้า</label>
+                                        <textarea class="form-control" placeholder="เหตุผลในการนำเข้า" id="reason_project_9"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">วันที่เข้าร่วม</label>
+                                        <input type="date" class="form-control mt-2" id="date_activity_9" name="date_activity_9">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class=" col-12mt-3">
+                                    <div class="host8"></div>
+                                    <div class="row justify-content-center form-group ">
+                                        <button class="add_fields8 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มรายชื่อนักเรียน</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_from_10" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- การขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ -->
+            <div class="modal fade" id="exampleModal11" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="" id="id_from" value="11">
+                            <div class="row mb-3">
+                                <div class="col-4 ">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
+                                        <input type="text" class="form-control mt-2  text-right" placeholder="ชื่อคำร้อง" id="name_from_10" name="name_from_10">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_10" name="petition_name_10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">โรงเรียนมีความประสงค์</label>
+                                        <input type="text" class="form-control mt-2" placeholder="โรงเรียนมีความประสงค์" id="school_wishes_10" name="school_wishes_10">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">นักเรียนชั้น</label>
+                                        <input type="text" class="form-control mt-2" placeholder="นักเรียนชั้น" id="class_student_10" name="class_student_10">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ห้อง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ห้อง" id="room_10" name="room_10">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เหตุผล</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เหตุผล" id="reason_project_10" name="reason_project_10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-2">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">วันที่</label>
+                                        <input type="date" class="form-control mt-2" placeholder="วันที่" id="date_activity_10" name="date_activity_10">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลา</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เวลา" id="Time_to_go_10" name="Time_to_go_10">
+                                    </div>
+                                </div>
+                                <div class="col-1 mt-5">
+                                    <h5>ถึง</h5>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลา</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เวลา" id="Return_time_10" name="Return_time_10">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">จำนวนครูผู้ดูแล</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ดูแล" id="Number_of_supervising_teachers" name="Number_of_supervising_teachers">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">สถานที่ส่งเอกสาร</label>
+                                        <input type="text" class="form-control mt-2" placeholder="สถานที่ส่งเอกสาร" id="Place_of_sending_documents" name="Place_of_sending_documents">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" mt-3">
+                                <div class="host9"></div>
+                                <div class="row justify-content-center form-group ">
+                                    <button class="add_fields9 btn btn-primary" style="font-size: 16px; width:500px;">เพิ่มรายชื่อครูผู้ดูแล</button>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_from_11" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

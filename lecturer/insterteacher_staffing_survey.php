@@ -1,7 +1,6 @@
 <?php
 include("../servers/connect.php");
 
-$name_from = $_POST["name_from"];
 $subject_group = $_POST["subject_group"];
 $semester = $_POST["semester"];
 $school_yea = $_POST["school_yea"];
@@ -15,7 +14,7 @@ $teacher_total_add = $_POST["teacher_total_add"];
 $teacher_add_reason = $_POST["teacher_add_reason"];
 $id_user = $_POST["id_user"];
 
-$details = $name_from . "," . $subject_group . "," . $semester . "," . $school_yea . "," . $teacher_total_now . "," . $teacher_total_out . "," . $teacher_total_broken . "," .$teacher_broken_reason.",".$teacher_total_over.",".$teacher_over_reason.",".$teacher_total_add.",".$teacher_add_reason;
+$details = $subject_group . "," . $semester . "," . $school_yea . "," . $teacher_total_now . "," . $teacher_total_out . "," . $teacher_total_broken . "," .$teacher_broken_reason.",".$teacher_total_over.",".$teacher_over_reason.",".$teacher_total_add.",".$teacher_add_reason;
     // Prepared Statemen
     $query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details) 
               VALUES (?, ?, ?, ?)";

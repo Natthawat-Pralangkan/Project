@@ -1,6 +1,6 @@
 <?php
 include("../servers/connect.php");
-
+// การยื่นฟอร์มปะหน้า
 // $name_from = $_POST["name_from"];
 $date_report_send = $_POST["date_report_send"];
 $document_name_consider = $_POST["document_name_consider"];
@@ -12,22 +12,16 @@ $activity_where = $_POST["activity_where"];
 $summary_details = $_POST["summary_details"];
 $id_user = $_POST["id_user"];
 // Prepared Statemen
-$query = "INSERT INTO modal_title_2 (id_from ,name_from, petition_name, date_report_send, document_name_consider, subject_group, activity_name, according_project, date_activity, activity_where, summary_details,id_user) 
-              VALUES (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?,?)";
+$details = $date_report_send.",".$document_name_consider.",".$subject_group.",".$activity_name.",".$according_project.",".$date_activity.",".$activity_where.",".$summary_details;
+
+$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details ) 
+              VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $newID);
-    $stmt->bindParam(2, $name_from);
-    $stmt->bindParam(3, $petition_name);
-    $stmt->bindParam(4, $date_report_send);
-    $stmt->bindParam(5, $document_name_consider);
-    $stmt->bindParam(6, $subject_group);
-    $stmt->bindParam(7, $activity_name);
-    $stmt->bindParam(8, $according_project);
-    $stmt->bindParam(9, $date_activity);
-    $stmt->bindParam(10, $activity_where);
-    $stmt->bindParam(11, $summary_details);
-    $stmt->bindParam(11, $id_user);
+    $stmt->bindParam(1, $id_user);
+    $stmt->bindValue(2, "6");
+    $stmt->bindValue(3, "1");
+    $stmt->bindParam(4, $details);
 
     // Execute the prepared statement
     if ($stmt->execute()) {
