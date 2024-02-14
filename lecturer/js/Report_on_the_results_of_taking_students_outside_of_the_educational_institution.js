@@ -15,8 +15,8 @@ $(document).ready(function () {
   //
   $("#server_report").click(function () {
     // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from_2").val();
-    var petition_name = $("#petition_name_2").val();
+    // var name_from = $("#name_from_2").val();
+    // var petition_name = $("#petition_name_2").val();
     var school_name = $("#school_name").val();
     var student_total = $("#student_total").val();
     var teacher_total = $("#teacher_total").val();
@@ -28,10 +28,6 @@ $(document).ready(function () {
     var time = $("#time").val();
     var details_of_this_trip = $("#details_of_this_trip").val();
     console.log(
-      name_from +
-        " " +
-        petition_name +
-        " " +
         school_name +
         " " +
         student_total +
@@ -50,8 +46,8 @@ $(document).ready(function () {
         "" +
         time +
         "" +
-        details_of_this_trip+
-        ""+
+        details_of_this_trip +
+        "" +
         localStorage.getItem("id_user")
     );
     $.ajax({
@@ -59,9 +55,9 @@ $(document).ready(function () {
       method: "POST",
       data: {
         id_user: localStorage.getItem("id_user"),
- 
-        name_from: name_from,
-        petition_name: petition_name,
+
+        // name_from: name_from,
+        // petition_name: petition_name,
         school_name: school_name,
         student_total: student_total,
         teacher_total: teacher_total,

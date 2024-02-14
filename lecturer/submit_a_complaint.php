@@ -89,11 +89,11 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="1">
-                            <div class="row ">
+                            <!-- <div class="row ">
                                 <div class="col-6 ">
                                     <div class="form-group ">
                                         <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2" id="name_from_2" name="name_from_2" placeholder="รายงานผลการพานักเรียนไปนอกสถานศึกษา ">
+                                        <input type="text" class="form-control mt-2" id="name_from_2" name="name_from_2" placeholder="รายงานผลการพานักเรียนไปนอกสถานศึกษา " >
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -102,7 +102,7 @@
                                         <input type="text" class="form-control mt-2" id="petition_name_2" name="petition_name_2" placeholder="ชื่อผู้ยื่น">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row mt-2">
                                 <div class="col-8">
                                     <div class="form-group">
@@ -160,18 +160,6 @@
                                         <input type="date" class="form-control mt-2" id="travel_back" name="travel_back">
                                     </div>
                                 </div>
-                                <!-- <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">เดือน</label>
-                                            <input type="text" class="form-control mt-2" placeholder="เดือน">
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <div class="form-group">
-                                            <label for="" style="font-size: 18px;">พ.ศ.</label>
-                                            <input type="text" class="form-control mt-2" placeholder="พ.ศ.">
-                                        </div>
-                                    </div> -->
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เวลา</label>

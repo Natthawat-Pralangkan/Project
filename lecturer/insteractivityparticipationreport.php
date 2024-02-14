@@ -1,6 +1,6 @@
 <?php
 include("../servers/connect.php");
-
+// รายงานการเข้าร่วมกิจกรรม	
 $name_from = $_POST["name_from"];
 $subject_group = $_POST["subject_group"];
 $school_year = $_POST["school_year"];
