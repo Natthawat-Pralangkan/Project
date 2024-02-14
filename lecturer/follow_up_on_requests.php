@@ -6,7 +6,7 @@
     <!-- Content Wrapper -->
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/follow_up_on_requests.js"></script>
+        <!-- <script src="./js/follow_up_on_requests.js"></script> -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
@@ -21,7 +21,7 @@
         </div>
         <div class="content">
             <div class="mt-3">
-                <table id="show" class="table">
+                <table id="follow_up_on_requests" class="table">
                     <thead>
                         <tr>
                             <th>วันที่ยื่นคำร้อง</th>
@@ -31,7 +31,7 @@
                             <th>จัดการ</th>
                         </tr>
                     </thead>
-                    <tbody id="show">
+                    <tbody>
 
                     </tbody>
                 </table>
@@ -63,32 +63,44 @@
         window.location.href = "../"
     }
     $(document).ready(function() {
-        // console.log(localStorage.getItem("id_user"));
         $.ajax({
             url: "get_follw",
             type: "POST",
             data: {
                 id_user: localStorage.getItem("id_user")
             },
-            success: function(datanew) {
-                // สร้างตาราง
-                // var newdata = JSON.parse(data)
-
-                var tableBody = '';
-                $.each(datanew, function (index, item) {
-                    tableBody += '<tr>';
-                    tableBody += '<td>' + item.date + '</td>';
-                    tableBody += '<td>' + item.petition_name + '</td>';
-                    tableBody += '<td>' + item.request_type_name + '</td>';
-                    tableBody += '<td>' + item.status_from + '</td>';
-                    tableBody += '</tr>';
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var table = $('#follow_up_on_requests').DataTable({
+                    data: data,
+                    columns: [
+                        { data: 'date' },
+                        { data: 'petition_name' },
+                        { data: 'request_type_name' },
+                        { data: 'name_status' },
+                        { 
+                            data: null,
+                            render: function(data, type, row) {
+                                return '<button class="btn l" style="background-color:#BB6AFB ; color:#FFFFFF" data-id="#exampleModal">จัดการ</button>';
+                            }
+                        }
+                    ]
+                    ,order: [[0, 'desc']]
                 });
-                // เพิ่มตารางลงใน tbody
-                console.log(tableBody);
-                $('#show').html(tableBody);
+               
+                // เพิ่มเหตุการณ์เมื่อคลิกที่ปุ่ม "จัดการ" เพื่อเปิด modal
+                $('#follow_up_on_requests tbody').on('click', 'button', function() {
+                    var data = table.row($(this).parents('tr')).data();
+                    var modalId = $(this).attr('data-id');
+                    $(modalId).modal('show');
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
             }
-
         });
     });
 </script>
+
 <?php include("../footer.php") ?>

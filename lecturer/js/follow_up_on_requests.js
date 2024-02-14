@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-    $("#show").DataTable({
+    $("#follow_up_on_requests").DataTable({
       columns: [
         {
           data: "วันที่ยื่น",

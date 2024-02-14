@@ -75,43 +75,43 @@ function addfields6() {
         <div class="col-4 mt-2">
             <div class="form-group">
                 <label for="" style="font-size: 18px;">รายวิชา</label>
-                <input type="text" class="form-control mt-2" placeholder="รายวิชา">
+                <input type="text" name="input_host_name[]" class="form-control mt-2" placeholder="รายวิชา">
             </div>
         </div>
         <div class="col-4 mt-2">
             <div class="form-group">
                 <label for="" style="font-size: 18px;">รหัส</label>
-                <input type="text" class="form-control mt-2" placeholder="รหัส">
+                <input type="text" name="input_host_name[]"  class="form-control mt-2" placeholder="รหัส">
             </div>
         </div>
         <div class="col-4 mt-2">
             <div class="form-group">
                 <label for="" style="font-size: 18px;">ชั้น/ห้อง</label>
-                <input type="text" class="form-control mt-2" placeholder="ชั้น/ห้อง">
+                <input type="text" name="input_host_name[]"  class="form-control mt-2" placeholder="ชั้น/ห้อง">
             </div>
         </div>
         <div class="col-4 mt-2">
             <div class="form-group">
                 <label for="" style="font-size: 18px;">คาบสอน/ห้อง</label>
-                <input type="text" class="form-control mt-2" placeholder="คาบสอน/ห้อง">
+                <input type="text" name="input_host_name[]"  class="form-control mt-2" placeholder="คาบสอน/ห้อง">
             </div>
         </div>
         <div class="col-4 mt-2">
             <div class="form-group">
                 <label for="" style="font-size: 18px;">รวมคาบสอน</label>
-                <input type="text" class="form-control mt-2" placeholder="รวมคาบสอน">
+                <input type="text" name="input_host_name[]"  class="form-control mt-2" placeholder="รวมคาบสอน">
             </div>
         </div>
         <div class="col-4 mt-2">
             <div class="form-group">
                 <label for="" style="font-size: 18px;">สอนวิชาคู่กับครู</label>
-                <input type="text" class="form-control mt-2" placeholder="สอนวิชาคู่กับครู">
+                <input type="text" name="input_host_name[]"  class="form-control mt-2" placeholder="สอนวิชาคู่กับครู">
             </div>
         </div>
         <div class="col-4 mt-2">
             <div class="form-group">
                 <label for="" style="font-size: 18px;">ชื่อกิจกรรม/ม.ต้น/ม.ปลาย</label>
-                <input type="text" class="form-control mt-2" placeholder="ชื่อกิจกรรม/ม.ต้น/ม.ปลาย">
+                <input type="text" name="input_host_name[]"  class="form-control mt-2" placeholder="ชื่อกิจกรรม/ม.ต้น/ม.ปลาย">
             </div>
         </div>
     </div>

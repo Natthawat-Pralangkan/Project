@@ -33,25 +33,52 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
 }
 
 $user_id = $_POST["id_user"];
-// print_r($_POST);
+
 $sql = "SELECT * FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
-                        JOIN petition_type ON petition_name.id_petition = petition_type.id WHERE details_ppetiton.id_user = ? ORDER by details_ppetiton.date desc ";
+                        JOIN petition_type ON petition_name.id_petition = petition_type.id 
+                        JOIN request_status ON details_ppetiton.id_status = request_status.id_status
+                        WHERE details_ppetiton.id_user = ? ORDER by details_ppetiton.date desc ";
 $result = $db->prepare($sql);
 $result->bindParam(1, $user_id);
 $result->execute();
 $row = $result->fetchAll(PDO::FETCH_ASSOC);
+$keeall = array(); // สร้าง array เพื่อเก็บข้อมูลทั้งหมดก่อนส่ง JSON กลับ
+
 foreach ($row as $kee) {
     $newdate = ConvertToThaiDate($kee['date'], 0, 0);
     $keeall[] = array(
-        "date" => $kee['date'],
+        "date" => $newdate, // เปลี่ยนเป็น $newdate ที่แปลงเป็นวันที่ไทยแล้ว
         "petition_name" => $kee['petition_name'],
         "request_type_name" => $kee['request_type_name'],
-        "status_from" => $kee['status_from'],
+        "name_status" => $kee['name_status'],
     );
-    // print_r($keeall);
-    echo json_encode($keeall);
 }
 
+echo json_encode($keeall); // ส่ง JSON กลับหลังจากวนลูปเสร็จสิ้นทั้งหมด
+// if(isset($_POST["id_user"])) {
+//     // นำค่า id_user ที่ส่งมาจาก AJAX ไปใช้งาน
+//     $user_id = $_POST["id_user"];
+
+//     // ทำการเชื่อมต่อฐานข้อมูล
+//     // และทำการคิวรี่เพื่อดึงข้อมูลตาม id_user
+//     $sql = "SELECT * FROM `details_ppetiton`
+//             JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
+//             JOIN petition_type ON petition_name.id_petition = petition_type.id 
+//             WHERE details_ppetiton.id_user = :user_id ORDER BY details_ppetiton.date DESC";
+
+//     $result = $db->prepare($sql);
+//     $result->bindParam(':user_id', $user_id, PDO::PARAM_INT); // ผูกค่า id_user กับพารามิเตอร์
+//     $result->execute();
+
+//     // เก็บข้อมูลที่ได้เป็นรูปแบบของอาร์เรย์
+//     $data = $result->fetchAll(PDO::FETCH_ASSOC);
+
+//     // ส่งข้อมูลในรูปแบบ JSON กลับไปยัง JavaScript
+//     echo json_encode($data);
+// } else {
+//     // หากไม่มีการส่งค่า id_user มาให้แสดงข้อความผิดพลาด
+//     echo "Missing id_user parameter.";
+// }
 // แสดงข้อมูลในตารา
 ?>

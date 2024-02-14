@@ -24,9 +24,11 @@
                 <table id="order_inside_outside" class="table">
                     <thead>
                         <tr>
-                            <th>use_name</th>
-                            <th>password</th>
-                            <th>type</th>
+                            <th>วันที่</th>
+                            <th>ชื่อคำสั่ง</th>
+                            <th>ประเภท</th>
+                            <th>ไฟล์</th>
+                            <th>จัดการ</th>
                         </tr>
                     </thead>
                     <tbody>

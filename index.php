@@ -67,23 +67,23 @@ include("./servers/connect.php");
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./admin/home.php";
                                 break;
-                            case 1:
+                            case 7:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./lecturer/home";
                                 break;
 
-                            case 2:
+                            case 1:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./Director_DeputyDirector/DeputyDirector/home";
                                 break;
-                            case 3:
+                            case 2:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./Director_DeputyDirector/director/home";
                                 break;
-                            case 4:
+                            case 3:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./officer/academicmaster/home";
@@ -98,7 +98,7 @@ include("./servers/connect.php");
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./officer/BudgetOfficer/home";
                                 break;
-                            case 7:
+                            case 4:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./officer/generaldepartment/home";

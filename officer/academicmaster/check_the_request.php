@@ -81,4 +81,10 @@
         </div>
 
     </div>
+    <script>
+    if(localStorage.getItem("id_type") != "3" && localStorage.getItem("id_user") == null){
+        localStorage.clear()
+        window.location.href ="../"
+    }
+</script>
     <?php include("../../footer.php") ?>

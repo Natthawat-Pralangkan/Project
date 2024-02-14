@@ -40,7 +40,7 @@
     </div>
 </div>
 <script>
-    if(localStorage.getItem("type") != "0" && localStorage.getItem("id") == null){
+    if(localStorage.getItem("id_type") != "0" && localStorage.getItem("id_user") == null){
         localStorage.clear()
         window.location.href ="../"
     }

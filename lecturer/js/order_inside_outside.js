@@ -1,26 +1,21 @@
 $(document).ready(function () {
-  $.ajax({
-    url: "./get",
-    type: "POST",
-    data: {
-      id: localStorage.getItem("id"),
-    },
-    success: function (get) {
-      var data = JSON.parse(get);
-      $("#order_inside_outside").DataTable({
-        data: data,
-        columns: [
-          {
-            data: "use_name",
-          },
-          {
-            data: "password",
-          },
-          {
-            data: "type",
-          },
-        ],
-      });
-    },
+  $("#order_inside_outside").DataTable({
+    columns: [
+      {
+        data: "วันที่",
+      },
+      {
+        data: "ชื่อสั่ง",
+      },
+      {
+        data: "ประเภท",
+      },
+      {
+        data: "ไฟล์",
+      },
+      {
+        data: "จัดการ",
+      },
+    ],
   });
 });
