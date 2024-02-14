@@ -14,17 +14,12 @@ $(document).ready(function () {
   });
 
   $("#server_from_7").click(function () {
-    // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from_7").val();
-    var petition_name = $("#petition_name_7").val();
+    // การยื่นแบบสำรวจคาบสอนของครูผู้สอน
+   
     var subject_group = $("#subject_group_7").val();
     var semester = $("#semester_7").val();
     var school_year = $("#school_year_7").val();
     console.log(
-      name_from +
-        " " +
-        petition_name +
-        " " +
         subject_group +
         " " +
         semester +

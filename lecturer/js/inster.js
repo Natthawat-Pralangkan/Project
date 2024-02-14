@@ -1,16 +1,10 @@
 $(document).ready(function () {
   $("#ser_from_1").click(function () {
-    // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from_4").val();
-    var petition_name = $("#petition_name_4").val();
+    // การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ
     var subject_group = $("#subject_group_4").val();
     var semester = $("#semester").val();
     var school_year = $("#school_year_4").val();
     console.log(
-      name_from +
-        " " +
-        petition_name +
-        " " +
         subject_group +
         " " +
         semester +
@@ -22,8 +16,6 @@ $(document).ready(function () {
       method: "POST",
       data: {
         id_user:localStorage.getItem("id_user"),
-        name_from: name_from,
-        petition_name: petition_name,
         subject_group: subject_group,
         semester: semester,
         school_year: school_year,
@@ -47,9 +39,7 @@ $(document).ready(function () {
 
   //////////////////////แบบสำรวจอัตรากำลังครู////////////////////////
   $("#ser_from_6").click(function () {
-    // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from_6").val();
-    var subject_group = $("#subject_group_6").val();
+    // แบบสำรวจอัตรากำลังครู
     var semester = $("#semester_6").val();
     var school_yea = $("#school_yea_6").val();
     var teacher_total_now = $("#teacher_total_now_6").val();
@@ -65,8 +55,6 @@ $(document).ready(function () {
       method: "POST",
       data: {
         id_user:localStorage.getItem("id_user"),
-     
-        name_from: name_from,
         subject_group: subject_group,
         semester: semester,
         school_yea: school_yea,

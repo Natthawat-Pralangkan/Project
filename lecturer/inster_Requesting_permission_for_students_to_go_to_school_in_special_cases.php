@@ -1,9 +1,7 @@
 <?php
 include("../servers/connect.php");
+// ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ
 
-
-
-$name_from = $_POST["name_from"];
 $school_wishes = $_POST["school_wishes"];
 $class_student = $_POST["class_student"];
 $room = $_POST["room"];
@@ -15,24 +13,16 @@ $Number_of_supervising_teachers = $_POST["Number_of_supervising_teachers"];
 $Place_of_sending_documents = $_POST["Place_of_sending_documents"];
 $id_user = $_POST["id_user"];
 
+$details = $school_wishes.",".$class_student.",".$room.",".$reason_project.",".$date_activity.",".$Time_to_go.",".$Return_time.",".$Number_of_supervising_teachers.",".$Place_of_sending_documents;
 // Prepared Statemen
-$query = "INSERT INTO modal_title_5 (id_from ,name_from, petition_name, school_wishes, class_student, room, reason_project, date_activity, Time_to_go, Return_time, Number_of_supervising_teachers, Place_of_sending_documents,id_user) 
-              VALUES (?, ?, ?, ?, ?,?, ?, ?, ?, ?,?, ?,?)";
+$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details) 
+              VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $newID);
-    $stmt->bindParam(2, $name_from);
-    $stmt->bindParam(3, $petition_name);
-    $stmt->bindParam(4, $school_wishes);
-    $stmt->bindParam(5, $class_student);
-    $stmt->bindParam(6, $room);
-    $stmt->bindParam(7, $reason_project);
-    $stmt->bindParam(8, $date_activity);
-    $stmt->bindParam(9, $Time_to_go);
-    $stmt->bindParam(10, $Return_time);
-    $stmt->bindParam(11, $Number_of_supervising_teachers);
-    $stmt->bindParam(12, $Place_of_sending_documents);
-    $stmt->bindParam(13, $id_user);
+    $stmt->bindParam(1, $id_user);
+    $stmt->bindValue(2, "11");
+    $stmt->bindValue(3, "1");
+    $stmt->bindParam(4, $details);
 ;
 
     // Execute the prepared statement

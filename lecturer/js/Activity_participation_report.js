@@ -14,8 +14,7 @@ $(document).ready(function () {
   });
   //
   $("#saveform").click(function () {
-    // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from").val();
+    // <!-- รายงานการเข้าร่วมกิจกรรม -->
     var petition_name = $("#petition_name").val();
     var subject_group = $("#subject_group").val();
     var school_year = $("#school_year").val();
@@ -24,7 +23,6 @@ $(document).ready(function () {
       method: "POST",
       data: {
         id_user:localStorage.getItem("id_user"),
-        name_from: name_from,
         petition_name: petition_name,
         subject_group: subject_group,
         school_year: school_year,

@@ -16,16 +16,12 @@ $(document).ready(function() {
     
     $("#server_from_10").click(function () {
         // รับข้อมูลจากฟอร์ม Modal
-        var name_from = $("#name_from_9").val();
-        // var petition_name = $("#petition_name_9").val();
+
         var activity_name = $("#activity_name_9").val();
         var reason_project = $("#reason_project_9").val();
         var date_activity = $("#date_activity_9").val();
         console.log(
-          name_from +
-            " " +
-            petition_name +
-            " " +
+
             activity_name +
             " " +
             reason_project +
@@ -37,9 +33,6 @@ $(document).ready(function() {
           method: "POST",
           data: {
             id_user:localStorage.getItem("id_user"),
-        
-            name_from: name_from,
-            // petition_name: petition_name,
             activity_name: activity_name,
             reason_project: reason_project,
             date_activity: date_activity,

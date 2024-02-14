@@ -1,8 +1,7 @@
 <?php
 include("../servers/connect.php");
 
-
-$name_from = $_POST["name_from"];
+// ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน
 
 $activity_name = $_POST["activity_name"];
 $reason_project = $_POST["reason_project"];
@@ -10,7 +9,7 @@ $date_activity = $_POST["date_activity"];
 $id_user = $_POST["id_user"];
 
 
-$details = $name_from.",".$activity_name.",".$reason_project.",".$date_activity;
+$details = $activity_name.",".$reason_project.",".$date_activity;
 // Prepared Statemen
 $query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details) 
               VALUES (?, ?, ?, ?)";

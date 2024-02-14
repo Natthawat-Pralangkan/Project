@@ -88,12 +88,12 @@ include("./servers/connect.php");
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./officer/academicmaster/home";
                                 break;
-                            case 5:
+                            case 6:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./officer/addpersonnelinformation/home";
                                 break;
-                            case 6:
+                            case 5:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("id_user", data.id_user)
                                 window.location.href = "./officer/BudgetOfficer/home";

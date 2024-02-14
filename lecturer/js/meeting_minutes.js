@@ -15,9 +15,7 @@ $(document).ready(function () {
   //
 
   $("#server_meeting").click(function () {
-    // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from_5").val();
-    var petition_name = $("#petition_name_5").val();
+    // รายงานการประชุม/อบรม/สัมมนา/กิจกรรม/โครงการ/งาน
     var location = $("#location_5").val();
     var subject = $("#subject_5").val();
     var joining_date = $("#joining_date_5").val();
@@ -26,10 +24,6 @@ $(document).ready(function () {
 
     var details_of_this_trip = $("#details_of_this_trip").val();
     console.log(
-      name_from +
-        " " +
-        petition_name +
-        " " +
         location +
         " " +
         subject +
@@ -45,8 +39,6 @@ $(document).ready(function () {
       method: "POST",
       data: {
         id_user:localStorage.getItem("id_user"),
-        name_from: name_from,
-        petition_name: petition_name,
         location: location,
         subject: subject,
         joining_date: joining_date,

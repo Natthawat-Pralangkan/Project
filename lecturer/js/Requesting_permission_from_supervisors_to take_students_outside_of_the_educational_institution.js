@@ -15,8 +15,6 @@ $(document).ready(function () {
 
   $("#server_from_8").click(function () {
     // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from_8").val();
-    var petition_name = $("#petition_name_8").val();
     var allow_student = $("#allow_student_8").val();
     var student_total = $("#student_total_8").val();
     var teacher_total = $("#teacher_total_8").val();
@@ -29,10 +27,6 @@ $(document).ready(function () {
     var Time_to_arrive = $("#Time_to_arrive_8").val();
     var amount_person = $("#amount_person_8").val();
     console.log(
-      name_from +
-        " " +
-        petition_name +
-        " " +
         allow_student +
         " " +
         student_total +

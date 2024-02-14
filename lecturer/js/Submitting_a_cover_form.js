@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $("#server_from").click(function () {
     // รับข้อมูลจากฟอร์ม Modal
-    var name_from = $("#name_from_1").val();
+    // var name_from = $("#name_from_1").val();
     var date_report_send = $("#date_report_send").val();
     var document_name_consider = $("#document_name_consider").val();
     var subject_group = $("#subject_group_1").val();
@@ -34,7 +34,7 @@ $(document).ready(function () {
       method: "POST",
       data: {
         id_user: localStorage.getItem("id_user"),
-        name_from: name_from,
+        // name_from: name_from,
         date_report_send: date_report_send,
         document_name_consider: document_name_consider,
         subject_group: subject_group,

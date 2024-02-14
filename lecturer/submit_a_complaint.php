@@ -89,20 +89,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="1">
-                            <!-- <div class="row ">
-                                <div class="col-6 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2" id="name_from_2" name="name_from_2" placeholder="รายงานผลการพานักเรียนไปนอกสถานศึกษา " >
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                        <input type="text" class="form-control mt-2" id="petition_name_2" name="petition_name_2" placeholder="ชื่อผู้ยื่น">
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="row mt-2">
                                 <div class="col-8">
                                     <div class="form-group">
@@ -199,14 +185,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="2">
-                            <div class="row ">
-                                <div class="col-6 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2" placeholder="รายงานการเข้าร่วมกิจกรรม" id="name_from" name="name_from" />
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group ">
@@ -247,14 +225,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="3">
-                            <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2  text-right" name="name_from_1" id="name_from_1" placeholder="การยื่นฟอร์มปะหน้า">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-2">
                                     <div class="form-group ">
@@ -333,12 +303,6 @@
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="4">
                             <div class="row ">
-                                <div class="col-6 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2" placeholder="รายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน" id="name_from_3" name="name_from_3">
-                                    </div>
-                                </div>
                                 <div class="col-4 mt-3">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ระดับชั้นมัธยมศึกษาปีที่</label>
@@ -399,14 +363,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="5">
-                            <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" id="name_from_4" name="name_from_4" class="form-control mt-2  text-right" placeholder="การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -430,7 +386,7 @@
                             <div class="modal-footer mb-3 mt-3">
                                 <div class=" text-center">
                                     <button type="submit" class="btn " id="ser_from_1" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                    <!-- <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button> -->
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                 </div>
                             </div>
                             <!-- </div> -->
@@ -445,19 +401,11 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">ยื่นคำร้อง รายงานการประชุม / อบรม / สัมมนา / กิจกรรม / โครงการ / งาน</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">รายงานการประชุม/อบรม/สัมมนา/กิจกรรม/โครงการ/งาน</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="6">
-                            <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2  text-right" placeholder="รายงานการประชุม/อบรม/สัมมนา/กิจกรรม/โครงการ/งาน" id="name_from_5" name="name_from_5">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -523,14 +471,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="7">
-                            <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2  text-right" placeholder="แบบสำรวจอัตรากำลังครู" id="name_from_6" name="name_from_6">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group ">
@@ -631,12 +571,6 @@
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="8">
                             <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2  text-right" placeholder="แบบสำรวจคาบสอนของครูผู้สอน" id="name_from_7" name="name_from_7">
-                                    </div>
-                                </div>
                                 <div class="row mt-2">
                                     <div class="col-4">
                                         <div class="form-group ">
@@ -688,14 +622,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="9">
-                            <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2  text-right" placeholder="การขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา" id="name_from_8" name="name_from_8">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-4 mt-3">
                                     <div class="form-group">
@@ -730,7 +656,6 @@
                             </div>
                             <h3 class="mt-3  text-center">ออกเดินทาง</h3>
                             <div class="row">
-
                                 <div class="col-2 mt-3">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">วันที่</label>
@@ -799,18 +724,6 @@
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="10">
                             <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2  text-right" placeholder="ขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน" id="name_from_9" name="name_from_9">
-                                    </div>
-                                </div>
-                                <!-- <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_9" name="petition_name_9">
-                                    </div>
-                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-4 mt-3">
@@ -860,20 +773,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="11">
-                            <div class="row mb-3">
-                                <div class="col-4 ">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ชื่อคำร้อง</label>
-                                        <input type="text" class="form-control mt-2  text-right" placeholder="ชื่อคำร้อง" id="name_from_10" name="name_from_10">
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ชื่อผู้ยื่น</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ชื่อผู้ยื่น" id="petition_name_10" name="petition_name_10">
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group">
