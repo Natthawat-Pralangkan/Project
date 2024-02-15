@@ -538,7 +538,7 @@
                                 <div class="col-4">
                                     <div class="form-group ">
                                         <label for="" style="font-size: 18px;">จำนวนครูที่ขอเพิ่ม</label>
-                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่ขอเพิ่ม" id="teacher_total_add_6" name="teacher_total_add">
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนครูที่ขอเพิ่ม" id="teacher_total_add_6" name="teacher_total_add_6">
                                     </div>
                                 </div>
                                 <div class="col-4">

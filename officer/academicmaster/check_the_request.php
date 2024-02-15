@@ -146,13 +146,14 @@
 
     function getdata(id) {
         $.ajax({
-            url: "",
+            url: "get_check_the_request",
             type: "POST",
             data: {
                 idata: id,
+                id_user: localStorage.getItem("id_user")
             },
             success: function(newdata) {
-
+                
             }
         })
         console.log(id);

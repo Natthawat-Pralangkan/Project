@@ -1,6 +1,7 @@
 <?php
 include("../servers/connect.php");
-
+//  print_r($_POST);
+//  exit;
 $subject_group = $_POST["subject_group"];
 $semester = $_POST["semester"];
 $school_yea = $_POST["school_yea"];
