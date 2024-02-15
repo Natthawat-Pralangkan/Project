@@ -3,9 +3,11 @@ require_once('../../fpdf186/fpdf.php');
 require_once('../../FPDI/src/autoload.php');
 include("../../servers/connect.php");
 
-class PDF extends FPDF {
+class PDF extends FPDF
+{
     // การกำหนดฟอนต์
-    function setThaiFont() {
+    function setThaiFont()
+    {
         $this->AddFont('THSarabunNew', '', 'THSarabunNew.php');
         $this->SetFont('THSarabunNew', '', 12);
     }
@@ -56,16 +58,36 @@ JOIN request_status ON details_ppetiton.id_status = request_status.id_status
 JOIN teacher_personnel_information ON details_ppetiton.id_user = teacher_personnel_information.user_id
 WHERE details_ppetiton.petition_type = 1 ORDER BY details_ppetiton.date DESC;";
 $result = $db->query($sql);
-$rows = $result->fetchAll(PDO::FETCH_ASSOC);
-// กำหนดตำแหน่งและเพิ่มข้อมูลลงใน PDF
-$pdf->SetXY(20, 20);
-$pdf->SetFont('Arial', '', 12);
-foreach ($rows as $row) {
-    $newdate = ConvertToThaiDate($row['date'], 0, 0);
-    $pdf->Cell(0, 10, 'วันที่: ' . $newdate, 0, 1);
-    $pdf->Cell(0, 10, 'ชื่อคำร้อง: ' . $row['petition_name'], 0, 1);
-    $pdf->Cell(0, 10, 'ประเภทคำร้อง: ' . $row['request_type_name'], 0, 1);
-    $pdf->Cell(0, 10, 'สถานะ: ' . $row['name_status'], 0, 1);
-}
+$rows = $result->fetch(PDO::FETCH_ASSOC);
+// extract($rows);
+$pdf->AddFont('THSarabunNew', '', 'THSarabunNew.php');
+$pdf->AddFont('THSarabunNew', 'BI', 'THSarabunNew_b.php');
+$pdf->SetFont('THSarabunNew', 'BI', 18);
 
-$pdf->Output('I', 'generated.pdf');
+$newdate = ConvertToThaiDate($rows['date'], 0, 0);
+$pdf->SetXY(110, 57);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[0]));
+$pdf->SetXY(100, 64);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[1]));
+$pdf->SetXY(127, 64);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[2]));
+$pdf->SetXY(65, 79);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[3]));
+$pdf->SetXY(85, 86);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[4]));
+$pdf->SetXY(60, 101);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[5]));
+$pdf->SetXY(45, 108);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[6]));
+$pdf->SetXY(55, 145);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[7]));
+$pdf->SetXY(45, 153);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[8]));
+$pdf->SetXY(60, 189);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[9]));
+$pdf->SetXY(45, 196);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[10]));
+
+$pdf->SetXY(130, 262);
+$pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",",$newdate))[0]));
+$pdf->Output('I', './file/aaa.pdf');

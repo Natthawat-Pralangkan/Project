@@ -76,8 +76,6 @@
                                 // แปลงวันที่ให้เป็นรูปแบบไทย
                                 $newdate = ConvertToThaiDate($row['date'], 0, 0);
                         ?>
-
-
                                 <tr>
                                     <td> <?php echo $newdate ?> </td>
                                     <td> <?php echo $row['petition_name'] ?> </td>
@@ -107,7 +105,7 @@
                         <iframe id="pdfViewer" width="100%" height="500px" frameborder="0"></iframe>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn text-center" data-bs-dismiss="modal" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
+                        <button type="button" id="approveButton" class="btn text-center" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
                         <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
                     </div>
                 </div>
@@ -143,6 +141,33 @@
     }
 
     // $(document).ready(function () {
+    $('#exampleModal7').on('show.bs.modal', function(event) {
+        var modal = $(this);
+        var pdfUrl = 'check_the_request_pdf'; // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ PDF ของคุณ
+        modal.find('#pdfViewer').attr('src', pdfUrl);
+    });
+
+    $(document).ready(function() {
+        $('#approveButton').click(function() {
+            // ทำการอัพเดท id_status เป็น 2 ที่ดำเนินการตามคำขอที่แนบมา
+            $.ajax({
+                url: 'update_status.php', // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ที่มีการอัพเดท id_status
+                method: 'POST',
+                data: {
+                    idata: id,
+                    id_user: localStorage.getItem("id_user")
+                }, // ส่งข้อมูล id_status เป็น 2
+                success: function(response) {
+                    // เมื่ออัพเดทสำเร็จ ให้ปิด modal
+                    $('#exampleModal7').modal('hide');
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    // ในกรณีที่เกิดข้อผิดพลาด คุณอาจจะต้องจัดการตามความเหมาะสม
+                }
+            });
+        });
+    });
 
     function getdata(id) {
         $.ajax({
@@ -153,7 +178,7 @@
                 id_user: localStorage.getItem("id_user")
             },
             success: function(newdata) {
-                
+
             }
         })
         console.log(id);
