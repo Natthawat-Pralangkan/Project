@@ -25,7 +25,7 @@
                     <a href="#" class="btn btn-success mr-2">เพิ่มคำสั่งภายใน - ภายนอก</a>
                 </div> -->
                 <div class="mt-5">
-                    <button type="button" class="btn btn-success mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         เพิ่มคำสั่งภายใน - ภายนอก
                     </button>
                 </div>
@@ -34,52 +34,74 @@
                 <table id="uploadcommand" class="table">
                     <thead>
                         <tr>
-                            <th>ลำดับ</th>
-                            <th>ว/ด/ป</th>
-                            <th>เวลาเข้า</th>
-                            <th>เวลาออก</th>
-                            <th>ชื่อนามสกุล</th>
-                            <th>หมายเหตุ</th>
+                            <th>วัน/เดือน/ปี</th>
+                            <th>ชื่อคำสั่ง</th>
+                            <th>ประเภทคำสั่ง</th>
+                            <th>ไฟล์</th>
+                            <th>จัดการ</th>
                         </tr>
                     </thead>
-                    <!-- เพิ่มข้อมูลตารางตรงนี้ -->
                 </table>
             </div>
         </div>
-        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content" style="height: 300px;">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">เพิ่มคำสั่งภายใน - ภายนอก</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">เพิ่มคำร้อง</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="row mt-3 mx-3">
-                        <div class="col-12 ">
-                            <div class="form-group ">
-                                <label for="" style="font-size: 18px;">ชื่อคำสั่ง</label>
-                                <input type="text" class="form-control mt-2  text-right" placeholder="ชื่อคำสั่ง" id="name_from_9" name="name_from_9">
+                    <div class="modal-body">
+                        <div class="row mt-3 mx-3">
+                            <div class="col-12 ">
+                                <div class="form-group ">
+                                    <label for="" style="font-size: 18px;">ชื่อคำสั่ง</label>
+                                    <input type="text" class="form-control mt-2  text-right" placeholder="ชื่อคำสั่ง" id="name_order" name="name_order">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="" style="font-size: 18px;">ประเภทคำสั่ง</label>
+                                    <select class="form-select mt-2" id="order_type" name="order_type">
+                                        <option value="1">คำสั่งภายใน</option>
+                                        <option value="2">คำสั่งภายนอก</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12 ">
-                            <div class="form-group ">
-                                <label for="" style="font-size: 18px;">ประเภทคำสั่ง</label>
-                                <input type="text" class="form-control mt-2  text-right" placeholder="ประเภทคำสั่ง" id="name_from_9" name="name_from_9">
+                        <div class="input-group mt-3">
+                            <div class=" mt-3">
+                                <img id="uploaded_image_edit" src="#" alt="Selected Image" style="display:none; width: 75%; height: 75%;">
+                                <label for="">ไฟล์คำสั่ง :</label>
+                                <input type="file" id="file" onchange="displayImageEdit(this)" class="form-control">
                             </div>
                         </div>
-                    </div>
-                    <div class="input-group mt-3">
-                        <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <div class="form-group mb-3 mt-3">
+                            <div class=" text-center">
+                                <button type="submit" class="btn " id="server_file" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
-<script>
-    if(localStorage.getItem("id_type") != "4" && localStorage.getItem("id_user") == null){
-        localStorage.clear()
-        window.location.href ="../"
-    }
-</script>
-<?php include("../../footer.php") ?>
+    <script>
+        if (localStorage.getItem("id_type") != "4" && localStorage.getItem("id_user") == null) {
+            localStorage.clear()
+            window.location.href = "../"
+        }
+
+        function displayImageEdit(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#uploaded_image_edit').attr('src', e.target.result).show();
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <?php include("../../footer.php") ?>

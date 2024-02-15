@@ -8,6 +8,11 @@
                 <i class="fa-solid fa-house spani"></i><span class="menu-text">หน้าหลัก</span>
             </a>
         </li>
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/personal_information') !== false ? 'active-menu' : ''; ?>">
+            <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./personal_information.php">
+            <i class="fa-solid fa-user spani"></i><span class="menu-text">ข้อมูลส่วนตัว</span>
+            </a>
+        </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/submit_a_complaint') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./submit_a_complaint.php">
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ยื่นคำร้อง</span>

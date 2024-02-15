@@ -225,14 +225,14 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="3">
-                            <div class="row mt-2">
+                            <!-- <div class="row mt-2">
                                 <div class="col-2">
                                     <div class="form-group ">
                                         <label for="" style="font-size: 18px;">วันที่ยื่น</label>
                                         <input type="date" class="form-control mt-2" name="date_report_send" id="date_report_send" placeholder="วันที่">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group">

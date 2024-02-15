@@ -1,4 +1,5 @@
 <?php include("../../header.php"); ?>
+<?php include("../../servers/connect.php"); ?>
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
     <div class="content-wrapper">
@@ -29,12 +30,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td>12 มกราคม 2567</td>
-                        <td>แบบขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา</td>
-                        <td>ณัฐวัตร ประลังการ</td>
-                        <td>รอพิจารณา</td>
-                        <td><button class="btn mr-2" style="background-color: #8B39F4; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal">ตรวจสอบ</button>
-                        </td>
                     </tbody>
                 </table>
             </div>
@@ -78,12 +73,62 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <script>
+</div>
+<script>
     if (localStorage.getItem("id_type") != "6" && localStorage.getItem("id_user") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
+
+
+    // $(document).ready(function() {
+    //     $.ajax({
+    //         url: "get_check_the_request",
+    //         type: "POST",
+    //         data: {
+    //             id_user: localStorage.getItem("id_user")
+    //         },
+    //         dataType: 'json',
+    //         success: function(data) {
+    //             console.log(data);
+    //             var table = $('#checktherequest').DataTable({
+    //                 data: data,
+    //                 columns: [{
+    //                         data: 'date'
+    //                     },
+    //                     {
+    //                         data: 'petition_name'
+    //                     },
+    //                     {
+    //                         data: 'request_type_name'
+    //                     },
+    //                     {
+    //                         data: 'name_status'
+    //                     },
+    //                     {
+    //                         data: null,
+    //                         render: function(data, type, row) {
+    //                             return '<button class="btn l" style="background-color:#BB6AFB ; color:#FFFFFF" data-id="#exampleModal">จัดการ</button>';
+    //                         }
+    //                     }
+    //                 ],
+    //                 order: [
+    //                     [0, 'desc']
+    //                 ]
+    //             });
+
+    //             // เพิ่มเหตุการณ์เมื่อคลิกที่ปุ่ม "จัดการ" เพื่อเปิด modal
+    //             $('#follow_up_on_requests tbody').on('click', 'button', function() {
+    //                 var data = table.row($(this).parents('tr')).data();
+    //                 var modalId = $(this).attr('data-id');
+    //                 $(modalId).modal('show');
+    //             });
+    //         },
+    //         error: function(xhr, status, error) {
+    //             console.error(xhr.responseText);
+    //         }
+    //     });
+    // });
 </script>
-    <?php include("../../footer.php") ?>
+<?php include("../../footer.php") ?>

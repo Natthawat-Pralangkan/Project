@@ -17,8 +17,8 @@ $(document).ready(function() {
 
     $("#server_from_11").click(function () {
         // รับข้อมูลจากฟอร์ม Modal
-        var name_from = $("#name_from_10").val();
-        var petition_name = $("#petition_name_10").val();
+        // var name_from = $("#name_from_10").val();
+        // var petition_name = $("#petition_name_10").val();
         var school_wishes = $("#school_wishes_10").val();
         var class_student = $("#class_student_10").val();
         var room = $("#room_10").val();

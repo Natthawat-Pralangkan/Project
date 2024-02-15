@@ -14,15 +14,15 @@ $(document).ready(function () {
   });
 
   $("#server_from_8").click(function () {
-    let addIdValues = [];
-        $('input[name="nub_id[]"]').each(function () {
-            addIdValues.push($(this).val());
-        });
+    // let addIdValues = [];
+    //     $('input[name="nub_id[]"]').each(function () {
+    //         addIdValues.push($(this).val());
+    //     });
 
-        let productNames = [];
-        $('select[name="input_host_name[]"]').each(function () {
-            productNames.push($(this).val());
-        });
+    //     let productNames = [];
+    //     $('select[name="input_host_name[]"]').each(function () {
+    //         productNames.push($(this).val());
+    //     });
     // รับข้อมูลจากฟอร์ม Modal
     var allow_student = $("#allow_student_8").val();
     var student_total = $("#student_total_8").val();
@@ -64,8 +64,6 @@ $(document).ready(function () {
       data: {
         id_user:localStorage.getItem("id_user"),
         id_from: $("#id_from").val(),
-        name_from: name_from,
-        petition_name: petition_name,
         allow_student: allow_student,
         student_total: student_total,
         teacher_total: teacher_total,
