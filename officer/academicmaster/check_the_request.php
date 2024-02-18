@@ -172,20 +172,25 @@
             });
         });
     });
+
     function getdata(id) {
         $.ajax({
             url: "get_check_the_request",
             type: "POST",
             data: {
                 idata: id,
+                id: localStorage.getItem("id"),
                 id_user: localStorage.getItem("id_user")
             },
             success: function(newdata) {
-
+                // Handle the success response here if needed
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here if needed
+                console.error(error);
             }
-        })
+        });
         console.log(id);
     }
-    // } );
 </script>
 <?php include("../../footer.php") ?>
