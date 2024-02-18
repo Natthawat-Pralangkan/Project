@@ -1,6 +1,6 @@
 <aside class="sidebar" id="bg">
     <div class="text-center my-4" style="height : 28px">
-        <h4 id="title_web" class="text-secondary">NUNTABUREE-ผู้อำนวยการ</h4>
+        <h4 id="title_web" class="text-secondary">NUNTABUREE-รองผู้อำนวยการ</h4>
     </div>
     <ul class="nav flex-column">
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/Director_DeputyDirector/director/home') !== false ? 'active-menu' : ''; ?>">

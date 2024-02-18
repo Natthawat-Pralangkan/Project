@@ -15,7 +15,7 @@ class PDF extends FPDF
 
 $pdf = new \setasign\Fpdi\Fpdi();
 
-$pageCount = $pdf->setSourceFile('./file/aaa.pdf');
+$pageCount = $pdf->setSourceFile('../../officer/academicmaster/file/aaa.pdf');
 $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
 $pdf->addPage();
@@ -89,6 +89,5 @@ $pdf->SetXY(45, 196);
 $pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",", $rows['details']))[10]));
 
 $pdf->SetXY(130, 262);
-$pdf->SetFont('THSarabunNew', 'BI', 16);
 $pdf->Cell(10, 10, iconv('UTF-8', 'cp874', (explode(",",$newdate))[0]));
 $pdf->Output('I', './file/aaa.pdf');

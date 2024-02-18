@@ -5,11 +5,11 @@ include("../../servers/connect.php");
 // print_r($_POST);
 // exit;
 // รับข้อมูลที่ส่งมาจาก AJAX
-$id_status = 2; // กำหนดค่า id_status เป็น 2 ตามที่ต้องการอัพเดท
+$id_status = 3; // กำหนดค่า id_status เป็น 2 ตามที่ต้องการอัพเดท
 $id_user = $_POST['id_user'];
 
 // อัพเดทสถานะในฐานข้อมูล
-$sql = "UPDATE details_ppetiton SET id_status = 2 WHERE id = 28";
+$sql = "UPDATE details_ppetiton SET id_status = 3 WHERE id = 28";
 
 try {
     $stmt = $db->prepare($sql);

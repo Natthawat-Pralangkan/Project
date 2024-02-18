@@ -149,17 +149,21 @@
 
     $(document).ready(function() {
         $('#approveButton').click(function() {
-            // ทำการอัพเดท id_status เป็น 2 ที่ดำเนินการตามคำขอที่แนบมา
+            // รับ id ที่ต้องการอัพเดท
+            var id = $(this).data('id');
+
+            // ทำการอัพเดท id_status เป็น 2 โดยรวมค่า id ไปด้วย
             $.ajax({
-                url: 'update_status.php', // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ที่มีการอัพเดท id_status
+                url: 'update_status', // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ที่มีการอัพเดท id_status
                 method: 'POST',
                 data: {
-                    idata: id,
-                    id_user: localStorage.getItem("id_user")
-                }, // ส่งข้อมูล id_status เป็น 2
+                    id_status: 2,
+                    id_user: localStorage.getItem("id_user"),
+                    idata: id // เพิ่มค่า id ไปยังข้อมูลที่ส่งไปยังเซิร์ฟเวอร์
+                },
                 success: function(response) {
                     // เมื่ออัพเดทสำเร็จ ให้ปิด modal
-                    $('#exampleModal7').modal('hide');
+                    $('#exampleModal1').modal('hide');
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
@@ -168,7 +172,6 @@
             });
         });
     });
-
     function getdata(id) {
         $.ajax({
             url: "get_check_the_request",

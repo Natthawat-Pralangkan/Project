@@ -45,7 +45,7 @@
                     </thead>
                     <?php
                     // คำสั่ง SQL เพื่อดึงข้อมูล
-                    $sql = "SELECT * FROM `teacher_personnel_information`";
+                    $sql = "SELECT * FROM `teacher_personnel_information` ORDER BY user_id DESC;";
                     $result = $db->query($sql);
 
                     // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
@@ -56,9 +56,10 @@
                             echo "<td>" . $row['id'] . "</td>";
                             echo "<td>" . $row['user_name'] . "</td>";
                             echo "<td>" . $row['last_name'] . "</td>";
-                            echo "<td>" . $row['id_card_number'] . "</td>";
-                            echo "<td>" . $row['date_month_yearofbirth'] . "</td>";
-                            echo "<td>" . $row['age'] . "</td>";
+                            echo "<td>" . $row['user_id'] . "</td>";
+                            echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . $row['id'] . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . $row['id'] . "'>แก้ไข</button></td>";
+                            echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . $row['id'] . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . $row['id'] . "'>ลบ</button></td>";
+
                             echo "</tr>";
                         }
                     } else {

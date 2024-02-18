@@ -13,7 +13,7 @@ $(document).ready(function () {
         {
           data: "สถานะ",
           createdCell: function (td, cellData, rowData, row, col) {
-            if (cellData == "รอการอนุมัติ") {
+            if (cellData == "รออนุมัติ") {
               $(td).addClass("status1");
             } else if (cellData == "รอพิจารณา") {
               $(td).addClass("status2");
