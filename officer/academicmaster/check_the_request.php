@@ -179,7 +179,6 @@
             type: "POST",
             data: {
                 idata: id,
-                id: localStorage.getItem("id"),
                 id_user: localStorage.getItem("id_user")
             },
             success: function(newdata) {
