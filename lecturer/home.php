@@ -59,7 +59,9 @@
                                 <p style="color : #555555">คำร้องอนุมัติแล้ว</p>
                             </div>
                             <div class="my-3">
-                                <h1 class="text-center">40</h1>
+                                <div class="my-3">
+                                    <h1 class="text-center">0</h1>
+                                </div>
                             </div>
                             <div class="border-top text-center py-3">
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3" style="background-color: #BB6AFB; color :#FFFFFF">
@@ -88,7 +90,7 @@
             </div>
             <!-- Modal คำร้องรอการพิจารณา -->
             <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">คำร้องรอการพิจารณา</h1>
@@ -99,12 +101,11 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">วันที่ยื่น</th>
-                                        <th scope="col">ชื่อ</th>
-                                        <th scope="col">นามสกุล</th>
+                                        <th scope="col">ชื่อ-นามสกุล</th>
                                         <th scope="col">เรื่อง</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="Request_pending_consideration">
 
                                 </tbody>
                             </table>
@@ -115,7 +116,7 @@
             <!-- Modal คำร้องรออนุมัติ -->
             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content modal-xl">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">คำร้องรออนุมัติ</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -125,12 +126,11 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">วันที่ยื่น</th>
-                                        <th scope="col">ชื่อ</th>
-                                        <th scope="col">นามสกุล</th>
+                                        <th scope="col">ชื่อ-นามสกุล</th>
                                         <th scope="col">เรื่อง</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="Request_pending_approval">
 
                                 </tbody>
                             </table>
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <!-- Modal คำร้องอนุมัติแล้ว -->
-            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class=" modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -155,28 +155,7 @@
                                         <th scope="col">เรื่อง</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <?php
-                                    // คำสั่ง SQL เพื่อดึงข้อมูล
-                                    $sql = "";
-                                    $result = $db->query($sql);
-                                    // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
-                                    if ($result->rowCount() > 0) {
-                                        // เลือกข้อมูลรายการแรกเท่านั้น
-                                        $row = $result->fetch(PDO::FETCH_ASSOC);
-                                        // แสดงข้อมูลในตาราง
-                                        echo "<tr>";
-                                        echo "<td>" . $row['date_report_send'] . "</td>";
-                                        echo "<td>" . $row['petition_name'] . "</td>";
-                                        echo "<td>" . $row['name_from'] . "</td>";
-                                        echo "</tr>";
-                                    } else {
-                                        echo "0 results";
-                                    }
-
-                                    ?>
-
-
+                                <tbody id="modalBody">
                                 </tbody>
                             </table>
                         </div>
@@ -185,10 +164,10 @@
             </div>
             <!-- Modal คำร้องทั้งหมด -->
             <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">คำร้องอนุมัติแล้ว</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">คำร้องทั้งหมด</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -196,12 +175,11 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">วันที่ยื่น</th>
-                                        <th scope="col">ชื่อ</th>
-                                        <th scope="col">นามสกุล</th>
-                                        <th scope="col">1</th>
+                                        <th scope="col">ชื่อ-นามสกุล</th>
+                                        <th scope="col">เรื่อง</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="all_requests">
                                     <!-- ข้อมูลจะถูกแสดงที่นี่ -->
                                 </tbody>
                             </table>
@@ -212,17 +190,96 @@
         </div>
     </div>
 </div>
-
+</div>
+</div>
+</div>
 <script>
     if (localStorage.getItem("id_type") != "7" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
-</script>
-<script>
-    $(document).reaby(function() {
-        $('#myTable').DataTable();
-
+    // คำร้องอนุมัติแล้ว
+    $(document).ready(function() {
+        // เมื่อ modal แสดงขึ้นมา
+        $('#exampleModal3').on('show.bs.modal', function(e) {
+            // เรียกใช้งานข้อมูลผ่าน AJAX
+            $.ajax({
+                url: 'get_request_approved', // เปลี่ยนเป็นเส้นทางของสคริปต์ PHP ของคุณ
+                method: 'GET',
+                data: {
+                    user_id: localStorage.getItem("user_id")
+                }, // ส่งพารามิเตอร์ user_id หากคุณมีการใช้งาน
+                success: function(response) {
+                    $('#modalBody').html(response); // แทรกข้อมูลที่ได้รับเข้าไปใน tbody
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    $('#modalBody').html('<tr><td colspan="3">เกิดข้อผิดพลาดในการดึงข้อมูล</td></tr>'); // แสดงข้อความผิดพลาด
+                }
+            });
+        });
+    });
+    // คำร้องรออนุมัติ
+    $(document).ready(function() {
+        // เมื่อ modal แสดงขึ้นมา
+        $('#exampleModal2').on('show.bs.modal', function(e) {
+            // เรียกใช้งานข้อมูลผ่าน AJAX
+            $.ajax({
+                url: 'get_Request_pending_approval', // เปลี่ยนเป็นเส้นทางของสคริปต์ PHP ของคุณ
+                method: 'GET',
+                data: {
+                    user_id: localStorage.getItem("user_id")
+                }, // ส่งพารามิเตอร์ user_id หากคุณมีการใช้งาน
+                success: function(response) {
+                    $('#Request_pending_approval').html(response); // แทรกข้อมูลที่ได้รับเข้าไปใน tbody
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    $('#Request_pending_approval').html('<tr><td colspan="3">เกิดข้อผิดพลาดในการดึงข้อมูล</td></tr>'); // แสดงข้อความผิดพลาด
+                }
+            });
+        });
+    });
+    // คำร้องรอการพิจารณา
+    $(document).ready(function() {
+        // เมื่อ modal แสดงขึ้นมา
+        $('#exampleModal1').on('show.bs.modal', function(e) {
+            // เรียกใช้งานข้อมูลผ่าน AJAX
+            $.ajax({
+                url: 'get_Request_pending_consideration', // เปลี่ยนเป็นเส้นทางของสคริปต์ PHP ของคุณ
+                method: 'GET',
+                data: {
+                    user_id: localStorage.getItem("user_id")
+                }, // ส่งพารามิเตอร์ user_id หากคุณมีการใช้งาน
+                success: function(response) {
+                    $('#Request_pending_consideration').html(response); // แทรกข้อมูลที่ได้รับเข้าไปใน tbody
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    $('#Request_pending_consideration').html('<tr><td colspan="3">เกิดข้อผิดพลาดในการดึงข้อมูล</td></tr>'); // แสดงข้อความผิดพลาด
+                }
+            });
+        });
+    });
+    $(document).ready(function() {
+        // เมื่อ modal แสดงขึ้นมา
+        $('#exampleModal4').on('show.bs.modal', function(e) {
+            // เรียกใช้งานข้อมูลผ่าน AJAX
+            $.ajax({
+                url: 'get_all_requests', // เปลี่ยนเป็นเส้นทางของสคริปต์ PHP ของคุณ
+                method: 'GET',
+                data: {
+                    user_id: localStorage.getItem("user_id")
+                }, // ส่งพารามิเตอร์ user_id หากคุณมีการใช้งาน
+                success: function(response) {
+                    $('#all_requests').html(response); // แทรกข้อมูลที่ได้รับเข้าไปใน tbody
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    $('#all_requests').html('<tr><td colspan="3">เกิดข้อผิดพลาดในการดึงข้อมูล</td></tr>'); // แสดงข้อความผิดพลาด
+                }
+            });
+        });
     });
 </script>
 <?php include("../footer.php") ?>

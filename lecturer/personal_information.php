@@ -173,7 +173,7 @@
                 $("#nationality").html("สัญชาติ :" + " " + data[0].nationality);
                 $("#age").html("อายุ :" + " " + data[0].age);
                 $("#email").html("อีเมล์ :" + " " + data[0].email + " " + " <i class='fas fa-edit edit-icon' data-email='" + data[0].email + "'></i>");
-                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " " + "<i class='fas fa-edit edit-icon1' data-telephone_number='"+ data[0].telephone_number +"'></i>");
+                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " " + "<i class='fas fa-edit edit-icon1' data-telephone_number='" + data[0].telephone_number + "'></i>");
                 $("#start_date").html("วันที่เริ่มทำงาน :" + " " + data[0].start_date);
                 $("#house_code").html("รหัสประจำบ้าน :" + " " + data[0].house_code);
                 $("#number_house").html("เลขที่ :" + " " + data[0].number_house);
@@ -262,6 +262,7 @@
                     window.location.href = "personal_information";
                 } else {
                     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+                    window.location.href = "personal_information";
                 }
             },
             error: function() {
