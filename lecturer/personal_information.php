@@ -32,8 +32,11 @@
                         <p id="id_card_number">เลขที่บัตรประชาชน :</p>
                         <p id="date_month_yearofbirth">วัน เดือนปี เกิด :</p>
                         <p id="nationality">สัญชาติ :</p>
-                        <p id="age">อายุ :</p>
-                        <p id="email">อีเมล์ :</p>
+                        <!-- <p id="age">อายุ :</p>
+                        <p id="email">อีเมล์ :</p> -->
+                        <p id="age"><i class="fas fa-edit"></i> อายุ :</p>
+                        <p id="email"><i class="fas fa-edit"></i> อีเมล์ :</p>
+
                         <p id="telephone_number">เบอร์โทรศัพท์ :</p>
                         <p id="start_date">วันที่เริ่มทำงาน :</p>
                     </div>
@@ -92,13 +95,38 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">แก้ไขข้อมูล</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editForm">
+                                <div class="form-group">
+                                    <label for="emailInput">อีเมล์</label>
+                                    <input type="email" class="form-control" id="emailInput" placeholder="Enter email">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
 </div>
 
 <script>
-    if (localStorage.getItem("id_type") != "1" && localStorage.getItem("id_user") == null) {
+    if (localStorage.getItem("id_type") != "7" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
@@ -109,7 +137,7 @@
             method: 'POST',
             dataType: 'json',
             data: {
-                id_user: localStorage.getItem("id_user")
+                user_id: localStorage.getItem("user_id")
             },
             success: function(data) {
                 $("#picture").attr('src', data[0].picture);
@@ -118,8 +146,8 @@
                 $("#date_month_yearofbirth").html("วัน เดือนปี เกิด :" + " " + data[0].date);
                 $("#nationality").html("สัญชาติ :" + " " + data[0].nationality);
                 $("#age").html("อายุ :" + " " + data[0].age);
-                $("#email").html("อีเมล์ :" + " " + data[0].email);
-                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number);
+                $("#email").html("อีเมล์ :" + " " + data[0].email + " " + " <i class='fas fa-edit edit-icon' data-email='" + data[0].email + "'></i>");
+                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " " + '<i class="fas fa-edit"></i> ');
                 $("#start_date").html("วันที่เริ่มทำงาน :" + " " + data[0].start_date);
                 $("#house_code").html("รหัสประจำบ้าน :" + " " + data[0].house_code);
                 $("#number_house").html("เลขที่ :" + " " + data[0].number_house);
@@ -146,6 +174,42 @@
                 // จัดการกับข้อผิดพลาด
                 console.error('There was a problem with the ajax operation:', error);
             }
+        });
+    });
+
+    $(document).on('click', '.edit-icon', function() {
+        var emailToEdit = $(this).data('email'); // ดึงอีเมล์จาก data-email
+        // ตัวอย่าง: ใส่อีเมล์เดิมในฟอร์ม modal
+        $('#emailInput').val(emailToEdit);
+        $('#editModal').modal('show'); // แสดง modal สำหรับการแก้ไข
+    });
+
+    $('#editForm').on('submit', function(e) {
+        e.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
+        var formData = {
+            user_id: localStorage.getItem("user_id"),
+            email: $('#emailInput').val(),
+            // รวมฟิลด์อื่นๆ จากฟอร์มที่นี่, ตัวอย่างเช่น:
+            // phone: $('#phoneInput').val(),
+        };
+        $.ajax({
+            url: 'update_endpoint_email', // แทนที่ด้วย URL จริงของคุณ
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                var data = JSON.parse(response);
+                if (data.status === 200) {
+                    alert("บันทึกข้อมูลสำเร็จ");
+                    window.location.href = "personal_information";
+                } else {
+                    alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+                    window.location.href = "personal_information";
+                }
+            },
+            error: function() {
+                alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+            },
         });
     });
 </script>

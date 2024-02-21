@@ -81,7 +81,7 @@
                                     <td> <?php echo $row['petition_name'] ?> </td>
                                     <td> <?php echo $row['user_name'] ?> </td>
                                     <td> <?php echo $row['name_status'] ?> </td>
-                                    <td><button type='button' class='btn btn-primary' onclick="getdata('<?php echo $row['id'] ?>')" data-bs-toggle='modal' data-bs-target='#exampleModal<?php echo $row['id'] ?>'>เลือก</button></td>
+                                    <td><button type='button' class='btn btn-primary' onclick="getdata('<?php echo $row['id'] ?>')" data-bs-toggle='modal' data-bs-target='#exampleModal7' data-pdfurl='path_to_your_pdf_file.pdf'>เลือก</button></td>
                                 </tr>
 
                         <?php   }
@@ -112,6 +112,7 @@
             </div>
         </div>
 
+
         <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -140,56 +141,24 @@
         window.location.href = "../"
     }
 
-    // $(document).ready(function () {
-    $('#exampleModal7').on('show.bs.modal', function(event) {
-        var modal = $(this);
-        var pdfUrl = 'check_the_request_pdf'; // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ PDF ของคุณ
-        modal.find('#pdfViewer').attr('src', pdfUrl);
-    });
-
-    $(document).ready(function() {
-        $('#approveButton').click(function() {
-            // รับ id ที่ต้องการอัพเดท
-            var id = $(this).data('id');
-
-            // ทำการอัพเดท id_status เป็น 2 โดยรวมค่า id ไปด้วย
-            $.ajax({
-                url: 'update_status', // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ที่มีการอัพเดท id_status
-                method: 'POST',
-                data: {
-                    id_status: 2,
-                    id_user: localStorage.getItem("id_user"),
-                    idata: id // เพิ่มค่า id ไปยังข้อมูลที่ส่งไปยังเซิร์ฟเวอร์
-                },
-                success: function(response) {
-                    // เมื่ออัพเดทสำเร็จ ให้ปิด modal
-                    $('#exampleModal1').modal('hide');
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                    // ในกรณีที่เกิดข้อผิดพลาด คุณอาจจะต้องจัดการตามความเหมาะสม
-                }
-            });
-        });
-    });
-
     function getdata(id) {
-        $.ajax({
-            url: "get_check_the_request",
-            type: "POST",
-            data: {
-                idata: id,
-                id_user: localStorage.getItem("id_user")
-            },
-            success: function(newdata) {
-                // Handle the success response here if needed
-            },
-            error: function(xhr, status, error) {
-                // Handle errors here if needed
-                console.error(error);
-            }
-        });
-        console.log(id);
-    }
+    var pdfViewer = document.getElementById("pdfViewer");
+    // สมมติว่า `create_pdf.php` คือไฟล์ PHP ที่คุณใช้สร้าง PDF
+    var pdfUrl = "check_the_request_pdf"; 
+    var formData = new FormData();
+    formData.append('id', id);
+
+    fetch(pdfUrl, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        var newPdfUrl = URL.createObjectURL(blob);
+        pdfViewer.src = newPdfUrl;
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 </script>
 <?php include("../../footer.php") ?>

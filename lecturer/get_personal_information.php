@@ -31,9 +31,9 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
     } else
         return "";
 }
-if (isset($_POST["id_user"]) && $_POST["id_user"]) {
+if (isset($_POST["user_id"]) && $_POST["user_id"]) {
 
-    $user_id = $_POST["id_user"];
+    $user_id = $_POST["user_id"];
 
     $sql = "SELECT * FROM `teacher_personnel_information` WHERE user_id = ? ";
     $result = $db->prepare($sql);

@@ -69,7 +69,7 @@ include("./servers/connect.php");
                                 break;
                             case 7:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./lecturer/home";
                                 break;
 
@@ -85,7 +85,7 @@ include("./servers/connect.php");
                                 break;
                             case 3:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./officer/academicmaster/home";
                                 break;
                             case 6:
