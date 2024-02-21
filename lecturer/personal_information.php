@@ -121,6 +121,32 @@
                 </div>
             </div>
 
+
+            <div class="modal fade" id="editModal_telephone_number" tabindex="-1" aria-labelledby="editModalLabel_telephone_number" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel_telephone_number">แก้ไขข้อมูล</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editForm_telephone_number">
+                                <div class="form-group">
+                                    <label for="telephoneNumberInput">เบอร์โทรศัพท์</label>
+                                    <input type="tel" class="form-control" id="telephoneNumberInput" placeholder="Enter telephone number">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                    <button type="submit" class="btn btn-primary">บันทึก</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -147,7 +173,7 @@
                 $("#nationality").html("สัญชาติ :" + " " + data[0].nationality);
                 $("#age").html("อายุ :" + " " + data[0].age);
                 $("#email").html("อีเมล์ :" + " " + data[0].email + " " + " <i class='fas fa-edit edit-icon' data-email='" + data[0].email + "'></i>");
-                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " " + '<i class="fas fa-edit"></i> ');
+                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " " + "<i class='fas fa-edit edit-icon1' data-telephone_number='"+ data[0].telephone_number +"'></i>");
                 $("#start_date").html("วันที่เริ่มทำงาน :" + " " + data[0].start_date);
                 $("#house_code").html("รหัสประจำบ้าน :" + " " + data[0].house_code);
                 $("#number_house").html("เลขที่ :" + " " + data[0].number_house);
@@ -205,6 +231,37 @@
                 } else {
                     alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
                     window.location.href = "personal_information";
+                }
+            },
+            error: function() {
+                alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+            },
+        });
+    });
+
+    $(document).on('click', '.edit-icon1', function() {
+        var telephoneNumberToEdit = $(this).data('telephone_number'); // ดึงเบอร์โทรศัพท์จาก data-telephone_number
+        $('#telephoneNumberInput').val(telephoneNumberToEdit);
+        $('#editModal_telephone_number').modal('show'); // แสดง modal สำหรับการแก้ไข
+    });
+    $('#editForm_telephone_number').on('submit', function(e) {
+        e.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
+        var formData = {
+            user_id: localStorage.getItem("user_id"),
+            telephone_number: $('#telephoneNumberInput').val(), // ส่งเบอร์โทรศัพท์
+        };
+        $.ajax({
+            url: 'update_endpoint_telephone_number', // แทนที่ด้วย URL จริงของคุณ
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                var data1 = JSON.parse(response);
+                if (data1.status === 200) {
+                    alert("บันทึกข้อมูลสำเร็จ");
+                    window.location.href = "personal_information";
+                } else {
+                    alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
                 }
             },
             error: function() {

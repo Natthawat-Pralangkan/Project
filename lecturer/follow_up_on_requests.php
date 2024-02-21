@@ -67,7 +67,7 @@
             url: "get_follw",
             type: "POST",
             data: {
-                id_user: localStorage.getItem("id_user")
+                user_id: localStorage.getItem("user_id")
             },
             dataType: 'json',
             success: function(data) {

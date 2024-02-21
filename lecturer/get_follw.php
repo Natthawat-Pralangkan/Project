@@ -32,13 +32,13 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
         return "";
 }
 
-$user_id = $_POST["id_user"];
+$user_id = $_POST["user_id"];
 
 $sql = "SELECT * FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        WHERE details_ppetiton.id_user = ? ORDER by details_ppetiton.date desc ";
+                        WHERE details_ppetiton.user_id = ? ORDER by details_ppetiton.date desc ";
 $result = $db->prepare($sql);
 $result->bindParam(1, $user_id);
 $result->execute();
