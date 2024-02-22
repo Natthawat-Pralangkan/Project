@@ -112,9 +112,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -142,58 +139,6 @@
         localStorage.clear()
         window.location.href = "../"
     }
-
-    // $(document).ready(function() {
-    //     // Example setup for handling clicks on "จัดการ" buttons
-    //     $('.manage-button').on('click', function() {
-    //         var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
-    //         console.log(id); // Debugging line to ensure the id is captured correctly
-
-    //         var pdfUrl = 'check_the_request_pdf.php?id=' + id; // Construct the URL for the PDF
-
-    //         $('#pdfViewer').attr('src', pdfUrl); // Set the iframe's source to the constructed URL
-    //         $('#exampleModal7').modal('show'); // Open the modal that contains the iframe
-    //     });
-
-    //     $('.manage-button').on('click', function() {
-    //         var petitionId = $(this).data('id');
-    //         // Store this ID in the modal for later use
-    //         $('#exampleModal7').data('petition-id', petitionId);
-    //         // Now open the modal
-    //         $('#exampleModal7').modal('show');
-    //     });
-
-
-    //     $("#approveButton").on('click', function(event) {
-    //         event.preventDefault();
-    //         var id = $('#exampleModal7').data('id');
-    //         var id_status = 2; // Define and assign a value to id_status
-    //         console.log("Sending ID:", id, "Status:", id_status);
-
-    //         // AJAX call to update the status
-    //         $.ajax({
-    //             url: "update_status.php",
-    //             type: "POST",
-    //             data: {
-    //                 id: id,
-    //                 id_status: id_status
-    //             },
-    //             success: function(response) {
-    //                 if (response.status === "success") {
-    //                     alert("อนุมัติคำร้องเรียบร้อยแล้ว");
-    //                     $('#exampleModal7').modal('hide');
-    //                     // Refresh or update the UI as necessary
-    //                     location.reload(); // or use a more targeted update method
-    //                 } else {
-    //                     alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
-    //                 }
-    //             },
-    //             error: function(xhr, status, error) {
-    //                 alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
-    //             }
-    //         });
-    //     });
-    // });
     $(document).ready(function() {
         $('.manage-button').on('click', function() {
             var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button

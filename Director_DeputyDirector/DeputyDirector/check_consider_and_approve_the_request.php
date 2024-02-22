@@ -63,50 +63,50 @@
                             } else
                                 return "";
                         }
-                        $sql = "SELECT * FROM `details_ppetiton`
+                        $sql = "SELECT *,`details_ppetiton`.`id` FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        JOIN teacher_personnel_information ON details_ppetiton.id_user = teacher_personnel_information.user_id
-                         ORDER BY details_ppetiton.date DESC;";
-                        $result = $db->query($sql);
-
-                        // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
+                        JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
+                        ORDER BY details_ppetiton.date DESC;";
+                        $result = $db->query($sql); ?>
+                        <?php
                         if ($result->rowCount() > 0) {
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                                 // แปลงวันที่ให้เป็นรูปแบบไทย
                                 $newdate = ConvertToThaiDate($row['date'], 0, 0);
-                                echo "<tr>";
-                                echo "<td>" . $newdate . "</td>";
-                                echo "<td>" . $row['petition_name'] . "</td>";
-                                echo "<td>" . $row['user_name'] . "</td>";
-                                echo "<td>" . $row['name_status'] . "</td>";
-                                echo "<td><button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#exampleModal'>เลือก</button></td>";
-                                echo "</tr>";
-                            }
+                        ?>
+                                <tr>
+                                    <td> <?php echo $newdate ?> </td>
+                                    <td> <?php echo $row['petition_name'] ?> </td>
+                                    <td> <?php echo $row['user_name'] ?> </td>
+                                    <td> <?php echo $row['name_status'] ?> </td>
+                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button>
+                                    </td>
+                                </tr>
+
+                        <?php   }
                         } else {
                             echo "0 results";
                         }
                         ?>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn  text-center" data-bs-dismiss="modal" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                        <!-- <button type="button" class="btn "style="background-color: #ff0000; color: #fcfafa;">ไม่อนุมัติ</button> -->
-                        <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe id="pdfViewer" width="100%" height="500px" frameborder="0"></iframe>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
+                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,5 +131,61 @@
         </div>
     </div>
 </div>
+<script>
+    if (localStorage.getItem("id_type") != "1" && localStorage.getItem("user_id") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
+    $(document).ready(function() {
+        $('.manage-button').on('click', function() {
+            var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
+            console.log(id); // Debugging line to ensure the id is captured correctly
 
+            var pdfUrl = 'check_the_request_pdf.php?id=' + id; // Construct the URL for the PDF
+
+            $('#pdfViewer').attr('src', pdfUrl); // Set the iframe's source to the constructed URL
+            $('#exampleModal7').modal('show'); // Open the modal that contains the iframe
+        });
+
+        // Setup for handling clicks on "จัดการ" buttons
+        $('.manage-button').on('click', function() {
+            var petitionId = $(this).data('id');
+            // Store this ID in the modal for later use
+            $('#exampleModal7').data('id', petitionId);
+            // Now open the modal
+            $('#exampleModal7').modal('show');
+        });
+
+        // Setup for handling clicks on "อนุมัติ" button
+        $("#approveButton").on('click', function(event) {
+            event.preventDefault();
+            var id = $('#exampleModal7').data('id');
+            var id_status = 4; // Define and assign a value to id_status
+            console.log("Sending ID:", id, "Status:", id_status);
+
+            // AJAX call to update the status
+            $.ajax({
+                url: "update_status",
+                type: "POST",
+                data: {
+                    id: id,
+                    id_status: id_status
+                },
+                success: function(response) {
+                    if (response.status === "success") {
+                        alert("อนุมัติคำร้องเรียบร้อยแล้ว");
+                        $('#exampleModal7').modal('hide');
+                        // Refresh or update the UI as necessary
+                        location.reload(); // or use a more targeted update method
+                    } else {
+                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
+                }
+            });
+        });
+    });
+</script>
 <?php include("../../footer.php") ?>

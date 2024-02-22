@@ -12,15 +12,17 @@ $(document).ready(function () {
       },
       {
         data: "สถานะ",
-        createdCell: function (td, cellData, rowData, row, col) {
-          if (cellData == "รออนุมัติ") {
-            $(td).addClass("status1");
-          } else if (cellData == "รอพิจารณา") {
-            $(td).addClass("status2");
+        createdCell: function(td, cellData, rowData, row, col) {
+          if (cellData == "รอพิจารณา") {
+              $(td).addClass("status1");
+          } else if (cellData == "รอรองผู้อำนวยการพิจารณา") {
+              $(td).addClass("status2");
           } else if (cellData == "รอผู้อำนวยการพิจารณา") {
-            $(td).addClass("status3");
-          } else if (cellData == "ไม่อนุมัติ") {
-            $(td).addClass("status4");
+              $(td).addClass("status3");
+          } else if (cellData == "อนุมัติแล้ว") {
+              $(td).addClass("status4");
+          }else if (cellData == "ไม่อนุมัติแล้ว") {
+              $(td).addClass("status5");
           }
         },
       },

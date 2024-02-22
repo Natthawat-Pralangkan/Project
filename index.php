@@ -64,7 +64,7 @@ include("./servers/connect.php");
                         switch (data.id_type) {
                             case 0:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./admin/home.php";
                                 break;
                             case 7:
@@ -75,12 +75,12 @@ include("./servers/connect.php");
 
                             case 1:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./Director_DeputyDirector/DeputyDirector/home";
                                 break;
                             case 2:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./Director_DeputyDirector/director/home";
                                 break;
                             case 3:
@@ -90,17 +90,17 @@ include("./servers/connect.php");
                                 break;
                             case 6:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./officer/addpersonnelinformation/home";
                                 break;
                             case 5:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./officer/BudgetOfficer/home";
                                 break;
                             case 4:
                                 localStorage.setItem("id_type", data.id_type)
-                                localStorage.setItem("id_user", data.id_user)
+                                localStorage.setItem("user_id", data.user_id)
                                 window.location.href = "./officer/generaldepartment/home";
                                 break;
                             default:

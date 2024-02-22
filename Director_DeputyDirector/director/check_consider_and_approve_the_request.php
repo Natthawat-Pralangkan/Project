@@ -63,12 +63,12 @@
                             } else
                                 return "";
                         }
-                        $sql = "SELECT * FROM `details_ppetiton`
+                        $sql = "SELECT *,`details_ppetiton`.`id` FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        JOIN teacher_personnel_information ON details_ppetiton.id_user = teacher_personnel_information.user_id
-                         ORDER BY details_ppetiton.date DESC;";
+                        JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
+                        ORDER BY details_ppetiton.date DESC;";
                         $result = $db->query($sql); ?>
                         <?php
                         if ($result->rowCount() > 0) {
@@ -81,7 +81,8 @@
                                     <td> <?php echo $row['petition_name'] ?> </td>
                                     <td> <?php echo $row['user_name'] ?> </td>
                                     <td> <?php echo $row['name_status'] ?> </td>
-                                    <td><button type='button' class='btn btn-primary' onclick="getdata('<?php echo $row['id'] ?>')" data-bs-toggle='modal' data-bs-target='#exampleModal<?php echo $row['id'] ?>'>เลือก</button></td>
+                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button>
+                                    </td>
                                 </tr>
 
                         <?php   }
@@ -91,26 +92,26 @@
                         ?>
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <iframe id="pdfViewer" width="100%" height="500px" frameborder="0"></iframe>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" id="approveButton" class="btn text-center" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                        <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe id="pdfViewer" width="100%" height="500px" frameborder="0"></iframe>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
+                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -134,39 +135,58 @@
     </div>
 </div>
 <script>
-    if (localStorage.getItem("id_type") != "3" && localStorage.getItem("id_user") == null) {
+    if (localStorage.getItem("id_type") != "3" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
-
-    // $(document).ready(function () {
-    $('#exampleModal7').on('show.bs.modal', function(event) {
-        var modal = $(this);
-        var pdfUrl = 'check_the_request_pdf'; // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ PDF ของคุณ
-        modal.find('#pdfViewer').attr('src', pdfUrl);
-    });
-
+    
     $(document).ready(function() {
-        $('#approveButton').click(function() {
-            // รับ id ที่ต้องการอัพเดท
-            var id = $(this).data('id');
+        $('.manage-button').on('click', function() {
+            var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
+            console.log(id); // Debugging line to ensure the id is captured correctly
 
-            // ทำการอัพเดท id_status เป็น 2 โดยรวมค่า id ไปด้วย
+            var pdfUrl = 'check_the_request_pdf.php?id=' + id; // Construct the URL for the PDF
+
+            $('#pdfViewer').attr('src', pdfUrl); // Set the iframe's source to the constructed URL
+            $('#exampleModal7').modal('show'); // Open the modal that contains the iframe
+        });
+
+        // Setup for handling clicks on "จัดการ" buttons
+        $('.manage-button').on('click', function() {
+            var petitionId = $(this).data('id');
+            // Store this ID in the modal for later use
+            $('#exampleModal7').data('id', petitionId);
+            // Now open the modal
+            $('#exampleModal7').modal('show');
+        });
+
+        // Setup for handling clicks on "อนุมัติ" button
+        $("#approveButton").on('click', function(event) {
+            event.preventDefault();
+            var id = $('#exampleModal7').data('id');
+            var id_status = 3; // Define and assign a value to id_status
+            console.log("Sending ID:", id, "Status:", id_status);
+
+            // AJAX call to update the status
             $.ajax({
-                url: 'update_status', // เปลี่ยนเป็นที่อยู่ URL ของไฟล์ที่มีการอัพเดท id_status
-                method: 'POST',
+                url: "update_status",
+                type: "POST",
                 data: {
-                    id_status: 2,
-                    id_user: localStorage.getItem("id_user"),
-                    idata: id // เพิ่มค่า id ไปยังข้อมูลที่ส่งไปยังเซิร์ฟเวอร์
+                    id: id,
+                    id_status: id_status
                 },
                 success: function(response) {
-                    // เมื่ออัพเดทสำเร็จ ให้ปิด modal
-                    $('#exampleModal1').modal('hide');
+                    if (response.status === "success") {
+                        alert("อนุมัติคำร้องเรียบร้อยแล้ว");
+                        $('#exampleModal7').modal('hide');
+                        // Refresh or update the UI as necessary
+                        location.reload(); // or use a more targeted update method
+                    } else {
+                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                    }
                 },
                 error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                    // ในกรณีที่เกิดข้อผิดพลาด คุณอาจจะต้องจัดการตามความเหมาะสม
+                    alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
                 }
             });
         });

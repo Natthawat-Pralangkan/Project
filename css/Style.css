@@ -193,7 +193,7 @@ html {
 }
 
 .status1 {
-  color: #fbc01f !important;
+  color: #05befc !important;
 }
 
 .status2 {
@@ -203,7 +203,13 @@ html {
   color: #ea0b8d !important;
 }
 .status4 {
-  color: #0b3bea !important;
+  color: #05c90f !important;
+}
+.status5{
+  color: #f71004;
+}
+.status6{
+  color: #a204f7;
 }
 #follow_up_on_requests {
   width: 100%;
