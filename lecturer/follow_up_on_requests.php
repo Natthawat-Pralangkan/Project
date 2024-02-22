@@ -32,28 +32,27 @@
                         </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="pdfModalLabel">PDF Title</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-
+                            <iframe src="" frameborder="0" style="width:100%; height:500px;"></iframe>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -74,21 +73,30 @@
                 console.log(data);
                 var table = $('#follow_up_on_requests').DataTable({
                     data: data,
-                    columns: [
-                        { data: 'date' },
-                        { data: 'petition_name' },
-                        { data: 'request_type_name' },
-                        { data: 'name_status' },
-                        { 
+                    columns: [{
+                            data: 'date'
+                        },
+                        {
+                            data: 'petition_name'
+                        },
+                        {
+                            data: 'request_type_name'
+                        },
+                        {
+                            data: 'name_status'
+                        },
+                        {
                             data: null,
                             render: function(data, type, row) {
-                                return '<button class="btn l" style="background-color:#BB6AFB ; color:#FFFFFF" data-id="#exampleModal">จัดการ</button>';
+                                return '<button class="btn btn-primary manage-button" data-id="' + row.id + '">จัดการ</button>';
                             }
                         }
+                    ],
+                    order: [
+                        [0, 'desc']
                     ]
-                    ,order: [[0, 'desc']]
                 });
-               
+
                 // เพิ่มเหตุการณ์เมื่อคลิกที่ปุ่ม "จัดการ" เพื่อเปิด modal
                 $('#follow_up_on_requests tbody').on('click', 'button', function() {
                     var data = table.row($(this).parents('tr')).data();
@@ -100,6 +108,14 @@
                 console.error(xhr.responseText);
             }
         });
+    });
+    $('#follow_up_on_requests tbody').on('click', '.manage-button', function() {
+        var id = $(this).data('id');
+        console.log(id); // Debugging line to check the id
+        var pdfUrl = 'check_the_request_pdf.php?id=' + id;
+
+        $('#pdfModal iframe').attr('src', pdfUrl);
+        $('#pdfModal').modal('show');
     });
 </script>
 

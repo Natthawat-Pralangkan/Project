@@ -34,7 +34,7 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
 
 $user_id = $_POST["user_id"];
 
-$sql = "SELECT * FROM `details_ppetiton`
+$sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id` FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
@@ -48,6 +48,8 @@ $keeall = array(); // สร้าง array เพื่อเก็บข้อ
 foreach ($row as $kee) {
     $newdate = ConvertToThaiDate($kee['date'], 0, 0);
     $keeall[] = array(
+        "id" => $kee['id'],
+        "petition_id" => $kee['petition_id'],
         "date" => $newdate, // เปลี่ยนเป็น $newdate ที่แปลงเป็นวันที่ไทยแล้ว
         "petition_name" => $kee['petition_name'],
         "request_type_name" => $kee['request_type_name'],
