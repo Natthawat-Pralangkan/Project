@@ -4,7 +4,8 @@ require_once(__DIR__ . '/../FPDI/src/autoload.php');
 include(__DIR__ . '/../servers/connect.php');
 
 // Define a function to convert dates to Thai format
-function ConvertToThaiDate($date, $showTime = false, $showSeconds = false) {
+function ConvertToThaiDate($date, $showTime = false, $showSeconds = false)
+{
     if ($date == '0000-00-00' || empty($date)) {
         return '';
     }
@@ -38,43 +39,343 @@ if (!$row) {
 }
 
 use setasign\Fpdi\Fpdi;
+
 $pdf = new Fpdi();
-
-$templatePath = __DIR__ . '/file/แบบสำรวจอัตรากำลังครู.pdf';
-if (!file_exists($templatePath)) {
-    exit('Template PDF not found at path: ' . $templatePath);
-}
-
-$pageCount = $pdf->setSourceFile($templatePath);
-$pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
-
-$pdf->addPage();
-$pdf->useImportedPage($pageId);
-
-// Set up the Thai font
 $pdf->AddFont('THSarabunNew', '', 'THSarabunNew.php');
 $pdf->AddFont('THSarabunNew', 'BI', 'THSarabunNew_b.php');
 $pdf->SetFont('THSarabunNew', 'BI', 18);
+// $templatePath = __DIR__ . '/file/แบบสำรวจอัตรากำลังครู.pdf';
+if ($row['petition_id'] == 7) {
+    $templatePath = __DIR__ . '/file/แบบสำรวจอัตรากำลังครู.pdf';
+    $details = explode(",", $row['details']);
 
-// Process and display the details
-$details = explode(",", $row['details']);
-$positions = [
-    [110, 57], [100, 64], [127, 64], [65, 79], [85, 86],
-    [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
-];
-
-foreach ($details as $index => $detail) {
-    if (isset($positions[$index])) {
-        list($x, $y) = $positions[$index];
-        $pdf->SetXY($x, $y);
-        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
     }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+
+    $positions = [
+        [110, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+} elseif ($row['petition_id'] == 6) {
+    $templatePath = __DIR__ . '/file/แบบฟอร์มปะหน้า.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+} elseif ($row['petition_id'] == 1) {
+    $templatePath = __DIR__ . '/file/แบบรายงานผลการพานักเรียนไปนอกสถานศึกษา.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 2) {
+    $templatePath = __DIR__ . '/file/แบบรายงานการเข้าร่วมกิจกรรม.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 3) {
+    $templatePath = __DIR__ . '/file/แบบรายงานการไม่ลงนามในแบบสำรวจการเรียนการสอน.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 4) {
+    $templatePath = __DIR__ . '/file/การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 5) {
+    $templatePath = __DIR__ . '/file/รายงานการประชุม.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 8) {
+    $templatePath = __DIR__ . '/file/แบบสำรวจคาบสอนของครูผู้สอน.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 9) {
+    $templatePath = __DIR__ . '/file/แบบขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 10) {
+    $templatePath = __DIR__ . '/file/แบบขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}elseif ($row['petition_id'] == 11) {
+    $templatePath = __DIR__ . '/file/ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+    
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    $pageCount = $pdf->setSourceFile($templatePath);
+    $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    $pdf->addPage();
+    $pdf->useImportedPage($pageId);
+    $details = explode(",", $row['details']);
+    $positions = [
+        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+    ];
+    foreach ($details as $index => $detail) {
+        if (isset($positions[$index])) {
+            list($x, $y) = $positions[$index];
+            $pdf->SetXY($x, $y);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+        }
+    }
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(130, 262);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $pdf->Output('I', 'generated_pdf.pdf');
+}else {
+    // Handle unexpected petition_id values
+    exit('No template defined for the given petition_id.');
 }
 
-// Display the date
-$newdate = ConvertToThaiDate($row['date']);
-$pdf->SetXY(130, 262);
-$pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
-
-// Output the PDF
-$pdf->Output('I', 'generated_pdf.pdf');
