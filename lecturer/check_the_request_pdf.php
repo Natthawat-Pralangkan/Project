@@ -90,7 +90,7 @@ if ($row['petition_id'] == 7) {
     $pdf->useImportedPage($pageId);
     $details = explode(",", $row['details']);
     $positions = [
-        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [70, 63], [100, 64], [127, 64], [65, 79], [85, 86],
         [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
     ];
     foreach ($details as $index => $detail) {

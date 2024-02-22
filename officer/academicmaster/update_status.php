@@ -1,27 +1,17 @@
 <?php
-
-// เชื่อมต่อกับฐานข้อมูล
+header('Content-Type: application/json');
 include("../../servers/connect.php");
-// print_r($_POST);
-// exit;
-// รับข้อมูลที่ส่งมาจาก AJAX
-$id_status = 2; // กำหนดค่า id_status เป็น 2 ตามที่ต้องการอัพเดท
-$id_user = $_POST['id_user'];
 
-// อัพเดทสถานะในฐานข้อมูล
-$sql = "UPDATE details_ppetiton SET id_status = 2 WHERE id = 28";
+$id = $_POST['id'] ?? null;
+$id_status = $_POST['id_status'] ?? null;
 
-try {
-    $stmt = $db->prepare($sql);
-    // $stmt->bindParam(1, $id_status);
-    // $stmt->bindParam(1, $id_user);
-
-    // Execute the prepared statement
-    if ($stmt->execute()) {
-        echo json_encode(['status' => 200]);
+if ($id && $id_status) {
+    $stmt = $db->prepare("UPDATE details_ppetiton SET id_status = ? WHERE id = ?");
+    if ($stmt->execute([$id_status, $id])) {
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Update failed.']);
     }
-} catch (Exception $e) {
-    echo json_encode(['status' => 400, "mgs" => $e->getMessage()]);
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Missing parameters.']);
 }
-
-?>
