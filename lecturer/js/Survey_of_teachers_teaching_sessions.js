@@ -26,16 +26,16 @@ $(document).ready(function () {
         " " +
         school_year+
         ""+
-        localStorage.getItem("id_user")
+        localStorage.getItem("user_id")
     );
     $.ajax({
       url: "inster_survey_of_teachers_teaching_sessions", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user:localStorage.getItem("id_user"),
+        user_id:localStorage.getItem("user_id"),
       
-        name_from: name_from,
-        petition_name: petition_name,
+        // name_from: name_from,
+        // petition_name: petition_name,
         subject_group: subject_group,
         semester: semester,
         school_year: school_year,

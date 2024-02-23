@@ -52,7 +52,7 @@ if (isset($_GET['user_id'])) {
                 echo "<tr>";
                 // Ensure these column names exist in your query's result set
                 echo "<td>"  . $newdate . "</td>"; // Assuming 'date' is a correct column name
-                echo "<td>" . $row['user_name'] . "</td>"; // Assuming 'user_name' is provided by teacher_personnel_information
+                echo "<td>" .  $row['user_name'] . ' ' . $row['last_name'] . "</td>"; // Assuming 'user_name' is provided by teacher_personnel_information
                 echo "<td>" . $row['petition_name'] . "</td>"; // Assuming 'name' is the correct column from petition_name
                 echo "</tr>";
             }

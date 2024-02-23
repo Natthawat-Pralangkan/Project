@@ -164,10 +164,10 @@
         </div>
     </div>
     <script>
-        if (localStorage.getItem("id_type") != "4" && localStorage.getItem("id_user") == null) {
-            localStorage.clear()
-            window.location.href = "../"
-        }
+         if(localStorage.getItem("id_type") != "4" && localStorage.getItem("user_id") == null){
+        localStorage.clear()
+        window.location.href ="../"
+    }
 
         function displayImageEdit(input) {
             if (input.files && input.files[0]) {

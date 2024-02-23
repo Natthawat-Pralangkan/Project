@@ -228,21 +228,22 @@
             <!-- </form> -->
         </div>
     </div>
-    <script>
-        if (localStorage.getItem("id_type") != "6" && localStorage.getItem("id_user") == null) {
-            localStorage.clear()
-            window.location.href = "../"
-        };
+</div>
+<script>
+    if (localStorage.getItem("id_type") != "6" && localStorage.getItem("user_id") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
 
-        function displayImageEdit(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#uploaded_image_edit').attr('src', e.target.result).show();
-                }
-                reader.readAsDataURL(input.files[0]);
+    function displayImageEdit(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#uploaded_image_edit').attr('src', e.target.result).show();
             }
+            reader.readAsDataURL(input.files[0]);
         }
-    </script>
+    }
+</script>
 
-    <?php include("../../footer.php") ?>
+<?php include("../../footer.php") ?>

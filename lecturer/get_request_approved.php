@@ -40,7 +40,7 @@ if (isset($_GET['user_id'])) {
         JOIN petition_type ON details_ppetiton.petition_type = petition_type.id
         JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
-        WHERE details_ppetiton.id_status = 1 AND details_ppetiton.user_id =?  ORDER BY date DESC";
+        WHERE details_ppetiton.id_status = 4 AND details_ppetiton.user_id =?  ORDER BY date DESC";
 
         $stmt = $db->prepare($sql);
         $stmt->execute([$user_id]);
@@ -52,7 +52,7 @@ if (isset($_GET['user_id'])) {
                 echo "<tr>";
                 // Ensure these column names exist in your query's result set
                 echo "<td>"  . $newdate . "</td>"; // Assuming 'date' is a correct column name
-                echo "<td>" . $row['user_name'] . "</td>"; // Assuming 'user_name' is provided by teacher_personnel_information
+                echo "<td>" .$row['user_name'] . ' ' . $row['last_name'] . "</td>"; // Assuming 'user_name' is provided by teacher_personnel_information
                 echo "<td>" . $row['petition_name'] . "</td>"; // Assuming 'name' is the correct column from petition_name
                 echo "</tr>";
             }

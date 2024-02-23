@@ -13,17 +13,17 @@ $travel_route = $_POST["travel_route"];
 $travel_back = $_POST["travel_back"];
 $Time_to_arrive = $_POST["Time_to_arrive"];
 $amount_person = $_POST["amount_person"];
-$id_user = $_POST["id_user"];
+$user_id = $_POST["user_id"];
 
 $details = $allow_student.",".$student_total.",".$teacher_total.",".$reason_controll.",".$school_name.",".$date_travel.",".$travel_time.",".$travel_route.",".$travel_back.",".$Time_to_arrive.",".$amount_person;
 
 
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details) 
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details) 
 VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $id_user);
+    $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "9");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);

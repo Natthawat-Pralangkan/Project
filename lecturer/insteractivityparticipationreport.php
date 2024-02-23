@@ -3,16 +3,16 @@ include("../servers/connect.php");
 // รายงานการเข้าร่วมกิจกรรม	
 $subject_group = $_POST["subject_group"];
 $school_year = $_POST["school_year"];
-$id_user = $_POST["id_user"];
+$user_id = $_POST["user_id"];
 
 $details = $subject_group.",".$school_year;
 
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details ) 
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details ) 
               VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $id_user);
+    $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "2");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);

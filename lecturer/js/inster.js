@@ -9,7 +9,7 @@ $(document).ready(function () {
       url: "insterarranging_teaching_schedules_for_teachers_who_are_not_onofficialduty", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user: localStorage.getItem("id_user"),
+        user_id: localStorage.getItem("user_id"),
         subject_group: subject_group,
         semester: semester,
         school_year: school_year,
@@ -49,7 +49,7 @@ $(document).ready(function () {
       url: "insterteacher_staffing_survey", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user: localStorage.getItem("id_user"),
+        id_user: localStorage.getItem("user_id"),
         
         subject_group: subject_group,
         semester: semester,

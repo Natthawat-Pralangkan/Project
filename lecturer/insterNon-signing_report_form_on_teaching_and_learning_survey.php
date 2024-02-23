@@ -5,16 +5,16 @@ $level = $_POST["level"];
 $teach_week = $_POST["teach_week"];
 $date_teach_start = $_POST["date_teach_start"];
 $date_teach_end = $_POST["date_teach_end"];
-$id_user = $_POST["id_user"];
+$user_id = $_POST["user_id"];
 
 $details = $level.",".$teach_week.",".$date_teach_start.",".$date_teach_end;
 
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details ) 
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details ) 
               VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $id_user);
+    $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "3");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);

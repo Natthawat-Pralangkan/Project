@@ -10,15 +10,15 @@ $according_project = $_POST["according_project"];
 $date_activity = $_POST["date_activity"];
 $activity_where = $_POST["activity_where"];
 $summary_details = $_POST["summary_details"];
-$id_user = $_POST["id_user"];
+$user_id = $_POST["user_id"];
 // Prepared Statemen
 $details = $document_name_consider.",".$subject_group.",".$activity_name.",".$according_project.",".$date_activity.",".$activity_where.",".$summary_details;
 
-$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details ) 
-              VALUES (?, ?, ?, ?)";
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details ) 
+              VALUES (?,?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $id_user);
+    $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "6");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);

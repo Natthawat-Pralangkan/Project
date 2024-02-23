@@ -52,7 +52,7 @@ if (isset($_GET['user_id'])) {
                 echo "<tr>";
                 // Ensure these column names exist in your query's result set
                 echo "<td>"  . $newdate . "</td>"; // Assuming 'date' is a correct column name
-                echo "<td>" . $row['user_name'] . "</td>"; // Assuming 'user_name' is provided by teacher_personnel_information
+                echo "<td>" . $row['user_name'] . ' ' . $row['last_name'] . "</td>"; // Assuming 'user_name' is provided by teacher_personnel_information
                 echo "<td>" . $row['petition_name'] . "</td>"; // Assuming 'name' is the correct column from petition_name
                 echo "</tr>";
             }
@@ -65,12 +65,12 @@ if (isset($_GET['user_id'])) {
 } else {
     echo '<tr><td colspan="3">ไม่พบผู้ใช้</td></tr>';
 }
-try {
-    // Assuming $db is your PDO database connection
-    $sql = "SELECT COUNT(*) FROM your_petitions_table WHERE id_status = 1"; // Adjust your query as needed
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $numPetitions = $stmt->fetchColumn(); // Fetches the count
-} catch (PDOException $e) {
-    die("Database error: " . $e->getMessage()); // Handle error appropriately
-}
+// try {
+//     // Assuming $db is your PDO database connection
+//     $sql = "SELECT COUNT(*) FROM your_petitions_table WHERE id_status = 1"; // Adjust your query as needed
+//     $stmt = $db->prepare($sql);
+//     $stmt->execute();
+//     $numPetitions = $stmt->fetchColumn(); // Fetches the count
+// } catch (PDOException $e) {
+//     die("Database error: " . $e->getMessage()); // Handle error appropriately
+// }

@@ -9,16 +9,16 @@ $subject = $_POST["subject"];
 $joining_date = $_POST["joining_date"];
 $organizer = $_POST["organizer"];
 $summary_of_results_of_participation_in_the_event = $_POST["summary_of_results_of_participation_in_the_event"];
-$id_user = $_POST["id_user"];
+$user_id = $_POST["user_id"];
 
 $details = $location . "," . $subject . "," . $joining_date . "," . $organizer . "," . $summary_of_results_of_participation_in_the_event;
 
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details) 
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details) 
 VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $id_user);
+    $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "5");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);

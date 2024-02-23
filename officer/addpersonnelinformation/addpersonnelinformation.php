@@ -91,9 +91,9 @@
     </div>
 </div>
 <script>
-    if (localStorage.getItem("id_type") != "6" && localStorage.getItem("id_user") == null) {
-        localStorage.clear()
-        window.location.href = "../"
-    }
+    if (localStorage.getItem("id_type") != "6" && localStorage.getItem("user_id") == null) {
+            localStorage.clear()
+            window.location.href = "../"
+        }
 </script>
 <?php include("../../footer.php") ?>

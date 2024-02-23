@@ -29,7 +29,7 @@ $(document).ready(function () {
       url: "instersubmitting_a_cover_form", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user: localStorage.getItem("id_user"),
+        user_id: localStorage.getItem("user_id"),
         // name_from: name_from,
         // date_report_send: date_report_send,
         document_name_consider: document_name_consider,

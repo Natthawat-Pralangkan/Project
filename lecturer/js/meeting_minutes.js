@@ -38,7 +38,7 @@ $(document).ready(function () {
       url: "instermeeting_minutes", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user:localStorage.getItem("id_user"),
+        id_user:localStorage.getItem("user_id"),
         location: location,
         subject: subject,
         joining_date: joining_date,

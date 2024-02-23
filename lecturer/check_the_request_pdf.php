@@ -258,19 +258,20 @@ if ($row['petition_id'] == 7) {
     $templatePath = __DIR__ . '/file/แบบสำรวจคาบสอนของครูผู้สอน.docx.pdf'; // Adjust path as necessary
     // Process and display the details
     $details = explode(",", $row['details']);
-    
+    // $pdf->AddPage('L'); // เพิ่มหน้าใหม่และกำหนดแนวหน้าเป็นแนวนอน (L หมายถึง Landscape)
+
     if (!file_exists($templatePath)) {
         exit('Template PDF not found at path: ' . $templatePath);
     }
-
+    // $pdf = new FPDF('P','mm','A4');
     $pageCount = $pdf->setSourceFile($templatePath);
     $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
-    $pdf->addPage();
+    $pdf->addPage('L');
     $pdf->useImportedPage($pageId);
     $details = explode(",", $row['details']);
     $positions = [
-        [100, 57], [100, 64], [127, 64], [65, 79], [85, 86],
+        [155, 43], [200, 43], [230, 43], [65, 79], [85, 86],
         [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
     ];
     foreach ($details as $index => $detail) {
@@ -280,9 +281,9 @@ if ($row['petition_id'] == 7) {
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
         }
     }
-    $newdate = ConvertToThaiDate($row['date']);
-    $pdf->SetXY(130, 262);
-    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    // $newdate = ConvertToThaiDate($row['date']);
+    // $pdf->SetXY(130, 262);
+    // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $newdate), 0, 1);
     $pdf->Output('I', 'generated_pdf.pdf');
 }elseif ($row['petition_id'] == 9) {
     $templatePath = __DIR__ . '/file/แบบขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา.docx.pdf'; // Adjust path as necessary

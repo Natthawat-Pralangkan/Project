@@ -55,7 +55,7 @@ $(document).ready(function() {
           url: "inster_Requesting_permission_for_students_to_go_to_school_in_special_cases", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
           method: "POST",
           data: {
-            id_user:localStorage.getItem("id_user"),
+            id_user:localStorage.getItem("user_id"),
             
             name_from: name_from,
             petition_name: petition_name,

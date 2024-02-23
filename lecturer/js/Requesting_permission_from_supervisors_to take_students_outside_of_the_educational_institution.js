@@ -62,7 +62,7 @@ $(document).ready(function () {
       url: "inster_Requesting_permission_from_supervisors_to take_students_outside_of_the_educational_institution", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user:localStorage.getItem("id_user"),
+        id_user:localStorage.getItem("user_id"),
         id_from: $("#id_from").val(),
         allow_student: allow_student,
         student_total: student_total,

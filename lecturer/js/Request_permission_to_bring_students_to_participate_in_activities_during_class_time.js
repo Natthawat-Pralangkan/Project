@@ -32,7 +32,7 @@ $(document).ready(function() {
           url: "inster_Request_permission_to_bring_students_to_participate_in_activities_during_class_time", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
           method: "POST",
           data: {
-            id_user:localStorage.getItem("id_user"),
+            id_user:localStorage.getItem("user_id"),
             activity_name: activity_name,
             reason_project: reason_project,
             date_activity: date_activity,

@@ -48,13 +48,13 @@ $(document).ready(function () {
         "" +
         details_of_this_trip +
         "" +
-        localStorage.getItem("id_user")
+        localStorage.getItem("user_id")
     );
     $.ajax({
       url: "insterReport_on_the_results_of_taking_students_outside_of_the_educational_institution", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user: localStorage.getItem("id_user"),
+        id_user: localStorage.getItem("user_id"),
 
         // name_from: name_from,
         // petition_name: petition_name,

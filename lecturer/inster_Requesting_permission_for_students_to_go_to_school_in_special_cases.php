@@ -11,15 +11,15 @@ $Time_to_go = $_POST["Time_to_go"];
 $Return_time = $_POST["Return_time"];
 $Number_of_supervising_teachers = $_POST["Number_of_supervising_teachers"];
 $Place_of_sending_documents = $_POST["Place_of_sending_documents"];
-$id_user = $_POST["id_user"];
+$user_id = $_POST["user_id"];
 
 $details = $school_wishes.",".$class_student.",".$room.",".$reason_project.",".$date_activity.",".$Time_to_go.",".$Return_time.",".$Number_of_supervising_teachers.",".$Place_of_sending_documents;
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (id_user,petition_id,petition_type,details) 
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details) 
               VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $id_user);
+    $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "11");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);
