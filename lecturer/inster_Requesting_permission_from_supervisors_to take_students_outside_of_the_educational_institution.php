@@ -13,9 +13,11 @@ $travel_route = $_POST["travel_route"];
 $travel_back = $_POST["travel_back"];
 $Time_to_arrive = $_POST["Time_to_arrive"];
 $amount_person = $_POST["amount_person"];
+$Vehicle_for_traveling = $_POST["Vehicle_for_traveling"];
+$addIdValues = implode(",", $_POST["addIdValues"]);
 $user_id = $_POST["user_id"];
 
-$details = $allow_student.",".$student_total.",".$teacher_total.",".$reason_controll.",".$school_name.",".$date_travel.",".$travel_time.",".$travel_route.",".$travel_back.",".$Time_to_arrive.",".$amount_person;
+$details = $allow_student.",".$student_total.",".$teacher_total.",".$reason_controll.",".$school_name.",".$date_travel.",".$travel_time.",".$travel_route.",".$travel_back.",".$Time_to_arrive.",".$amount_person.",".$Vehicle_for_traveling.",".$addIdValues;
 
 
 // Prepared Statemen

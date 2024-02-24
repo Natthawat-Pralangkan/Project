@@ -4,6 +4,7 @@ include("../servers/connect.php");
 
 
 $school_name = $_POST["school_name"];
+$school_name1 = $_POST["school_name1"];
 $student_total = $_POST["student_total"];
 $teacher_total = $_POST["teacher_total"];
 $reason_controlling = $_POST["reason_controlling"];
@@ -11,11 +12,12 @@ $date_travel = $_POST["date_travel"];
 $travel_route = $_POST["travel_route"];
 $trave_vehicle = $_POST["trave_vehicle"];
 $travel_back = $_POST["travel_back"];
-$time = $_POST["time"];
+$time1 = $_POST["time1"];
+$time2 = $_POST["time2"];
 $details_of_this_trip = $_POST["details_of_this_trip"];
 $user_id = $_POST["user_id"];
-
-$details = $school_name.",".$student_total.",".$teacher_total.",".$reason_controlling.",".$date_travel.",".$travel_route.",".$trave_vehicle.",".$travel_back.",".$time.",".$details_of_this_trip;
+$addIdValues = implode(",", $_POST["addIdValues"]);
+$details = $school_name.",".$student_total.",".$teacher_total.",".$reason_controlling.",".$date_travel.",".$travel_route.",".$trave_vehicle.",".$travel_back.",".$time2.",".$details_of_this_trip.",".$time1.",".$addIdValues.",".$school_name1;
 
 $query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details )  
               VALUES (?, ?, ?, ?)";

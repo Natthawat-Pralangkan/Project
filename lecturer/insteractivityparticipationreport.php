@@ -8,7 +8,7 @@ $user_id = $_POST["user_id"];
 $details = $subject_group.",".$school_year;
 
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details ) 
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details) 
               VALUES (?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);

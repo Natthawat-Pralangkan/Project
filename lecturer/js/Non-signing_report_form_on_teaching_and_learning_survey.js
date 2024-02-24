@@ -25,7 +25,7 @@ $(document).ready(function () {
       url: "insterNon-signing_report_form_on_teaching_and_learning_survey", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user:localStorage.getItem("user_id"),
+        user_id:localStorage.getItem("user_id"),
         level: level,
         teach_week: teach_week,
         date_teach_start: date_teach_start,

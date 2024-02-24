@@ -49,7 +49,7 @@ $(document).ready(function () {
       url: "insterteacher_staffing_survey", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user: localStorage.getItem("user_id"),
+        user_id: localStorage.getItem("user_id"),
         
         subject_group: subject_group,
         semester: semester,
@@ -67,10 +67,10 @@ $(document).ready(function () {
         console.log(response);
         var data = JSON.parse(response);
         if (data.status === 200) {
-          alert("บันทึกข้อมูลสินค้าสำเร็จ");
+          alert("บันทึกข้อมูลสำเร็จ");
           window.location.href = "follow_up_on_requests";
         } else {
-          alert("เกิดข้อผิดพลาดในการบันทึกข้อมูลสินค้า");
+          alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
           window.location.href = "submit_a_complaint";
         }
       },

@@ -96,6 +96,12 @@
                                         <input type="text" class="form-control mt-2" id="school_name" name="school_name" placeholder="ชื่อสถานที่">
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ณ.</label>
+                                        <input type="text" class="form-control mt-2" id="school_name1" name="school_name1" placeholder="ณ">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-4">
@@ -124,6 +130,12 @@
                                         <input type="date" class="form-control mt-2" id="date_travel" name="date_travel" placeholder="วันที่">
                                     </div>
                                 </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลาเดินทาง</label>
+                                        <input type="text" class="form-control mt-2" id="time1" name="time1" placeholder="เวลาเดินทาง">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-4">
@@ -148,8 +160,8 @@
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="" style="font-size: 18px;">เวลา</label>
-                                        <input type="text" class="form-control mt-2" id="time" name="time" placeholder="เวลาเดินทาง">
+                                        <label for="" style="font-size: 18px;">เวลาเดินทางกลับ</label>
+                                        <input type="text" class="form-control mt-2" id="time2" name="time2" placeholder="เวลาเดินทางกลับ">
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -672,6 +684,12 @@
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
                                         <input type="text" class="form-control mt-2" placeholder="เส้นทางในการเดินทาง" id="travel_route_8" name="travel_route_8">
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">พาหนะที่ใช้เดินทาง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="พาหนะที่ใช้เดินทาง" id="Vehicle_for_traveling_8" name="Vehicle_for_traveling_8">
                                     </div>
                                 </div>
                             </div>

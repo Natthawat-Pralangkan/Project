@@ -15,9 +15,12 @@ $(document).ready(function () {
   //
   $("#server_report").click(function () {
     // รับข้อมูลจากฟอร์ม Modal
-    // var name_from = $("#name_from_2").val();
-    // var petition_name = $("#petition_name_2").val();
+    let addIdValues = [];
+    $('input[name="input_host_name[]"]').each(function () {
+      addIdValues.push($(this).val());
+    });
     var school_name = $("#school_name").val();
+    var school_name1 = $("#school_name1").val();
     var student_total = $("#student_total").val();
     var teacher_total = $("#teacher_total").val();
     var reason_controlling = $("#reason_controlling").val();
@@ -25,10 +28,14 @@ $(document).ready(function () {
     var travel_route = $("#travel_route").val();
     var trave_vehicle = $("#trave_vehicle").val();
     var travel_back = $("#travel_back").val();
-    var time = $("#time").val();
+    var time1 = $("#time1").val();
+    var time2 = $("#time2").val();
     var details_of_this_trip = $("#details_of_this_trip").val();
+
     console.log(
-        school_name +
+      school_name +
+        " " +
+        school_name1 +
         " " +
         student_total +
         " " +
@@ -44,7 +51,9 @@ $(document).ready(function () {
         "" +
         travel_back +
         "" +
-        time +
+        time1 +
+        "" +
+        time2 +
         "" +
         details_of_this_trip +
         "" +
@@ -54,11 +63,12 @@ $(document).ready(function () {
       url: "insterReport_on_the_results_of_taking_students_outside_of_the_educational_institution", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        id_user: localStorage.getItem("user_id"),
+        user_id: localStorage.getItem("user_id"),
 
         // name_from: name_from,
         // petition_name: petition_name,
         school_name: school_name,
+        school_name1: school_name1,
         student_total: student_total,
         teacher_total: teacher_total,
         reason_controlling: reason_controlling,
@@ -66,8 +76,10 @@ $(document).ready(function () {
         travel_route: travel_route,
         trave_vehicle: trave_vehicle,
         travel_back: travel_back,
-        time: time,
+        time1: time1,
+        time2: time2,
         details_of_this_trip: details_of_this_trip,
+        addIdValues: addIdValues,
       },
       success: function (response) {
         console.log(response);

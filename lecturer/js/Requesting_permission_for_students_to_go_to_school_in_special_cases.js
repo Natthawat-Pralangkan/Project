@@ -16,9 +16,7 @@ $(document).ready(function() {
 
 
     $("#server_from_11").click(function () {
-        // รับข้อมูลจากฟอร์ม Modal
-        // var name_from = $("#name_from_10").val();
-        // var petition_name = $("#petition_name_10").val();
+
         var school_wishes = $("#school_wishes_10").val();
         var class_student = $("#class_student_10").val();
         var room = $("#room_10").val();
@@ -29,10 +27,6 @@ $(document).ready(function() {
         var Number_of_supervising_teachers = $("#Number_of_supervising_teachers").val();
         var Place_of_sending_documents = $("#Place_of_sending_documents").val();
         console.log(
-          name_from +
-            " " +
-            petition_name +
-            " " +
             school_wishes +
             " " +
             class_student +
@@ -55,10 +49,7 @@ $(document).ready(function() {
           url: "inster_Requesting_permission_for_students_to_go_to_school_in_special_cases", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
           method: "POST",
           data: {
-            id_user:localStorage.getItem("user_id"),
-            
-            name_from: name_from,
-            petition_name: petition_name,
+            user_id:localStorage.getItem("user_id"),
             school_wishes: school_wishes,
             class_student: class_student,
             room: room,
