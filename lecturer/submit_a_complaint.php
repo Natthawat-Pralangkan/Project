@@ -439,7 +439,18 @@
                                         <input type="date" class="form-control mt-2" id="joining_date_5" name="joining_date_5">
                                     </div>
                                 </div>
-
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลาเข้าร่วม</label>
+                                        <input type="text" class="form-control mt-2" id="time_1" name="time_1">
+                                    </div>
+                                </div>
+                                <div class="col-2 mt-3">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เวลาเลิก</label>
+                                        <input type="text" class="form-control mt-2" id="time_2" name="time_2">
+                                    </div>
+                                </div>
                                 <div class="col-4 mt-3">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ผู้จัดงาน</label>

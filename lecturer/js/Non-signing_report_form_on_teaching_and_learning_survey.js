@@ -12,24 +12,67 @@ $(document).ready(function () {
     p--;
     x--;
   });
-  
+
   $("#server_non").click(function () {
     // รับข้อมูลจากฟอร์ม Modal
+    let addIdValues = [];
+    $('input[name="nub_id[]"]').each(function () {
+      addIdValues.push($(this).val());
+    });
+
+    let product_name1 = [];
+    $('input[name="input_host_name1[]"]').each(function () {
+      product_name1.push($(this).val());
+    });
+
+    let product_name2 = [];
+    $('input[name="input_host_name2[]"]').each(function () {
+      product_name2.push($(this).val());
+    });
+
+    let product_name3 = [];
+    $('input[name="input_host_name3[]"]').each(function () {
+      product_name3.push($(this).val());
+    });
+
+    let product_name4 = [];
+    $('input[name="input_host_name4[]"]').each(function () {
+      product_name4.push($(this).val());
+    });
+
+    let product_name5 = [];
+    $('input[name="input_host_name5[]"]').each(function () {
+      product_name5.push($(this).val());
+    });
+
+    let product_name6 = [];
+    $('input[name="input_host_name6[]"]').each(function () {
+      product_name6.push($(this).val());
+    });
     var level = $("#level").val();
     var teach_week = $("#teach_week").val();
     var date_teach_start = $("#date_teach_start").val();
     var date_teach_end = $("#date_teach_end").val();
     var details_of_this_trip = $("#details_of_this_trip").val();
-    console.log(level+' '+teach_week+' '+date_teach_start+' '+date_teach_end);
+    console.log(
+      level + " " + teach_week + " " + date_teach_start + " " + date_teach_end
+    );
     $.ajax({
       url: "insterNon-signing_report_form_on_teaching_and_learning_survey", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        user_id:localStorage.getItem("user_id"),
+        user_id: localStorage.getItem("user_id"),
         level: level,
         teach_week: teach_week,
         date_teach_start: date_teach_start,
         date_teach_end: date_teach_end,
+        addIdValues: addIdValues,
+        product_name1: product_name1,
+        product_name2: product_name2,
+        product_name3: product_name3,
+        product_name4: product_name4,
+        product_name5: product_name5,
+        product_name6: product_name6,
       },
       success: function (response) {
         console.log(response);
@@ -70,13 +113,14 @@ function addfields4() {
 </thead>
 <tbody>
 <tr>
+  <input type="hidden" class="form-control mt-2" name="nub_id[]" value = "" />
   <th scope="row">${p++}</th>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><textarea class="form-control" placeholder="หมายเหตุ" id="floatingTextarea"></textarea>
+  <td><input type="text" class="form-control mt-2" name="input_host_name1[]" placeholder=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name2[]" placeholder=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name3[]" placeholder=""></td>
+  <td><input type="date" class="form-control mt-2" name="input_host_name4[]" placeholder=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name5[]" placeholder=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name6[]" placeholder=""></td>
   
 </tr>
 </table>

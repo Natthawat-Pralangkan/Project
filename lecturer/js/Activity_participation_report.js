@@ -2,7 +2,13 @@ $(document).ready(function () {
   //กดเพิ่มเจ้าภาพ
   $(".add_fields2").click(function (e) {
     e.preventDefault();
-    addfields2();
+    if (x < 9) {
+      // Check if less than 9 fields are already added
+      addfields2();
+      x++; // Increment the counter each time a new set of fields is added
+    } else {
+      alert("You can add no more than 9 sets of fields."); // Optional: Alert the user
+    }
   });
   //
   //กดลบเจ้าภาพ
@@ -15,28 +21,66 @@ $(document).ready(function () {
   //
   $("#saveform").click(function () {
     // <!-- รายงานการเข้าร่วมกิจกรรม -->
-    var petition_name = $("#petition_name").val();
+    let addIdValues = [];
+    $('input[name="nub_id[]"]').each(function () {
+      addIdValues.push($(this).val());
+    });
+
+    let product_name1 = [];
+    $('input[name="input_host_name1[]"]').each(function () {
+      product_name1.push($(this).val());
+    });
+
+    let product_name2 = [];
+    $('input[name="input_host_name2[]"]').each(function () {
+      product_name2.push($(this).val());
+    });
+
+    let product_name3 = [];
+    $('input[name="input_host_name3[]"]').each(function () {
+      product_name3.push($(this).val());
+    });
+
+    let product_name4 = [];
+    $('input[name="input_host_name4[]"]').each(function () {
+      product_name4.push($(this).val());
+    });
+
+    let product_name5 = [];
+    $('input[name="input_host_name5[]"]').each(function () {
+      product_name5.push($(this).val());
+    });
+
+    let product_name6 = [];
+    $('input[name="input_host_name6[]"]').each(function () {
+      product_name6.push($(this).val());
+    });
     var subject_group = $("#subject_group").val();
     var school_year = $("#school_year").val();
     $.ajax({
       url: "insteractivityparticipationreport", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
-        user_id:localStorage.getItem("user_id"),
-        petition_name: petition_name,
+        user_id: localStorage.getItem("user_id"),
         subject_group: subject_group,
         school_year: school_year,
-        //   status_from: status_from,
-        // เพิ่มฟิลด์อื่น ๆ ตามต้องการ
+        addIdValues: addIdValues,
+        product_name1: product_name1,
+        product_name2: product_name2,
+        product_name3: product_name3,
+        product_name4: product_name4,
+        product_name5: product_name5,
+        product_name6: product_name6,
       },
       success: function (response) {
         // console.log(response);
-        var data = JSON.parse(response)
+        var data = JSON.parse(response);
         if (data.status === 200) {
-          alert("บันทึกข้อมูลค้าสำเร็จ");
+          alert("บันทึกข้อมูลสำเร็จ");
           window.location.href = "follow_up_on_requests";
         } else {
-          alert("เกิดข้อผิดพลาดในการบันทึกข้อมูลสินค้า");
+          console.log(data);
+          alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
           window.location.href = "submit_a_complaint";
         }
       },
@@ -69,13 +113,14 @@ function addfields2() {
 </thead>
 <tbody>
 <tr>
-  <th scope="row">${p++}</th>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
-  <td><input type="text" class="form-control mt-2" placeholder=""></td>
+<input type="hidden" class="form-control mt-2" name="nub_id[]" value = "" />
+  <td>${p++}</td>
+  <td><input type="date" class="form-control mt-2" name="input_host_name1[]" id="" ></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name2[]" id=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name3[]" id=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name4[]" id=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name5[]" id=""></td>
+  <td><input type="text" class="form-control mt-2" name="input_host_name6[]" id=""></td>
   
 </tr>
 </table>

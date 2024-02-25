@@ -246,8 +246,8 @@ if ($row['petition_id'] == 7) {
     $details = explode(",", $row['details']);
     $positions = [
         [90, 55], [132, 73], [175, 73], [50, 87], [140, 94],
-        [120, 101], [45, 108], [140, 108], [45, 115], [100, 121], 
-        [50, 101],[40,80],[90,80],[40,94]
+        [120, 101], [45, 108], [140, 108], [45, 115], [100, 121],
+        [50, 101], [40, 80], [90, 80], [40, 94]
     ];
     foreach ($details as $index => $detail) {
         if (isset($positions[$index])) {
@@ -385,14 +385,56 @@ if ($row['petition_id'] == 7) {
     $pdf->useImportedPage($pageId);
     $details = explode(",", $row['details']);
     $positions = [
-        [163, 46], [220, 46], [127, 64], [65, 79], [85, 86],
-        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+        [163, 46], [220, 46],
+        [17, 64], [27, 64], [50, 64], [105, 64], [155, 64], [217, 64], [227, 64],
+        [17, 70], [27, 70], [50, 70], [105, 70], [155, 70], [217, 70], [227, 70],
+        [17, 76], [27, 76], [50, 76], [105, 76], [155, 76], [217, 76], [227, 76],
+        [17, 82], [27, 82], [50, 82], [105, 82], [155, 82], [217, 82], [227, 82],
+        [17, 88], [27, 88], [50, 88], [105, 88], [155, 88], [217, 88], [227, 88],
+        [17, 95], [27, 95], [50, 95], [105, 95], [155, 95], [217, 95], [227, 95],
+        [17, 103], [27, 103], [50, 103], [105, 103], [155, 103], [217, 103], [227, 103],
+        [17, 110], [27, 110], [50, 110], [105, 110], [155, 110], [217, 110], [227, 110],
     ];
+    $datePositions = [3, 10, 17, 24, 31, 38, 45, 52];
+
     foreach ($details as $index => $detail) {
+        $thai_month_arr1 = array(
+            "01" => "ม.ค.",
+            "02" => "ก.พ.",
+            "03" => "มี.ค.",
+            "04" => "เม.ย.",
+            "05" => "พ.ค.",
+            "06" => "มิ.ย.",
+            "07" => "ก.ค.",
+            "08" => "ส.ค.",
+            "09" => "ก.ย.",
+            "10" => "ต.ค.",
+            "11" => "พ.ย.",
+            "12" => "ธ.ค."
+        );
+
         if (isset($positions[$index])) {
             list($x, $y) = $positions[$index];
             $pdf->SetXY($x, $y);
-            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+
+            // Check if current position is one of the specified date positions
+            if (in_array($index, $datePositions)) {
+                // Assuming $detail is in 'Y-m-d' format, convert it to Thai date format
+                $dateComponents = explode('-', $detail);
+                $year = $dateComponents[0] + 543; // Convert year to Thai year
+                $month = $dateComponents[1];
+                $day = $dateComponents[2];
+                $thaiMonth = $thai_month_arr1[$month]; // Use short month name
+
+                // Reformat the date as desired, for example: "31 ม.ค. 2563"
+                $formattedDate = $day . '' . $thaiMonth . '' . $year;
+
+                // Display the formatted date
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $formattedDate), 0, 1);
+            } else {
+                // Display other details normally
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+            }
         }
     }
 
@@ -453,8 +495,9 @@ if ($row['petition_id'] == 7) {
     $pdf->useImportedPage($pageId);
     $details = explode(",", $row['details']);
     $positions = [
-        [110, 55], [140, 55], [70, 63], [125, 63], [85, 86],
-        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+        [110, 55], [140, 55], [70, 63], [125, 63],
+        [40, 90], [89, 90], [115, 90], [130, 90], [155, 90], [165, 90],
+        [45, 196]
     ];
     foreach ($details as $index => $detail) {
         if (isset($positions[$index])) {
@@ -562,7 +605,7 @@ if ($row['petition_id'] == 7) {
     // $details = explode(",", $row['details']);
     $positions = [
         [45, 53], [128, 53], [50, 60], [45, 67], [35, 133],
-        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+        [35, 82], [80, 82], [130, 60], [160, 60],
     ];
     foreach ($details as $index => $detail) {
         if (isset($positions[$index])) {
@@ -666,8 +709,10 @@ if ($row['petition_id'] == 7) {
     $pdf->useImportedPage($pageId);
     $details = explode(",", $row['details']);
     $positions = [
-        [155, 43], [200, 43], [230, 43], [65, 79], [85, 86],
-        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+        [155, 43], [200, 43], [230, 43],
+        [23, 79], [35, 70], [82, 70], [120, 70], [148, 70], [168, 70], [195, 70], [210, 70], [250, 70],
+        [35, 78], [82, 78], [120, 78], [148, 78], [168, 78], [195, 78], [210, 78], [250, 78],
+        [35, 87], [82, 87], [120, 87], [148, 87], [168, 87], [195, 87], [210, 87], [250, 87]
     ];
     foreach ($details as $index => $detail) {
         if (isset($positions[$index])) {
@@ -697,7 +742,7 @@ if ($row['petition_id'] == 7) {
     $details = explode(",", $row['details']);
     $positions = [
         [78, 71], [123, 91], [178, 91], [52, 105], [38, 112],
-        [130, 112], [52, 119], [120, 119], [155, 126], [58, 133], 
+        [130, 112], [52, 119], [120, 119], [155, 126], [58, 133],
         [125, 133], [58, 126], [37, 98], [80, 98], [130, 98]
     ];
     foreach ($details as $index => $detail) {
@@ -839,8 +884,8 @@ if ($row['petition_id'] == 7) {
     $pdf->useImportedPage($pageId);
     $details = explode(",", $row['details']);
     $positions = [
-        [95, 74], [38, 81], [130, 81], [65, 79], [85, 86],
-        [60, 101], [45, 108], [55, 145], [45, 153], [60, 189], [45, 196]
+        [95, 74], [38, 81], [130, 81],
+        [24, 110], [32, 110], [93, 110], [110, 110], [133, 110], [172, 110]
     ];
     foreach ($details as $index => $detail) {
         if (isset($positions[$index])) {
@@ -946,7 +991,9 @@ if ($row['petition_id'] == 7) {
     $details = explode(",", $row['details']);
     $positions = [
         [115, 101], [52, 108], [60, 108], [108, 108], [40, 115],
-        [113, 115], [145, 115], [70, 123], [60, 233], [60, 189], [45, 196]
+        [113, 115], [145, 115], [70, 123], [60, 233],
+        [73, 218], [150, 218], [73, 226], [150, 226]
+
     ];
     foreach ($details as $index => $detail) {
         if (isset($positions[$index])) {
@@ -966,19 +1013,28 @@ if ($row['petition_id'] == 7) {
                 "11" => "พฤศจิกายน",
                 "12" => "ธันวาคม"
             );
-
+            $days_in_thai = array("อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์");
             // แปลงเดือนให้เป็นภาษาไทย
             $month_thai = $thai_month_arr[date("m", strtotime($detail))];
 
             // ตรวจสอบว่าข้อมูลที่ต้องการแสดงเป็นวันที่หรือไม่
             if ($index == 4) { // ตำแหน่งที่ 5 ของ $details เป็นวันที่ (เหมือนเดิม)
                 // แยกวัน เดือน และปีออกจากกัน
+                setlocale(LC_TIME, 'th_TH');
+                // $date = "2024-02-21"; // วันที่ต้องการแปลง
+                $day_index = date('w', strtotime($detail));
+
+                // รับชื่อวันภาษาไทยจาก array
+                $day_name_thai = $days_in_thai[$day_index];
+                // echo $day_name_thai; // ผลลัพธ์ที่คาดหวัง
                 $date_components = explode('-', $detail);
                 $day = $date_components[2];
                 $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
                 $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
 
                 // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
+                $pdf->SetXY($x - 2, $y);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day_name_thai), 0, 1);
                 $pdf->SetXY($x + 17, $y);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
                 $pdf->SetXY($x + 30, $y);
@@ -992,9 +1048,9 @@ if ($row['petition_id'] == 7) {
             }
         }
     }
-    // $newdate = ConvertToThaiDate($row['date']);
-    // $pdf->SetXY(120,276);
-    // $pdf->Cell(0, 0, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+    $newdate = ConvertToThaiDate($row['date']);
+    $pdf->SetXY(120, 276.5);
+    $pdf->Cell(0, 0, iconv('UTF-8', 'cp874', $newdate), 0, 1);
     $pdf->Output('I', 'generated_pdf.pdf');
 } else {
     // Handle unexpected petition_id values
