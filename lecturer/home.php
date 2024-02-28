@@ -1,5 +1,6 @@
 <?php include("../servers/connect.php"); ?>
 <?php include(".././header.php"); ?>
+
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
     <!-- Content Wrapper -->
@@ -26,7 +27,7 @@
                                 <p style="color : #555555">คำร้องรอการพิจารณา</p>
                             </div>
                             <div class="my-3">
-                                <h1 class="text-center">30</h1>
+                                <h1 id="idStatus_1" class="text-center"></h1>
                             </div>
                             <div class="border-top text-center py-3">
                                 <button type="button" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" style="background-color: #BB6AFB; color :#FFFFFF">
@@ -42,7 +43,7 @@
                                 <p style="color : #555555">คำร้องรออนุมัติ</p>
                             </div>
                             <div class="my-3">
-                                <h1 class="text-center">40</h1>
+                                <h1 id="idStatus_2" class="text-center"></h1>
                             </div>
                             <div class="border-top text-center py-3">
                                 <button type="button" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #BB6AFB; color: #FFFFFF">
@@ -60,8 +61,9 @@
                             </div>
                             <div class="my-3">
                                 <div class="my-3">
-                                    <h1 class="text-center">0</h1>
+                                    <h1 id="idStatus_4" class="text-center"></h1>
                                 </div>
+
                             </div>
                             <div class="border-top text-center py-3">
                                 <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3" style="background-color: #BB6AFB; color :#FFFFFF">
@@ -77,7 +79,7 @@
                                 <p style="color : #555555">คำร้องทั้งหมด</p>
                             </div>
                             <div class="my-3">
-                                <h1 class="text-center">60</h1>
+                                <h1 id="idStatusArray_0" class="text-center"></h1>
                             </div>
                             <div class="border-top text-center py-3">
                                 <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal4" style="background-color: #BB6AFB; color :#FFFFFF">
@@ -281,5 +283,102 @@
             });
         });
     });
+
+    // ฟังก์ชันสำหรับดึงข้อมูลจำนวน id_status และแสดงผล
+    function fetchStatusCount_1(idStatus_1) {
+        $.ajax({
+            url: 'get_id_status_1',
+            method: 'POST',
+            data: {
+                user_id: localStorage.getItem("user_id"),
+                id_status: idStatus_1
+            },
+            success: function(response) {
+                $('#idStatus_1').text(response.count); // แสดงผลข้อมูลใน element ที่มี id เป็น "idStatus"
+            },
+            error: function(error) {
+                console.error('Error fetching status count:', error);
+            }
+        });
+    }
+
+    // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+    $(document).ready(function() {
+        fetchStatusCount_1(1); // เรียกใช้ฟังก์ชันเพื่อดึงข้อมูล id_status ที่เป็น 1
+    });
+
+    // ฟังก์ชันสำหรับดึงข้อมูลจำนวน id_status และแสดงผล
+    function fetchStatusCount_2(idStatusArray) {
+        idStatusArray.forEach(function(idStatus) {
+            $.ajax({
+                url: 'get_id_status_2',
+                method: 'POST',
+                data: {
+                    user_id: localStorage.getItem("user_id"),
+                    id_status: idStatus
+                },
+                success: function(response) {
+                    $('#idStatus_' + idStatus).text(response.count); // แสดงผลข้อมูลใน element ที่มี id เป็น "idStatus"
+                },
+                error: function(error) {
+                    console.error('Error fetching status count:', error);
+                }
+            });
+        });
+    }
+
+    // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+    $(document).ready(function() {
+        fetchStatusCount_2([2, 3]); // เรียกใช้ฟังก์ชันเพื่อดึงข้อมูล id_status ที่เป็น 2 และ 3
+    });
+
+    // ฟังก์ชันสำหรับดึงข้อมูลจำนวน id_status และแสดงผล
+    function fetchStatusCount(idStatus_4) {
+        $.ajax({
+            url: 'get_id_status_4',
+            method: 'POST',
+            data: {
+                user_id: localStorage.getItem("user_id"),
+                id_status: idStatus_4
+            },
+            success: function(response) {
+                $('#idStatus_4').text(response.count); // แสดงผลข้อมูลใน element ที่มี id เป็น "idStatus"
+            },
+            error: function(error) {
+                console.error('Error fetching status count:', error);
+            }
+        });
+    }
+
+    // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
+    $(document).ready(function() {
+        fetchStatusCount(4); // เรียกใช้ฟังก์ชันเพื่อดึงข้อมูล id_status ที่เป็น 1
+    });
+
+    $(document).ready(function() {
+        // สร้างอาร์เรย์ idStatusArray เพื่อระบุ id_status ที่ต้องการ
+        // var idStatusArray = [1, 2, 3, 4, 5, 6];
+
+        // เรียกใช้ฟังก์ชันเพื่อดึงจำนวนคำร้องทั้งหมดที่มี id_status 1, 2, 3, 4, 5, หรือ 6
+        fetchTotalPetitions([1, 2, 3, 4, 5, 6]);
+    });
+
+    function fetchTotalPetitions(idStatusArray_0) {
+        $.ajax({
+            url: 'get_id_status', // URL ของ API ที่รับข้อมูลคำร้อง
+            method: 'POST',
+            data: {
+                user_id: localStorage.getItem("user_id"),
+                id_status: idStatusArray_0
+            },
+            success: function(response) {
+                // แสดงผลจำนวนคำร้องทั้งหมดใน element ที่มี id เป็น "idStatusArray"
+                $('#idStatusArray_0').text(response.total);
+            },
+            error: function(error) {
+                console.error('Error fetching total petitions:', error);
+            }
+        });
+    }
 </script>
 <?php include("../footer.php") ?>

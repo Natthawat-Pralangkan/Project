@@ -20,17 +20,6 @@
             <a href=""></a>
         </div>
         <div class="mt-5 mx-3">
-            <div class="d-flex justify-content-end">
-                <!-- <div>
-                    <a href="#" class="btn btn-success mr-2">เพิ่มคำสั่งภายใน - ภายนอก</a>
-                </div> -->
-                <div class="mt-5">
-                    <!-- <button type="button" class="btn btn-success mr-2"> -->
-                        <a href="./Add_information.php" class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF" >เพิ่มข้อมูลบุคลากร</a>
-                       
-                    <!-- </button> -->
-                </div>
-            </div>
             <div class="mt-3">
                 <table id="addpersonnelinformation" class="table">
                     <thead>
@@ -45,28 +34,40 @@
                             <th>ลบ</th>
                         </tr>
                     </thead>
-                    <!-- เพิ่มข้อมูลตารางตรงนี้ -->
                 </table>
             </div>
         </div>
-        <!-- <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" style="height: 300px;">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">เพิ่มข้อมูลบุคลากร</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="text-center">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
     </div>
 </div>
+<script>
+    if (localStorage.getItem("id_type") != "0" && localStorage.getItem("id_user") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
 
+    function submitForm() {
+        // รับค่าจากฟอร์ม
+        var userName = document.getElementById('user-name').value;
+        var userId = document.getElementById('user-id').value;
+
+        // สร้าง FormData และเพิ่มข้อมูล
+        var formData = new FormData();
+        formData.append('user_name', userName);
+        formData.append('user_id', userId);
+
+        // ส่งข้อมูลไปยังเซิร์ฟเวอร์ผ่าน AJAX
+        fetch('path/to/your/server/script.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // ปิด modal หลังจากบันทึกข้อมูลสำเร็จ
+                $('#insertModal').modal('hide');
+                // อัปเดต UI หรือแสดงข้อความสำเร็จ
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
 <?php include("../../footer.php") ?>
