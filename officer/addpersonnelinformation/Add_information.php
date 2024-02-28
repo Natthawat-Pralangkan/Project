@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <div class="form-group mt-2">
+                    <div class="form-group ">
                         <label for="" style="font-size: 18px;">เลขบัตรประชาชน</label>
                         <input type="text" class="form-control mt-2" placeholder="เลขบัตรประชาชน" id="id_card_number" name="id_card_number">
                     </div>
@@ -54,6 +54,23 @@
                     <div class="form-group mt-2">
                         <label for="" style="font-size: 18px;">สัญชาติ</label>
                         <input type="text" class="form-control mt-2" placeholder="สัญชาติ" id="nationality" name="nationality">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group mt-2">
+                        <label for="" style="font-size: 18px;">ตำแหน่ง</label>
+                        <div class="">
+                            <select name="position" class="form-control mt-2" id="position" required>
+                                <option value="">เลือกตำแหน่ง</option>
+                                <option value="1">ผู้อำนวยการ</option>
+                                <option value="2">รองผู้อำนวยการ</option>
+                                <option value="3">เจ้าหน้าที่ฝ่ายวิชาการ</option>
+                                <option value="4">เจ้าหน้าที่ฝ่ายทั่วไป</option>
+                                <option value="5">เจ้าหน้าที่ฝ่ายงบประมาณ</option>
+                                <option value="6">เจ้าหน้าที่ฝ่ายบุคคล</option>
+                                <option value="7">ครู</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

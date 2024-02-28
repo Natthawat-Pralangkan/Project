@@ -67,6 +67,7 @@ $(document).ready(function () {
     var precepts_pali_studies = $("#precepts_pali_studies").val();
     var educational_qualification = $("#educational_qualification").val();
     var picture = $("#picture")[0].files[0];
+    var position = $("#position").val();
 
     var formData = new FormData();
     formData.append('id_user',localStorage.getItem("id_user"),);
@@ -99,6 +100,7 @@ $(document).ready(function () {
     formData.append('precepts_pali_studies',precepts_pali_studies);
     formData.append('educational_qualification',educational_qualification);
     formData.append('picture',picture);
+    formData.append('position',position);
     // var id_user = $("#id_user").val();
     $.ajax({
       url: "./api/inster_Add_information", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
