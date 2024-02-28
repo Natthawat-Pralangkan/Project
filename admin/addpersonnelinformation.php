@@ -26,7 +26,7 @@
                 </div> -->
                 <div class="mt-5">
                     <!-- <button type="button" class="btn btn-success mr-2"> -->
-                        <a href="./Add_information.php"class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF" >เพิ่มข้อมูลบุคลากร</a>
+                        <a href="./Add_information.php" class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF" >เพิ่มข้อมูลบุคลากร</a>
                        
                     <!-- </button> -->
                 </div>

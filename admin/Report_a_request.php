@@ -1,18 +1,19 @@
 <?php include("../header.php"); ?>
+<?php include("../servers/connect.php"); ?>
 
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
 
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/managerequests.js"></script>
+
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
                     <h2 class="m-0">รายงานสถิติคำร้อง</h2>
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="./home.php">หน้าหลัก</a></li>
-                        <li class="breadcrumb-item active">รายงานสถิติคำร้อง </li>
+                        <li class="breadcrumb-item active">รายงานสถิติคำร้อง</li>
                     </ol>
                 </div>
             </div>
@@ -20,55 +21,141 @@
         <div class="content">
             <div class="text-center mt-5">
                 <h2 class="mb-4">ค้นหาข้อมูลตามวันที่</h2>
-                <form action="search.php" method="get">
+                <form id="myForm" action="" method="get">
                     <div class="row align-items-center justify-content-center">
-                        <div class="col-md-2 mb-0 d-flex align-items-center justify-content-center"> <!-- กำหนด margin-bottom เป็น 0 -->
+                        <div class="col-md-1 mb-0">
                             <label for="start_date" class="form-label mb-0">วันที่เริ่มต้น:</label>
                         </div>
-                        <div class="col-md-2 mb-0 d-flex align-items-center justify-content-center"> <!-- กำหนด margin-bottom เป็น 0 -->
+                        <div class="col-md-2 mb-0">
                             <input type="date" class="form-control" id="start_date" name="start_date">
                         </div>
-                        <div class="col-md-2 mb-0 d-flex align-items-center justify-content-center"> <!-- กำหนด margin-bottom เป็น 0 -->
+                        <div class="col-md-1 mb-0">
                             <label for="end_date" class="form-label mb-0">วันที่สิ้นสุด:</label>
                         </div>
-                        <div class="col-md-2 mb-0 d-flex align-items-center justify-content-center"> <!-- กำหนด margin-bottom เป็น 0 -->
+                        <div class="col-md-2 mb-0">
                             <input type="date" class="form-control" id="end_date" name="end_date">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">ค้นหา</button>
-                </form>
-                <?php
-                // ตรวจสอบว่ามีการส่งข้อมูลผ่านแบบฟอร์มหรือไม่
-                if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                    // ดึงข้อมูลที่ส่งมาจากฟอร์ม
-                    // $startDate = $_GET["start_date"];
-                    // $endDate = $_GET["end_date"];
+                    <div class="text-center mt-3">
+                    <button type="submit" style="width: 250px; background-color: #BB6AFB; color:#FFFFFF " class="btn  text-center">ค้นหา</button>
 
-                    // นำข้อมูลไปใช้งานหรือดึงข้อมูลจากฐานข้อมูลเพื่อแสดงผล
-                    // ตัวอย่างเพียงแสดงข้อมูลในรูปแบบตาราง
-                ?>
-                    <div class="table-responsive mt-4">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Column 1</th>
-                                    <th>Column 2</th>
-                                    <!-- เพิ่มหัวข้อคอลัมน์ตามข้อมูลที่ต้องการแสดง -->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Data 1</td>
-                                    <td>Data 2</td>
-                                    <!-- เพิ่มข้อมูลตามที่ต้องการแสดง -->
-                                </tr>
-                                <!-- เพิ่มแถวข้อมูลตามจำนวนที่ต้องการ -->
-                            </tbody>
-                        </table>
                     </div>
-                <?php } ?>
+                </form>
+                <button id="pdfButton" style="display:none;" onclick="createPDF()" class="btn btn-danger mt-3" ">Generate PDF</button>
+            </div>
+                <table class=" table mt-3" style="display:none;" id="">
+                    <thead>
+                        <tr class="text-center p-3">
+                            <th scope="col" class="align-middle pl-3 pr-3">ลำดับ</th>
+                            <th scope="col" class="align-middle pl-3 pr-3">วันที่ยื่น</th>
+                            <th scope="col" class="align-middle pl-3 pr-3">ชื่อผู้ยื่น</th>
+                            <th scope="col" class="align-middle pl-3 pr-3">ชื่อคำร้อง</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data rows will be inserted here -->
+                    </tbody>
+                    </table>
             </div>
         </div>
     </div>
-</div>
-<?php include("../footer.php") ?>
+    <script>
+        if (localStorage.getItem("id_type") != "0" && localStorage.getItem("user_id") == null) {
+            localStorage.clear()
+            window.location.href = "../"
+        }
+        $(document).ready(function() {
+            $('#myForm').submit(function(event) {
+                event.preventDefault(); // Prevent the form from submitting via the browser.
+                var startDate = $('#start_date').val();
+                var endDate = $('#end_date').val();
+
+                $.ajax({
+                    url: 'submit_data.php',
+                    type: 'GET',
+                    data: {
+                        start_date: startDate,
+                        end_date: endDate
+                    },
+                    dataType: 'json', // Expect JSON response
+                    success: function(data) {
+                        updateTable(data); // No need to parse JSON manually
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error: " + error);
+                        console.log(xhr.responseText); // Log the response text to see the error or invalid JSON
+                    }
+                });
+            });
+        });
+
+        function formatDateToThai(dateString) {
+            const monthNames = [
+                "มกราคม", "กุมภาพันธ์", "มีนาคม",
+                "เมษายน", "พฤษภาคม", "มิถุนายน",
+                "กรกฎาคม", "สิงหาคม", "กันยายน",
+                "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
+            ];
+
+            const date = new Date(dateString);
+            const day = date.getDate();
+            const monthIndex = date.getMonth();
+            const year = date.getFullYear() + 543; // แปลงค.ศ. เป็น พ.ศ.
+
+            return `${day} ${monthNames[monthIndex]} ${year}`;
+        }
+
+
+        function updateTable(data) {
+            // Ensure the table is displayed and the PDF button is visible
+            document.querySelector('.table').style.display = '';
+            document.getElementById('pdfButton').style.display = '';
+
+            // Check if DataTable is already initialized
+            if ($.fn.DataTable.isDataTable('.table')) {
+                // If the DataTable instance already exists, clear and repopulate it
+                $('.table').DataTable().clear().rows.add(data).draw();
+            } else {
+                // Initialize DataTable on your table
+                $('.table').DataTable({
+                    data: data,
+                    columns: [{
+                            title: "ลำดับ",
+                            data: null,
+                            render: (data, type, row, meta) => meta.row + 1,
+                            className: "text-center"
+                        },
+                        {
+                            title: "วันที่ยื่น",
+                            data: "date",
+                            className: "text-center",
+                            render: function(data, type, row) {
+                                return formatDateToThai(data); // ใช้ฟังก์ชันที่สร้างขึ้นเพื่อแปลงวันที่
+                            }
+                        },
+                        {
+                            title: "ชื่อผู้ยื่น",
+                            data: null,
+                            render: (data) => `${data.user_name} ${data.last_name}`,
+                            className: "text-center"
+                        },
+                        {
+                            title: "ชื่อคำร้อง",
+                            data: "petition_name"
+                        }
+                    ],
+                    destroy: true // This allows you to reinitialize DataTable without throwing an error
+                });
+            }
+        }
+
+        function createPDF() {
+            var startDate = $('#start_date').val();
+            var endDate = $('#end_date').val();
+            window.open(`./generate_pdf.php?start_date=${startDate}&end_date=${endDate}`, '_blank');
+        }
+        $(document).ready(function() {
+            $('#myTable').DataTable(); // เปลี่ยน #myTable เป็น ID ของตารางของคุณ
+        });
+    </script>
+    <?php include("../footer.php"); ?>
