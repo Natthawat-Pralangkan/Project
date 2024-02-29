@@ -20,6 +20,8 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6 col-lg-6 text-center">
                     <img id="picture" src="" alt="" style="width: 250px; height: 250px;">
+                    <div id="name_type" style="font-size: 18px;" class="mt-3 "> <span class="menu-text">ตำแหน่ง :</span> <br>ชื่อตำแหน่ง</div>
+
                 </div>
             </div>
             <div class="row mt-5 ">
@@ -167,6 +169,8 @@
             },
             success: function(data) {
                 $("#picture").attr('src', data[0].picture);
+                // $("#name_type").html("ตำแหน่ง :" + " " + data[0].name_type);
+                $("#name_type").html("ตำแหน่ง <br>" + "<span style='font-size: 20px;'>" + data[0].name_type + "</span>");
                 $("#user_name").html("ชื่อ-นามสกุล :" + " " + data[0].user_name);
                 $("#id_card_number").html("เลขที่บัตรประชาชน:" + " " + data[0].id_card_number);
                 $("#date_month_yearofbirth").html("วัน เดือนปี เกิด :" + " " + data[0].date);

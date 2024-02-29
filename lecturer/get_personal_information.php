@@ -35,7 +35,7 @@ if (isset($_POST["user_id"]) && $_POST["user_id"]) {
 
     $user_id = $_POST["user_id"];
 
-    $sql = "SELECT * FROM `teacher_personnel_information` WHERE user_id = ? ";
+    $sql = "SELECT *,name_type FROM `teacher_personnel_information`JOIN type ON teacher_personnel_information.position = type.id_type WHERE user_id = ? ";
     $result = $db->prepare($sql);
     $result->bindParam(1, $user_id);
     $result->execute();
@@ -72,7 +72,7 @@ if (isset($_POST["user_id"]) && $_POST["user_id"]) {
         "executive_professional_certificate_less_than_bachelor_s_degree" => $row['executive_professional_certificate_less_than_bachelor_s_degree'],
         "dhamma_expert_dhamma_studies" => $row['dhamma_expert_dhamma_studies'],
         "precepts_pali_studies" => $row['precepts_pali_studies'],
-        "educational_qualification" => $row['educational_qualification'],
+        "name_type" => $row['name_type'],
         "picture" => "../officer/addpersonnelinformation/api/images/". $row['picture'],
     );
 
