@@ -43,7 +43,7 @@
                                 <p style="color : #555555">คำร้องรออนุมัติ</p>
                             </div>
                             <div class="my-3">
-                                <h1 id="idStatus_2" class="text-center"></h1>
+                                <h1 id="idStatusArray_2" class="text-center"></h1>
                             </div>
                             <div class="border-top text-center py-3">
                                 <button type="button" class="btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" style="background-color: #BB6AFB; color: #FFFFFF">
@@ -308,29 +308,28 @@
     });
 
     // ฟังก์ชันสำหรับดึงข้อมูลจำนวน id_status และแสดงผล
-    function fetchStatusCount_2(idStatusArray) {
-        idStatusArray.forEach(function(idStatus) {
-            $.ajax({
-                url: 'get_id_status_2',
-                method: 'POST',
-                data: {
-                    user_id: localStorage.getItem("user_id"),
-                    id_status: idStatus
-                },
-                success: function(response) {
-                    $('#idStatus_' + idStatus).text(response.count); // แสดงผลข้อมูลใน element ที่มี id เป็น "idStatus"
-                },
-                error: function(error) {
-                    console.error('Error fetching status count:', error);
-                }
-            });
+    $(document).ready(function() {
+        fetchTotalPetitions_2([2, 3]);
+    });
+
+    function fetchTotalPetitions_2(idStatusArray_2) {
+        $.ajax({
+            url: 'get_id_status_2', // URL ของ API ที่รับข้อมูลคำร้อง
+            method: 'POST',
+            data: {
+                user_id: localStorage.getItem("user_id"),
+                id_status: idStatusArray_2
+            },
+            success: function(response) {
+                // แสดงผลจำนวนคำร้องทั้งหมดใน element ที่มี id เป็น "idStatusArray"
+                $('#idStatusArray_2').text(response.total);
+            },
+            error: function(error) {
+                console.error('Error fetching total petitions:', error);
+            }
         });
     }
 
-    // เรียกใช้ฟังก์ชันเมื่อหน้าเว็บโหลดเสร็จ
-    $(document).ready(function() {
-        fetchStatusCount_2([2, 3]); // เรียกใช้ฟังก์ชันเพื่อดึงข้อมูล id_status ที่เป็น 2 และ 3
-    });
 
     // ฟังก์ชันสำหรับดึงข้อมูลจำนวน id_status และแสดงผล
     function fetchStatusCount(idStatus_4) {
@@ -356,11 +355,8 @@
     });
 
     $(document).ready(function() {
-        // สร้างอาร์เรย์ idStatusArray เพื่อระบุ id_status ที่ต้องการ
-        // var idStatusArray = [1, 2, 3, 4, 5, 6];
-
         // เรียกใช้ฟังก์ชันเพื่อดึงจำนวนคำร้องทั้งหมดที่มี id_status 1, 2, 3, 4, 5, หรือ 6
-        fetchTotalPetitions([1, 2, 3, 4, 5, 6]);
+        fetchTotalPetitions([1, 2, 3, 4, 5, 6,7]);
     });
 
     function fetchTotalPetitions(idStatusArray_0) {

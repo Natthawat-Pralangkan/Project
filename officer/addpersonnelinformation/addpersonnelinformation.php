@@ -47,13 +47,13 @@
                     // คำสั่ง SQL เพื่อดึงข้อมูล
                     $sql = "SELECT * FROM `teacher_personnel_information` ORDER BY user_id DESC;";
                     $result = $db->query($sql);
-
+                    $nenber = 1;
                     // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
                     if ($result->rowCount() > 0) {
                         // วนลูปเพื่อแสดงข้อมูลทั้งหมดในตาราง
                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
                             echo "<tr>";
-                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $nenber++ . "</td>";
                             echo "<td>" . $row['user_name'] . "</td>";
                             echo "<td>" . $row['last_name'] . "</td>";
                             echo "<td>" . $row['user_id'] . "</td>";
@@ -71,23 +71,6 @@
                 </table>
             </div>
         </div>
-        <!-- <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" style="height: 300px;">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">เพิ่มข้อมูลบุคลากร</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="text-center">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
     </div>
 </div>
 <script>

@@ -63,12 +63,15 @@
                             } else
                                 return "";
                         }
-                        $sql = "SELECT *,`details_ppetiton`.`id` FROM `details_ppetiton`
+                        $sql = "SELECT *, `details_ppetiton`.`id`
+                        FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
                         JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        ORDER BY details_ppetiton.date DESC;";
+                        WHERE details_ppetiton.id_status IN (2, 3, 4, 5, 6)
+                        ORDER BY details_ppetiton.date DESC
+                        ;";
                         $result = $db->query($sql); ?>
                         <?php
                         if ($result->rowCount() > 0) {
@@ -139,7 +142,7 @@
         localStorage.clear()
         window.location.href = "../"
     }
-    
+
     $(document).ready(function() {
         $('.manage-button').on('click', function() {
             var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button

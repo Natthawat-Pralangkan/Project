@@ -95,15 +95,26 @@
                                     $(td).addClass("status4");
                                 } else if (cellData == "ไม่อนุมัติแล้ว") {
                                     $(td).addClass("status5");
+                                } else if (cellData == "ไม่ผ่านพิจารณา") {
+                                    $(td).addClass("status6");
+                                }else if (cellData == "ยกเลิก") {
+                                    $(td).addClass("status7");
                                 }
                             },
                         },
                         {
                             data: null,
                             render: function(data, type, row) {
-                                return '<button class="btn btn-primary manage-button" data-id="' + row.id + '">จัดการ</button>';
+                                var buttonHtml = '';
+                                if (row.id_status == 1) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
+                                    buttonHtml = '<button class="btn btn-danger cancel-button" data-id="' + row.id + '">ยกเลิก</button>';
+                                } else if ([4, 5, 6].includes(row.id_status)) { // ตรวจสอบสถานะ 4, 5, หรือ 6 เพื่อแสดงปุ่มดูรายละเอียด
+                                    buttonHtml = '<button class="btn btn-primary manage-button" data-id="' + row.id + '">ดูรายละเอียด</button>';
+                                }
+                                return buttonHtml;
                             }
                         }
+                        
                     ],
                     order: [
                         [0, 'desc']
@@ -122,14 +133,37 @@
             }
         });
     });
+    // ตัวอย่างการใช้ event delegation เพื่อผูกเหตุการณ์กับปุ่มที่ถูกเพิ่มหลังจาก DOM ถูกโหลด
     $('#follow_up_on_requests tbody').on('click', '.manage-button', function() {
         var id = $(this).data('id');
-        console.log(id); // Debugging line to check the id
         var pdfUrl = 'check_the_request_pdf.php?id=' + id;
-
         $('#pdfModal iframe').attr('src', pdfUrl);
         $('#pdfModal').modal('show');
     });
+
+    // ยืนยันก่อนทำการยกเลิก
+    $(document).on('click', '.cancel-button', function() {
+    var id = $(this).data('id'); // รับค่า ID ของคำร้องที่จะยกเลิก
+
+    // ยืนยันก่อนทำการยกเลิก
+    if(confirm('คุณแน่ใจหรือไม่ที่จะยกเลิกคำร้องนี้?')) {
+        $.ajax({
+            url: 'cancel_request', // URL ไปยังสคริปต์เซิร์ฟเวอร์ที่จะอัปเดตฐานข้อมูล
+            type: 'POST',
+            data: { id: id, id_status: 7 }, // ส่งข้อมูล ID และสถานะใหม่
+            success: function(response) {
+                // ทำอะไรก็ตามที่ต้องการหลังจากอัปเดตสำเร็จ, เช่น รีโหลดหน้าหรือแสดงข้อความ
+                alert('คำร้องถูกยกเลิกสำเร็จ');
+                // รีโหลดหน้าเว็บหรืออัปเดต DataTables ที่นี่
+                location.reload(); // หรือใช้ table.draw(false) ถ้าคุณไม่ต้องการรีโหลดหน้าเว็บ
+            },
+            error: function(xhr, status, error) {
+                // แสดงข้อความผิดพลาดหากมี
+                alert('ไม่สามารถยกเลิกคำร้องได้');
+            }
+        });
+    }
+});
 </script>
 
 <?php include("../footer.php") ?>

@@ -34,7 +34,7 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
 
 $user_id = $_POST["user_id"];
 
-$sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id` FROM `details_ppetiton`
+$sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,details_ppetiton.id_status FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
@@ -54,6 +54,7 @@ foreach ($row as $kee) {
         "petition_name" => $kee['petition_name'],
         "request_type_name" => $kee['request_type_name'],
         "name_status" => $kee['name_status'],
+        "id_status" => $kee['id_status'],
     );
 }
 

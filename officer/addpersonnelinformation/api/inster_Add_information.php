@@ -84,8 +84,15 @@ $position = $_POST["position"];
 $query = "INSERT INTO teacher_personnel_information (id_user, user_id, user_name, last_name, id_card_number, date_month_yearofbirth, age, nationality, house_code, number_house, village, district, prefecture, province, road, zip_code, email, telephone_number, start_date, faculty_bachelor_s_degree, field_of_study_bachelor_s_degree, faculty_master_s_degree, field_of_study_master_s_degree, executive_professional_certificate, faculty_less_than_bachelor_s_degree, field_of_study_less_than_bachelor_s_degree, executive_professional_certificate_less_than_bachelor_s_degree, dhamma_expert_dhamma_studies, precepts_pali_studies, educational_qualification, picture, position) 
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 
+$query_user = "INSERT INTO user (user_id,user_name,password,id_type) 
+VALUES (?,?,?,?)";
 try {
     $stmt = $db->prepare($query);
+    $stmt_user = $db->prepare($query_user);
+    $stmt_user->bindParam(1, $user_id);
+    $stmt_user->bindParam(2, $user_id);
+    $stmt_user->bindParam(3, $user_id);
+    $stmt_user->bindParam(4, $position);
 
     $stmt->bindParam(1, $id_user);
     $stmt->bindParam(2, $user_id);
@@ -120,9 +127,10 @@ try {
     $stmt->bindParam(31, $imgname);
     $stmt->bindParam(32, $position);
 
-    if ($stmt->execute()) {
+    if ($stmt->execute() && $stmt_user->execute()) {
         echo json_encode(['status' => 200]);
     }
+
 } catch (Exception $e) {
     echo json_encode(['status' => 400, "mgs" => $e->getMessage()]);
 }

@@ -206,10 +206,13 @@ html {
   color: #05c90f !important;
 }
 .status5{
-  color: #f71004;
+  color: #f71004!important;
 }
 .status6{
-  color: #a204f7;
+  color: #a204f7!important;
+}
+.status7{
+  color: #f71004!important;
 }
 #follow_up_on_requests {
   width: 100%;

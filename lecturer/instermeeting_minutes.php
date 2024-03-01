@@ -22,7 +22,7 @@ try {
     $stmt = $db->prepare($query);
     $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "5");
-    $stmt->bindValue(3, "1");
+    $stmt->bindValue(3, "2");
     $stmt->bindParam(4, $details);
 
 

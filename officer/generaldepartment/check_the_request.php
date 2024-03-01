@@ -92,6 +92,7 @@
                         ?>
                     </tbody>
                 </table>
+                <!-- Modal -->
                 <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -134,7 +135,7 @@
     </div>
 </div>
 <script>
-    if (localStorage.getItem("id_type") != "4" && localStorage.getItem("user_id") == null) {
+    if (localStorage.getItem("id_type") != "3" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
@@ -189,5 +190,6 @@
             });
         });
     });
+    // Assume your manage buttons have a class 'manage-button' and data-id attribute
 </script>
 <?php include("../../footer.php") ?>
