@@ -30,7 +30,7 @@ JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
 JOIN petition_type ON petition_name.id_petition = petition_type.id 
 JOIN request_status ON details_ppetiton.id_status = request_status.id_status
 JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-WHERE details_ppetiton.petition_type = 2 AND details_ppetiton.id = ?");
+WHERE details_ppetiton.petition_type = 4 AND details_ppetiton.id = ?");
 $stmt->execute([$id]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 

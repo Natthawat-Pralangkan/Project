@@ -68,7 +68,7 @@
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
                         JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        WHERE details_ppetiton.petition_type = 2;";
+                        WHERE details_ppetiton.petition_type = 4;";
                         $result = $db->query($sql); ?>
                         <?php
                         if ($result->rowCount() > 0) {
@@ -92,6 +92,7 @@
                         ?>
                     </tbody>
                 </table>
+                <!-- Modal -->
                 <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -131,14 +132,14 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <script>
-        if (localStorage.getItem("id_type") != "4" && localStorage.getItem("user_id") == null) {
-            localStorage.clear()
-            window.location.href = "../"
-        }
-        $(document).ready(function() {
+</div>
+<script>
+    if (localStorage.getItem("id_type") != "6" && localStorage.getItem("user_id") == null) {
+        localStorage.clear()
+        window.location.href = "../"
+    }
+    $(document).ready(function() {
         $('.manage-button').on('click', function() {
             var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
             console.log(id); // Debugging line to ensure the id is captured correctly
@@ -189,5 +190,6 @@
             });
         });
     });
-    </script>
-    <?php include("../../footer.php") ?>
+    // Assume your manage buttons have a class 'manage-button' and data-id attribute
+</script>
+<?php include("../../footer.php") ?>

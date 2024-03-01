@@ -65,12 +65,4 @@ if (isset($_GET['user_id'])) {
 } else {
     echo '<tr><td colspan="3">ไม่พบผู้ใช้</td></tr>';
 }
-// try {
-//     // Assuming $db is your PDO database connection
-//     $sql = "SELECT COUNT(*) FROM your_petitions_table WHERE id_status = 1"; // Adjust your query as needed
-//     $stmt = $db->prepare($sql);
-//     $stmt->execute();
-//     $numPetitions = $stmt->fetchColumn(); // Fetches the count
-// } catch (PDOException $e) {
-//     die("Database error: " . $e->getMessage()); // Handle error appropriately
-// }
+

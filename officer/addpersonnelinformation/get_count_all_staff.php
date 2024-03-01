@@ -5,7 +5,9 @@ include("../../servers/connect.php");
 // If they are indeed needed for filtering, the SQL query should be adjusted to include these parameters properly.
 // However, based on your initial SQL, it seems you're counting records with a specific petition_type and id_status, which doesn't directly involve user_id or id_status as parameters.
 
-$sql = "SELECT COUNT(id_status) AS count FROM details_ppetiton WHERE petition_type = 4 AND id_status = 1";
+$sql = "SELECT COUNT(position) AS count 
+FROM teacher_personnel_information 
+WHERE position IN (1, 2, 3, 4, 5, 6, 7)";
 $stmt = $db->prepare($sql);
 $stmt->execute(); // Removed parameters as they are not used in your SQL.
 $result = $stmt->fetch();
@@ -19,4 +21,3 @@ if ($result !== false) {
     header('Content-Type: application/json');
     echo json_encode(['error' => 'An error occurred fetching the count']);
 }
-?>

@@ -68,7 +68,7 @@
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
                         JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        WHERE details_ppetiton.petition_type = 2;";
+                        WHERE details_ppetiton.petition_type = 4;";
                         $result = $db->query($sql); ?>
                         <?php
                         if ($result->rowCount() > 0) {

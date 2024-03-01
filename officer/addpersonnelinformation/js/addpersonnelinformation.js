@@ -5,10 +5,7 @@ $(document).ready(function () {
         data: "ลำดับ",
       },
       {
-        data: "ชื่อ",
-      },
-      {
-        data: "นามสกุล",
+        data: "ชื่อ-นามสกุล",
       },
       {
         data: "ตำแหนง",

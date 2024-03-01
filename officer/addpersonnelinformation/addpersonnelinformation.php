@@ -36,35 +36,41 @@
                     <thead>
                         <tr>
                             <th>ลำดับ</th>
-                            <th>ชื่อ</th>
-                            <th>นามสกุล</th>
+                            <th>ชื่อ-นามสกุล</th>
                             <th>ตำแหน่ง</th>
                             <th>แก้ไข</th>
                             <th>ลบ</th>
                         </tr>
                     </thead>
                     <?php
-                    // คำสั่ง SQL เพื่อดึงข้อมูล
-                    $sql = "SELECT * FROM `teacher_personnel_information` ORDER BY user_id DESC;";
-                    $result = $db->query($sql);
-                    $nenber = 1;
-                    // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
-                    if ($result->rowCount() > 0) {
-                        // วนลูปเพื่อแสดงข้อมูลทั้งหมดในตาราง
-                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                            echo "<tr>";
-                            echo "<td>" . $nenber++ . "</td>";
-                            echo "<td>" . $row['user_name'] . "</td>";
-                            echo "<td>" . $row['last_name'] . "</td>";
-                            echo "<td>" . $row['user_id'] . "</td>";
-                            echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . $row['id'] . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . $row['id'] . "'>แก้ไข</button></td>";
-                            echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . $row['id'] . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . $row['id'] . "'>ลบ</button></td>";
+                    $sql = "SELECT * FROM `teacher_personnel_information` 
+                    JOIN type ON teacher_personnel_information.position = type.id_type 
+                    WHERE teacher_personnel_information.position IN (2, 3, 4, 5, 6, 7) ORDER BY id DESC";
 
-                            echo "</tr>";
+                    try {
+                        $result = $db->query($sql);
+
+                        // Assuming you meant to type $number instead of $nenber
+                        $number = 1;
+
+                        // Check if there are any results
+                        if ($result && $result->rowCount() > 0) {
+                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<tr>";
+                                echo "<td>" . $number++ . "</td>";
+                                echo "<td>" . $row['user_name'] . ' ' . $row['last_name'] . "</td>";
+                                echo "<td>" . $row['name_type'] . "</td>";
+                                echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . htmlspecialchars($row['id']) . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . htmlspecialchars($row['id']) . "'>แก้ไข</button></td>";
+                                echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . htmlspecialchars($row['id']) . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . htmlspecialchars($row['id']) . "'>ลบ</button></td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>ไม่พบข้อมูล</td></tr>";
                         }
-                    } else {
-                        echo "0 results";
+                    } catch (PDOException $e) {
+                        die("Database error: " . $e->getMessage());
                     }
+
 
 
                     ?>
@@ -75,8 +81,8 @@
 </div>
 <script>
     if (localStorage.getItem("id_type") != "6" && localStorage.getItem("user_id") == null) {
-            localStorage.clear()
-            window.location.href = "../"
-        }
+        localStorage.clear()
+        window.location.href = "../"
+    }
 </script>
 <?php include("../../footer.php") ?>
