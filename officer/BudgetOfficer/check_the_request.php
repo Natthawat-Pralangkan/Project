@@ -68,7 +68,7 @@
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
                         JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        WHERE details_ppetiton.petition_type = 2;";
+                        WHERE details_ppetiton.petition_type = 4;";
                         $result = $db->query($sql); ?>
                         <?php
                         if ($result->rowCount() > 0) {
@@ -92,6 +92,7 @@
                         ?>
                     </tbody>
                 </table>
+                <!-- Modal -->
                 <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -131,14 +132,14 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <script>
-        if(localStorage.getItem("id_type") != "5" && localStorage.getItem("user_id") == null){
+</div>
+<script>
+    if (localStorage.getItem("id_type") != "5" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
-        window.location.href ="../"
+        window.location.href = "../"
     }
-        $(document).ready(function() {
+    $(document).ready(function() {
         $('.manage-button').on('click', function() {
             var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
             console.log(id); // Debugging line to ensure the id is captured correctly
@@ -188,6 +189,42 @@
                 }
             });
         });
+
+        $('#exampleModal1').on('show.bs.modal', function() {
+            var id = $('#exampleModal7').data('id');
+            $('#hiddenIdField').val(id); // Transfer the id to a hidden input within the disapproval reason modal
+        });
+
+        // Handle the confirmation of disapproval
+        $('#confirmDisapproval').click(function() {
+            var id = $('#hiddenIdField').val(); // Retrieve the id
+            var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
+            if (!reason.trim()) {
+                alert("Please enter a reason for disapproval.");
+                return;
+            }
+            var id_status = 6;
+            // AJAX call to update the reason and status to "Disapproved"
+            $.ajax({
+                url: 'update_reason', // Adjust the URL as necessary
+                type: 'POST', // Make sure this is POST
+                data: {
+                    id: id, // Ensure these variables are correctly defined in your JS
+                    reason: reason,
+                    id_status: id_status
+                },
+                success: function(response) {
+                    alert("อัปเดตข้อมูลเรียบร้อย");
+                    $('#exampleModal1').modal('hide');
+                    location.reload();
+                    console.log('Success:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
     });
-    </script>
-    <?php include("../../footer.php") ?>
+    // Assume your manage buttons have a class 'manage-button' and data-id attribute
+</script>
+<?php include("../../footer.php") ?>

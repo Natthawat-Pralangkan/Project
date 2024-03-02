@@ -38,7 +38,7 @@ try {
     JOIN petition_type ON details_ppetiton.petition_type = petition_type.id
     JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
     JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
-    WHERE details_ppetiton.petition_type = 2
+    WHERE details_ppetiton.petition_type = 3
     ORDER BY details_ppetiton.date DESC";
     $stmt = $db->prepare($sql);
     $stmt->execute();

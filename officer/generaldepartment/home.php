@@ -119,7 +119,7 @@
                 url: 'get_Request_pending_consideration', // เปลี่ยนเป็นเส้นทางของสคริปต์ PHP ของคุณ
                 method: 'GET',
                 data: {
-                    petition_type: 4, // ตั้งค่าคงที่หากต้องการส่งค่านี้ไปยังเซิร์ฟเวอร์เสมอ
+                    petition_type: 2, // ตั้งค่าคงที่หากต้องการส่งค่านี้ไปยังเซิร์ฟเวอร์เสมอ
                     id_status: 1 // ส่งค่านี้ไปด้วยหากสคริปต์ PHP ของคุณต้องการ
                 },
                 success: function(response) {
@@ -141,7 +141,7 @@
                 url: 'get_all_requests', // เปลี่ยนเป็นเส้นทางของสคริปต์ PHP ของคุณ
                 method: 'GET',
                 data: {
-                    petition_type: 4
+                    petition_type: 2
                 }, // ส่งพารามิเตอร์ user_id หากคุณมีการใช้งาน
                 success: function(response) {
                     $('#all_requests').html(response); // แทรกข้อมูลที่ได้รับเข้าไปใน tbody

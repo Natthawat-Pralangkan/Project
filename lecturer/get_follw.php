@@ -54,6 +54,7 @@ foreach ($row as $kee) {
         "petition_name" => $kee['petition_name'],
         "request_type_name" => $kee['request_type_name'],
         "name_status" => $kee['name_status'],
+        "reason" => $kee['reason'],
         "id_status" => $kee['id_status'],
     );
 }

@@ -28,6 +28,7 @@
                             <th>ชื่อคำร้อง</th>
                             <th>ประเภท</th>
                             <th>สถานะ</th>
+                            <th>เหตุผลไม่ผ่านอนุมัติ/พิจารณา</th>
                             <th>จัดการ</th>
                         </tr>
                     </thead>
@@ -82,6 +83,7 @@
                         {
                             data: 'request_type_name'
                         },
+                        
                         {
                             data: 'name_status',
                             createdCell: function(td, cellData, rowData, row, col) {
@@ -101,6 +103,9 @@
                                     $(td).addClass("status7");
                                 }
                             },
+                        },
+                        {
+                            data: 'reason'
                         },
                         {
                             data: null,
