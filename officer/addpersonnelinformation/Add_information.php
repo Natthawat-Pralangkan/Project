@@ -44,12 +44,12 @@
                         <input type="date" class="form-control mt-2" placeholder="เลขบัตรประชาชน" id="date_month_yearofbirth" name="date-month-yearofbirth	">
                     </div>
                 </div>
-                <div class="col-2">
+                <!-- <div class="col-2">
                     <div class="form-group mt-2">
                         <label for="" style="font-size: 18px;">อายุ</label>
                         <input type="text" class="form-control mt-2" placeholder="อายุ" id="age" name="age">
                     </div>
-                </div>
+                </div> -->
                 <div class="col-2">
                     <div class="form-group mt-2">
                         <label for="" style="font-size: 18px;">สัญชาติ</label>

@@ -90,8 +90,8 @@ try {
     $stmt = $db->prepare($query);
     $stmt_user = $db->prepare($query_user);
     $stmt_user->bindParam(1, $user_id);
-    $stmt_user->bindParam(2, $user_id);
-    $stmt_user->bindParam(3, $user_id);
+    $stmt_user->bindParam(2, $id_card_number);
+    $stmt_user->bindParam(3, $id_card_number);
     $stmt_user->bindParam(4, $position);
 
     $stmt->bindParam(1, $id_user);

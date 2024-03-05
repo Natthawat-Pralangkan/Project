@@ -21,14 +21,8 @@
         </div>
         <div class="mt-5 mx-3">
             <div class="d-flex justify-content-end">
-                <!-- <div>
-                    <a href="#" class="btn btn-success mr-2">เพิ่มคำสั่งภายใน - ภายนอก</a>
-                </div> -->
                 <div class="mt-5">
-                    <!-- <button type="button" class="btn btn-success mr-2"> -->
                     <a href="./Add_information.php" class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF">เพิ่มข้อมูลบุคลากร</a>
-
-                    <!-- </button> -->
                 </div>
             </div>
             <div class="mt-3">
@@ -43,26 +37,24 @@
                         </tr>
                     </thead>
                     <?php
-                    $sql = "SELECT * FROM `teacher_personnel_information` 
-                    JOIN type ON teacher_personnel_information.position = type.id_type 
-                    WHERE teacher_personnel_information.position IN (2, 3, 4, 5, 6, 7) ORDER BY id DESC";
-
                     try {
+                        $sql = "SELECT * FROM `teacher_personnel_information` 
+            JOIN type ON teacher_personnel_information.position = type.id_type 
+            WHERE teacher_personnel_information.position IN (2, 3, 4, 5, 6, 7) and teacher_personnel_information.status in (0) ORDER BY id DESC";
                         $result = $db->query($sql);
 
-                        // Assuming you meant to type $number instead of $nenber
-                        $number = 1;
-
-                        // Check if there are any results
                         if ($result && $result->rowCount() > 0) {
+                            $number = 1; // Initialize counter outside the loop
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<tr>";
-                                echo "<td>" . $number++ . "</td>";
-                                echo "<td>" . $row['user_name'] . ' ' . $row['last_name'] . "</td>";
-                                echo "<td>" . $row['name_type'] . "</td>";
-                                echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . htmlspecialchars($row['id']) . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . htmlspecialchars($row['id']) . "'>แก้ไข</button></td>";
-                                echo "<td><button type='button' class='btn btn-primary' onclick=\"getdata('" . htmlspecialchars($row['id']) . "')\" data-bs-toggle='modal' data-bs-target='#exampleModal" . htmlspecialchars($row['id']) . "'>ลบ</button></td>";
-                                echo "</tr>";
+                    ?>
+                                <tr>
+                                    <td><?php echo $number++; ?></td>
+                                    <td><?php echo htmlspecialchars($row['user_name']) . ' ' . htmlspecialchars($row['last_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['name_type']); ?></td>
+                                    <td><button class="btn" style="background-color: #BB6AFB; color:#FFFFFF" onclick="window.location.href='edit_information.php?id=<?php echo $row['id']; ?>'">แก้ไข</button></td>
+                                    <td><button type="button" class="btn " style="background-color: #FF0000; color:#FFFFFF"  onclick="getdelete('<?php echo htmlspecialchars($row['id']); ?>')">ลบ</button></td>
+                                </tr>
+                    <?php
                             }
                         } else {
                             echo "<tr><td colspan='5'>ไม่พบข้อมูล</td></tr>";
@@ -70,11 +62,10 @@
                     } catch (PDOException $e) {
                         die("Database error: " . $e->getMessage());
                     }
-
-
-
                     ?>
+
                 </table>
+
             </div>
         </div>
     </div>
@@ -83,6 +74,52 @@
     if (localStorage.getItem("id_type") != "6" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
+    }
+
+    function getdata(id) {
+        $.ajax({
+            url: 'edit_information.php', // Your PHP script to fetch data
+            type: 'post',
+            data: {
+                id: id
+            },
+            dataType: 'json',
+            success: function(data) {
+                // Assuming 'data' contains fields like 'user_name', 'last_name', etc.
+                // Update modal fields here
+                $('#exampleModal .modal-body #user_name').val(data.user_name);
+                // And so on for other fields
+                $('#exampleModal').modal('show');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    }
+
+    function getdelete(id) {
+        if (confirm('คุณแน่ใจว่าต้องการลบรายการนี้?')) { // เพิ่มการยืนยันก่อนลบ
+            $.ajax({
+                url: './api/dle_user', // แทนที่ด้วยเส้นทางไปยังไฟล์ PHP ของคุณ
+                type: 'POST',
+                data: {
+                    id: id,
+                }, // ส่ง ID และสถานะใหม่ที่ต้องการอัปเดต
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    if (data.status === 200) {
+                        alert("ลบข้อมูลสำเร็จ");
+                        location.reload(); 
+                    } else {
+                        alert("เกิดข้อผิดพลาดในการลบข้อมูล");
+                        location.reload(); 
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("เกิดข้อผิดพลาด: " + status + " " + error);
+                }
+            });
+        }
     }
 </script>
 <?php include("../../footer.php") ?>

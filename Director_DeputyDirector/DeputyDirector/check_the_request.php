@@ -1,26 +1,26 @@
-<?php include("../../servers/connect.php"); ?>
 <?php include("../../header.php"); ?>
+<?php include("../../servers/connect.php"); ?>
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
-    <!-- Content Wrapper -->
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/check_consider_and_approve_the_request.js"></script>
+        <script src="./js/Check_the_request.js"></script>
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
-                    <h2 class="m-0">ตรวจสอบ/พิจารณา และอนุมัติคำร้อง</h2>
+                    <h2 class="m-0">ตรวจสอบคำร้อง</h2>
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="./home.php">หน้าหลัก</a></li>
-                        <li class="breadcrumb-item active">ตรวจสอบ/พิจารณา และอนุมัติคำร้อง</li>
+                        <li class="breadcrumb-item active">ตรวจสอบคำร้อง </li>
                     </ol>
                 </div>
             </div>
             <a href=""></a>
         </div>
+
         <div class="mx-3 mt-5">
             <div class="mt-3">
-                <table id="check_consider_and_approve_the_request" class="table">
+                <table id="checktherequest" class="table">
                     <thead>
                         <tr>
                             <th>วันที่ยื่น</th>
@@ -63,15 +63,12 @@
                             } else
                                 return "";
                         }
-                        $sql = "SELECT *, `details_ppetiton`.`id`
-                        FROM `details_ppetiton`
+                        $sql = "SELECT *,`details_ppetiton`.`id` FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
                         JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        WHERE details_ppetiton.id_status IN (2, 3, 4, 5, 6)
-                        ORDER BY details_ppetiton.date DESC
-                        ;";
+                        WHERE details_ppetiton.petition_type in (1, 2, 3, 4) and details_ppetiton.id_status in (3, 4, 5);";
                         $result = $db->query($sql); ?>
                         <?php
                         if ($result->rowCount() > 0) {
@@ -95,6 +92,7 @@
                         ?>
                     </tbody>
                 </table>
+                <!-- Modal -->
                 <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -112,29 +110,29 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">เหตุผลไม่อนุมัติคำร้อง</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput" class="form-label">เหตุผลไม่อนุมัติคำร้อง</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="เหตุผลไม่อนุมัติคำร้อง">
+                <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">เหตุผลไม่อนุมัติคำร้อง</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="formGroupExampleInput" class="form-label">เหตุผลไม่อนุมัติคำร้อง</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="เหตุผลไม่อนุมัติคำร้อง">
+                                    <input type="hidden" id="hiddenIdField" value="">
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="confirmDisapproval" class="btn text-center disapproveButton" data-bs-dismiss="modal" style="background-color: #8B39F4; color: #fcfafa;">ยืนยัน</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn  text-center" data-bs-dismiss="modal" style="background-color: #8B39F4; color: #fcfafa;">ยืนยัน</button>
-
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <script>
@@ -142,7 +140,6 @@
         localStorage.clear()
         window.location.href = "../"
     }
-
     $(document).ready(function() {
         $('.manage-button').on('click', function() {
             var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
@@ -167,7 +164,7 @@
         $("#approveButton").on('click', function(event) {
             event.preventDefault();
             var id = $('#exampleModal7').data('id');
-            var id_status = 3; // Define and assign a value to id_status
+            var id_status = 4; // Define and assign a value to id_status
             console.log("Sending ID:", id, "Status:", id_status);
 
             // AJAX call to update the status
@@ -190,6 +187,41 @@
                 },
                 error: function(xhr, status, error) {
                     alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
+                }
+            });
+        });
+
+        $('#exampleModal1').on('show.bs.modal', function() {
+            var id = $('#exampleModal7').data('id');
+            $('#hiddenIdField').val(id); // Transfer the id to a hidden input within the disapproval reason modal
+        });
+
+        // Handle the confirmation of disapproval
+        $('#confirmDisapproval').click(function() {
+            var id = $('#hiddenIdField').val(); // Retrieve the id
+            var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
+            if (!reason.trim()) {
+                alert("Please enter a reason for disapproval.");
+                return;
+            }
+            var id_status = 5;
+            // AJAX call to update the reason and status to "Disapproved"
+            $.ajax({
+                url: 'update_reason', // Adjust the URL as necessary
+                type: 'POST', // Make sure this is POST
+                data: {
+                    id: id, // Ensure these variables are correctly defined in your JS
+                    reason: reason,
+                    id_status: id_status
+                },
+                success: function(response) {
+                    alert("อัปเดตข้อมูลเรียบร้อย");
+                    $('#exampleModal1').modal('hide');
+                    location.reload();
+                    console.log('Success:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
                 }
             });
         });

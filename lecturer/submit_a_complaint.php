@@ -275,7 +275,7 @@
                                 <div class="col-2">
                                     <div class="form-group ">
                                         <label for="" style="font-size: 18px;">วันที่</label>
-                                        <input type="date" class="form-control mt-2" id="date_activity" name="date_activity" placeholder="วันที่">
+                                        <input type="date" class="form-control mt-2 " id="date_activity" name="date_activity" placeholder="วันที่">
                                     </div>
                                 </div>
                             </div>
