@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#checktherequest").DataTable({
+  $("#check_consider_and_approve_the_request").DataTable({
     columns: [
       {
         data: "วันที่ยื่น",
