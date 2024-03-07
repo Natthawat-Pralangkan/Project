@@ -278,8 +278,6 @@
                                         <input type="date" class="form-control mt-2 " id="date_activity" name="date_activity" placeholder="วันที่">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-4">
                                     <div class="form-group ">
                                         <label for="" style="font-size: 18px;">สถานที่</label>
@@ -292,7 +290,27 @@
                                         <textarea name="std_address" required placeholder="สรุปรายละเอียด" id="summary_details" class="form-control mt-2"></textarea>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">พิจารณา</label>
+                                        <select class="form-select mt-2" id="memo_id" name="memo_id">
+                                            <option value="0">เลือกพิจารณา</option>
+                                            <option value="1">อนุญาต</option>
+                                            <option value="2">อนุมัติ</option>
+                                            <option value="3">เห็นชอบ</option>
+                                            <option value="4">ลงนาม</option>
+                                            <option value="5">สั่ง</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ละเอียดพิจารณา</label>
+                                        <textarea name="save_message" required placeholder="สรุปรายละเอียด" id="save_message" class="form-control mt-2"></textarea>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group mb-3 mt-3">
                                 <div class=" text-center">
@@ -615,9 +633,9 @@
                                     </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="text-center mt-4">
+                                    <div class="mt-4">
                                         <div class="host6"></div>
-                                        <div class=" justify-content-center form-group ">
+                                        <div class="text-center form-group mt-3">
                                             <button class="add_fields6 btn btn-primary" style="font-size: 16px; width: 500px;">เพิ่มรายละเอียดแบบสำรวจคาบสอน</button>
                                         </div>
                                     </div>

@@ -10,18 +10,22 @@ $according_project = $_POST["according_project"];
 $date_activity = $_POST["date_activity"];
 $activity_where = $_POST["activity_where"];
 $summary_details = $_POST["summary_details"];
+$memo_id = $_POST["memo_id"];
+$save_message = $_POST["save_message"];
 $user_id = $_POST["user_id"];
 // Prepared Statemen
 $details = $document_name_consider.",".$subject_group.",".$activity_name.",".$according_project.",".$date_activity.",".$activity_where.",".$summary_details;
 
-$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details ) 
-              VALUES (?,?, ?, ?)";
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details,memo_id,save_message) 
+              VALUES (?,?, ?, ?,?,?)";
 try {
     $stmt = $db->prepare($query);
     $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "6");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);
+    $stmt->bindParam(5, $memo_id);
+    $stmt->bindParam(6, $save_message);
 
     // Execute the prepared statement
     if ($stmt->execute()) {

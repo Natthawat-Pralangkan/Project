@@ -10,6 +10,8 @@ $(document).ready(function () {
     var date_activity = $("#date_activity").val();
     var activity_where = $("#activity_where").val();
     var summary_details = $("#summary_details").val();
+    var memo_id = $("#memo_id").val();
+    var save_message = $("#save_message").val();
     console.log(
         document_name_consider +
         " " +
@@ -23,7 +25,11 @@ $(document).ready(function () {
         "" +
         activity_where +
         "" +
-        summary_details
+        summary_details+
+        ""+
+        memo_id +
+        "" +
+        save_message
     );
     $.ajax({
       url: "instersubmitting_a_cover_form", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
@@ -39,6 +45,8 @@ $(document).ready(function () {
         date_activity: date_activity,
         activity_where: activity_where,
         summary_details: summary_details,
+        memo_id: memo_id,
+        save_message: save_message,
       },
       success: function (response) {
         console.log(response);

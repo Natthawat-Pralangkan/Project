@@ -30,6 +30,7 @@ JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
 JOIN petition_type ON petition_name.id_petition = petition_type.id 
 JOIN request_status ON details_ppetiton.id_status = request_status.id_status
 JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
+JOIN memo_type on details_ppetiton.memo_type = memo_type.id
 WHERE details_ppetiton.petition_type = 1 AND details_ppetiton.id = ?");
 $stmt->execute([$id]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -228,6 +229,46 @@ if ($row['petition_id'] == 7) {
     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1);
     $pdf->SetXY(143, 215);
     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+    // การพิจารณาสั่งการของครู
+    $iconPositions_1 = [
+        '1' => ['x' => 145, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
+        '2' => ['x' => 58, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
+        '3' => ['x' => 140, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
+        '4' => ['x' => 160, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
+        '5' => ['x' => 180, 'y' => 163, 'icon' => './img/8666665_check_icon.png']
+    ];
+    if (isset($row['memo_id']) && array_key_exists($row['memo_id'], $iconPositions_1)) {
+        // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
+        $icon = $iconPositions_1[$row['memo_id']]['icon'];
+
+
+        $x = $iconPositions_1[$row['memo_id']]['x'];
+
+        $y = $iconPositions_1[$row['memo_id']]['y'];
+        $pdf->Image($icon, $x, $y, 5, 10);
+    }
+    $pdf->SetXY(40, 178);
+    $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['save_message']), 0, 1);
+
+    $iconPositions = [
+        '1' => ['x' => 145, 'y' => 242, 'icon' => './img/8666665_check_icon.png'],
+        '2' => ['x' => 172, 'y' => 242, 'icon' => './img/8666665_check_icon.png'],
+        '3' => ['x' => 140, 'y' => 70, 'icon' => './img/8666665_check_icon.png'],
+        '4' => ['x' => 160, 'y' => 80, 'icon' => './img/8666665_check_icon.png'],
+        '5' => ['x' => 180, 'y' => 90, 'icon' => './img/8666665_check_icon.png']
+    ];
+    if (isset($row['memo_type']) && array_key_exists($row['memo_type'], $iconPositions) && $row['id_status'] == 4) {    // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
+        $icon = $iconPositions[$row['memo_type']]['icon'];
+
+
+        $x = $iconPositions[$row['memo_type']]['x'];
+
+        $y = $iconPositions[$row['memo_type']]['y'];
+        $pdf->Image($icon, $x, $y, 5, 10);
+        $pdf->SetXY(162, 257);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['save_a_message']), 0, 1);
+    }
+
     $pdf->Output('I', 'generated_pdf.pdf');
 } elseif ($row['petition_id'] == 1) {
     $templatePath = __DIR__ . '/file/แบบรายงานผลการพานักเรียนไปนอกสถานศึกษา.docx.pdf'; // Adjust path as necessary
