@@ -90,6 +90,22 @@
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="1">
                             <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <select class="form-select mt-2" id="id_subject_group" name="id_subject_group">
+                                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-8">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ชื่อสถานที่</label>
@@ -102,8 +118,6 @@
                                         <input type="text" class="form-control mt-2" id="school_name1" name="school_name1" placeholder="ณ">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">จำนวนนักเรียน</label>
@@ -122,26 +136,16 @@
                                         <textarea name="std_address" required placeholder="เหตุในการไปควบคุม" id="reason_controlling" class="form-control mt-2"></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-3">
+                                <div class="col-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">วันที่เดินทาง</label>
                                         <input type="date" class="form-control mt-2" id="date_travel" name="date_travel" placeholder="วันที่">
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เวลาเดินทาง</label>
                                         <input type="text" class="form-control mt-2" id="time1" name="time1" placeholder="เวลาเดินทาง">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
-                                        <textarea name="std_address" required placeholder="เส้นทางในการเดินทาง" id="travel_route" class="form-control mt-2"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -150,15 +154,20 @@
                                         <input type="text" class="form-control mt-2" id="trave_vehicle" name="trave_vehicle" placeholder="พาหนะที่ใช้เดินทาง">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-3">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เส้นทางในการเดินทาง</label>
+                                        <textarea name="std_address" required placeholder="เส้นทางในการเดินทาง" id="travel_route" class="form-control mt-2"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">วันที่เดินทางกลับ</label>
                                         <input type="date" class="form-control mt-2" id="travel_back" name="travel_back">
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เวลาเดินทางกลับ</label>
                                         <input type="text" class="form-control mt-2" id="time2" name="time2" placeholder="เวลาเดินทางกลับ">
@@ -170,17 +179,19 @@
                                         <textarea name="std_address" required placeholder="รายละเอียดการเดินทางครั้งนี้" id="details_of_this_trip" class="form-control mt-2"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-6 mt-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-4 mt-4">
                                     <div class="host1"></div>
-                                    <div class="row justify-content-center form-group ">
+                                    <div class="text-center form-group mt-3 ">
                                         <button class="add_fields1 btn btn-primary" style="font-size: 16px;">เพิ่มชื่อครูผู้ควบคุม</button>
                                     </div>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <div class=" text-center">
-                                        <button type="submit" class="btn " id="server_report" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
-                                        <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
-                                    </div>
+                            </div>
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_report" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                 </div>
                             </div>
                         </div>
@@ -200,8 +211,20 @@
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                        <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group" name="subject_group">
+                                        <div class="form-group">
+                                            <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                            <select class="form-select mt-2" id="id_subject_group_2" name="id_subject_group_2">
+                                                <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                                <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                                <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                                <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                                <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                                <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                                <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                                <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                                <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-2">
@@ -237,14 +260,6 @@
                         </div>
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="3">
-                            <!-- <div class="row mt-2">
-                                <div class="col-2">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">วันที่ยื่น</label>
-                                        <input type="date" class="form-control mt-2" name="date_report_send" id="date_report_send" placeholder="วันที่">
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -413,15 +428,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class=" mt-3">
+                                <div class="mt-4">
+                                    <div class="host15"></div>
+                                    <div class=" text-center form-group mt-3 ">
+                                        <button class="add_fields15 btn btn-primary" style="font-size: 16px;">เพิ่มรายชื่อครูที่ไม่มาปฏิบัติงาน</button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="modal-footer mb-3 mt-3">
                                 <div class=" text-center">
                                     <button type="submit" class="btn " id="ser_from_1" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
                                     <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
                                 </div>
                             </div>
-                            <!-- </div> -->
-
-                            <!-- </form> -->
                         </div>
                     </div>
                 </div>
@@ -437,6 +457,22 @@
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="6">
                             <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <select class="form-select mt-2" id="id_subject_group_3" name="id_subject_group_3">
+                                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">สถานที่</label>
@@ -489,7 +525,6 @@
                                         <button class="add_fields5 btn btn-primary" style="font-size: 16px;">เพิ่มรายชื่อผู้เข้าร่วมงาน</button>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="form-group mb-3 mt-3">
                                 <div class=" text-center">
@@ -514,9 +549,19 @@
                             <input type="hidden" name="" id="id_from" value="7">
                             <div class="row mt-2">
                                 <div class="col-4">
-                                    <div class="form-group ">
+                                    <div class="form-group">
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                        <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group_6" name="subject_group_6">
+                                        <select class="form-select mt-2" id="id_subject_group_4" name="id_subject_group_4">
+                                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -664,7 +709,23 @@
                         <div class="modal-body">
                             <input type="hidden" name="" id="id_from" value="9">
                             <div class="row">
-                                <div class="col-4 mt-3">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <select class="form-select mt-2" id="id_subject_group_5" name="id_subject_group_5">
+                                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4 ">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ขออนุญาตนำนักเรียนไป</label>
                                         <input type="text" class="form-control mt-2" placeholder="ขออนุญาตนำนักเรียนไป" id="allow_student_8" name="allow_student_8">
@@ -682,13 +743,13 @@
                                         <input type="text" class="form-control mt-2" placeholder="จำนวนครูผู้ควบคุม" id="teacher_total_8" name="teacher_total_8">
                                     </div>
                                 </div>
-                                <div class="col-4 mt-3">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เหตุผลในการไปควบคุม</label>
                                         <textarea class="form-control" placeholder="เหตุผลในการไปควบคุม" id="reason_controll_8"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-4 mt-3">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ชื่อสถานที่</label>
                                         <input type="text" class="form-control mt-2" placeholder="ชื่อสถานที่" id="school_name_8" name="school_name_8">

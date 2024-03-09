@@ -30,6 +30,8 @@ $(document).ready(function () {
       "#summary_of_results_of_participation_in_the_event"
     ).val();
     var details_of_this_trip = $("#details_of_this_trip").val();
+
+    var id_subject_group = $("#id_subject_group_3").val();
     $.ajax({
       url: "instermeeting_minutes", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
@@ -44,6 +46,7 @@ $(document).ready(function () {
         time_1: time_1,
         time_2: time_2,
         addIdValues: addIdValues,
+        id_subject_group_3: id_subject_group,
       },
       success: function (response) {
         console.log(response);

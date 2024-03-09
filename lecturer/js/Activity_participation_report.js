@@ -55,14 +55,15 @@ $(document).ready(function () {
     $('input[name="input_host_name6[]"]').each(function () {
       product_name6.push($(this).val());
     });
-    var subject_group = $("#subject_group").val();
+    // var subject_group = $("#subject_group").val();
     var school_year = $("#school_year").val();
+    var id_subject_group = $("#id_subject_group_2").val();
     $.ajax({
       url: "insteractivityparticipationreport", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
         user_id: localStorage.getItem("user_id"),
-        subject_group: subject_group,
+        // subject_group: subject_group,
         school_year: school_year,
         addIdValues: addIdValues,
         product_name1: product_name1,
@@ -71,6 +72,7 @@ $(document).ready(function () {
         product_name4: product_name4,
         product_name5: product_name5,
         product_name6: product_name6,
+        id_subject_group_2: id_subject_group,
       },
       success: function (response) {
         // console.log(response);

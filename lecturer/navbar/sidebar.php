@@ -10,7 +10,7 @@
         </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/personal_information') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./personal_information.php">
-            <i class="fa-solid fa-user spani"></i><span class="menu-text">ข้อมูลส่วนตัว</span>
+                <i class="fa-solid fa-user spani"></i><span class="menu-text">ข้อมูลส่วนตัว</span>
             </a>
         </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/submit_a_complaint') !== false ? 'active-menu' : ''; ?>">
@@ -33,32 +33,39 @@
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ขอรายงานการลง เวลาเข้า - ออกงาน</span>
             </a>
         </li>
+        <li style="display: none;" id="subject" class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/Subject_group_leader') !== false ? 'active-menu' : ''; ?>">
+            <a class="nav-link d-inline-block" style="font-size: 16px;" href="./Subject_group_leader.php">
+                <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">หัวหน้ากลุ่มสาระ</span>
+            </a>
+        </li>
     </ul>
 
 </aside>
 <script>
     $.ajax({
-        url: "../../servers/function",
+        url: "./navbar/get_user", // ตรวจสอบ URL ให้ถูกต้องตามไฟล์ PHP ที่คุณใช้
         type: "POST",
         data: {
-            function: "get_userbyid",
             user_id: localStorage.getItem("user_id")
         },
         success: function(res) {
-            var datas = JSON.parse(res)
-            $("#imageUser").attr('src', datas[0].image_user).show();
-            $("#fullnameNav").html(datas[0].user_name)
-        }
-    })
+            var datas = JSON.parse(res);
+            console.log(datas);
 
-    $(document).ready(function() {
-        let status = true;
-        $("#toggleSidebar").click(function() {
-            status = !status; // Toggle the status variable
-            $("#title_web").toggleClass("d-none", !status).toggleClass("d-block", status);
-            $(".menu-text").toggleClass("d-none", !status).toggleClass("d-block,menu-text", status);
-        });
+            // ตรวจสอบว่าผู้ใช้มี id_subject_group หรือไม่
+            if (datas[0].id_subject_group != null && datas[0].id_subject_group != '') {
+                // ถ้ามี, แสดงเมนู "หัวหน้ากลุ่มสาระ"
+                $('#subject').show(); // ใช้ .show() ของ jQuery เพื่อแสดงเมนู
+            }
+        }
     });
 
-  
+    // $(document).ready(function() {
+    //     let status = true;
+    //     $("#toggleSidebar").click(function() {
+    //         status = !status; // Toggle the status variable
+    //         $("#title_web").toggleClass("d-none", !status).toggleClass("d-block", status);
+    //         $(".menu-text").toggleClass("d-none", !status).toggleClass("d-block,menu-text", status);
+    //     });
+    // });
 </script>

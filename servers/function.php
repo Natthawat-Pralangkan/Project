@@ -22,11 +22,12 @@ if (isset($_POST['user_name']) && isset($_POST['password'])) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $user_id = $row['user_id'];
             $user_name = $row['user_name'];
+            $id_subject_group = $row['id_subject_group'];
 
             $updatetime = $db->prepare("UPDATE user SET date_login = now() WHERE user_id = ?");
             $updatetime->bindParam(1, $user_id);
             if ($updatetime->execute()) {
-                echo json_encode(["statusCode" => 200, "user_id" => $user_id, "user_name" => $user_name, "id_type" => $row['id_type']]);
+                echo json_encode(["statusCode" => 200, "user_id" => $user_id, "user_name" => $user_name, "id_type" => $row['id_type'], "id_subject_group" => $row['id_subject_group']]);
             }
             // Return success status and user information
         } else {

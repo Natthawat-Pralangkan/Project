@@ -305,9 +305,7 @@ function addfields6() {
             </div>
           </div>
          <div class ="mt-2"></div>
-         <div class="text-center mt-2">
          <a href="javascript:void(0);"style="width: 250px; height:40px" class="btn btn-danger remove_field ">ลบ</a>
-         </div>
        
 </div>`);
 }

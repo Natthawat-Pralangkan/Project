@@ -83,7 +83,7 @@
                         {
                             data: 'request_type_name'
                         },
-                        
+
                         {
                             data: 'name_status',
                             createdCell: function(td, cellData, rowData, row, col) {
@@ -99,8 +99,10 @@
                                     $(td).addClass("status5");
                                 } else if (cellData == "ไม่ผ่านพิจารณา") {
                                     $(td).addClass("status6");
-                                }else if (cellData == "ยกเลิก") {
+                                } else if (cellData == "ยกเลิก") {
                                     $(td).addClass("status7");
+                                } else if (cellData == "รอหัวหน้ากลุ่มสาระพิจารณา") {
+                                    $(td).addClass("status8");
                                 }
                             },
                         },
@@ -111,7 +113,7 @@
                             data: null,
                             render: function(data, type, row) {
                                 var buttonHtml = '';
-                                if (row.id_status == 1) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
+                                if (row.id_status == 1 && 8) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
                                     buttonHtml = '<button class="btn btn-danger cancel-button" data-id="' + row.id + '">ยกเลิก</button>';
                                 } else if ([4, 5, 6].includes(row.id_status)) { // ตรวจสอบสถานะ 4, 5, หรือ 6 เพื่อแสดงปุ่มดูรายละเอียด
                                     buttonHtml = '<button class="btn btn-primary manage-button" data-id="' + row.id + '">ดูรายละเอียด</button>';
@@ -119,7 +121,7 @@
                                 return buttonHtml;
                             }
                         }
-                        
+
                     ],
                     order: [
                         [0, 'desc']
@@ -148,27 +150,30 @@
 
     // ยืนยันก่อนทำการยกเลิก
     $(document).on('click', '.cancel-button', function() {
-    var id = $(this).data('id'); // รับค่า ID ของคำร้องที่จะยกเลิก
+        var id = $(this).data('id'); // รับค่า ID ของคำร้องที่จะยกเลิก
 
-    // ยืนยันก่อนทำการยกเลิก
-    if(confirm('คุณแน่ใจหรือไม่ที่จะยกเลิกคำร้องนี้?')) {
-        $.ajax({
-            url: 'cancel_request', // URL ไปยังสคริปต์เซิร์ฟเวอร์ที่จะอัปเดตฐานข้อมูล
-            type: 'POST',
-            data: { id: id, id_status: 7 }, // ส่งข้อมูล ID และสถานะใหม่
-            success: function(response) {
-                // ทำอะไรก็ตามที่ต้องการหลังจากอัปเดตสำเร็จ, เช่น รีโหลดหน้าหรือแสดงข้อความ
-                alert('คำร้องถูกยกเลิกสำเร็จ');
-                // รีโหลดหน้าเว็บหรืออัปเดต DataTables ที่นี่
-                location.reload(); // หรือใช้ table.draw(false) ถ้าคุณไม่ต้องการรีโหลดหน้าเว็บ
-            },
-            error: function(xhr, status, error) {
-                // แสดงข้อความผิดพลาดหากมี
-                alert('ไม่สามารถยกเลิกคำร้องได้');
-            }
-        });
-    }
-});
+        // ยืนยันก่อนทำการยกเลิก
+        if (confirm('คุณแน่ใจหรือไม่ที่จะยกเลิกคำร้องนี้?')) {
+            $.ajax({
+                url: 'cancel_request', // URL ไปยังสคริปต์เซิร์ฟเวอร์ที่จะอัปเดตฐานข้อมูล
+                type: 'POST',
+                data: {
+                    id: id,
+                    id_status: 7
+                }, // ส่งข้อมูล ID และสถานะใหม่
+                success: function(response) {
+                    // ทำอะไรก็ตามที่ต้องการหลังจากอัปเดตสำเร็จ, เช่น รีโหลดหน้าหรือแสดงข้อความ
+                    alert('คำร้องถูกยกเลิกสำเร็จ');
+                    // รีโหลดหน้าเว็บหรืออัปเดต DataTables ที่นี่
+                    location.reload(); // หรือใช้ table.draw(false) ถ้าคุณไม่ต้องการรีโหลดหน้าเว็บ
+                },
+                error: function(xhr, status, error) {
+                    // แสดงข้อความผิดพลาดหากมี
+                    alert('ไม่สามารถยกเลิกคำร้องได้');
+                }
+            });
+        }
+    });
 </script>
 
 <?php include("../footer.php") ?>

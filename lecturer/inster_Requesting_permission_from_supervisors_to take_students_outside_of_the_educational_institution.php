@@ -14,6 +14,7 @@ $travel_back = $_POST["travel_back"];
 $Time_to_arrive = $_POST["Time_to_arrive"];
 $amount_person = $_POST["amount_person"];
 $Vehicle_for_traveling = $_POST["Vehicle_for_traveling"];
+$id_subject_group = $_POST["id_subject_group_5"];
 $addIdValues = implode(",", $_POST["addIdValues"]);
 $user_id = $_POST["user_id"];
 
@@ -21,14 +22,16 @@ $details = $allow_student.",".$student_total.",".$teacher_total.",".$reason_cont
 
 
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details) 
-VALUES (?, ?, ?, ?)";
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details,id_subject_group,id_status) 
+VALUES (?, ?, ?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
     $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "9");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);
+    $stmt->bindParam(5, $id_subject_group);
+    $stmt->bindValue(6, "8");
     
 
     // Execute the prepared statement

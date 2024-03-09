@@ -76,16 +76,17 @@ $dhamma_expert_dhamma_studies = $_POST["dhamma_expert_dhamma_studies"];
 $precepts_pali_studies = $_POST["precepts_pali_studies"];
 $educational_qualification = $_POST["educational_qualification"];
 $position = $_POST["position"];
+$id_subject_group = $_POST["id_subject_group"];
 // $picture = $_POST["picture"];
 
 
 
 
-$query = "INSERT INTO teacher_personnel_information (id_user, user_id, user_name, last_name, id_card_number, date_month_yearofbirth, age, nationality, house_code, number_house, village, district, prefecture, province, road, zip_code, email, telephone_number, start_date, faculty_bachelor_s_degree, field_of_study_bachelor_s_degree, faculty_master_s_degree, field_of_study_master_s_degree, executive_professional_certificate, faculty_less_than_bachelor_s_degree, field_of_study_less_than_bachelor_s_degree, executive_professional_certificate_less_than_bachelor_s_degree, dhamma_expert_dhamma_studies, precepts_pali_studies, educational_qualification, picture, position) 
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
+$query = "INSERT INTO teacher_personnel_information (id_user, user_id, user_name, last_name, id_card_number, date_month_yearofbirth, age, nationality, house_code, number_house, village, district, prefecture, province, road, zip_code, email, telephone_number, start_date, faculty_bachelor_s_degree, field_of_study_bachelor_s_degree, faculty_master_s_degree, field_of_study_master_s_degree, executive_professional_certificate, faculty_less_than_bachelor_s_degree, field_of_study_less_than_bachelor_s_degree, executive_professional_certificate_less_than_bachelor_s_degree, dhamma_expert_dhamma_studies, precepts_pali_studies, educational_qualification, picture, position,id_subject_group) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?,?)";
 
-$query_user = "INSERT INTO user (user_id,user_name,password,id_type) 
-VALUES (?,?,?,?)";
+$query_user = "INSERT INTO user (user_id,user_name,password,id_type,id_subject_group) 
+VALUES (?,?,?,?,?)";
 try {
     $stmt = $db->prepare($query);
     $stmt_user = $db->prepare($query_user);
@@ -93,6 +94,7 @@ try {
     $stmt_user->bindParam(2, $id_card_number);
     $stmt_user->bindParam(3, $id_card_number);
     $stmt_user->bindParam(4, $position);
+    $stmt_user->bindParam(5, $id_subject_group);
 
     $stmt->bindParam(1, $id_user);
     $stmt->bindParam(2, $user_id);
@@ -126,6 +128,7 @@ try {
     $stmt->bindParam(30, $educational_qualification);
     $stmt->bindParam(31, $imgname);
     $stmt->bindParam(32, $position);
+    $stmt->bindParam(33, $id_subject_group);
 
     if ($stmt->execute() && $stmt_user->execute()) {
         echo json_encode(['status' => 200]);

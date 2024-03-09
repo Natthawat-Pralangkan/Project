@@ -6,8 +6,32 @@ $subject_group = $_POST["subject_group"];
 $semester = $_POST["semester"];
 $school_year = $_POST["school_year"];
 $user_id = $_POST["user_id"];
+$addIdValues = $_POST["addIdValues"];
+$product_name_0 =  $_POST["product_name_0"];
+$product_name1 =  $_POST["product_name1"];
+$product_name2 = $_POST["product_name2"];
+$product_name3 = $_POST["product_name3"];
+$product_name4 = $_POST["product_name4"];
+$product_name5 =  $_POST["product_name5"];
+$product_name6 = $_POST["product_name6"];
+$product_name7 = $_POST["product_name7"];
+$products = [];
 
-$details = $subject_group.",".$semester.",".$school_year;
+foreach ($addIdValues as $index => $row) {
+
+    $name_0 = $product_name_0[$index];
+    $name1 = $product_name1[$index];
+    $name2 = $product_name2[$index];
+    $name3 = $product_name3[$index];
+    $name4 = $product_name4[$index];
+    $name5 = $product_name5[$index];
+    $name6 = $product_name6[$index];
+    $name7 = $product_name7[$index];
+    $product =     $name_0 . "," . $name1 . "," . $name2 . "," . $name3 . "," . $name4 . "," . $name5 . "," . $name6 . "," . $name7;
+    $products[] = $product; // Collect all product strings in an array
+}
+$productStr = implode(',', $products);
+$details = $subject_group.",".$semester.",".$school_year.",".$productStr;
 
 // Prepared Statemen
 $query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details ) 

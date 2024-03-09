@@ -18,6 +18,14 @@ $(document).ready(function () {
       },
     ],
   });
+ 
+  $("#position").change(function(){
+    if( $("#position").val()== 8){
+      $("#id_subject").show()
+    }else{
+      $("#id_subject").hide()
+    }
+  })
 
   $("#server_user").click(function () {
     
@@ -63,6 +71,7 @@ $(document).ready(function () {
     var dhamma_expert_dhamma_studies = $("#dhamma_expert_dhamma_studies").val();
     var precepts_pali_studies = $("#precepts_pali_studies").val();
     var educational_qualification = $("#educational_qualification").val();
+    var id_subject_group = $("#id_subject_group").val();
     var picture = $("#picture")[0].files[0];
     var position = $("#position").val();
 
@@ -97,6 +106,7 @@ $(document).ready(function () {
     formData.append('precepts_pali_studies',precepts_pali_studies);
     formData.append('educational_qualification',educational_qualification);
     formData.append('picture',picture);
+    formData.append('id_subject_group',id_subject_group);
     formData.append('position',position);
     // var id_user = $("#id_user").val();
     $.ajax({

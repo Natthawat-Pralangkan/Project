@@ -31,6 +31,7 @@ $(document).ready(function () {
     var time1 = $("#time1").val();
     var time2 = $("#time2").val();
     var details_of_this_trip = $("#details_of_this_trip").val();
+    var id_subject_group = $("#id_subject_group").val();
 
     console.log(
       school_name +
@@ -57,6 +58,8 @@ $(document).ready(function () {
         "" +
         details_of_this_trip +
         "" +
+        id_subject_group +
+        "" +
         localStorage.getItem("user_id")
     );
     $.ajax({
@@ -79,6 +82,7 @@ $(document).ready(function () {
         time1: time1,
         time2: time2,
         details_of_this_trip: details_of_this_trip,
+        id_subject_group: id_subject_group,
         addIdValues: addIdValues,
       },
       success: function (response) {

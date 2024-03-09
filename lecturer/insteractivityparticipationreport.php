@@ -2,7 +2,7 @@
 include("../servers/connect.php");
 
 // Assuming your form data is structured correctly
-$subject_group = $_POST["subject_group"];
+
 $school_year = $_POST["school_year"];
 $user_id = $_POST["user_id"];
 $addIdValues = $_POST["addIdValues"];
@@ -12,6 +12,7 @@ $product_name3 = $_POST["product_name3"];
 $product_name4 = $_POST["product_name4"];
 $product_name5 =  $_POST["product_name5"];
 $product_name6 = $_POST["product_name6"];
+$id_subject_group = $_POST["id_subject_group_2"];
 $number = 1;
 $products = [];
 
@@ -34,9 +35,10 @@ $productStr = implode(',',$products); // Use a delimiter that does not conflict 
 // Convert addIdValues array to string
 // $addIdValuesStr = implode(",", $addIdValues);
 
-$details = $subject_group.",".$school_year.",".$productStr;
+$details = $school_year.",".$productStr;
 
-$query = "INSERT INTO details_ppetiton (user_id, petition_id, petition_type, details) VALUES (?, ?, ?, ?)";
+$query = "INSERT INTO details_ppetiton (user_id, petition_id, petition_type, details,id_subject_group,id_status) 
+VALUES (?, ?, ?, ?, ?, ?)";
 
 try {
     $stmt = $db->prepare($query);
@@ -44,6 +46,8 @@ try {
     $stmt->bindValue(2, "2"); // Assuming these values are static
     $stmt->bindValue(3, "1"); // Assuming these values are static
     $stmt->bindParam(4, $details);
+    $stmt->bindParam(5, $id_subject_group);
+    $stmt->bindValue(6, "8");
 
     if ($stmt->execute()) {
         echo json_encode(['status' => 200]);

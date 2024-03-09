@@ -31,6 +31,7 @@ $(document).ready(function () {
     var Time_to_arrive = $("#Time_to_arrive_8").val();
     var amount_person = $("#amount_person_8").val();
     var Vehicle_for_traveling = $("#Vehicle_for_traveling_8").val();
+    var id_subject_group = $("#id_subject_group_5").val();
     // var Vehicle_for_traveling = $("#Vehicle_for_traveling_8").val();
     console.log(
       allow_student +
@@ -57,7 +58,9 @@ $(document).ready(function () {
         "" +
         Vehicle_for_traveling +
         "" +
-        addIdValues
+        addIdValues +
+        "" +
+        id_subject_group
     );
     $.ajax({
       url: "inster_Requesting_permission_from_supervisors_to take_students_outside_of_the_educational_institution", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
@@ -78,6 +81,7 @@ $(document).ready(function () {
         amount_person: amount_person,
         Vehicle_for_traveling: Vehicle_for_traveling,
         addIdValues: addIdValues,
+        id_subject_group_5: id_subject_group,
       },
       success: function (response) {
         console.log(response);
