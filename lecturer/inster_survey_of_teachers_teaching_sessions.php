@@ -2,7 +2,6 @@
 include("../servers/connect.php");
 
 
-$subject_group = $_POST["subject_group"];
 $semester = $_POST["semester"];
 $school_year = $_POST["school_year"];
 $user_id = $_POST["user_id"];
@@ -31,6 +30,7 @@ $product_name6_2 = $_POST["product_name6_2"];
 $product_name7 = $_POST["product_name7"];
 $product_name7_1 = $_POST["product_name7_1"];
 $product_name7_2 = $_POST["product_name7_2"];
+$id_subject_group = $_POST["id_subject_group_11"];
 $number = 1;
 $products = [];
 
@@ -66,17 +66,19 @@ foreach ($addIdValues as $index => $row) {
     $products[] = $product; // Collect all product strings in an array
 }
 $productStr = implode(',', $products); // Use a delimiter that does not conflict with your data
-$details = $subject_group . "," . $semester . "," . $school_year . "," . $productStr;
+$details =  $semester . "," . $school_year . "," . $productStr;
 
 // Prepared Statemen
-$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details) 
-VALUES (?, ?, ?, ?)";
+$query = "INSERT INTO details_ppetiton (user_id,petition_id,petition_type,details,id_subject_group,id_status) 
+VALUES (?, ?, ?, ?, ?, ?)";
 try {
     $stmt = $db->prepare($query);
     $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "8");
     $stmt->bindValue(3, "1");
     $stmt->bindParam(4, $details);
+    $stmt->bindParam(5, $id_subject_group);
+    $stmt->bindValue(6, "8");
 
 
     // Execute the prepared statement

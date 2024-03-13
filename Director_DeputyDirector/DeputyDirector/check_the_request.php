@@ -4,7 +4,7 @@
     <?php include('./navbar/sidebar.php'); ?>
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/Check_the_request.js"></script>
+        <!-- <script src="./js/Check_the_request.js"></script> -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
@@ -20,7 +20,7 @@
 
         <div class="mx-3 mt-5">
             <div class="mt-3">
-                <table id="check_consider_and_approve_the_request" class="table">
+                <table id="checktherequest" class="table">
                     <thead>
                         <tr>
                             <th>วันที่ยื่น</th>
@@ -31,71 +31,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_second = '0')
-                        {
-                            $date_arr = explode(' ', $value);
-                            $date = $date_arr[0];
-                            if (isset($date_arr[1])) {
-                                $time = $date_arr[1];
-                            } else {
-                                $time = '';
-                            }
-                            $value = $date;
-                            if ($value != "0000-00-00" && $value != '') {
-                                $x = explode("-", $value);
-                                if ($short == false)
-                                    $arrMM = array(1 => "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
-                                else
-                                    $arrMM = array(1 => "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                // return $x[2]." ".$arrMM[(int)$x[1]]." ".($x[0]>2500?$x[0]:$x[0]+543);
-                                if ($need_time == '1') {
-                                    if ($need_time_second == '1') {
-                                        $time_format = $time != '' ? date('H:i:s น.', strtotime($time)) : '';
-                                    } else {
-                                        $time_format = $time != '' ? date('H:i น.', strtotime($time)) : '';
-                                    }
-                                } else {
-                                    $time_format = '';
-                                }
 
-                                return (int)$x[2] . " " . $arrMM[(int)$x[1]] . " " . ($x[0] > 2500 ? $x[0] : $x[0] + 543) . " " . $time_format;
-                            } else
-                                return "";
-                        }
-                        $sql = "SELECT *,`details_ppetiton`.`id`,details_ppetiton.petition_id FROM `details_ppetiton`
-                        JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
-                        JOIN petition_type ON petition_name.id_petition = petition_type.id 
-                        JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        WHERE details_ppetiton.petition_type in (1, 2, 3, 4);";
-                        $result = $db->query($sql); ?>
-                        <?php
-                        if ($result->rowCount() > 0) {
-                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                // แปลงวันที่ให้เป็นรูปแบบไทย
-                                $newdate = ConvertToThaiDate($row['date'], 0, 0);
-                        ?>
-                                <tr>
-                                    <td> <?php echo $newdate ?> </td>
-                                    <td> <?php echo $row['petition_name'] ?> </td>
-                                    <td> <?php echo $row['user_name'] . $row['last_name'] ?> </td>
-                                    <td> <?php echo $row['name_status'] ?> </td>
-                                    <td>
-                                        <?php if ($row['petition_id'] == 6) { ?>
-                                            <button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>" data-petition_id="<?php echo $row['petition_id']; ?>" onclick="openAnotherModal(this)">จัดการ</button>
-                                        <?php } else { ?>
-                                            <button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>" data-petition_id="<?php echo $row['petition_id']; ?>">จัดการ</button>
-                                        <?php  }; ?>
-                                    </td>
 
-                                </tr>
-                        <?php
-                            }
-                        } else {
-                            echo "0 results";
-                        }
-                        ?>
                     </tbody>
                 </table>
                 <!-- Modal -->
@@ -205,10 +142,47 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="exampleModal9" tabindex=" -1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe id="pdfViewer3" width="100%" height="500px" frameborder="0"></iframe>
+                                <input type="hidden" id="hiddenIdField" value="">
+                                <div class="mb-3 mx-5 row">
+                                    <div class="col-4 justify-content-center">
+                                        <div class="form-check ">
+                                            <input class="form-check-input" type="radio" name="actionOption" id="acknowledge" value="1" checked>
+                                            <label class="form-check-label" for="acknowledge">
+                                                รับทราบ
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="actionOption" id="other" value="2">
+                                            <label class="form-check-label" for="other">
+                                                อื่นๆ
+                                            </label>
+                                            <input type="text" id="otherInput" class="form-control mt-2" placeholder="กรุณากรอก" style="display: none;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="approveButton3" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
+                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
+
+</div>
 </div>
 <script>
     if (localStorage.getItem("id_type") != "3" && localStorage.getItem("user_id") == null) {
@@ -216,10 +190,11 @@
         window.location.href = "../"
     }
     $(document).ready(function() {
-        $('.manage-button').on('click', function() {
+        $('#checktherequest').on('click', '.manage-button', function() {
             var id = $(this).data('id');
-            var petitionId = $(this).data('petition_id');
-            console.log("ID:" + id + "Petition ID:" + petitionId); // Check the values
+            var petitionId = $(this).data('petition-id');
+            var idStatus = $(this).data('id-status'); // Assuming this is how you store id_status
+            console.log("ID:" + id + " Petition ID:" + petitionId); // Check the values
 
             var pdfUrl = 'check_the_request_pdf.php?id=' + id; // Construct the URL for the PDF
 
@@ -227,17 +202,32 @@
             if (petitionId == 6) {
                 $('#pdfViewer2').attr('src', pdfUrl); // Assuming this is for petition_id = 6
                 $('#anotherModalId').data('id', id).modal('show');
+            } else if (petitionId == 5) {
+                // This is the new condition for petitionId == 5
+                $('#pdfViewer3').attr('src', pdfUrl); // Make sure the pdfViewer3 ID matches the iframe in modal 9
+                $('#exampleModal9').data('id', id).modal('show'); // Show modal with id exampleModal9
             } else {
                 $('#pdfViewer1').attr('src', pdfUrl); // For other IDs
                 $('#exampleModal7').data('id', id).modal('show');
             }
+            // Conditionally show or hide elements based on id_status
+            if (idStatus == 4) {
+                // If id_status is 4, hide the radio buttons and command text input
+                $('#acknowledge, #other, #otherInput,#flexRadioDefault1, #flexRadioDefault2, #flexRadioDefault3,#flexRadioDefault4, #flexRadioDefault5, #inputContainer').closest('.row').hide();
+            } else {
+                // Otherwise, make sure they are shown (useful if the modal is reused)
+                $('#acknowledge, #other, #otherInput,#flexRadioDefault1, #flexRadioDefault2, #flexRadioDefault3,#flexRadioDefault4, #flexRadioDefault5, #inputContainer').closest('.row').show();
+            }
+
+            // Additional code for handling the approval button or other elements...
         });
+
 
         // Setup for handling clicks on "อนุมัติ" button
         $("#approveButton").on('click', function(event) {
             event.preventDefault();
             var id = $('#exampleModal7').data('id');
-            var id_status = 3; // Define and assign a value to id_status
+            var id_status = 4; // Define and assign a value to id_status
             console.log("Sending ID:", id, "Status:", id_status);
 
             // AJAX call to update the status
@@ -269,12 +259,12 @@
 
             // Retrieve the id from the appropriate modal
             var id = $('#anotherModalId').data('id'); // Assuming the id is stored in the second modal
-            var id_status = 3; // Define and assign a value to id_status
+            var id_status = 4; // Define and assign a value to id_status
             var memo_type = $('input[name="flexRadioDefault"]:checked').val();
             var save_a_message = $('#inputContainer input').val(); // Read value from input field if present
 
             console.log("Sending ID:", id, "Status:", id_status);
-            console.log(save_a_message,memo_type);
+            console.log(save_a_message, memo_type);
             // AJAX call to update the status
             $.ajax({
                 url: "update_status1",
@@ -339,10 +329,124 @@
         });
 
         // Show input field if radio button is checked
+        // $('input[type="radio"][name="flexRadioDefault"]').change(function() {
+        //     if ($(this).val() === "5") {
+        //         $('#inputContainer').show();
+        //     } else {
+        //         $('#inputContainer').hide();
+        //     }
+        // });
         $('input[type="radio"][name="flexRadioDefault"]').change(function() {
             if ($(this).is(":checked")) {
                 $('#inputContainer').show();
             }
+        });
+
+
+        $.ajax({
+            url: "get_subject",
+            type: "POST",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var table = $('#checktherequest').DataTable({
+                    data: data,
+
+                    columns: [{
+                            data: 'date'
+                        },
+                        {
+                            data: 'petition_name'
+                        },
+                        {
+                            data: 'request_type_name'
+                        },
+
+                        {
+                            data: 'name_status',
+                            createdCell: function(td, cellData, rowData, row, col) {
+                                if (cellData == "รอพิจารณา") {
+                                    $(td).addClass("status1");
+                                } else if (cellData == "รอรองผู้อำนวยการพิจารณา") {
+                                    $(td).addClass("status2");
+                                } else if (cellData == "รอผู้อำนวยการพิจารณา") {
+                                    $(td).addClass("status3");
+                                } else if (cellData == "อนุมัติแล้ว") {
+                                    $(td).addClass("status4");
+                                } else if (cellData == "ไม่อนุมัติแล้ว") {
+                                    $(td).addClass("status5");
+                                } else if (cellData == "ไม่ผ่านพิจารณา") {
+                                    $(td).addClass("status6");
+                                } else if (cellData == "ยกเลิก") {
+                                    $(td).addClass("status7");
+                                } else if (cellData == "รอหัวหน้ากลุ่มสาระพิจารณา") {
+                                    $(td).addClass("status8");
+                                }
+                            },
+                        },
+                        {
+                            data: null,
+                            render: function(data, type, row) {
+                                return `<button class="btn btn-primary manage-button" data-id="${row.id}" data-petition-id="${row.petition_id}" data-id-status="${row.id_status}">จัดการ</button>`;
+                            }
+                        }
+                    ],
+                    order: [
+                        [0, 'desc']
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+        $('input[type=radio][name=actionOption]').change(function() {
+            if ($('#other').is(':checked')) {
+                $('#otherInput').show();
+            } else {
+                $('#otherInput').hide();
+            }
+        });
+
+
+        $('#approveButton3').click(function() {
+            var id = $('#exampleModal9').data('id'); // Assuming the id is stored in the second modal
+            var id_status = 4; // Define and assign a value to id_status
+            var memo_type = $('input[name="actionOption"]:checked').val();
+            var save_a_message = '';
+            if (memo_type == '2') { // Assuming value "2" is for "Other"
+                save_a_message = $('#otherInput').val();
+            }
+
+            // Assuming you have an endpoint set up to handle this request
+            $.ajax({
+                url: 'update_status2',
+                type: 'POST',
+                data: {
+                    id: id, // Ensure this is set correctly elsewhere in your code
+                    save_a_message: save_a_message,
+                    memo_type: memo_type,
+                    id_status: id_status
+                },
+                success: function(response) {
+                    // var data = JSON.parse(response);
+                    console.log(response);
+                    if (response.status === 200) {
+                        alert("อัปเดตข้อมูลเรียบร้อย");
+                        location.reload();
+                    } else {
+                        console.log(response);
+                        alert("เกิดข้อผิดพลาดในการอัปเดตข้อมูล");
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
+                }
+            });
         });
 
     });

@@ -108,6 +108,31 @@ include("../servers/connect.php"); ?>
                         </div>
                     </div>
                 </div>
+                <div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" id="hiddenIdField" value="">
+                                <!-- New input field added below -->
+                                <iframe id="pdfViewer3" width="100%" height="500px" frameborder="0"></iframe>
+                                <div class="row justify-content-center">
+                                    <div class="col-4 mx-5" id="bossOpinionContainer">
+                                        <label for="">ความเห็นหัวหน้ากลุ่มสาระ / หัวหน้างาน</label>
+                                        <input type="text" id="Boss_opinion" class="form-control" placeholder="ความเห็นหัวหน้ากลุ่มสาระ / หัวหน้างาน">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="approveButton2" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
+                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -123,21 +148,41 @@ include("../servers/connect.php"); ?>
         $('#checktherequest').on('click', '.manage-button', function() {
             var id = $(this).data('id');
             var petitionId = $(this).data('petition-id');
-            console.log("ID: " + id + ", Petition ID: " + petitionId);
+            var idStatus = $(this).data('id-status'); // Assuming this is how you store id_status
 
-            // Use .data() to store the id for later use
+            console.log("ID: " + id + ", Petition ID: " + petitionId + ", ID Status: " + idStatus);
+
+            // Store the id for later use
             $('#exampleModal7').data('action-id', id);
             $('#exampleModal8').data('action-id', id); // Do the same for the second modal if necessary
+            $('#exampleModal10').data('action-id', id); // Do the same for the second modal if necessary
 
             var pdfUrl = 'check_the_request_pdf_subject.php?id=' + id;
-            if (petitionId == 9) {
+
+            // Check for petitionId 6 to open exampleModal10
+            if (petitionId == 6) {
+                // Adjust the iframe src or any other modal-specific settings here
+                $('#pdfViewer3').attr('src', pdfUrl); // Assuming you want to load the PDF here as well
+                $('#exampleModal10').modal('show');
+            } else if (petitionId == 9 || petitionId == 1) { // Combined condition for simplicity
                 $('#pdfViewer2').attr('src', pdfUrl);
                 $('#exampleModal8').modal('show');
             } else {
                 $('#pdfViewer1').attr('src', pdfUrl);
                 $('#exampleModal7').modal('show');
             }
+
+            // Conditionally show or hide elements based on id_status
+            if (idStatus == 4) {
+
+                $('#approve, #command, #commandText , #Boss_opinion ').closest('.row').hide();
+            } else {
+                // Otherwise, make sure they are shown (useful if the modal is reused)
+                $('#approve, #command, #commandText, #Boss_opinion').closest('.row').show();
+            }
         });
+
+
 
         $("#approveButton").on('click', function(event) {
             event.preventDefault();
@@ -211,6 +256,36 @@ include("../servers/connect.php"); ?>
             });
         });
 
+        $('#approveButton2').click(function() {
+            // Extract data from inputs
+            var id = $('#exampleModal10').data('action-id'); // รับค่า id จาก data-action-id ของ modal ตามที่กำหนด
+            var id_status = 1; // Define and assign a value to id_status
+            var Boss_opinion = $('#Boss_opinion').val(); // The input from the user
+
+            // AJAX request to your server-side script
+            $.ajax({
+                url: 'update_status2', // The path to your server-side script
+                type: 'POST',
+                data: {
+                    id: id,
+                    id_status: id_status,
+                    Boss_opinion: Boss_opinion,
+                    id_subject_group: localStorage.getItem("id_subject_group"),
+                },
+                success: function(response) {
+                    if (response.status === "success") {
+                        alert("การดำเนินการเรียบร้อยแล้ว");
+                        $('#exampleModal10').modal('hide'); // ซ่อน modal ที่ต้องการ
+                        location.reload(); // or use a more targeted update method
+                    } else {
+                        alert("เกิดข้อผิดพลาด: " + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
+                }
+            });
+        });
 
 
         $('#exampleModal1').on('show.bs.modal', function() {
@@ -297,7 +372,7 @@ include("../servers/connect.php"); ?>
                         {
                             data: null,
                             render: function(data, type, row) {
-                                return `<button class="btn btn-primary manage-button" data-id="${row.id}" data-petition-id="${row.petition_id}">จัดการ</button>`;
+                                return `<button class="btn btn-primary manage-button" data-id="${row.id}" data-petition-id="${row.petition_id}" data-id-status="${row.id_status}">จัดการ</button>`;
                             }
                         }
                     ],
@@ -311,8 +386,8 @@ include("../servers/connect.php"); ?>
             }
         });
 
-        $('input[type="radio"][name="decision"]').change(function() {
-            if (this.id == 'command') {
+        $('input[name="decision"]').change(function() {
+            if ($('#command').is(':checked')) {
                 $('#commandText').show();
             } else {
                 $('#commandText').hide();

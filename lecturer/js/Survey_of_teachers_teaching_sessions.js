@@ -124,9 +124,10 @@ $(document).ready(function () {
       product_name7_2.push($(this).val());
     });
 
-    var subject_group = $("#subject_group_7").val();
+
     var semester = $("#semester_7").val();
     var school_year = $("#school_year_7").val();
+    var id_subject_group = $("#id_subject_group_11").val();
     // console.log(
     //   subject_group +
     //     " " +
@@ -144,7 +145,7 @@ $(document).ready(function () {
 
         // name_from: name_from,
         // petition_name: petition_name,
-        subject_group: subject_group,
+        // subject_group: subject_group,
         semester: semester,
         school_year: school_year,
         addIdValues: addIdValues,
@@ -172,6 +173,7 @@ $(document).ready(function () {
         product_name7: product_name7,
         product_name7_1: product_name7_1,
         product_name7_2: product_name7_2,
+        id_subject_group_11: id_subject_group,
       },
       success: function (response) {
         console.log(response);

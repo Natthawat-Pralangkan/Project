@@ -4,7 +4,7 @@ $(document).ready(function () {
     // var name_from = $("#name_from_1").val();
     // var date_report_send = $("#date_report_send").val();
     var document_name_consider = $("#document_name_consider").val();
-    var subject_group = $("#subject_group_1").val();
+    // var subject_group = $("#subject_group_1").val();
     var activity_name = $("#activity_name").val();
     var according_project = $("#according_project").val();
     var date_activity = $("#date_activity").val();
@@ -12,10 +12,9 @@ $(document).ready(function () {
     var summary_details = $("#summary_details").val();
     var memo_id = $("#memo_id").val();
     var save_message = $("#save_message").val();
+    var id_subject_group = $("#id_subject_group_10").val();
     console.log(
         document_name_consider +
-        " " +
-        subject_group +
         " " +
         activity_name +
         " " +
@@ -39,7 +38,7 @@ $(document).ready(function () {
         // name_from: name_from,
         // date_report_send: date_report_send,
         document_name_consider: document_name_consider,
-        subject_group: subject_group,
+        // subject_group: subject_group,
         activity_name: activity_name,
         according_project: according_project,
         date_activity: date_activity,
@@ -47,6 +46,7 @@ $(document).ready(function () {
         summary_details: summary_details,
         memo_id: memo_id,
         save_message: save_message,
+        id_subject_group_10: id_subject_group,
       },
       success: function (response) {
         console.log(response);

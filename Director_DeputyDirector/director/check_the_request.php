@@ -4,7 +4,7 @@
     <?php include('./navbar/sidebar.php'); ?>
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/Check_the_request.js"></script>
+        <!-- <script src="./js/Check_the_request.js"></script> -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
@@ -20,7 +20,7 @@
 
         <div class="mx-3 mt-5">
             <div class="mt-3">
-                <table id="check_consider_and_approve_the_request" class="table">
+                <table id="checktherequest" class="table">
                     <thead>
                         <tr>
                             <th>วันที่ยื่น</th>
@@ -31,71 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_second = '0')
-                        {
-                            $date_arr = explode(' ', $value);
-                            $date = $date_arr[0];
-                            if (isset($date_arr[1])) {
-                                $time = $date_arr[1];
-                            } else {
-                                $time = '';
-                            }
-                            $value = $date;
-                            if ($value != "0000-00-00" && $value != '') {
-                                $x = explode("-", $value);
-                                if ($short == false)
-                                    $arrMM = array(1 => "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
-                                else
-                                    $arrMM = array(1 => "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                // return $x[2]." ".$arrMM[(int)$x[1]]." ".($x[0]>2500?$x[0]:$x[0]+543);
-                                if ($need_time == '1') {
-                                    if ($need_time_second == '1') {
-                                        $time_format = $time != '' ? date('H:i:s น.', strtotime($time)) : '';
-                                    } else {
-                                        $time_format = $time != '' ? date('H:i น.', strtotime($time)) : '';
-                                    }
-                                } else {
-                                    $time_format = '';
-                                }
-
-                                return (int)$x[2] . " " . $arrMM[(int)$x[1]] . " " . ($x[0] > 2500 ? $x[0] : $x[0] + 543) . " " . $time_format;
-                            } else
-                                return "";
-                        }
-                        $sql = "SELECT *,`details_ppetiton`.`id`,details_ppetiton.petition_id FROM `details_ppetiton`
-                        JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
-                        JOIN petition_type ON petition_name.id_petition = petition_type.id 
-                        JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        WHERE details_ppetiton.petition_type in (1, 2, 3, 4);";
-                        $result = $db->query($sql); ?>
-                        <?php
-                        if ($result->rowCount() > 0) {
-                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                // แปลงวันที่ให้เป็นรูปแบบไทย
-                                $newdate = ConvertToThaiDate($row['date'], 0, 0);
-                        ?>
-                                <tr>
-                                    <td> <?php echo $newdate ?> </td>
-                                    <td> <?php echo $row['petition_name'] ?> </td>
-                                    <td> <?php echo $row['user_name'] . $row['last_name'] ?> </td>
-                                    <td> <?php echo $row['name_status'] ?> </td>
-                                    <td>
-                                        <?php if ($row['petition_id'] == 6) { ?>
-                                            <button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>" data-petition_id="<?php echo $row['petition_id']; ?>" onclick="openAnotherModal(this)">จัดการ</button>
-                                        <?php } else { ?>
-                                            <button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>" data-petition_id="<?php echo $row['petition_id']; ?>">จัดการ</button>
-                                        <?php  }; ?>
-                                    </td>
-
-                                </tr>
-                        <?php
-                            }
-                        } else {
-                            echo "0 results";
-                        }
-                        ?>
+                       
                     </tbody>
                 </table>
                 <!-- Modal -->
@@ -138,67 +74,22 @@
                     </div>
                 </div>
                 <div class="modal fade" id="anotherModalId" tabindex="-1" aria-labelledby="anotherModalLabel" aria-hidden="true">
-                    <div class="modal-dialog  modal-xl">
+                    <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="anotherModalLabel">ข้อมูลคำร้อง..</h5>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <iframe id="pdfViewer2" width="100%" height="500px" frameborder="0"></iframe>
                                 <input type="hidden" id="hiddenIdField" value="">
+                                <!-- New input field added below -->
+                                <iframe id="pdfViewer2" width="100%" height="500px" frameborder="0"></iframe>
                             </div>
-                            <div class="row mx-3">
-                                <div class="col-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            อนุญาต
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="2">
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            อนุมัติ
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- แก้ไข id ให้เป็น unique สำหรับ radio ต่อไปนี้ -->
-                                <div class="col-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="3">
-                                        <label class="form-check-label" for="flexRadioDefault3">
-                                            เห็นชอบ
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- เพิ่มต่อไป -->
-                                <div class="col-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" value="4">
-                                        <label class="form-check-label" for="flexRadioDefault4">
-                                            ลงนาม
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="col-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault5" value="5">
-                                        <label class="form-check-label" for="flexRadioDefault5">
-                                            สั่ง
-                                        </label>
-                                    </div>
-                                </div>
+                            <div class="justify-content-center mx-5">
+                                <label for="">ความเห็นหัวหน้ากลุ่มสาระ / หัวหน้างาน</label>
+                                <input type="text" id="Secondary_opinion" class="form-control" placeholder="ความเห็นหัวหน้ากลุ่มสาระ / หัวหน้างาน">
                             </div>
-                            <div class="row mx-3 mt-3">
-                                <div id="inputContainer" style="display: none;">
-                                    <input type="text" class="form-control" placeholder="กรอกข้อมูลที่นี่">
-                                </div>
-                            </div>
-                            <div class="modal-footer justify-content-center mt-3">
+                            <div class="modal-footer justify-content-center">
                                 <button type="button" id="approveButton2" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
                                 <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
                             </div>
@@ -216,7 +107,7 @@
         window.location.href = "../"
     }
     $(document).ready(function() {
-        $('.manage-button').on('click', function() {
+        $('#checktherequest').on('click', '.manage-button', function() {
             var id = $(this).data('id');
             var petitionId = $(this).data('petition_id');
             console.log("ID:" + id + "Petition ID:" + petitionId); // Check the values
@@ -270,11 +161,9 @@
             // Retrieve the id from the appropriate modal
             var id = $('#anotherModalId').data('id'); // Assuming the id is stored in the second modal
             var id_status = 3; // Define and assign a value to id_status
-            var memo_type = $('input[name="flexRadioDefault"]:checked').val();
-            var save_a_message = $('#inputContainer input').val(); // Read value from input field if present
+            var Secondary_opinion = $('#Secondary_opinion').val();
 
-            console.log("Sending ID:", id, "Status:", id_status);
-            console.log(save_a_message,memo_type);
+       
             // AJAX call to update the status
             $.ajax({
                 url: "update_status1",
@@ -282,8 +171,7 @@
                 data: {
                     id: id,
                     id_status: id_status,
-                    save_a_message: save_a_message,
-                    memo_type: memo_type
+                    Secondary_opinion: Secondary_opinion,
                 },
                 success: function(response) {
                     // var data = JSON.parse(response);
@@ -345,6 +233,67 @@
             }
         });
 
+
+        $.ajax({
+            url: "get_subject",
+            type: "POST",
+            data: {
+
+            },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                var table = $('#checktherequest').DataTable({
+                    data: data,
+
+                    columns: [{
+                            data: 'date'
+                        },
+                        {
+                            data: 'petition_name'
+                        },
+                        {
+                            data: 'request_type_name'
+                        },
+
+                        {
+                            data: 'name_status',
+                            createdCell: function(td, cellData, rowData, row, col) {
+                                if (cellData == "รอพิจารณา") {
+                                    $(td).addClass("status1");
+                                } else if (cellData == "รอรองผู้อำนวยการพิจารณา") {
+                                    $(td).addClass("status2");
+                                } else if (cellData == "รอผู้อำนวยการพิจารณา") {
+                                    $(td).addClass("status3");
+                                } else if (cellData == "อนุมัติแล้ว") {
+                                    $(td).addClass("status4");
+                                } else if (cellData == "ไม่อนุมัติแล้ว") {
+                                    $(td).addClass("status5");
+                                } else if (cellData == "ไม่ผ่านพิจารณา") {
+                                    $(td).addClass("status6");
+                                } else if (cellData == "ยกเลิก") {
+                                    $(td).addClass("status7");
+                                } else if (cellData == "รอหัวหน้ากลุ่มสาระพิจารณา") {
+                                    $(td).addClass("status8");
+                                }
+                            },
+                        },
+                        {
+                            data: null,
+                            render: function(data, type, row) {
+                                return `<button class="btn btn-primary manage-button" data-id="${row.id}" data-petition-id="${row.petition_id}" data-id-status="${row.id_status}">จัดการ</button>`;
+                            }
+                        }
+                    ],
+                    order: [
+                        [0, 'desc']
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
     });
 </script>
 <?php include("../../footer.php") ?>

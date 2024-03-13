@@ -63,16 +63,15 @@ $(document).ready(function () {
       product_name7.push($(this).val());
     });
     // การจัดตารางสอนแทนครูที่ไม่มาปฏิบัติราชการ
-    var subject_group = $("#subject_group_4").val();
     var semester = $("#semester").val();
     var school_year = $("#school_year_4").val();
-    console.log(subject_group + " " + semester + " " + school_year);
+    var id_subject_group = $("#id_subject_group_7").val();
+    console.log( semester + " " + school_year);
     $.ajax({
       url: "insterarranging_teaching_schedules_for_teachers_who_are_not_onofficialduty", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
       method: "POST",
       data: {
         user_id: localStorage.getItem("user_id"),
-        subject_group: subject_group,
         semester: semester,
         school_year: school_year,
         addIdValues: addIdValues,
@@ -84,6 +83,7 @@ $(document).ready(function () {
         product_name5: product_name5,
         product_name6: product_name6,
         product_name7: product_name7,
+        id_subject_group_7: id_subject_group,
       },
       success: function (response) {
         // console.log(response);

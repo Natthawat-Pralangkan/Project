@@ -268,9 +268,23 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="" style="font-size: 18px;">กลุ่มบริหาร/กลุ่มสาระฯ/งาน</label>
                                         <input type="text" class="form-control mt-2" id="subject_group_1" name="subject_group_1" placeholder="กลุ่มบริหาร/กลุ่มสาระฯ/งาน">
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <select class="form-select mt-2" id="id_subject_group_10" name="id_subject_group_10">
+                                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -410,9 +424,23 @@
                             <input type="hidden" name="" id="id_from" value="5">
                             <div class="row mt-2">
                                 <div class="col-4">
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <input type="text" id="subject_group_4" name="subject_group_4" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้">
+                                    </div> -->
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <select class="form-select mt-2" id="id_subject_group_7" name="id_subject_group_7">
+                                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -659,9 +687,19 @@
                             <div class="row mb-3">
                                 <div class="row mt-2">
                                     <div class="col-4">
-                                        <div class="form-group ">
+                                        <div class="form-group">
                                             <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
-                                            <input type="text" class="form-control mt-2" placeholder="กลุ่มสาระการเรียนรู้" id="subject_group_7" name="subject_group_7">
+                                            <select class="form-select mt-2" id="id_subject_group_11" name="id_subject_group_11">
+                                                <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                                <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                                <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                                <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                                <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                                <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                                <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                                <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                                <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-4">
