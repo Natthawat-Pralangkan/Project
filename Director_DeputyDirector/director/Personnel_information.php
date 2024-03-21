@@ -25,14 +25,37 @@
                     <thead>
                         <tr>
                             <th>ลำดับ</th>
-                            <th>รูปภาพ</th>
-                            <th>คำนำหน้า</th>
-                            <th>ชื่อ</th>
-                            <th>นามสกุล</th>
+                            <th>ชื่อ-นามสกุล</th>
                             <th>ตำแหน่ง</th>
+                            <th>ดูรายละเอียด</th>
                         </tr>
                     </thead>
-                    <!-- เพิ่มข้อมูลตารางตรงนี้ -->
+                    <?php
+                    try {
+                        $sql = "SELECT * FROM `teacher_personnel_information` 
+            JOIN type ON teacher_personnel_information.position = type.id_type 
+            WHERE teacher_personnel_information.position IN (2, 3, 4, 5, 6, 7) and teacher_personnel_information.status in (0) ORDER BY id DESC";
+                        $result = $db->query($sql);
+
+                        if ($result && $result->rowCount() > 0) {
+                            $number = 1; // Initialize counter outside the loop
+                            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                                <tr>
+                                    <td><?php echo $number++; ?></td>
+                                    <td><?php echo htmlspecialchars($row['user_name']) . ' ' . htmlspecialchars($row['last_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['name_type']); ?></td>
+                                    <td><button class="btn" style="background-color: #BB6AFB; color:#FFFFFF" onclick="window.location.href='get_information.php?id=<?php echo $row['id']; ?>'">ดูรายละเอียด</button></td>
+                                </tr>
+                    <?php
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>ไม่พบข้อมูล</td></tr>";
+                        }
+                    } catch (PDOException $e) {
+                        die("Database error: " . $e->getMessage());
+                    }
+                    ?>
                 </table>
             </div>
         </div>
@@ -43,5 +66,6 @@
         localStorage.clear()
         window.location.href = "../"
     }
+    
 </script>
 <?php include("../../footer.php") ?>

@@ -496,13 +496,13 @@ if ($row['petition_id'] == 7) {
         exit('Template PDF not found at path: ' . $templatePath);
     }
 
+
     // $pageCount = $pdf->setSourceFile($templatePath);
     // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
     // $pdf->addPage();
+    $pdf->SetAutoPageBreak(false);
     // $pdf->useImportedPage($pageId);
-
-
     $pageCount = $pdf->setSourceFile($templatePath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         // Import each page
@@ -517,13 +517,13 @@ if ($row['petition_id'] == 7) {
         // If you have specific content to add to each page, you can do so here.
         // Note: You might need to adjust positions or content based on the page number if necessary.
         if ($pageNo == 1) {
-
-
             $details = explode(",", $row['details']);
             $positions = [
-                [90, 55], [132, 73], [175, 73], [50, 87], [140, 94],
-                [120, 101], [45, 108], [140, 108], [45, 115], [100, 121],
-                [50, 101], [40, 94], [40, 80], [90, 80]
+                [90, 58], [127, 78], [165, 78], [40, 93],
+                [53, 100], [35, 108], [110, 108], [40, 115],
+                [105, 115], [100, 122], [127, 100], [120, 93],
+                [40, 85], [90, 85]
+                //    
             ];
             foreach ($details as $index => $detail) {
                 if (isset($positions[$index])) {
@@ -558,9 +558,9 @@ if ($row['petition_id'] == 7) {
                         // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
                         $pdf->SetXY($x - 12, $y);
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-                        $pdf->SetXY($x + 3, $y);
+                        $pdf->SetXY($x + 5, $y);
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
-                        $pdf->SetXY($x + 26, $y);
+                        $pdf->SetXY($x + 27, $y);
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
                     } elseif ($index == 7) { // ตำแหน่งที่ 8 ของ $details เป็นวันที่ (ตำแหน่งใหม่)
                         // แยกวัน เดือน และปีออกจากกัน
@@ -572,7 +572,7 @@ if ($row['petition_id'] == 7) {
                         // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
                         $pdf->SetXY($x + 1, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-                        $pdf->SetXY($x + 16, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
+                        $pdf->SetXY($x + 17, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
                         $pdf->SetXY($x + 38, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
@@ -584,7 +584,7 @@ if ($row['petition_id'] == 7) {
                 }
             }
 
-            $pdf->SetXY(108, 185);
+            $pdf->SetXY(108, 170);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
 
             $userName = $row['user_name'];
@@ -593,7 +593,7 @@ if ($row['petition_id'] == 7) {
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr\.)/i', '', $userName);
 
             // Convert the cleaned name to a format usable in TCPDF
-            $pdf->SetXY(112, 192);
+            $pdf->SetXY(112, 177);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName . ' ' . $row['last_name']), 0, 1);
             $thai_month_arr = array(
                 "01" => "มกราคม",
@@ -647,11 +647,11 @@ if ($row['petition_id'] == 7) {
                 $year = (int)$year + 543;
 
                 // ตั้งค่าตำแหน่ง XY และแสดงวันที่
-                $pdf->SetXY(112, 226);
+                $pdf->SetXY(112, 215);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-                $pdf->SetXY(122, 226);
+                $pdf->SetXY(122, 215);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
-                $pdf->SetXY(134, 226);
+                $pdf->SetXY(134, 215);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
             } else {
                 // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
@@ -659,40 +659,24 @@ if ($row['petition_id'] == 7) {
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
 
-            // Check if the id_status is equal to 4
-            if ($row['id_status'] == 4) {
-                // Set the cursor position on the PDF for the Deputy Director's name
-                $pdf->SetXY(50, 260);
-                // Create a cell and insert the Deputy Director's name from the database
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
-
-                // Set the cursor position on the PDF for the Director's name
-                $pdf->SetXY(133, 260);
-                // Create a cell and insert the Director's name from the database
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
-            }
-
-
-
-
             $userName = $row['group_leader_name'];
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr)/i', '', $userName);
 
             // Convert the cleaned name to a format usable in TCPDF
-            $pdf->SetXY(115, 206);
+            $pdf->SetXY(115, 192);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName), 0, 1);
 
-            $pdf->SetXY(112, 213);
+            $pdf->SetXY(112, 200);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['group_leader_name']), 0, 1);
 
-            $pdf->SetXY(120, 220);
+            $pdf->SetXY(120, 207);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_group_name']), 0, 1);
 
             $iconPositions_1 = [
-                '1' => ['x' => 114, 'y' => 240, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 114, 'y' => 247, 'icon' => './img/8666665_check_icon.png'],
+                '1' => ['x' => 113, 'y' => 230, 'icon' => './img/8666665_check_icon.png'],
+                '2' => ['x' => 113, 'y' => 237, 'icon' => './img/8666665_check_icon.png'],
 
             ];
             if (isset($row['consider_group_leader']) && array_key_exists($row['consider_group_leader'], $iconPositions_1)) {
@@ -705,8 +689,111 @@ if ($row['petition_id'] == 7) {
                 $y = $iconPositions_1[$row['consider_group_leader']]['y'];
                 $pdf->Image($icon, $x, $y, 5, 10);
             }
-            $pdf->SetXY(135, 247);
+            $pdf->SetXY(135, 237);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['details_group_leader']), 0, 1);
+
+
+            if ($row['id_status'] == 3) {
+                // Set the cursor position on the PDF for the Deputy Director's name
+                $pdf->SetXY(48, 248);
+                // Create a cell and insert the Deputy Director's name from the database
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
+                // The Director's name is not added when id_status is 3
+            } elseif ($row['id_status'] == 4) {
+                // For id_status 4, add both Deputy Director's and Director's names
+
+                // Deputy Director's name
+                $pdf->SetXY(48, 248);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
+
+                // Director's name
+                $pdf->SetXY(133, 248);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
+            }
+            if (!empty($row['date_deputydirector']) && $row['date_deputydirector'] != '0000-00-00') {
+                $thai_month_arr1 = array(
+                    "01" => "ม.ค.",
+                    "02" => "ก.พ.",
+                    "03" => "มี.ค.",
+                    "04" => "เม.ย.",
+                    "05" => "พ.ค.",
+                    "06" => "มิ.ย.",
+                    "07" => "ก.ค.",
+                    "08" => "ส.ค.",
+                    "09" => "ก.ย.",
+                    "10" => "ต.ค.",
+                    "11" => "พ.ย.",
+                    "12" => "ธ.ค."
+                );
+
+                list($year, $month1, $day) = explode("-", $row['date_deputydirector']);
+
+                $thai_month1 = $thai_month_arr1[$month1];
+                // แปลงให้อยู่ในรูปแบบไทย
+                $newdate = date("d H:i:s", strtotime($row['date_deputydirector']));
+
+                $newdate = ConvertToThaiDate($row['date_deputydirector']);
+                $pdf->SetXY(55, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_deputydirector']))), 0, 1);
+                $pdf->SetXY(63, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
+                $pdf->SetXY(73, 267);;
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+            } else {
+            }
+
+            if (!empty($row['date_director']) && $row['date_director'] != '0000-00-00') {
+                $thai_month_arr2 = array(
+                    "01" => "ม.ค.", "02" => "ก.พ.", "03" => "มี.ค.", "04" => "เม.ย.",
+                    "05" => "พ.ค.", "06" => "มิ.ย.", "07" => "ก.ค.", "08" => "ส.ค.",
+                    "09" => "ก.ย.", "10" => "ต.ค.", "11" => "พ.ย.", "12" => "ธ.ค."
+                );
+
+                list($year, $month, $day) = explode("-", $row['date_director']); // Corrected $month2 to $month
+                $thai_month2 = $thai_month_arr2[$month]; // Use $month to access $thai_month_arr2
+
+                // Assuming ConvertToThaiDate is a function you've defined to convert dates, it's not used here.
+                // $newdate = ConvertToThaiDate($row['date_director']); // This line seems unnecessary based on the code context.
+
+                $pdf->SetXY(138, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
+                $pdf->SetXY(146, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month2), 0, 1); // Use $thai_month
+                $pdf->SetXY(155, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', (int)$year + 543), 0, 1); // Cast $year to int before adding 543
+            } else {
+                // Handle the else condition if necessary
+            }
+
+
+            // $thai_month_arr2 = array(
+            //     "01" => "ม.ค.",
+            //     "02" => "ก.พ.",
+            //     "03" => "มี.ค.",
+            //     "04" => "เม.ย.",
+            //     "05" => "พ.ค.",
+            //     "06" => "มิ.ย.",
+            //     "07" => "ก.ค.",
+            //     "08" => "ส.ค.",
+            //     "09" => "ก.ย.",
+            //     "10" => "ต.ค.",
+            //     "11" => "พ.ย.",
+            //     "12" => "ธ.ค."
+            // );
+
+            // list($year, $month2, $day) = explode("-", $row['date_director']);
+
+            // $thai_month2 = $thai_month_arr1[$month2];
+            // // แปลงให้อยู่ในรูปแบบไทย
+            // $newdate = date("d H:i:s", strtotime($row['date_director']));
+
+            // $newdate = ConvertToThaiDate($row['date_director']);
+            // $pdf->SetXY(138, 267);
+            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
+            // $pdf->SetXY(146, 267);
+            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
+            // $pdf->SetXY(155, 267);;
+            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
         }
     }
     $pdf->Output('I', 'generated_pdf.pdf');

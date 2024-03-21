@@ -741,34 +741,58 @@ if ($row['petition_id'] == 7) {
             } else {
             }
 
-            $thai_month_arr2 = array(
-                "01" => "ม.ค.",
-                "02" => "ก.พ.",
-                "03" => "มี.ค.",
-                "04" => "เม.ย.",
-                "05" => "พ.ค.",
-                "06" => "มิ.ย.",
-                "07" => "ก.ค.",
-                "08" => "ส.ค.",
-                "09" => "ก.ย.",
-                "10" => "ต.ค.",
-                "11" => "พ.ย.",
-                "12" => "ธ.ค."
-            );
+            if (!empty($row['date_director']) && $row['date_director'] != '0000-00-00') {
+                $thai_month_arr2 = array(
+                    "01" => "ม.ค.", "02" => "ก.พ.", "03" => "มี.ค.", "04" => "เม.ย.",
+                    "05" => "พ.ค.", "06" => "มิ.ย.", "07" => "ก.ค.", "08" => "ส.ค.",
+                    "09" => "ก.ย.", "10" => "ต.ค.", "11" => "พ.ย.", "12" => "ธ.ค."
+                );
 
-            list($year, $month2, $day) = explode("-", $row['date_director']);
+                list($year, $month, $day) = explode("-", $row['date_director']); // Corrected $month2 to $month
+                $thai_month2 = $thai_month_arr2[$month]; // Use $month to access $thai_month_arr2
 
-            $thai_month2 = $thai_month_arr1[$month2];
-            // แปลงให้อยู่ในรูปแบบไทย
-            $newdate = date("d H:i:s", strtotime($row['date_director']));
+                // Assuming ConvertToThaiDate is a function you've defined to convert dates, it's not used here.
+                // $newdate = ConvertToThaiDate($row['date_director']); // This line seems unnecessary based on the code context.
 
-            $newdate = ConvertToThaiDate($row['date_director']);
-            $pdf->SetXY(138, 267);
-            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
-            $pdf->SetXY(146, 267);
-            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
-            $pdf->SetXY(155, 267);;
-            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+                $pdf->SetXY(138, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
+                $pdf->SetXY(146, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month2), 0, 1); // Use $thai_month
+                $pdf->SetXY(155, 267);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', (int)$year + 543), 0, 1); // Cast $year to int before adding 543
+            } else {
+                // Handle the else condition if necessary
+            }
+
+
+            // $thai_month_arr2 = array(
+            //     "01" => "ม.ค.",
+            //     "02" => "ก.พ.",
+            //     "03" => "มี.ค.",
+            //     "04" => "เม.ย.",
+            //     "05" => "พ.ค.",
+            //     "06" => "มิ.ย.",
+            //     "07" => "ก.ค.",
+            //     "08" => "ส.ค.",
+            //     "09" => "ก.ย.",
+            //     "10" => "ต.ค.",
+            //     "11" => "พ.ย.",
+            //     "12" => "ธ.ค."
+            // );
+
+            // list($year, $month2, $day) = explode("-", $row['date_director']);
+
+            // $thai_month2 = $thai_month_arr1[$month2];
+            // // แปลงให้อยู่ในรูปแบบไทย
+            // $newdate = date("d H:i:s", strtotime($row['date_director']));
+
+            // $newdate = ConvertToThaiDate($row['date_director']);
+            // $pdf->SetXY(138, 267);
+            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
+            // $pdf->SetXY(146, 267);
+            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
+            // $pdf->SetXY(155, 267);;
+            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
         }
     }
     $pdf->Output('I', 'generated_pdf.pdf');
@@ -1630,7 +1654,6 @@ if ($row['petition_id'] == 7) {
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
         }
-
     }
 
 
