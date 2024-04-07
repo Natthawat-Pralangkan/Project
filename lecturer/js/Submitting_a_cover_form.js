@@ -14,7 +14,7 @@ $(document).ready(function () {
     var save_message = $("#save_message").val();
     var id_subject_group = $("#id_subject_group_10").val();
     console.log(
-        document_name_consider +
+      document_name_consider +
         " " +
         activity_name +
         " " +
@@ -24,8 +24,8 @@ $(document).ready(function () {
         "" +
         activity_where +
         "" +
-        summary_details+
-        ""+
+        summary_details +
+        "" +
         memo_id +
         "" +
         save_message
@@ -52,8 +52,16 @@ $(document).ready(function () {
         console.log(response);
         var data = JSON.parse(response);
         if (data.status === 200) {
-          alert("บันทึกข้อมูลสำเร็จ");
-          window.location.href = "follow_up_on_requests";
+          Swal.fire({
+            title: "ยื่นคำร้องสำเร็จ!",
+            text: response.message,
+            icon: "success",
+            confirmButtonText: "ยืนยัน", // Change the text of the confirmation button
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload(); // Reload the page after confirmation
+            }
+          });
         } else {
           alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
           window.location.href = "submit_a_complaint";

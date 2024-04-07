@@ -153,7 +153,6 @@
         var id = $(this).data('id'); // รับค่า ID ของคำร้องที่จะยกเลิก
 
         // ยืนยันก่อนทำการยกเลิก
-        if (confirm('คุณแน่ใจหรือไม่ที่จะยกเลิกคำร้องนี้?')) {
             $.ajax({
                 url: 'cancel_request', // URL ไปยังสคริปต์เซิร์ฟเวอร์ที่จะอัปเดตฐานข้อมูล
                 type: 'POST',
@@ -163,16 +162,23 @@
                 }, // ส่งข้อมูล ID และสถานะใหม่
                 success: function(response) {
                     // ทำอะไรก็ตามที่ต้องการหลังจากอัปเดตสำเร็จ, เช่น รีโหลดหน้าหรือแสดงข้อความ
-                    alert('คำร้องถูกยกเลิกสำเร็จ');
-                    // รีโหลดหน้าเว็บหรืออัปเดต DataTables ที่นี่
-                    location.reload(); // หรือใช้ table.draw(false) ถ้าคุณไม่ต้องการรีโหลดหน้าเว็บ
+                    Swal.fire({
+                        title: "ยกเลิกคำร้องสำเร็จ!",
+                        text: response.message,
+                        icon: "success",
+                        confirmButtonText: "ยืนยัน", // Change the text of the confirmation button
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload(); // Reload the page after confirmation
+                        }
+                    });
                 },
                 error: function(xhr, status, error) {
                     // แสดงข้อความผิดพลาดหากมี
                     alert('ไม่สามารถยกเลิกคำร้องได้');
                 }
             });
-        }
+      
     });
 </script>
 

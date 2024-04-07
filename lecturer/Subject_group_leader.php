@@ -243,7 +243,16 @@ include("../servers/connect.php"); ?>
                 },
                 success: function(response) {
                     if (response.status === "success") {
-                        alert("การดำเนินการเรียบร้อยแล้ว");
+                        Swal.fire({
+                            title: "สำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page after confirmation
+                            }
+                        });
                         $('#exampleModal8').modal('hide'); // ซ่อน modal ที่ต้องการ
                         location.reload(); // or use a more targeted update method
                     } else {
@@ -274,9 +283,17 @@ include("../servers/connect.php"); ?>
                 },
                 success: function(response) {
                     if (response.status === "success") {
-                        alert("การดำเนินการเรียบร้อยแล้ว");
+                        Swal.fire({
+                            title: "สำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page after confirmation
+                            }
+                        });
                         $('#exampleModal10').modal('hide'); // ซ่อน modal ที่ต้องการ
-                        location.reload(); // or use a more targeted update method
                     } else {
                         alert("เกิดข้อผิดพลาด: " + response.message);
                     }
@@ -312,9 +329,16 @@ include("../servers/connect.php"); ?>
                     id_status: id_status
                 },
                 success: function(response) {
-                    alert("อัปเดตข้อมูลเรียบร้อย");
-                    $('#exampleModal1').modal('hide');
-                    location.reload();
+                    Swal.fire({
+                        title: "สำเร็จ!",
+                        text: response.message,
+                        icon: "success",
+                        confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload(); // Reload the page after confirmation
+                        }
+                    });
                     console.log('Success:', response);
                 },
                 error: function(xhr, status, error) {
@@ -329,12 +353,14 @@ include("../servers/connect.php"); ?>
             url: "get_subject",
             type: "POST",
             data: {
-                user_id: localStorage.getItem("user_id"),
                 id_subject_group: localStorage.getItem("id_subject_group")
             },
             dataType: 'json',
             success: function(data) {
                 console.log(data);
+                // Remove duplicates from the data array
+                data = $.unique(data);
+
                 var table = $('#checktherequest').DataTable({
                     data: data,
                     columns: [{
@@ -385,6 +411,7 @@ include("../servers/connect.php"); ?>
                 console.error(xhr.responseText);
             }
         });
+
 
         $('input[name="decision"]').change(function() {
             if ($('#command').is(':checked')) {

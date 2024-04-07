@@ -1,30 +1,21 @@
-$(document).ready(function () {
-  $("#addpersonnelinformation").DataTable({
-    columns: [
-      {
-        data: "ลำดับ",
-      },
-      {
-        data: "รูปภาพ",
-      },
-      {
-        data: "คำนำหน้า",
-      },
-      {
-        data: "ชื่อ",
-      },
-      {
-        data: "นามสกุล",
-      },
-      {
-        data: "ตำแหนง",
-      },
-      {
-        data: "แก้ไข",
-      },
-      {
-        data: "ลบ",
-      },
-    ],
-  });
-});
+// $(document).ready(function () {
+//   $("#addpersonnelinformation").DataTable({
+//     columns: [
+//       {
+//         data: "ลำดับ",
+//       },
+//       {
+//         data: "ชื่อ - นามสกุล",
+//       },
+//       {
+//         data: "ตำแหน่ง",
+//       },
+//       {
+//         data: "ไอดีผู้ใช้",
+//       },
+//       {
+//         data: "จัดการ",
+//       },
+//     ],
+//   });
+// });

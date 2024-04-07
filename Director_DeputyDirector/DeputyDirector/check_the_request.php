@@ -328,20 +328,11 @@
             });
         });
 
-        // Show input field if radio button is checked
-        // $('input[type="radio"][name="flexRadioDefault"]').change(function() {
-        //     if ($(this).val() === "5") {
-        //         $('#inputContainer').show();
-        //     } else {
-        //         $('#inputContainer').hide();
-        //     }
-        // });
         $('input[type="radio"][name="flexRadioDefault"]').change(function() {
             if ($(this).is(":checked")) {
                 $('#inputContainer').show();
             }
         });
-
 
         $.ajax({
             url: "get_subject",

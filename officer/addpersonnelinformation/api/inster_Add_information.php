@@ -133,8 +133,6 @@ try {
     if ($stmt->execute() && $stmt_user->execute()) {
         echo json_encode(['status' => 200]);
     }
-
 } catch (Exception $e) {
     echo json_encode(['status' => 400, "mgs" => $e->getMessage()]);
 }
-

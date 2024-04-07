@@ -13,7 +13,7 @@
 <script>
     $("#nock").click(function() {
         localStorage.clear()
-        window.location.href = ".././"
+        window.location.href = "../../"
         alert("ยืนยันการออกระบบ");
     });
 </script>

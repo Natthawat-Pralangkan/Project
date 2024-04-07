@@ -168,7 +168,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="all_waiting_for_approval">
-
+                                    
                                     </tbody>
                                 </table>
                             </div>

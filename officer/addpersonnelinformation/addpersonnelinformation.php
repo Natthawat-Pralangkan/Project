@@ -40,7 +40,7 @@
                     try {
                         $sql = "SELECT * FROM `teacher_personnel_information` 
             JOIN type ON teacher_personnel_information.position = type.id_type 
-            WHERE teacher_personnel_information.position IN (2, 3, 4, 5, 6, 7) and teacher_personnel_information.status in (0) ORDER BY id DESC";
+            WHERE teacher_personnel_information.position IN (1, 2, 3, 4, 5, 6, 7) and teacher_personnel_information.status in (0) ORDER BY id DESC";
                         $result = $db->query($sql);
 
                         if ($result && $result->rowCount() > 0) {

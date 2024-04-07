@@ -68,7 +68,6 @@ include("./servers/connect.php");
                                 window.location.href = "./admin/home.php";
                                 break;
                             case 7:
-                            case 8: // This allows both case 7 and case 8 to execute the same code block
                                 localStorage.setItem("id_type", data.id_type);
                                 localStorage.setItem("user_id", data.user_id);
                                 localStorage.setItem("id_subject_group", data.id_subject_group);

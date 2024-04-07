@@ -180,7 +180,7 @@
     </div>
 </div>
 <script>
-    if (localStorage.getItem("id_type") != "3" && localStorage.getItem("user_id") == null) {
+    if (localStorage.getItem("id_type") != "2" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }

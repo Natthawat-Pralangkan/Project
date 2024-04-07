@@ -58,36 +58,41 @@
                 </div>
                 <div class="col-2">
                     <div class="form-group mt-2">
-                        <label for="" style="font-size: 18px;">ตำแหน่ง</label>
-                        <div class="">
+                        <label for="" style="font-size: 18px;">
+                            ตำแหน่ง
+                        </label>
+                        <div>
                             <select name="position" class="form-control mt-2" id="position" required>
                                 <option value="">เลือกตำแหน่ง</option>
                                 <option value="1">ผู้อำนวยการ</option>
                                 <option value="2">รองผู้อำนวยการ</option>
-                                <option value="3">เจ้าหน้าที่ฝ่ายวิชาการ</option>
-                                <option value="4">เจ้าหน้าที่ฝ่ายทั่วไป</option>
-                                <option value="5">เจ้าหน้าที่ฝ่ายงบประมาณ</option>
-                                <option value="6">เจ้าหน้าที่ฝ่ายบุคคล</option>
                                 <option value="7">ครู</option>
-                                <option value="8">หัวหน้ากลุ่มสาระการเรียนรู้</option>
-                            </select>
+                            </select> 
                         </div>
                     </div>
                 </div>
                 <div class="col-3" id="id_subject" style="display:none;">
                     <div class="form-group mt-2">
-                        <label for="" style="font-size: 18px;">หัวหน้ากลุ่มสาระการเรียนรู้</label>
+                        <label for="" style="font-size: 18px;">เลือกตำแหน่งเพิ่มเติม</label>
                         <div class="">
                             <select name="id_subject_group" class="form-control mt-2" id="id_subject_group" required>
-                                <option value="">เลือกหัวหน้ากลุ่มสาระการเรียนรู้</option>
-                                <option value="1">หัวหน้ากลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                <option value="2">หัวหน้ากลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                <option value="3">หัวหน้ากลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                <option value="4">หัวหน้ากลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                <option value="5">หัวหน้ากลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                <option value="6">หัวหน้ากลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                <option value="7">หัวหน้ากลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                <option value="8">หัวหน้ากลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                <option value="">เลือกตำแหน่งเพิ่มเติม</option>
+                                <option value="1">ผู้อำนวยการ</option>
+                                <option value="2">รองผู้อำนวยการ</option>
+                                <option value="3">หัวหน้ากลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                <option value="4">หัวหน้ากลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                <option value="5">หัวหน้ากลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                <option value="6">หัวหน้ากลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                <option value="7">หัวหน้ากลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                <option value="8">หัวหน้ากลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                <option value="9">หัวหน้ากลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                <option value="10">หัวหน้ากลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                <option value="11">หัวหน้าเจ้าหน้าที่ฝ่ายงบประมาณ</option>
+                                <option value="12">หัวหน้าเจ้าหน้าที่ฝ่ายทั่วไป</option>
+                                <option value="13">หัวหน้าเจ้าหน้าที่ฝ่ายบุคคล</option>
+                                <option value="14">หัวหน้าเจ้าหน้าที่ฝ่ายวิชาการ</option>
+                                <option value="15">เจ้าหน้าที่ฝ่ายทั่วไป</option>
+                                <option value="16">เจ้าหน้าที่ฝ่ายบุคคล</option>
                             </select>
                         </div>
                     </div>
@@ -280,7 +285,7 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-   
+    
 </script>
 
 <?php include("../../footer.php") ?>

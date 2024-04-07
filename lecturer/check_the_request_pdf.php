@@ -311,11 +311,11 @@ if ($row['petition_id'] == 7) {
 
             // การพิจารณาสั่งการของครู
             $iconPositions_1 = [
-                '1' => ['x' => 58, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 83, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '3' => ['x' => 108, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '4' => ['x' => 133, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '5' => ['x' => 58, 'y' => 170, 'icon' => './img/8666665_check_icon.png']
+                '1' => ['x' => 58, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 83, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '3' => ['x' => 108, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '4' => ['x' => 133, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '5' => ['x' => 58, 'y' => 170, 'icon' => './img/check-mark_5291043.png']
             ];
             if (isset($row['memo_id']) && array_key_exists($row['memo_id'], $iconPositions_1)) {
                 // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
@@ -332,11 +332,11 @@ if ($row['petition_id'] == 7) {
 
             // การพิจารณาสั่งการของโรงเรียน
             $iconPositions = [
-                '1' => ['x' => 145, 'y' => 242, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 172, 'y' => 242, 'icon' => './img/8666665_check_icon.png'],
-                '3' => ['x' => 145, 'y' => 250, 'icon' => './img/8666665_check_icon.png'],
-                '4' => ['x' => 172, 'y' => 250, 'icon' => './img/8666665_check_icon.png'],
-                '5' => ['x' => 145, 'y' => 258, 'icon' => './img/8666665_check_icon.png']
+                '1' => ['x' => 145, 'y' => 242, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 172, 'y' => 242, 'icon' => './img/check-mark_5291043.png'],
+                '3' => ['x' => 145, 'y' => 250, 'icon' => './img/check-mark_5291043.png'],
+                '4' => ['x' => 172, 'y' => 250, 'icon' => './img/check-mark_5291043.png'],
+                '5' => ['x' => 145, 'y' => 258, 'icon' => './img/check-mark_5291043.png']
             ];
             if (isset($row['memo_type']) && array_key_exists($row['memo_type'], $iconPositions)) {
                 // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
@@ -486,7 +486,7 @@ if ($row['petition_id'] == 7) {
             }
         }
     }
-    $pdf->Output('I', '/file/generated_pdf.pdf');
+    $pdf->Output('I', 'แบบฟอร์มปะหน้า.docx.pdf');
 } elseif ($row['petition_id'] == 1) {
     $templatePath = __DIR__ . '/file/แบบรายงานผลการพานักเรียนไปนอกสถานศึกษา.docx.pdf'; // Adjust path as necessary
     // Process and display the details
@@ -675,8 +675,8 @@ if ($row['petition_id'] == 7) {
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_group_name']), 0, 1);
 
             $iconPositions_1 = [
-                '1' => ['x' => 113, 'y' => 230, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 113, 'y' => 237, 'icon' => './img/8666665_check_icon.png'],
+                '1' => ['x' => 113, 'y' => 230, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 113, 'y' => 237, 'icon' => './img/check-mark_5291043.png'],
 
             ];
             if (isset($row['consider_group_leader']) && array_key_exists($row['consider_group_leader'], $iconPositions_1)) {
@@ -828,7 +828,8 @@ if ($row['petition_id'] == 7) {
         if ($pageNo == 1) {
             $details = explode(",", $row['details']);
             $positions = [
-                [220, 46],
+                [220, 38],
+                [17, 57], [27, 57], [50, 57], [105, 57], [155, 57], [217, 57], [227, 57],
                 [17, 64], [27, 64], [50, 64], [105, 64], [155, 64], [217, 64], [227, 64],
                 [17, 70], [27, 70], [50, 70], [105, 70], [155, 70], [217, 70], [227, 70],
                 [17, 76], [27, 76], [50, 76], [105, 76], [155, 76], [217, 76], [227, 76],
@@ -836,10 +837,9 @@ if ($row['petition_id'] == 7) {
                 [17, 88], [27, 88], [50, 88], [105, 88], [155, 88], [217, 88], [227, 88],
                 [17, 95], [27, 95], [50, 95], [105, 95], [155, 95], [217, 95], [227, 95],
                 [17, 103], [27, 103], [50, 103], [105, 103], [155, 103], [217, 103], [227, 103],
-                [17, 110], [27, 110], [50, 110], [105, 110], [155, 110], [217, 110], [227, 110],
             ];
             $datePositions = [2, 10, 17, 24, 31, 38, 45, 52];
-            $pdf->SetXY(163, 46);
+            $pdf->SetXY(163, 38);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_name']), 0, 1);
             foreach ($details as $index => $detail) {
                 $thai_month_arr1 = array(
@@ -885,7 +885,7 @@ if ($row['petition_id'] == 7) {
                 }
             }
 
-            $pdf->SetXY(220, 120);
+            $pdf->SetXY(220, 107);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
 
 
@@ -896,7 +896,7 @@ if ($row['petition_id'] == 7) {
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr\.)/i', '', $userName);
 
             // Convert the cleaned name to a format usable in TCPDF
-            $pdf->SetXY(225, 128);
+            $pdf->SetXY(225, 115);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName . ' ' . $row['last_name']), 0, 1);
 
             $thai_month_arr1 = array(
@@ -921,11 +921,11 @@ if ($row['petition_id'] == 7) {
             $newdate = date("d H:i:s", strtotime($row['date']));
 
             $newdate = ConvertToThaiDate($row['date']);
-            $pdf->SetXY(228, 142);
+            $pdf->SetXY(228, 130);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date']))), 0, 1);
-            $pdf->SetXY(237, 142);
+            $pdf->SetXY(237, 130);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
-            $pdf->SetXY(248, 142);;
+            $pdf->SetXY(248, 130);;
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
 
 
@@ -952,11 +952,11 @@ if ($row['petition_id'] == 7) {
                 $year = (int)$year + 543;
 
                 // ตั้งค่าตำแหน่ง XY และแสดงวันที่
-                $pdf->SetXY(145, 142);
+                $pdf->SetXY(145, 130);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-                $pdf->SetXY(155, 142);
+                $pdf->SetXY(155, 130);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
-                $pdf->SetXY(165, 142);
+                $pdf->SetXY(165, 130);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
             } else {
                 // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
@@ -970,13 +970,13 @@ if ($row['petition_id'] == 7) {
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr)/i', '', $userName);
 
             // Convert the cleaned name to a format usable in TCPDF
-            $pdf->SetXY(138, 128);
+            $pdf->SetXY(138, 107);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName), 0, 1);
 
-            $pdf->SetXY(132, 120);
+            $pdf->SetXY(132, 115);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['group_leader_name']), 0, 1);
 
-            $pdf->SetXY(162, 135);
+            $pdf->SetXY(162, 123);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_group_name']), 0, 1);
 
             if ($row['id_status'] == 3) {
@@ -1495,8 +1495,8 @@ if ($row['petition_id'] == 7) {
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
             $iconPositions_1 = [
-                '1' => ['x' => 112, 'y' => 246, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 112, 'y' => 253, 'icon' => './img/8666665_check_icon.png'],
+                '1' => ['x' => 112, 'y' => 246, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 112, 'y' => 253, 'icon' => './img/check-mark_5291043.png'],
 
             ];
             if (isset($row['memo_type']) && array_key_exists($row['memo_type'], $iconPositions_1)) {
@@ -1843,8 +1843,8 @@ if ($row['petition_id'] == 7) {
             }
             // การพิจารณาสั่งการของครู
             $iconPositions_1 = [
-                '1' => ['x' => 114, 'y' => 235, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 114, 'y' => 243, 'icon' => './img/8666665_check_icon.png'],
+                '1' => ['x' => 114, 'y' => 235, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 114, 'y' => 243, 'icon' => './img/check-mark_5291043.png'],
 
             ];
             if (isset($row['consider_group_leader']) && array_key_exists($row['consider_group_leader'], $iconPositions_1)) {

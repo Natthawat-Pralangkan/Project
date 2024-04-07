@@ -20,7 +20,7 @@ $(document).ready(function () {
   });
  
   $("#position").change(function(){
-    if( $("#position").val()== 8){
+    if( $("#position").val()== 7){
       $("#id_subject").show()
     }else{
       $("#id_subject").hide()

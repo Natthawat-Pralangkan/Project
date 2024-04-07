@@ -32,7 +32,6 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
         return "";
 }
 
-$user_id = $_POST["user_id"];
 $id_subject_group = $_POST["id_subject_group"];
 
 $sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,details_ppetiton.id_status FROM `details_ppetiton`
@@ -40,10 +39,10 @@ $sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,detail
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
                         JOIN user on details_ppetiton.id_subject_group = user.id_subject_group
-                        WHERE details_ppetiton.user_id = ?  AND details_ppetiton.id_subject_group = ?   ORDER by details_ppetiton.date desc ";
+                        WHERE details_ppetiton.id_subject_group = ?   ORDER by details_ppetiton.date desc ";
 $result = $db->prepare($sql);
-$result->bindParam(1, $user_id);
-$result->bindParam(2, $id_subject_group);
+// $result->bindParam(1, $user_id);
+$result->bindParam(1, $id_subject_group);
 $result->execute();
 $row = $result->fetchAll(PDO::FETCH_ASSOC);
 $keeall = array(); // สร้าง array เพื่อเก็บข้อมูลทั้งหมดก่อนส่ง JSON กลับ
