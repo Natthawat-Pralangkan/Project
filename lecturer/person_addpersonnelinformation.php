@@ -51,7 +51,7 @@
                                     <td><?php echo $number++; ?></td>
                                     <td><?php echo htmlspecialchars($row['user_name']) . ' ' . htmlspecialchars($row['last_name']); ?></td>
                                     <td><?php echo htmlspecialchars($row['name_type']); ?></td>
-                                    <td><button class="btn" style="background-color: #BB6AFB; color:#FFFFFF" onclick="window.location.href='edit_information.php?id=<?php echo $row['id']; ?>'">แก้ไข</button></td>
+                                    <td><button class="btn" style="background-color: #BB6AFB; color:#FFFFFF" onclick="window.location.href='person_edit_information.php?id=<?php echo $row['id']; ?>'">แก้ไข</button></td>
                                     <td><button type="button" class="btn " style="background-color: #FF0000; color:#FFFFFF"  onclick="getdelete('<?php echo htmlspecialchars($row['id']); ?>')">ลบ</button></td>
                                 </tr>
                     <?php

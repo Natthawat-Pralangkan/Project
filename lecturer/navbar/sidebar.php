@@ -154,7 +154,26 @@
             </li>
         </div>
 
+        <!-- เจ้าหน้าที่งบประมาณ -->
+        <div style="color: #000000; display: none;" id="subjectbudget">
 
+            <h5 class="mx-4" style="color: #000000;">เจ้าหน้าที่ฝ่ายบุคคล</h5>
+            <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/budget_home') !== false ? 'active-menu' : ''; ?>">
+                <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./budget_home.php">
+                    <i class="fa-solid fa-house spani"></i><span class="menu-text">หน้าหลัก</span>
+                </a>
+            </li>
+            <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/budget_check_the_request') !== false ? 'active-menu' : ''; ?>">
+                <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./budget_check_the_request.php">
+                    <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ตรวจสอบคำร้อง</span>
+                </a>
+            </li>
+            <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/budget_Report_on_entry_and_exit_times') !== false ? 'active-menu' : ''; ?>">
+                <a class="nav-link d-inline-block" style="font-size: 16px;" href="./budget_Report_on_entry_and_exit_times.php">
+                    <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ขอรายงานการลง เวลาเข้า - ออกงาน</span>
+                </a>
+            </li>
+        </div>
 
     </ul>
 
@@ -173,7 +192,7 @@
             // ตรวจสอบว่าผู้ใช้มี id_subject_group หรือไม่
             if (datas[0].id_subject_group != null && datas[0].id_subject_group != '') {
                 var id_subject_group = datas[0].id_subject_group; // กำหนดค่า id_subject_group
-                if (id_subject_group == 8) {
+                if (id_subject_group == 3 || id_subject_group == 4 || id_subject_group == 5 || id_subject_group == 6 || id_subject_group == 7 || id_subject_group == 8 || id_subject_group == 9) {
                     // ถ้ามี, แสดงเมนู "หัวหน้ากลุ่มสาระ"
                     $('#subject').show(); // ใช้ .show() ของ jQuery เพื่อแสดงเมนู
                 } else if (id_subject_group == 2) {
@@ -189,11 +208,15 @@
                 } else if (id_subject_group == 16) {
                     // <!-- เจ้าหน้าที่บุคคล -->
                     $('#subjectperson').show();
+                } else if (id_subject_group == 11) {
+                    // <!-- เจ้าหน้าที่งบประมาณ -->
+                    $('#subjectbudget').show();
                 } else {
                     $('#subject').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                     $('#subjectdirector').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                     $('#subjectdeputy_director').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                     $('#subjectacademic').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
+                    $('#subjectbudget').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                 }
             }
         }
