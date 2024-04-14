@@ -114,7 +114,6 @@
         $("#approveButton").on('click', function(event) {
             event.preventDefault();
             var id = $('#setshowpdf').data('id');
-            console.log("Sending ID:", id, "Status:", id_status);
             var url = "http://localhost/api/reg_data";
             // AJAX call to update the status
             $.ajax({
@@ -126,13 +125,12 @@
                     status: 1
                 },
                 success: function(response) {
-                    if (response.status === "success") {
+                    var datas = JSON.parse(response)
+                    if (datas.status == 200) {
                         alert("อนุมัติคำร้องเรียบร้อยแล้ว");
-                        $('#setshowpdf').modal('hide');
-                        // Refresh or update the UI as necessary
-                        location.reload(); // or use a more targeted update method
+                        window.location.reload()
                     } else {
-                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + datas.message);
                     }
                 },
                 error: function(xhr, status, error) {
@@ -142,7 +140,7 @@
         });
 
         $('#confirmDisapproval').click(function() {
-            var id = $('#hiddenIdField').val(); // Retrieve the id
+            var id = $('#setshowpdf').data('id');
             var url = "http://localhost/api/reg_data";
             // var id = $(this).data("id");
             // AJAX call to update the reason and status to "Disapproved"
@@ -155,10 +153,15 @@
                     status: 0
                 },
                 success: function(response) {
-                    alert("อัปเดตข้อมูลเรียบร้อย");
-                    $('#exampleModal1').modal('hide');
-                    location.reload();
-                    console.log('Success:', response);
+                    var datas = JSON.parse(response)
+                    if (datas.status == 200) {
+                        alert("อัปเดตข้อมูลเรียบร้อย");
+                        window.location.reload()
+
+                    } else {}
+
+
+                    console.log('Success:', datas);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
