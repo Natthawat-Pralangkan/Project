@@ -49,7 +49,7 @@
                     </div>
                     <div class="modal-footer justify-content-center">
                         <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                        <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                        <button class="btn mr-2" id="confirmDisapproval" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
                     </div>
                 </div>
             </div>
@@ -110,6 +110,61 @@
             $('#setshowpdf').data('id', id).modal('show');
         });
 
+
+        $("#approveButton").on('click', function(event) {
+            event.preventDefault();
+            var id = $('#setshowpdf').data('id');
+            console.log("Sending ID:", id, "Status:", id_status);
+            var url = "http://localhost/api/reg_data";
+            // AJAX call to update the status
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    function: "appoved_fromtis",
+                    request_id: id,
+                    status: 1
+                },
+                success: function(response) {
+                    if (response.status === "success") {
+                        alert("อนุมัติคำร้องเรียบร้อยแล้ว");
+                        $('#setshowpdf').modal('hide');
+                        // Refresh or update the UI as necessary
+                        location.reload(); // or use a more targeted update method
+                    } else {
+                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
+                }
+            });
+        });
+
+        $('#confirmDisapproval').click(function() {
+            var id = $('#hiddenIdField').val(); // Retrieve the id
+            var url = "http://localhost/api/reg_data";
+            // var id = $(this).data("id");
+            // AJAX call to update the reason and status to "Disapproved"
+            $.ajax({
+                url: url, // Adjust the URL as necessary
+                type: 'POST', // Make sure this is POST
+                data: {
+                    function: "appoved_fromtis",
+                    request_id: id,
+                    status: 0
+                },
+                success: function(response) {
+                    alert("อัปเดตข้อมูลเรียบร้อย");
+                    $('#exampleModal1').modal('hide');
+                    location.reload();
+                    console.log('Success:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
     });
 </script>
 <?php include("../../footer.php") ?>

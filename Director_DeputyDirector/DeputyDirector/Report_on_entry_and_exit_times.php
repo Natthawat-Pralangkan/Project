@@ -6,7 +6,7 @@
     <!-- Content Wrapper -->
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/Request_a_time_entry_and_exit_report.js"></script>
+        <!-- <script src="./js/Request_a_time_entry_and_exit_report.js"></script> -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
