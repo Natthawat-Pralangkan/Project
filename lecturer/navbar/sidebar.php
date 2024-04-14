@@ -175,6 +175,32 @@
             </li>
         </div>
 
+
+        <!-- เจ้าหน้าที่ทั่วไป -->
+        <div style="color: #000000; display: none;" id="subjectgeneral">
+
+            <h5 class="mx-4" style="color: #000000;">เจ้าหน้าที่ฝ่ายทั่วไป</h5>
+            <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/general_home') !== false ? 'active-menu' : ''; ?>">
+                <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./general_home.php">
+                    <i class="fa-solid fa-house spani"></i><span class="menu-text">หน้าหลัก</span>
+                </a>
+            </li>
+            <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/general_check_the_request') !== false ? 'active-menu' : ''; ?>">
+                <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./general_check_the_request.php">
+                    <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ตรวจสอบคำร้อง</span>
+                </a>
+            </li>
+            <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/general_Report_on_entry_and_exit_times') !== false ? 'active-menu' : ''; ?>">
+                <a class="nav-link d-inline-block" style="font-size: 16px;" href="./general_Report_on_entry_and_exit_times.php">
+                    <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ขอรายงานการลง เวลาเข้า - ออกงาน</span>
+                </a>
+            </li>
+            <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/general_uploadcommand') !== false ? 'active-menu' : ''; ?>">
+                <a class="nav-link d-inline-block" style="font-size: 16px;" href="./general_uploadcommand.php">
+                    <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">อัพโหลดคำสั่งภายใน - ภายนอก</span>
+                </a>
+            </li>
+        </div>
     </ul>
 
 </aside>
@@ -211,12 +237,17 @@
                 } else if (id_subject_group == 11) {
                     // <!-- เจ้าหน้าที่งบประมาณ -->
                     $('#subjectbudget').show();
-                } else {
+                }else if (id_subject_group == 15) {
+                    // <!-- เจ้าหน้าที่งบประมาณ -->
+                    $('#subjectgeneral').show();
+                } 
+                else {
                     $('#subject').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                     $('#subjectdirector').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                     $('#subjectdeputy_director').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                     $('#subjectacademic').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                     $('#subjectbudget').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
+                    $('#subjectgeneral').hide(); // ใช้ .hide() ของ jQuery เพื่อซ่อนเมนู
                 }
             }
         }

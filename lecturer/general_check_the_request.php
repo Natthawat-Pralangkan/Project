@@ -1,10 +1,10 @@
-<?php include("../../header.php"); ?>
-<?php include("../../servers/connect.php"); ?>
+<?php include("../header.php"); ?>
+<?php include("../servers/connect.php"); ?>
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
     <div class="content-wrapper">
         <?php include('./navbar/navuser.php'); ?>
-        <script src="./js/Check_the_request.js"></script>
+        <script src="./js/general_Check_the_request.js"></script>
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
@@ -135,7 +135,7 @@
     </div>
 </div>
 <script>
-    if (localStorage.getItem("id_type") != "5" && localStorage.getItem("user_id") == null) {
+    if (localStorage.getItem("id_type") != "3" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
@@ -144,7 +144,7 @@
             var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
             console.log(id); // Debugging line to ensure the id is captured correctly
 
-            var pdfUrl = 'check_the_request_pdf.php?id=' + id; // Construct the URL for the PDF
+            var pdfUrl = 'general_check_the_request_pdf.php?id=' + id; // Construct the URL for the PDF
 
             $('#pdfViewer').attr('src', pdfUrl); // Set the iframe's source to the constructed URL
             $('#exampleModal7').modal('show'); // Open the modal that contains the iframe
@@ -168,7 +168,7 @@
 
             // AJAX call to update the status
             $.ajax({
-                url: "update_status",
+                url: "general_update_status",
                 type: "POST",
                 data: {
                     id: id,
@@ -206,7 +206,7 @@
             var id_status = 6;
             // AJAX call to update the reason and status to "Disapproved"
             $.ajax({
-                url: 'update_reason', // Adjust the URL as necessary
+                url: 'general_update_reason', // Adjust the URL as necessary
                 type: 'POST', // Make sure this is POST
                 data: {
                     id: id, // Ensure these variables are correctly defined in your JS
@@ -227,4 +227,4 @@
     });
     // Assume your manage buttons have a class 'manage-button' and data-id attribute
 </script>
-<?php include("../../footer.php") ?>
+<?php include("../footer.php") ?>

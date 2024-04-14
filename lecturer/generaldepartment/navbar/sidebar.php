@@ -1,21 +1,26 @@
 <aside class="sidebar" id="bg">
     <div class="text-center my-4" style="height : 28px">
-        <h4 id="title_web" class="text-white">NUNTABUREE-เจ้าหน้าที่งบประมาณ</h4>
+        <h4 id="title_web" class="text-white">NUNTABUREE-เจ้าหน้าที่ฝ่ายทั่วไป</h4>
     </div>
     <ul class="nav flex-column">
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/BudgetOfficer/home') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/generaldepartment/home') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./home.php">
                 <i class="fa-solid fa-house spani"></i><span class="menu-text">หน้าหลัก</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/BudgetOfficer/check_the_request') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/generaldepartment/check_the_request') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 16px;" href="./check_the_request.php">
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ตรวจสอบคำร้อง</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/BudgetOfficer/Report_on_entry_and_exit_times') !== false ? 'active-menu' : ''; ?>">
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/generaldepartment/Report_on_entry_and_exit_times') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link d-inline-block" style="font-size: 16px;" href="./Report_on_entry_and_exit_times.php">
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ขอรายงานการลง เวลาเข้า - ออกงาน</span>
+            </a>
+        </li>
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/generaldepartment/uploadcommand') !== false ? 'active-menu' : ''; ?>">
+            <a class="nav-link d-inline-block" style="font-size: 16px;" href="./uploadcommand.php">
+                <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ขอัพโหลดคำสั่งภายใน - ภายนอก</span>
             </a>
         </li>
     </ul>

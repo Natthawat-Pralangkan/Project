@@ -7,6 +7,6 @@
     </ul>
     <ul class="navbar-nav ms-auto d-flex flex-row">
         <i class="fa-solid fa-arrow-right-from-bracket text-white" style="font-size: 20px;"></i>
-        <h6 class="me-4 ms-3 text-white">ออกจากระบบ</h6>
+        <h6 class="me-4 ms-3 text-white" id="nock">ออกจากระบบ</h6>
     </ul>
 </nav>
