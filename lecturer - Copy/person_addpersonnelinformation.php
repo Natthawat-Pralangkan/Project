@@ -19,7 +19,7 @@
             </div>
             <a href=""></a>
         </div>
-        <div class="mt-5 mx-3">
+        <div class="mx-3">
             <div class="d-flex justify-content-end">
                 <div class="mt-5">
                     <a href="./person_Add_information.php" class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF">เพิ่มข้อมูลบุคลากร</a>
@@ -70,6 +70,7 @@
         </div>
     </div>
 </div>
+<?php include("../footer.php") ?>
 <script>
     if (localStorage.getItem("id_type") != "6" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
@@ -122,4 +123,3 @@
         }
     }
 </script>
-<?php include("../footer.php") ?>

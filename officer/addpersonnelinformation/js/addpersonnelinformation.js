@@ -19,13 +19,13 @@ $(document).ready(function () {
     ],
   });
  
-  $("#position").change(function(){
-    if( $("#position").val()== 7){
-      $("#id_subject").show()
-    }else{
-      $("#id_subject").hide()
-    }
-  })
+  // $("#position").change(function(){
+  //   if( $("#position").val()== 7){
+  //     $("#id_subject").show()
+  //   }else{
+  //     $("#id_subject").hide()
+  //   }
+  // })
 
   $("#server_user").click(function () {
     
@@ -106,7 +106,7 @@ $(document).ready(function () {
     formData.append('precepts_pali_studies',precepts_pali_studies);
     formData.append('educational_qualification',educational_qualification);
     formData.append('picture',picture);
-    formData.append('id_subject_group',id_subject_group);
+    // formData.append('id_subject_group',id_subject_group);
     formData.append('position',position);
     // var id_user = $("#id_user").val();
     $.ajax({

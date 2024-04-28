@@ -37,7 +37,7 @@ if (isset($_POST["user_id"]) && $_POST["user_id"]) {
 
     $sql = "SELECT *,name_type FROM `teacher_personnel_information`
     JOIN type ON teacher_personnel_information.position = type.id_type 
-    JOIN  type_subject_group ON teacher_personnel_information.id_subject_group = type_subject_group.id_subject
+    -- JOIN  type_subject_group ON teacher_personnel_information.id_subject_group = type_subject_group.id_subject
     WHERE user_id = ? ";
     $result = $db->prepare($sql);
     $result->bindParam(1, $user_id);
@@ -84,7 +84,6 @@ if (isset($_POST["user_id"]) && $_POST["user_id"]) {
         "precepts_pali_studies" => $row['precepts_pali_studies'],
         "educational_qualification" => $row['educational_qualification'],
         "name_type" => $row['name_type'],
-        "subject_name" => $row['subject_name'],
         "picture" => "../officer/addpersonnelinformation/api/images/" . $row['picture'],
     );
 

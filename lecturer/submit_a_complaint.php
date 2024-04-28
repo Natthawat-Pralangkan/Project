@@ -53,7 +53,8 @@
                     <tbody>
                         <?php
                         // คำสั่ง SQL เพื่อดึงข้อมูล
-                        $sql = "SELECT * FROM `petition_name` LEFT JOIN petition_type ON petition_name.id_petition = petition_type.id;";
+                        $sql = "SELECT *FROM `petition_name`LEFT JOIN `petition_type` ON `petition_name`.`id_petition` = `petition_type`.`id`
+                        WHERE `petition_name`.`id_petition` IN (1, 2) ;";
                         $result = $db->prepare($sql);
                         $result->execute();
                         // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
@@ -187,6 +188,7 @@
                                         <button class="add_fields1 btn btn-primary" style="font-size: 16px;">เพิ่มชื่อครูผู้ควบคุม</button>
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="form-group mb-3 mt-3">
                                 <div class=" text-center">
@@ -215,14 +217,14 @@
                                             <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                             <select class="form-select mt-2" id="id_subject_group_2" name="id_subject_group_2">
                                                 <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                                <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                                <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                                <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                                <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                                <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                                <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                                <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                                <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                                <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                                <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                                <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                                <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                                <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                                <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                                <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                                <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                             </select>
                                         </div>
                                     </div>
@@ -276,14 +278,14 @@
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <select class="form-select mt-2" id="id_subject_group_10" name="id_subject_group_10">
                                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            <option value="3">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="4">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="5">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="6">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="7">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -432,14 +434,14 @@
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <select class="form-select mt-2" id="id_subject_group_7" name="id_subject_group_7">
                                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -490,14 +492,14 @@
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <select class="form-select mt-2" id="id_subject_group_3" name="id_subject_group_3">
                                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -581,14 +583,14 @@
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <select class="form-select mt-2" id="id_subject_group_4" name="id_subject_group_4">
                                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -691,14 +693,14 @@
                                             <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                             <select class="form-select mt-2" id="id_subject_group_11" name="id_subject_group_11">
                                                 <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                                <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                                <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                                <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                                <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                                <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                                <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                                <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                                <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                                <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                                <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                                <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                                <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                                <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                                <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                                <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                                <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                             </select>
                                         </div>
                                     </div>
@@ -752,14 +754,14 @@
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <select class="form-select mt-2" id="id_subject_group_5" name="id_subject_group_5">
                                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                         </select>
                                     </div>
                                 </div>

@@ -966,6 +966,7 @@ if ($row['petition_id'] == 7) {
             }
 
             $userName = $row['group_leader_name'];
+           
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr)/i', '', $userName);

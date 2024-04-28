@@ -170,7 +170,7 @@
             success: function(data) {
                 $("#picture").attr('src', data[0].picture);
                 // $("#name_type").html("ตำแหน่ง :" + " " + data[0].name_type);           
-                $("#name_type").html("ตำแหน่ง <br>" + "<span style='font-size: 20px;'>" + data[0].name_type +' และ '+data[0].subject_name +"</span>");
+                $("#name_type").html("ตำแหน่ง <br>" + "<span style='font-size: 20px;'>" + data[0].name_type +"</span>");
                 $("#user_name").html("ชื่อ-นามสกุล :" + " " + data[0].user_name);
                 $("#id_card_number").html("เลขที่บัตรประชาชน:" + " " + data[0].id_card_number);
                 $("#date_month_yearofbirth").html("วัน เดือนปี เกิด :" + " " + data[0].date);

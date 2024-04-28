@@ -168,7 +168,7 @@ include("../header.php");
 
             // AJAX call to update the status
             $.ajax({
-                url: "director_update_status1",
+                url: "director_update_status_1",
                 type: "POST",
                 data: {
                     id: id,

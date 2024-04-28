@@ -806,6 +806,7 @@ if ($row['petition_id'] == 7) {
         exit('Template PDF not found at path: ' . $templatePath);
     }
 
+  
     // $pageCount = $pdf->setSourceFile($templatePath);
     // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
@@ -818,8 +819,12 @@ if ($row['petition_id'] == 7) {
         $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
         // Add a page to the new document
-        $pdf->addPage('L');
-
+        // $pdf->addPage('L');
+        $standardWidth = 220; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
+        $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
+    
+        // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
+        $pdf->AddPage('L', array($standardWidth, $customHeight));
         // Use the imported page
         $pdf->useImportedPage($pageId);
 
@@ -932,7 +937,7 @@ if ($row['petition_id'] == 7) {
 
 
             if (!empty($row['date_learning']) && $row['date_learning'] != '0000-00-00') {
-                $thai_month_arr1 = array(
+                $thai_month_arr3 = array(
                     "01" => "ม.ค.",
                     "02" => "ก.พ.",
                     "03" => "มี.ค.",
@@ -946,22 +951,23 @@ if ($row['petition_id'] == 7) {
                     "11" => "พ.ย.",
                     "12" => "ธ.ค."
                 );
-                list($year, $month1, $day) = explode("-", $row['date_learning']);
-                $thai_month1 = $thai_month_arr1[$month1];
+                list($year3, $month3, $day3) = explode("-", $row['date_learning']);
+                $thai_month3 = $thai_month_arr3[$month1];
                 // ปรับปรุงปีให้เป็นรูปแบบพุทธศักราช
-                $year = (int)$year + 543;
+                $year3 = (int)$year3 + 543;
 
                 // ตั้งค่าตำแหน่ง XY และแสดงวันที่
                 $pdf->SetXY(145, 130);
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day3), 0, 1);
                 $pdf->SetXY(155, 130);
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month3), 0, 1);
                 $pdf->SetXY(165, 130);
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year3), 0, 1);
             } else {
                 // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
-                // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
+                $pdf->SetXY(165, 130);
+                $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
 
             $userName = $row['group_leader_name'];
@@ -989,12 +995,46 @@ if ($row['petition_id'] == 7) {
                 // For id_status 4, add both Deputy Director's and Director's names
 
                 // Deputy Director's name
-                $pdf->SetXY(130, 178);
+                $pdf->SetXY(130, 168);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
 
                 // Director's name
-                $pdf->SetXY(223, 175);
+                $pdf->SetXY(223, 163);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
+            }
+
+            if (!empty($row['date_deputydirector']) && $row['date_deputydirector'] != '0000-00-00') {
+                $thai_month_arr = array(
+                    "01" => "ม.ค.",
+                    "02" => "ก.พ.",
+                    "03" => "มี.ค.",
+                    "04" => "เม.ย.",
+                    "05" => "พ.ค.",
+                    "06" => "มิ.ย.",
+                    "07" => "ก.ค.",
+                    "08" => "ส.ค.",
+                    "09" => "ก.ย.",
+                    "10" => "ต.ค.",
+                    "11" => "พ.ย.",
+                    "12" => "ธ.ค."
+                );
+                list($year, $month, $day) = explode("-", $row['date_deputydirector']);
+                $thai_month = $thai_month_arr[$month1];
+                // ปรับปรุงปีให้เป็นรูปแบบพุทธศักราช
+                $year = (int)$year + 543;
+
+                // ตั้งค่าตำแหน่ง XY และแสดงวันที่
+                $pdf->SetXY(135, 187);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
+                $pdf->SetXY(145, 187);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1);
+                $pdf->SetXY(157, 187);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
+            } else {
+                // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
+                // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
+                $pdf->SetXY(165, 130);
+                $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
         }
     }
@@ -1564,12 +1604,12 @@ if ($row['petition_id'] == 7) {
 
             $pdf->SetXY(70, 23);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
-    
+
             $userName = $row['user_name'];
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr\.)/i', '', $userName);
-    
+
             // Convert the cleaned name to a format usable in TCPDF
             $pdf->SetXY(70, 30);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName . ' ' . $row['last_name']), 0, 1);
@@ -1578,11 +1618,11 @@ if ($row['petition_id'] == 7) {
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr)/i', '', $userName);
-    
+
             // Convert the cleaned name to a format usable in TCPDF
             $pdf->SetXY(185, 23);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName), 0, 1);
-    
+
             $pdf->SetXY(183, 30);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['group_leader_name']), 0, 1);
             // วันที่ยื่น
@@ -1600,13 +1640,13 @@ if ($row['petition_id'] == 7) {
                 "11" => "พ.ย.",
                 "12" => "ธ.ค."
             );
-    
+
             list($year, $month1, $day) = explode("-", $row['date']);
-    
+
             $thai_month1 = $thai_month_arr1[$month1];
             // แปลงให้อยู่ในรูปแบบไทย
             $newdate = date("d H:i:s", strtotime($row['date']));
-    
+
             $newdate = ConvertToThaiDate($row['date']);
             $pdf->SetXY(72, 37);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date']))), 0, 1);
@@ -1614,7 +1654,7 @@ if ($row['petition_id'] == 7) {
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
             $pdf->SetXY(97, 37);;
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
-    
+
             // วันที่หัวหน้าอนุมัต
             if (!empty($row['date_learning']) && $row['date_learning'] != '0000-00-00') {
                 $thai_month_arr3 = array(
@@ -1635,7 +1675,7 @@ if ($row['petition_id'] == 7) {
                 $thai_month3 = $thai_month_arr3[$month3];
                 // ปรับปรุงปีให้เป็นรูปแบบพุทธศักราช
                 $year = (int)$year + 543;
-    
+
                 // ตั้งค่าตำแหน่ง XY และแสดงวันที่
                 $pdf->SetXY(182, 37);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
@@ -1650,7 +1690,7 @@ if ($row['petition_id'] == 7) {
             }
         }
     }
-    
+
 
 
     $pdf->Output('I', 'generated_pdf.pdf');

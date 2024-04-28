@@ -58,51 +58,138 @@ include("./servers/connect.php");
                     var data = JSON.parse(response);
                     console.log(data)
                     if (data.statusCode == 200) {
-                        // ล็อกอินสำเร็จ
-                        alert("เข้าสู่ระบบสำเร็จ!");
-                        // console.log(data.id_user);
+
                         switch (data.id_type) {
                             case 0:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
-                                window.location.href = "./admin/home.php";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./admin/home.php";
+                                })
                                 break;
                             case 7:
+                                /////ครูผู้สอน///////
                                 localStorage.setItem("id_type", data.id_type);
                                 localStorage.setItem("user_id", data.user_id);
-                                localStorage.setItem("id_subject_group", data.id_subject_group);
-                                window.location.href = "./lecturer/home";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./lecturer/home";
+                                })
                                 break;
 
                             case 1:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
-                                window.location.href = "./Director_DeputyDirector/DeputyDirector/home";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./Director_DeputyDirector/DeputyDirector/home";
+                                })
                                 break;
                             case 2:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
-                                window.location.href = "./Director_DeputyDirector/director/home";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./Director_DeputyDirector/director/home";
+                                })
                                 break;
                             case 3:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
-                                window.location.href = "./officer/academicmaster/home";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./officer/academicmaster/home";
+                                })
                                 break;
                             case 6:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
-                                window.location.href = "./officer/addpersonnelinformation/home";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./officer/addpersonnelinformation/home";
+                                })
                                 break;
                             case 5:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
-                                window.location.href = "./officer/BudgetOfficer/home";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./officer/BudgetOfficer/home";
+                                })
                                 break;
                             case 4:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
-                                window.location.href = "./officer/generaldepartment/home";
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./officer/generaldepartment/home";
+                                })
+                                break;
+                            case 8:
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
+                            case 14:
+                            case 15:
+                                localStorage.setItem("id_type", data.id_type)
+                                localStorage.setItem("user_id", data.user_id)
+                                localStorage.setItem("id_subject_group", data.id_subject_group)
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./subject_group_leader/Subject_group_home.php";
+                                })
+                                break;
+                            case 16:
+                                localStorage.setItem("id_type", data.id_type)
+                                localStorage.setItem("user_id", data.user_id)
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./General_staff/home.php";
+                                })
+                                break;
+                            case 18:
+                                localStorage.setItem("id_type", data.id_type)
+                                localStorage.setItem("user_id", data.user_id)
+                                Swal.fire(
+                                    "แจ้งเตือน!!",
+                                    "เข้าสู่ระบบสำเร็จ",
+                                    "success"
+                                ).then(() => {
+                                    window.location.href = "./Budget_Officer/home.php";
+                                })
                                 break;
                             default:
                                 alert("ไม่พบผู้ใช้")
