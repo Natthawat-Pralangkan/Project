@@ -45,10 +45,6 @@ $(document).ready(function () {
       product_name5.push($(this).val());
     });
 
-    let product_name6 = [];
-    $('input[name="input_host_name6[]"]').each(function () {
-      product_name6.push($(this).val());
-    });
     var name = $("#name").val();
     var position = $("#position").val();
     var contact_number = $("#contact_number").val();
@@ -67,7 +63,6 @@ $(document).ready(function () {
         product_name3: product_name3,
         product_name4: product_name4,
         product_name5: product_name5,
-        product_name6: product_name6,
       },
       success: function (response) {
         console.log(response);
@@ -137,12 +132,6 @@ function addfields3() {
             <div class="form-group">
                 <label for="" style="font-size: 18px;">จ่าย</label>
                 <input type="text" name="input_host_name5[]"  class="form-control mt-2" placeholder="จ่าย">
-            </div>
-        </div>
-        <div class="col-2 mt-2">
-            <div class="form-group">
-                <label for="" style="font-size: 18px;">หมายเหตุ</label>
-                <input type="text" name="input_host_name6[]"  class="form-control mt-2" placeholder="หมายเหตุ">
             </div>
         </div>
     </div>

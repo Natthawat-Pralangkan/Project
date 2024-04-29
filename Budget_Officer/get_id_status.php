@@ -5,7 +5,7 @@ include("../servers/connect.php");
 // If they are indeed needed for filtering, the SQL query should be adjusted to include these parameters properly.
 // However, based on your initial SQL, it seems you're counting records with a specific petition_type and id_status, which doesn't directly involve user_id or id_status as parameters.
 
-$sql = "SELECT COUNT(id_status) AS count FROM details_ppetiton WHERE id_petition_general = 2";
+$sql = "SELECT COUNT(id_status) AS count FROM details_ppetiton WHERE petition_id in (12,13)";
 $stmt = $db->prepare($sql);
 $stmt->execute(); // Removed parameters as they are not used in your SQL.
 $result = $stmt->fetch();
