@@ -81,7 +81,7 @@
                                     <td> <?php echo $row['petition_name'] ?> </td>
                                     <td> <?php echo $row['user_name'] ?> </td>
                                     <td> <?php echo $row['name_status'] ?> </td>
-                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button>
+                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>" data-petition-id="<?php echo $row['petition_id']; ?>">จัดการ</button>
                                     </td>
                                 </tr>
 
@@ -101,10 +101,32 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <iframe id="pdfViewer" width="100%" height="500px" frameborder="0"></iframe>
+                                <iframe id="pdfViewer7" width="100%" height="500px" frameborder="0"></iframe>
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
+                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModal14" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe id="pdfViewer14" width="100%" height="500px" frameborder="0"></iframe>
+                                <div class="form-group mt-3">
+                                    <label for="reasonInput" class="form-label">ความเห็นหัวหน้าหน่วยงาน:</label>
+                                    <textarea class="form-control" id="reasonInput" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="approveButton2" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
                                 <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
                             </div>
                         </div>
@@ -142,22 +164,25 @@
     $(document).ready(function() {
         $('.manage-button').on('click', function() {
             var id = $(this).data('id'); // Fetch the data-id attribute of the clicked button
+            var petitionId = $(this).data('petition-id'); // Fetch the data-petition-id attribute of the clicked button
+
             console.log(id); // Debugging line to ensure the id is captured correctly
+            console.log(petitionId); // Debugging line to ensure the petitionId is captured correctly
 
             var pdfUrl = 'check_the_request_pdf.php?id=' + id; // Construct the URL for the PDF
 
-            $('#pdfViewer').attr('src', pdfUrl); // Set the iframe's source to the constructed URL
-            $('#exampleModal7').modal('show'); // Open the modal that contains the iframe
+            
+
+            // Check if petitionId is 14
+            if (petitionId === 14) {
+                $('#exampleModal14').data('id', id).modal('show'); // Open the modal that contains the iframe
+                $('#pdfViewer14').attr('src', pdfUrl); // Set the iframe's source to the constructed URL
+            } else {
+                $('#exampleModal7').data('id', id).modal('show'); // Open the modal that contains the iframe
+                $('#pdfViewer7').attr('src', pdfUrl); // Set the iframe's source to the constructed URL
+            }
         });
 
-        // Setup for handling clicks on "จัดการ" buttons
-        $('.manage-button').on('click', function() {
-            var petitionId = $(this).data('id');
-            // Store this ID in the modal for later use
-            $('#exampleModal7').data('id', petitionId);
-            // Now open the modal
-            $('#exampleModal7').modal('show');
-        });
 
         // Setup for handling clicks on "อนุมัติ" button
         $("#approveButton").on('click', function(event) {
@@ -221,6 +246,45 @@
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
+                }
+            });
+        });
+
+        $("#approveButton2").on('click', function(event) {
+            event.preventDefault();
+
+            // Retrieve the id from the appropriate modal
+            var id = $('#exampleModal14').data('id'); // Assuming the id is stored in the second modal
+            var id_status = 2; // Define and assign a value to id_status
+            var id_officer = 6; // Define and assign a value to id_status
+            var Officer_comments = $('#reasonInput').val(); // Read value from input field if present
+
+            console.log("Sending ID:", id, "Status:", id_status);
+            console.log(Officer_comments);
+            // AJAX call to update the status
+            $.ajax({
+                url: "update_status1",
+                type: "POST",
+                data: {
+                    id: id,
+                    id_status: id_status,
+                    id_officer:id_officer,
+                    Officer_comments: Officer_comments
+                },
+                success: function(response) {
+                    // var data = JSON.parse(response);
+                    console.log(response);
+                    if (response.status === 200) {
+                        alert("อัปเดตข้อมูลเรียบร้อย");
+                        location.reload();
+                    } else {
+                        console.log(response);
+                        alert("เกิดข้อผิดพลาดในการอัปเดตข้อมูล");
+                        location.reload();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
                 }
             });
         });

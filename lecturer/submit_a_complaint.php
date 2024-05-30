@@ -26,6 +26,7 @@
         <script src="./js/Requesting_permission_for_students_to_go_to_school_in_special_cases.js"></script>
         <script src="./js/Submitting_a_cover_form.js"></script>
         <script src="./js/inster.js"></script>
+        <script src="./js/Request_permission_to_leave.js"></script>
 
         <div class="content-header">
             <div class="container-fluid">
@@ -54,7 +55,7 @@
                         <?php
                         // คำสั่ง SQL เพื่อดึงข้อมูล
                         $sql = "SELECT *FROM `petition_name`LEFT JOIN `petition_type` ON `petition_name`.`id_petition` = `petition_type`.`id`
-                        WHERE `petition_name`.`id_petition` IN (1, 2) ;";
+                        WHERE `petition_name`.`id_petition` IN (1, 2, 3, 4) ;";
                         $result = $db->prepare($sql);
                         $result->execute();
                         // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
@@ -188,7 +189,7 @@
                                         <button class="add_fields1 btn btn-primary" style="font-size: 16px;">เพิ่มชื่อครูผู้ควบคุม</button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="form-group mb-3 mt-3">
                                 <div class=" text-center">
@@ -1001,6 +1002,87 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="exampleModal12" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ขออนุญาตลา คลอด ป่วย กิจ</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" name="" id="id_from" value="11">
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เรื่อง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เรื่อง" id="subject" name="subject">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ชื่อ - นามสกุล</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ชื่อ - นามสกุล" id="Name_Surname" name="Name_Surname">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ตำแหน่ง</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ตำแหน่ง" id="position" name="position">
+                                    </div>
+                                </div>
+                                <div class="col-3 mt-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">สาหตุในการลา</label>
+                                        <select class="form-select mt-2" id="reason_for_leave" name="reason_for_leave">
+                                            <option value="">เลือกสาหตุในการลา</option>
+                                            <option value="1">ป่วย</option>
+                                            <option value="2">กิจส่วนตัว</option>
+                                            <option value="3">คลอดบุตร</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4 mt-2" style="color: #000000; display: none;" id="personal_affairs_container">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เหตุผล</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เหตุผล" id="Personal_affairs" name="Personal_affairs">
+                                    </div>
+                                </div>
+
+                                <div class="col-2 mt-2">
+                                    <div class="form-group ">
+                                        <label for="" style="font-size: 18px;">ตั้งแต่วันที่</label>
+                                        <input type="date" class="form-control mt-2" placeholder="วันที่" id="date_activity_12" name="date_activity_12">
+                                    </div>
+                                </div>
+                                <div class="col-2 mt-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">ถึงวันที่</label>
+                                        <input type="date" class="form-control mt-2" placeholder="เวลา" id="date_activity_13" name="date_activity_13">
+                                    </div>
+                                </div>
+                                <div class="col-2 mt-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">มีกำหนด</label>
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนวัน" id="scheduled_2" name="scheduled_2">
+                                    </div>
+                                </div>
+                                <div class="col-2 mt-2">
+                                    <div class="form-group">
+                                        <label for="" style="font-size: 18px;">เบอร์โทรศัพท์</label>
+                                        <input type="text" class="form-control mt-2" placeholder="เบอร์โทรศัพท์" id="telephone_number_1" name="telephone_number_1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 mt-3">
+                                <div class=" text-center">
+                                    <button type="submit" class="btn " id="server_from_leave" style="background-color:#BB6AFB ; color:#FFFFFF">บันทึกข้อมูล</button>
+                                    <button type="submit" class="btn" style="background-color:#FF0505 ; color:#FFFFFF">ยกเลิก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

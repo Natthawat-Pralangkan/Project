@@ -36,7 +36,7 @@
                     <tbody>
                         <?php
                         // คำสั่ง SQL เพื่อดึงข้อมูล
-                        $sql = "SELECT * FROM `petition_name` LEFT JOIN petition_type ON petition_name.id_petition_general = petition_type.id WHERE petition_name.id_petition_general = 2";
+                        $sql = "SELECT * FROM `petition_name` LEFT JOIN petition_type ON petition_name.id_petition_general = petition_type.id WHERE petition_name.id_petition_general = 3";
                         $result = $db->prepare($sql);
                         $result->execute();
                         // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่

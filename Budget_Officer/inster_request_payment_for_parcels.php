@@ -28,7 +28,7 @@ try {
     $stmt = $db->prepare($query);
     $stmt->bindParam(1, $user_id);
     $stmt->bindValue(2, "13");
-    $stmt->bindValue(3, "2");
+    $stmt->bindValue(3, "3");
     $stmt->bindParam(4, $details);
 
     if ($stmt->execute()) {
