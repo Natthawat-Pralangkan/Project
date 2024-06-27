@@ -1190,7 +1190,7 @@
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">แบบบันทึกการนิเทศภายในกลุ่มสาระการเรียนรู้</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">รายการส่งครูเข้าร่วมสัมมนาอบรม</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -1198,86 +1198,30 @@
                             <div class="row mt-2">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label for="" style="font-size: 18px;">เรื่อง</label>
-                                        <input type="text" class="form-control mt-2" placeholder="เรื่อง" id="subject" name="subject">
-                                    </div>
-                                </div>
-                                <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">การนิเทศครั้งที่</label>
-                                        <input type="text" class="form-control mt-2" placeholder="การนิเทศครั้งที่" id="Name_Surname" name="Name_Surname">
+                                        <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
+                                        <select class="form-select mt-2" id="id_subject_group_5" name="id_subject_group_5">
+                                            <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ระดับชั้นมัธยมศึกษาปีที่</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ระดับชั้นมัธยมศึกษาปีที่" id="position" name="position">
+                                        <label for="" style="font-size: 18px;">ภาคเรียนที่</label>
+                                        <input type="text" class="form-control mt-2" placeholder="ภาคเรียนที่" id="position" name="position">
                                     </div>
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ปีการศึกษา</label>
                                         <input type="text" class="form-control mt-2" placeholder="ปีการศึกษา" id="position" name="position">
-                                    </div>
-                                </div>
-                                <div class="col-2 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">วิชา</label>
-                                        <input type="text" class="form-control mt-2" placeholder="วิชา" id="date_activity_13" name="date_activity_13">
-                                    </div>
-                                </div>
-                                <div class="col-2 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">รหัสวิชา</label>
-                                        <input type="text" class="form-control mt-2" placeholder="รหัสวิชา" id="scheduled_2" name="scheduled_2">
-                                    </div>
-                                </div>
-                                <div class="col-3 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">วัน/เดือน/ปี</label>
-                                        <input type="date" class="form-control mt-2" placeholder="เบอร์โทรศัพท์" id="telephone_number_1" name="telephone_number_1">
-                                    </div>
-                                </div>
-                                <div class="col-2 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">เวลา</label>
-                                        <input type="text" class="form-control mt-2" placeholder="เวลา" id="telephone_number_1" name="telephone_number_1">
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">สถานที่</label>
-                                        <input type="text" class="form-control mt-2" placeholder="สถานที่" id="telephone_number_1" name="telephone_number_1">
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ชื่อประธานการนิเทศ</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ชื่อประธานการนิเทศ" id="telephone_number_1" name="telephone_number_1">
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ผู้เข้าร่วมนิเทศจำนวน</label>
-                                        <input type="text" class="form-control mt-2" placeholder="รวมผเู้ข้าร่วมนิเทศจำนวน" id="telephone_number_1" name="telephone_number_1">
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ผู้ไม่เข้าร่วมนิเทศจำนวน</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ผู้ไม่เข้าร่วมนิเทศจำนวน" id="telephone_number_1" name="telephone_number_1">
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">วัตถุประสงค์</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ชื่อประธานการนิเทศ" id="telephone_number_1" name="telephone_number_1">
-                                    </div>
-                                </div>
-                                <div class="col-4 mt-2">
-                                    <div class="form-group">
-                                        <label for="" style="font-size: 18px;">เหตุผลในการนำเข้า</label>
-                                        <textarea class="form-control" placeholder="เหตุผลในการนำเข้า" id="reason_project_9"></textarea>
                                     </div>
                                 </div>
                             </div>
