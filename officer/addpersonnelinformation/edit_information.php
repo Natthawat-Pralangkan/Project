@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
                 // The picture column contains the name or path of the image
                 $pictureName = $data['picture'];
                 // If the image is stored in a directory, specify it here, otherwise adjust as necessary
-                $picturePath = "./api/images/" . $pictureName;
+                $picturePath = "../../images/" . $pictureName;
             } else {
                 // Handle case where no picture is associated with the record
                 echo "No picture available for this record.";

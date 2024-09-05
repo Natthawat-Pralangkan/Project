@@ -64,7 +64,7 @@
     }
     $(document).ready(function() {
         $.ajax({
-            url: "get_follw",
+            url: "get_petition_history",
             type: "POST",
             data: {
                 user_id: localStorage.getItem("user_id")
@@ -113,11 +113,9 @@
                             data: null,
                             render: function(data, type, row) {
                                 var buttonHtml = '';
-                                if (row.id_status == 1 && 8) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
-                                    buttonHtml = '<button class="btn btn-danger cancel-button" data-id="' + row.id + '">ยกเลิก</button>';
-                                } else if ([4, 5, 6].includes(row.id_status)) { // ตรวจสอบสถานะ 4, 5, หรือ 6 เพื่อแสดงปุ่มดูรายละเอียด
+                                if ([4, 5, 6,7].includes(row.id_status)) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
                                     buttonHtml = '<button class="btn btn-primary manage-button" data-id="' + row.id + '">ดูรายละเอียด</button>';
-                                }
+                                } 
                                 return buttonHtml;
                             }
                         }
@@ -148,55 +146,39 @@
         // $('#pdfModal iframe').attr('src', pdfUrl);
         // $('#pdfModal').modal('show');
     });
-    // $('#follow_up_on_requests tbody').on('click', '.manage-button', function() {
-    //     var id = $(this).data('id');
-    //     var petition_id = $(this).data('petition-id');
-    //     var pdfUrl;
 
-    //     if (petition_id == 7) {
-    //         pdfUrl = './PDF/teacher_staffing_survey_pdf.php?id='+id;
-    //         // $('#pdfModal iframe').attr('src', pdfUrl);
-    //         // $('#pdfModal').modal('show');
-    //     } else if (petition_id == 6) {
-    //         // สร้าง URL ของหน้าอื่นที่ต้องการเปิด
-    //         pdfUrl = './PDF/cover_form_pdf.php?id=' + id;
-    //     }
+    // // ยืนยันก่อนทำการยกเลิก
+    // $(document).on('click', '.cancel-button', function() {
+    //     var id = $(this).data('id'); // รับค่า ID ของคำร้องที่จะยกเลิก
 
-    //     // เปิด URL ในหน้าต่างหรือแท็บใหม่
-    //     window.open(pdfUrl, '_blank');
+    //     // ยืนยันก่อนทำการยกเลิก
+    //     $.ajax({
+    //         url: 'cancel_request', // URL ไปยังสคริปต์เซิร์ฟเวอร์ที่จะอัปเดตฐานข้อมูล
+    //         type: 'POST',
+    //         data: {
+    //             id: id,
+    //             id_status: 7
+    //         }, // ส่งข้อมูล ID และสถานะใหม่
+    //         success: function(response) {
+    //             // ทำอะไรก็ตามที่ต้องการหลังจากอัปเดตสำเร็จ, เช่น รีโหลดหน้าหรือแสดงข้อความ
+    //             Swal.fire({
+    //                 title: "ยกเลิกคำร้องสำเร็จ!",
+    //                 text: response.message,
+    //                 icon: "success",
+    //                 confirmButtonText: "ยืนยัน", // Change the text of the confirmation button
+    //             }).then((result) => {
+    //                 if (result.isConfirmed) {
+    //                     location.reload(); // Reload the page after confirmation
+    //                 }
+    //             });
+    //         },
+    //         error: function(xhr, status, error) {
+    //             // แสดงข้อความผิดพลาดหากมี
+    //             alert('ไม่สามารถยกเลิกคำร้องได้');
+    //         }
+    //     });
+
     // });
-    // ยืนยันก่อนทำการยกเลิก
-    $(document).on('click', '.cancel-button', function() {
-        var id = $(this).data('id'); // รับค่า ID ของคำร้องที่จะยกเลิก
-
-        // ยืนยันก่อนทำการยกเลิก
-        $.ajax({
-            url: 'cancel_request', // URL ไปยังสคริปต์เซิร์ฟเวอร์ที่จะอัปเดตฐานข้อมูล
-            type: 'POST',
-            data: {
-                id: id,
-                id_status: 7
-            }, // ส่งข้อมูล ID และสถานะใหม่
-            success: function(response) {
-                // ทำอะไรก็ตามที่ต้องการหลังจากอัปเดตสำเร็จ, เช่น รีโหลดหน้าหรือแสดงข้อความ
-                Swal.fire({
-                    title: "ยกเลิกคำร้องสำเร็จ!",
-                    text: response.message,
-                    icon: "success",
-                    confirmButtonText: "ยืนยัน", // Change the text of the confirmation button
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload(); // Reload the page after confirmation
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                // แสดงข้อความผิดพลาดหากมี
-                alert('ไม่สามารถยกเลิกคำร้องได้');
-            }
-        });
-
-    });
 </script>
 
 <?php include("../footer.php") ?>

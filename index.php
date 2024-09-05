@@ -21,7 +21,7 @@ include("./servers/connect.php");
                                 <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
                                 <input type="text" class="form-control" name="user_name" id="user_name" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                             </div>
-                            <label for="">Passeord :</label>
+                            <label for="">Password :</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Passeord" aria-label="Password" aria-describedby="basic-addon2">

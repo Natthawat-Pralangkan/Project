@@ -1,5 +1,11 @@
 <?php include("../servers/connect.php"); ?>
 <?php
+function calculateAge($birthdate) {
+    $birthDate = new DateTime($birthdate);
+    $currentDate = new DateTime();
+    $age = $currentDate->diff($birthDate);
+    return $age->y;
+}
 function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_second = '0')
 {
     $date_arr = explode(' ', $value);
@@ -58,8 +64,8 @@ if (isset($_POST["user_id"]) && $_POST["user_id"]) {
     $keeall[] = array(
         "user_name" => $row['user_name'] . ' ' . $row['last_name'],
         "id_card_number" => $row['id_card_number'],
-        "date" => $newdate, // เปลี่ยนเป็น $newdate ที่แปลงเป็นวันที่ไทยแล้ว
-        "age" =>  $age_data,
+        "date_month_yearofbirth" =>  $newdate, // เปลี่ยนเป็น $newdate ที่แปลงเป็นวันที่ไทยแล้ว
+        "age" => calculateAge($row['date_month_yearofbirth']),
         "nationality" => $row['nationality'],
         "house_code" => $row['house_code'],
         "number_house" => $row['number_house'],
@@ -84,7 +90,8 @@ if (isset($_POST["user_id"]) && $_POST["user_id"]) {
         "precepts_pali_studies" => $row['precepts_pali_studies'],
         "educational_qualification" => $row['educational_qualification'],
         "name_type" => $row['name_type'],
-        "picture" => "../officer/addpersonnelinformation/api/images/" . $row['picture'],
+        "id" => $row['id'],
+        "picture" => "../images/" . $row['picture'],
     );
 
     echo json_encode($keeall); // ส่ง JSON กลับหลังจากวนลูปเสร็จสิ้นทั้งหมด

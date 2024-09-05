@@ -19,14 +19,6 @@ $(document).ready(function () {
     ],
   });
  
-  // $("#position").change(function(){
-  //   if( $("#position").val()== 7){
-  //     $("#id_subject").show()
-  //   }else{
-  //     $("#id_subject").hide()
-  //   }
-  // })
-
   $("#server_user").click(function () {
     
     // รับข้อมูลจากฟอร์ม Modal

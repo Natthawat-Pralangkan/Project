@@ -28,6 +28,11 @@
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ติดตามคำร้อง</span>
             </a>
         </li>
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/petition_history') !== false ? 'active-menu' : ''; ?>">
+            <a class="nav-link d-inline-block" style="font-size: 16px;" href="./petition_history.php">
+                <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ประวัติคำร้อง</span>
+            </a>
+        </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/lecturer/order_inside_outside') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link d-inline-block" style="font-size: 16px;" href="./order_inside_outside.php">
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">คำสั่งภายใน - ภายนอก</span>

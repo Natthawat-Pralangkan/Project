@@ -1,6 +1,24 @@
 <?php include("../servers/connect.php"); ?>
 <?php include(".././header.php"); ?>
 <div class="wrapper">
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .edit-icon-container {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+
+        #file-input {
+            display: none;
+        }
+    </style>
     <?php include('./navbar/sidebar.php'); ?>
     <!-- Content Wrapper -->
     <div class="content-wrapper">
@@ -19,11 +37,19 @@
         <div class="content">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6 col-lg-6 text-center">
-                    <img id="picture" src="" alt="" style="width: 250px; height: 250px;">
-                    <div id="name_type" style="font-size: 18px;" class="mt-3 "> <span class="menu-text">ตำแหน่ง :</span> <br>ชื่อตำแหน่ง</div>
-
+                    <div class="image-container">
+                        <img id="picture" src="" alt="" style="width: 250px; height: 250px;">
+                        <div class="edit-icon-container">
+                            <i class="fas fa-edit edit-icon mt-3" id="edit-picture"></i>
+                        </div>
+                    </div>
+                    <input type="file" id="file-input" accept="image/*" style="display: none;">
+                    <div id="name_type" style="font-size: 18px;" class="mt-3">
+                        <span class="menu-text">ตำแหน่ง :</span>
+                    </div>
                 </div>
             </div>
+
             <div class="row mt-5 ">
                 <div class="col-6">
                     <div class="" style="font-size: 20px;">
@@ -149,7 +175,33 @@
                 </div>
             </div>
 
+            <!-- Modal for editing picture -->
+            <div class="modal fade" id="editPictureModal" tabindex="-1" aria-labelledby="editPictureModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editPictureModalLabel">แก้ไขรูปภาพ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <img id="uploaded_image_edit" src="<?php echo ($picturePath); ?>" alt="Selected Image" style="width: 250px; height: 250px;">
+                            </div>
+                            <div class="mt-3">
+                                <input type="file" id="picture_1" name="picture_1" onchange="displayImageEdit(this)" class="form-control">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                            <button type="button" id="edit_picture_1" class="btn btn-primary">อัปโหลด</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
 </div>
 
@@ -158,8 +210,56 @@
         localStorage.clear()
         window.location.href = "../"
     }
-    // สร้างฟังก์ชันสำหรับแสดงข้อมูลผู้ใช้ใน HTML
-    $(document).ready(function() {
+
+    function displayImageEdit(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#uploaded_image_edit').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Edit email
+    $(document).on('click', '#email .edit-icon', function() {
+        var email = $('#email').text().trim().replace('อีเมล์ : ', '');
+        $('#emailInput').val(email);
+        $('#editModal').modal('show');
+    });
+
+    $('#editForm').submit(function(event) {
+        event.preventDefault();
+        var email = $('#emailInput').val().trim();
+        $.ajax({
+            url: 'update_endpoint_email',
+            type: 'post',
+            data: {
+                user_id: localStorage.getItem("user_id"),
+                email: email
+            },
+            success: function(response) {
+                console.log(response);
+                var data = JSON.parse(response);
+                if (data.status === 200) {
+                    alert("บันทึกข้อมูลสำเร็จ");
+                    window.location.href = "personal_information";
+                } else {
+                    alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+                    window.location.href = "personal_information";
+                }
+            },
+            error: function() {
+                alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+            },
+        });
+    });
+
+    fetchUserData();
+    // Fetch personal information function
+    function fetchUserData() {
         $.ajax({
             url: 'get_personal_information',
             method: 'POST',
@@ -169,15 +269,14 @@
             },
             success: function(data) {
                 $("#picture").attr('src', data[0].picture);
-                // $("#name_type").html("ตำแหน่ง :" + " " + data[0].name_type);           
-                $("#name_type").html("ตำแหน่ง <br>" + "<span style='font-size: 20px;'>" + data[0].name_type +"</span>");
+                $("#name_type").html("ตำแหน่ง <span style='font-size: 20px;'>" + data[0].name_type + "</span>");
                 $("#user_name").html("ชื่อ-นามสกุล :" + " " + data[0].user_name);
                 $("#id_card_number").html("เลขที่บัตรประชาชน:" + " " + data[0].id_card_number);
-                $("#date_month_yearofbirth").html("วัน เดือนปี เกิด :" + " " + data[0].date);
+                $("#date_month_yearofbirth").html("วัน เดือนปี เกิด :" + " " + data[0].date_month_yearofbirth);
                 $("#nationality").html("สัญชาติ :" + " " + data[0].nationality);
-                $("#age").html("อายุ :" + " " + data[0].age);
-                $("#email").html("อีเมล์ :" + " " + data[0].email + " " + " <i class='fas fa-edit edit-icon' data-email='" + data[0].email + "'></i>");
-                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " " + "<i class='fas fa-edit edit-icon1' data-telephone_number='" + data[0].telephone_number + "'></i>");
+                $("#age").html("อายุ :" + " " + data[0].age + " ปี");
+                $("#email").html("อีเมล์ :" + " " + data[0].email + " <i class='fas fa-edit edit-icon' data-email='" + data[0].email + "'></i>");
+                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " <i class='fas fa-edit edit-icon1' data-telephone_number='" + data[0].telephone_number + "'></i>");
                 $("#start_date").html("วันที่เริ่มทำงาน :" + " " + data[0].start_date);
                 $("#house_code").html("รหัสประจำบ้าน :" + " " + data[0].house_code);
                 $("#number_house").html("เลขที่ :" + " " + data[0].number_house);
@@ -198,51 +297,12 @@
                 $("#dhamma_expert_dhamma_studies").html("นักธรรม :" + " " + data[0].dhamma_expert_dhamma_studies);
                 $("#precepts_pali_studies").html("เปรียญธรรม/บาลีศึกษา :" + " " + data[0].precepts_pali_studies);
                 $("#educational_qualification").html("วุฒิการศึกษา :" + " " + data[0].educational_qualification);
-
             },
             error: function(xhr, status, error) {
-                // จัดการกับข้อผิดพลาด
                 console.error('There was a problem with the ajax operation:', error);
             }
         });
-    });
-
-    $(document).on('click', '.edit-icon', function() {
-        var emailToEdit = $(this).data('email'); // ดึงอีเมล์จาก data-email
-        // ตัวอย่าง: ใส่อีเมล์เดิมในฟอร์ม modal
-        $('#emailInput').val(emailToEdit);
-        $('#editModal').modal('show'); // แสดง modal สำหรับการแก้ไข
-    });
-
-    $('#editForm').on('submit', function(e) {
-        e.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
-        var formData = {
-            user_id: localStorage.getItem("user_id"),
-            email: $('#emailInput').val(),
-            // รวมฟิลด์อื่นๆ จากฟอร์มที่นี่, ตัวอย่างเช่น:
-            // phone: $('#phoneInput').val(),
-        };
-        $.ajax({
-            url: 'update_endpoint_email', // แทนที่ด้วย URL จริงของคุณ
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                console.log(response);
-                var data = JSON.parse(response);
-                if (data.status === 200) {
-                    alert("บันทึกข้อมูลสำเร็จ");
-                    window.location.href = "personal_information";
-                } else {
-                    alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
-                    window.location.href = "personal_information";
-                }
-            },
-            error: function() {
-                alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
-            },
-        });
-    });
-
+    }
     $(document).on('click', '.edit-icon1', function() {
         var telephoneNumberToEdit = $(this).data('telephone_number'); // ดึงเบอร์โทรศัพท์จาก data-telephone_number
         $('#telephoneNumberInput').val(telephoneNumberToEdit);
@@ -272,6 +332,42 @@
             error: function() {
                 alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
             },
+        });
+    });
+
+    $('#edit-picture').click(function() {
+        $('#editPictureModal').modal('show');
+    });
+
+    $("#edit_picture_1").click(function() {
+        var picture = $("#picture_1").prop('files')[0]; // Get the file object
+        var formData = new FormData();
+        formData.append('user_id', localStorage.getItem("user_id"));
+        formData.append('picture_1', picture); // Append the file object
+
+        console.log("User ID:", localStorage.getItem("user_id"));
+        console.log(picture);
+
+        $.ajax({
+            url: "upload_picture",
+            method: "POST",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                var data = JSON.parse(response);
+                if (data.status === 200) {
+                    alert("บันทึกข้อมูลสำเร็จ");
+                    window.location.href = "personal_information";
+                } else {
+                    alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+                    window.location.href = "personal_information";
+                }
+            },
+            error: function() {
+                alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+            }
         });
     });
 </script>

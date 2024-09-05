@@ -28,7 +28,7 @@
                             <th>ไอดีผู้ใช้</th>
                             <th>ชื่อ - นามสกุล</th>
                             <th>ตำแหน่ง</th>
-                            <th>จัดการ</th>
+                            <!-- <th>จัดการ</th> -->
                         </tr>
                     </thead>
                 </table>
@@ -66,13 +66,13 @@
                         {
                             data: 'name_type'
                         },
-                        {
-                            data: null,
-                            render: function(data, type, row) {
-                                // Return the button with data attributes for user id and modal target
-                                return '<button class="btn btn-danger cancel-button" data-id="' + row.id + '">ลบ</button>';
-                            }
-                        }
+                        // {
+                        //     data: null,
+                        //     render: function(data, type, row) {
+                        //         // Return the button with data attributes for user id and modal target
+                        //         return '<button class="btn btn-danger cancel-button" data-id="' + row.id + '">ลบ</button>';
+                        //     }
+                        // }
                     ],
                     "destroy": true // This ensures the table is reinitialized properly
                 });
@@ -82,35 +82,35 @@
             }
         });
     });
-    $(document).on('click', '.cancel-button', function() {
-        var id = $(this).data('id'); // Get the ID of the request to be cancelled
+    // $(document).on('click', '.cancel-button', function() {
+    //     var id = $(this).data('id'); // Get the ID of the request to be cancelled
 
-        $.ajax({
-            url: 'update_status', // URL to the server-side script for updating status
-            type: 'POST',
-            data: {
-                id: id,
-                status: 1
-            }, // Send ID and new status
-            dataType: 'json', // Expect JSON response
-            success: function(response) {
-                // Handle successful response
-                Swal.fire({
-                    title: "ลบผู้ใช้งานสำเร็จ!",
-                    text: response.message,
-                    icon: "success",
-                    confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload(); // Reload the page after confirmation
-                    }
-                });
-            },
-            error: function(xhr, status, error) {
-                // Handle error response
-                alert('ไม่สามารถลบผู้ใช้งานได้');
-            }
-        });
-    });
+    //     $.ajax({
+    //         url: 'update_status', // URL to the server-side script for updating status
+    //         type: 'POST',
+    //         data: {
+    //             id: id,
+    //             status: 1
+    //         }, // Send ID and new status
+    //         dataType: 'json', // Expect JSON response
+    //         success: function(response) {
+    //             // Handle successful response
+    //             Swal.fire({
+    //                 title: "ลบผู้ใช้งานสำเร็จ!",
+    //                 text: response.message,
+    //                 icon: "success",
+    //                 confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
+    //             }).then((result) => {
+    //                 if (result.isConfirmed) {
+    //                     location.reload(); // Reload the page after confirmation
+    //                 }
+    //             });
+    //         },
+    //         error: function(xhr, status, error) {
+    //             // Handle error response
+    //             alert('ไม่สามารถลบผู้ใช้งานได้');
+    //         }
+    //     });
+    // });
 </script>
 <?php include("../footer.php") ?>

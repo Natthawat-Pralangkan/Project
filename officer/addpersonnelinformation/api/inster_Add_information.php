@@ -7,7 +7,7 @@ include("../../../servers/connect.php");
 if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
     $tmp = $_FILES['picture']['tmp_name'];
     $imgname = $_FILES['picture']['name'];
-    $path = "./images/" . $imgname;
+    $path = "../../../images/" . $imgname;
     move_uploaded_file($tmp, $path);
 } else {
     $imgname = "";
