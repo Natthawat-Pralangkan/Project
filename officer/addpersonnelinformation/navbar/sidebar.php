@@ -1,6 +1,6 @@
 <aside class="sidebar" id="bg">
     <div class="text-center my-4" style="height : 28px;">
-        <h5 id="title_web" class="text-white" >NUNTABUREE-เจ้าหน้าที่ฝ่ายบุคคล</h5>
+        <h5 id="title_web" class="text-white">NUNTABUREE-เจ้าหน้าที่ฝ่ายบุคคล</h5>
     </div>
     <ul class="nav flex-column">
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/addpersonnelinformation/home') !== false ? 'active-menu' : ''; ?>">
@@ -11,6 +11,11 @@
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/addpersonnelinformation/check_the_request') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./check_the_request.php">
                 <i class="fa-solid fa-file-lines spani"></i><span id="text-b" class="menu-text">ตรวจสอบคำร้อง</span>
+            </a>
+        </li>
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/addpersonnelinformation/Petition_history') !== false ? 'active-menu' : ''; ?>">
+            <a class="nav-link d-inline-block" style="font-size: 16px;" href="./Petition_history.php">
+                <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ประวัติคำร้อง</span>
             </a>
         </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/addpersonnelinformation/Report_on_entry_and_exit_times') !== false ? 'active-menu' : ''; ?>">

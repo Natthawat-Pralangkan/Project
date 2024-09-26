@@ -7,8 +7,7 @@ try {
     // Corrected JOIN syntax and fixed the condition to match tables correctly
     $sql = "SELECT * FROM `teacher_personnel_information` 
         JOIN type on teacher_personnel_information.position = type.id_type
-        WHERE teacher_personnel_information.position IN (2, 3, 4, 5, 6, 7, 8)";
-
+        WHERE teacher_personnel_information.position IN (1,2, 3, 4, 5, 6, 7, 8,9,10,11,12,13,14,15,16,17)";
     $stmt = $db->prepare($sql);
     $stmt->execute();
 

@@ -131,7 +131,7 @@
         $('#exampleModal5').on('show.bs.modal', function(e) {
             // Fetch data through AJAX
             $.ajax({
-                url: 'get_all_staff.php', // Adjusted URL to include .php extension
+                url: 'get_all_staff', // Adjusted URL to include .php extension
                 method: 'GET',
                 success: function(response) {
                     // Insert the response data into tbody within the modal

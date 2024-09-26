@@ -13,11 +13,17 @@
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ตรวจสอบคำร้อง</span>
             </a>
         </li>
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/academicmaster/Petition_history') !== false ? 'active-menu' : ''; ?>">
+            <a class="nav-link d-inline-block" style="font-size: 16px;" href="./Petition_history.php">
+                <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ประวัติคำร้อง</span>
+            </a>
+        </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/academicmaster/Report_on_entry_and_exit_times') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link d-inline-block" style="font-size: 16px;" href="./Report_on_entry_and_exit_times.php">
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ขอรายงานการลง เวลาเข้า - ออกงาน</span>
             </a>
         </li>
+ 
     </ul>
 </aside>
 <script>

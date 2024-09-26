@@ -27,7 +27,7 @@ include("./servers/connect.php");
                                 <input type="password" class="form-control" id="password" name="password" placeholder="Passeord" aria-label="Password" aria-describedby="basic-addon2">
                             </div>
                             <h6 style="text-align:right;width:100%;">ลืมรหัสผ่าน?</h6>
-                            <button id="loginButton" class="butn form-control">เข้าสู่ระบบ</button>
+                            <button id="loginButton" class="butn form-control">Login</button>
                             <!-- <input type="submit" value="เข้าสู่ระบบ" id="login" class="form-control">  -->
                             <div class="text-center">
                                 <br>

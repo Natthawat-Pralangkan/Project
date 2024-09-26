@@ -63,12 +63,7 @@
                             } else
                                 return "";
                         }
-                        $sql = "SELECT *,`details_ppetiton`.`id` FROM `details_ppetiton`
-                        JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
-                        JOIN petition_type ON petition_name.id_petition = petition_type.id 
-                        JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
-                        WHERE details_ppetiton.petition_type = 4;";
+                        $sql = "SELECT *,`details_ppetiton`.`id` FROM `details_ppetiton` JOIN petition_name ON details_ppetiton.petition_id = petition_name.id JOIN petition_type ON petition_name.id_petition = petition_type.id JOIN request_status ON details_ppetiton.id_status = request_status.id_status JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id WHERE details_ppetiton.petition_type = 3 AND details_ppetiton.id_status = 1;";
                         $result = $db->query($sql); ?>
                         <?php
                         if ($result->rowCount() > 0) {
@@ -110,32 +105,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">เหตุผลไม่อนุมัติคำร้อง</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput" class="form-label">เหตุผลไม่อนุมัติคำร้อง</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="เหตุผลไม่อนุมัติคำร้อง">
+                <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">เหตุผลไม่อนุมัติคำร้อง</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="formGroupExampleInput" class="form-label">เหตุผลไม่อนุมัติคำร้อง</label>
+                                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="เหตุผลไม่อนุมัติคำร้อง">
+                                    <input type="hidden" id="hiddenIdField" value="">
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" id="confirmDisapproval" class="btn text-center disapproveButton" data-bs-dismiss="modal" style="background-color: #8B39F4; color: #fcfafa;">ยืนยัน</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn  text-center" data-bs-dismiss="modal" style="background-color: #8B39F4; color: #fcfafa;">ยืนยัน</button>
-
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <script>
-    if (localStorage.getItem("id_type") != "5" && localStorage.getItem("user_id") == null) {
+    if (localStorage.getItem("id_type") != "3" && localStorage.getItem("user_id") == null) {
         localStorage.clear()
         window.location.href = "../"
     }
@@ -176,16 +172,23 @@
                 },
                 success: function(response) {
                     if (response.status === "success") {
-                        alert("อนุมัติคำร้องเรียบร้อยแล้ว");
-                        $('#exampleModal7').modal('hide');
-                        // Refresh or update the UI as necessary
-                        location.reload(); // or use a more targeted update method
+                        Swal.fire({
+                            title: "อนุมัติคำร้องสำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน" // เปลี่ยนข้อความของปุ่มยืนยัน
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // รีเฟรชหน้าเว็บหลังจากกดยืนยัน
+                            }
+                        });
+                        $('#exampleModal7').modal('hide'); // ซ่อน modal ที่ต้องการ
                     } else {
-                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                        alert("เกิดข้อผิดพลาด: " + response.message);
                     }
                 },
                 error: function(xhr, status, error) {
-                    alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
+                    console.error('Error:', error); // แสดงข้อผิดพลาดในคอนโซล
                 }
             });
         });
@@ -197,34 +200,48 @@
 
         // Handle the confirmation of disapproval
         $('#confirmDisapproval').click(function() {
-            var id = $('#hiddenIdField').val(); // Retrieve the id
-            var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
-            if (!reason.trim()) {
-                alert("Please enter a reason for disapproval.");
-                return;
+    var id = $('#hiddenIdField').val(); // Retrieve the id
+    var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
+    if (!reason.trim()) {
+        alert("Please enter a reason for disapproval.");
+        return;
+    }
+    var id_status = 6; // Status for disapproval
+    
+    // AJAX call to update the reason and status to "Disapproved"
+    $.ajax({
+        url: 'update_reason', // Adjust the URL as necessary
+        type: 'POST', // Make sure this is POST
+        data: {
+            id: id, // Ensure these variables are correctly defined in your JS
+            reason: reason,
+            id_status: id_status
+        },
+        success: function(response) {
+            // ตรวจสอบ response.success ที่ส่งมาจากเซิร์ฟเวอร์
+            if (response.success) {
+                Swal.fire({
+                    title: "บันทึกสำเร็จ!",
+                    text: response.message,
+                    icon: "success",
+                    confirmButtonText: "ยืนยัน"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload(); // Reload the page after confirmation
+                    }
+                });
+                $('#exampleModal1').modal('hide'); // ซ่อน modal เมื่อการบันทึกสำเร็จ
+            } else {
+                alert("เกิดข้อผิดพลาด: " + response.message);
             }
-            var id_status = 6;
-            // AJAX call to update the reason and status to "Disapproved"
-            $.ajax({
-                url: 'update_reason', // Adjust the URL as necessary
-                type: 'POST', // Make sure this is POST
-                data: {
-                    id: id, // Ensure these variables are correctly defined in your JS
-                    reason: reason,
-                    id_status: id_status
-                },
-                success: function(response) {
-                    alert("อัปเดตข้อมูลเรียบร้อย");
-                    $('#exampleModal1').modal('hide');
-                    location.reload();
-                    console.log('Success:', response);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
-            });
-        });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', error);
+            alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');
+        }
     });
-    // Assume your manage buttons have a class 'manage-button' and data-id attribute
+});
+
+    });
 </script>
 <?php include("../../footer.php") ?>

@@ -391,7 +391,7 @@
                                     $(td).addClass("status3");
                                 } else if (cellData == "อนุมัติแล้ว") {
                                     $(td).addClass("status4");
-                                } else if (cellData == "ไม่อนุมัติแล้ว") {
+                                } else if (cellData == "ไม่อนุมัติ") {
                                     $(td).css('color', '#f71004'); // ใช้สีแดงแบบ inline
                                     $(td).addClass("status5");
                                 } else if (cellData == "ไม่ผ่านพิจารณา") {

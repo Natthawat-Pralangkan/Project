@@ -31,7 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                       
+
                     </tbody>
                 </table>
                 <!-- Modal -->
@@ -141,20 +141,27 @@
                 },
                 success: function(response) {
                     if (response.status === "success") {
-                        alert("อนุมัติคำร้องเรียบร้อยแล้ว");
-                        $('#exampleModal7').modal('hide');
-                        // Refresh or update the UI as necessary
-                        location.reload(); // or use a more targeted update method
+                        Swal.fire({
+                            title: "อนุมัติคำร้องสำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page after confirmation
+                            }
+                        });
+                        $('#exampleModal7').modal('hide'); // ซ่อน modal ที่ต้องการ
                     } else {
-                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                        alert("เกิดข้อผิดพลาด: " + response.message);
                     }
                 },
+
                 error: function(xhr, status, error) {
                     alert("เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
                 }
             });
         });
-
         $("#approveButton2").on('click', function(event) {
             event.preventDefault();
 
@@ -163,7 +170,7 @@
             var id_status = 3; // Define and assign a value to id_status
             var Secondary_opinion = $('#Secondary_opinion').val();
 
-       
+
             // AJAX call to update the status
             $.ajax({
                 url: "update_status1",
@@ -197,31 +204,47 @@
         });
 
         // Handle the confirmation of disapproval
+        // Handle the confirmation of disapproval
         $('#confirmDisapproval').click(function() {
             var id = $('#hiddenIdField').val(); // Retrieve the id
             var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
             if (!reason.trim()) {
-                alert("Please enter a reason for disapproval.");
+                alert("กรุณาใส่เหตุผลสำหรับการไม่อนุมัติ.");
                 return;
             }
-            var id_status = 5;
+
+            var id_status = 5; // Define the status for disapproval
+
             // AJAX call to update the reason and status to "Disapproved"
             $.ajax({
                 url: 'update_reason', // Adjust the URL as necessary
                 type: 'POST', // Make sure this is POST
                 data: {
-                    id: id, // Ensure these variables are correctly defined in your JS
+                    id: id,
                     reason: reason,
                     id_status: id_status
                 },
                 success: function(response) {
-                    alert("อัปเดตข้อมูลเรียบร้อย");
-                    $('#exampleModal1').modal('hide');
-                    location.reload();
-                    console.log('Success:', response);
+                    // Assuming response.success is being returned by the server
+                    if (response.success) {
+                        Swal.fire({
+                            title: "บันทึกสำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page after confirmation
+                            }
+                        });
+                        $('#exampleModal1').modal('hide'); // Hide modal after successful submission
+                    } else {
+                        alert("เกิดข้อผิดพลาด: " + response.message);
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
+                    alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');
                 }
             });
         });
@@ -259,15 +282,11 @@
                         {
                             data: 'name_status',
                             createdCell: function(td, cellData, rowData, row, col) {
-                                if (cellData == "รอพิจารณา") {
-                                    $(td).addClass("status1");
-                                } else if (cellData == "รอรองผู้อำนวยการพิจารณา") {
-                                    $(td).addClass("status2");
-                                } else if (cellData == "รอผู้อำนวยการพิจารณา") {
-                                    $(td).addClass("status3");
-                                } else if (cellData == "อนุมัติแล้ว") {
-                                    $(td).addClass("status4");
-                                } else if (cellData == "ไม่อนุมัติแล้ว") {
+                                // ตรวจสอบว่า id_status เป็น 1, 2, 3 หรือ 4
+                                if ([3, 4].includes(parseInt(rowData.id_status))) {
+                                    // ถ้า id_status เป็น 1, 2, 3 หรือ 4 ให้ขึ้นว่า "อนุมัติแล้ว"
+                                    $(td).addClass("status4").text("อนุมัติแล้ว");
+                                } else if (cellData == "ไม่อนุมัติ") {
                                     $(td).addClass("status5");
                                 } else if (cellData == "ไม่ผ่านพิจารณา") {
                                     $(td).addClass("status6");

@@ -48,7 +48,7 @@
                                     $arrMM = array(1 => "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
                                 else
                                     $arrMM = array(1 => "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.");
-                                // return $x[2]." ".$arrMM[(int)$x[1]]." ".($x[0]>2500?$x[0]:$x[0]+543);
+
                                 if ($need_time == '1') {
                                     if ($need_time_second == '1') {
                                         $time_format = $time != '' ? date('H:i:s น.', strtotime($time)) : '';
@@ -63,8 +63,18 @@
                             } else
                                 return "";
                         }
-                        $sql = "SELECT *,`details_ppetiton`.`id` FROM `details_ppetiton` JOIN petition_name ON details_ppetiton.petition_id = petition_name.id JOIN petition_type ON petition_name.id_petition = petition_type.id JOIN request_status ON details_ppetiton.id_status = request_status.id_status JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id WHERE details_ppetiton.petition_type = 1 AND details_ppetiton.id_status = 1;";
-                        $result = $db->query($sql); ?>
+
+                        $sql = "SELECT *, `details_ppetiton`.`id` 
+                                FROM `details_ppetiton`
+                                JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
+                                JOIN petition_type ON petition_name.id_petition = petition_type.id
+                                JOIN request_status ON details_ppetiton.id_status = request_status.id_status
+                                JOIN teacher_personnel_information ON details_ppetiton.user_id = teacher_personnel_information.user_id
+                                WHERE details_ppetiton.petition_type = 3
+                                AND details_ppetiton.id_status IN (2, 3, 4, 5, 6, 7);";
+                        $result = $db->query($sql);
+                        ?>
+
                         <?php
                         if ($result->rowCount() > 0) {
                             while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
@@ -75,12 +85,20 @@
                                     <td> <?php echo $newdate ?> </td>
                                     <td> <?php echo $row['petition_name'] ?> </td>
                                     <td> <?php echo $row['user_name'] ?> </td>
-                                    <td> <?php echo $row['name_status'] ?> </td>
-                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button>
+                                    <td>
+                                        <?php
+                                        // ตรวจสอบค่า id_status ถ้าเป็น 2, 3, หรือ 4 ให้แสดงว่า "อนุมัติแล้ว"
+                                        if (in_array($row['id_status'], [2, 3, 4])) {
+                                            echo "อนุมัติแล้ว";
+                                        } else {
+                                            echo $row['name_status'];
+                                        }
+                                        ?>
                                     </td>
+                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button></td>
                                 </tr>
-
-                        <?php   }
+                        <?php
+                            }
                         } else {
                             echo "0 results";
                         }
@@ -190,6 +208,7 @@
                 error: function(xhr, status, error) {
                     console.error('Error:', error); // แสดงข้อผิดพลาดในคอนโซล
                 }
+
             });
         });
 
@@ -200,48 +219,45 @@
 
         // Handle the confirmation of disapproval
         $('#confirmDisapproval').click(function() {
-    var id = $('#hiddenIdField').val(); // Retrieve the id
-    var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
-    if (!reason.trim()) {
-        alert("Please enter a reason for disapproval.");
-        return;
-    }
-    var id_status = 6; // Status for disapproval
-    
-    // AJAX call to update the reason and status to "Disapproved"
-    $.ajax({
-        url: 'update_reason', // Adjust the URL as necessary
-        type: 'POST', // Make sure this is POST
-        data: {
-            id: id, // Ensure these variables are correctly defined in your JS
-            reason: reason,
-            id_status: id_status
-        },
-        success: function(response) {
-            // ตรวจสอบ response.success ที่ส่งมาจากเซิร์ฟเวอร์
-            if (response.success) {
-                Swal.fire({
-                    title: "บันทึกสำเร็จ!",
-                    text: response.message,
-                    icon: "success",
-                    confirmButtonText: "ยืนยัน"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload(); // Reload the page after confirmation
-                    }
-                });
-                $('#exampleModal1').modal('hide'); // ซ่อน modal เมื่อการบันทึกสำเร็จ
-            } else {
-                alert("เกิดข้อผิดพลาด: " + response.message);
+            var id = $('#hiddenIdField').val(); // Retrieve the id
+            var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
+            if (!reason.trim()) {
+                alert("Please enter a reason for disapproval.");
+                return;
             }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error:', error);
-            alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');
-        }
-    });
-});
+            var id_status = 6;
+            // AJAX call to update the reason and status to "Disapproved"
+            $.ajax({
+                url: 'update_reason', // Adjust the URL as necessary
+                type: 'POST', // Make sure this is POST
+                data: {
+                    id: id, // Ensure these variables are correctly defined in your JS
+                    reason: reason,
+                    id_status: id_status
+                },
+                success: function(response) {
+                    if (response.status === "success") {
+                        Swal.fire({
+                            title: "บันทึกสำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน" // เปลี่ยนข้อความของปุ่มยืนยัน
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // รีเฟรชหน้าเว็บหลังจากกดยืนยัน
+                            }
+                        });
+                        $('#exampleModal1').modal('hide'); // ซ่อน modal ที่ต้องการ
+                    } else {
+                        alert("เกิดข้อผิดพลาด: " + response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error); // แสดงข้อผิดพลาดในคอนโซล
+                }
 
+            });
+        });
     });
 </script>
 <?php include("../../footer.php") ?>

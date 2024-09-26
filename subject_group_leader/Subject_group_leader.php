@@ -412,7 +412,7 @@ include("../servers/connect.php"); ?>
                                 if ([1, 2, 3, 4].includes(parseInt(rowData.id_status))) {
                                     // ถ้า id_status เป็น 1, 2, 3 หรือ 4 ให้ขึ้นว่า "อนุมัติแล้ว"
                                     $(td).addClass("status4").text("อนุมัติแล้ว");
-                                } else if (cellData == "ไม่อนุมัติแล้ว") {
+                                } else if (cellData == "ไม่อนุมัติ") {
                                     $(td).addClass("status5");
                                 } else if (cellData == "ไม่ผ่านพิจารณา") {
                                     $(td).addClass("status6");

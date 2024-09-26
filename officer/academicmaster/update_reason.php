@@ -14,17 +14,16 @@ try {
 
         if ($stmt->execute([$reason, $id_status, $id])) {
             http_response_code(200); // OK
-            echo json_encode(["message" => "Record updated successfully"]);
+            echo json_encode(["success" => true, "message" => "Record updated successfully"]);
         } else {
             http_response_code(500); // Internal Server Error
-            echo json_encode(["message" => "Error updating record"]);
+            echo json_encode(["success" => false, "message" => "Error updating record"]);
         }
     } else {
         http_response_code(400); // Bad Request
-        echo json_encode(["message" => "Invalid request"]);
+        echo json_encode(["success" => false, "message" => "Invalid request"]);
     }
 } catch (PDOException $e) {
     http_response_code(500); // Internal Server Error
-    echo json_encode(["message" => "Database error: " . $e->getMessage()]);
+    echo json_encode(["success" => false, "message" => "Database error: " . $e->getMessage()]);
 }
-?>

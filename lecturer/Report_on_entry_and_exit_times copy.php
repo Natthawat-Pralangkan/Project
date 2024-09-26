@@ -42,7 +42,7 @@
 
                     </div>
                 </form>
-                <button id="pdfButton" style="display:none;" onclick="createPDF()" class="btn btn-danger mt-3" ">พิมพ์รายงาน PDF</button>
+                <button id="pdfButton" style="display:none;" onclick="createPDF()" class="btn btn-danger mt-3" ">Generate PDF</button>
             </div>
                 <table class=" table mt-3" style="display:none;" id="">
                     <thead>

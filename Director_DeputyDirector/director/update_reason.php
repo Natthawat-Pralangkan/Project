@@ -14,17 +14,28 @@ try {
 
         if ($stmt->execute([$reason, $id_status, $id])) {
             http_response_code(200); // OK
-            echo json_encode(["message" => "Record updated successfully"]);
+            echo json_encode([
+                "message" => "Record updated successfully",
+                "success" => true  // เพิ่ม success เพื่อให้ client ตรวจสอบได้ง่าย
+            ]);
         } else {
             http_response_code(500); // Internal Server Error
-            echo json_encode(["message" => "Error updating record"]);
+            echo json_encode([
+                "message" => "Error updating record",
+                "success" => false
+            ]);
         }
     } else {
         http_response_code(400); // Bad Request
-        echo json_encode(["message" => "Invalid request"]);
+        echo json_encode([
+            "message" => "Invalid request",
+            "success" => false
+        ]);
     }
 } catch (PDOException $e) {
     http_response_code(500); // Internal Server Error
-    echo json_encode(["message" => "Database error: " . $e->getMessage()]);
+    echo json_encode([
+        "message" => "Database error: " . $e->getMessage(),
+        "success" => false
+    ]);
 }
-?>
