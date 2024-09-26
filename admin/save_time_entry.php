@@ -4,7 +4,7 @@ include("../servers/connect.php");
 if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
     $tmp = $_FILES['picture']['tmp_name'];
     $imgname = $_FILES['picture']['name'];
-    $path = "../Face_scanning_system/images/" . $imgname;
+    $path = "../Face_scanning_system/images_time/" . $imgname;
     move_uploaded_file($tmp, $path);
 } else {
     $imgname = "";

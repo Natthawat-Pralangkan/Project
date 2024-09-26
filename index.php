@@ -118,6 +118,7 @@ include("./servers/connect.php");
                                 })
                                 break;
                             case 6:
+                            case 17:
                                 localStorage.setItem("id_type", data.id_type)
                                 localStorage.setItem("user_id", data.user_id)
                                 Swal.fire(

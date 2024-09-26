@@ -19,9 +19,9 @@
             </div>
             <a href=""></a>
         </div>
-        <div class="mt-5 mx-3">
+        <div class=" mx-3">
             <div class="d-flex justify-content-end">
-                <div class="mt-5">
+                <div class="mt-3">
                     <a href="./Add_information.php" class="btn mr-2" style="background-color: #BB6AFB; color:#FFFFFF">เพิ่มข้อมูลบุคลากร</a>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     try {
                         $sql = "SELECT * FROM `teacher_personnel_information` 
             JOIN type ON teacher_personnel_information.position = type.id_type 
-            WHERE teacher_personnel_information.position IN (1, 2, 3, 4, 5, 6, 7) and teacher_personnel_information.status in (0) ORDER BY id DESC";
+            WHERE teacher_personnel_information.position IN (1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13,14,15,16,17,18) and teacher_personnel_information.status in (0) ORDER BY id DESC";
                         $result = $db->query($sql);
 
                         if ($result && $result->rowCount() > 0) {

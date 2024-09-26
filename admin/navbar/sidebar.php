@@ -33,7 +33,7 @@
                 <i class="fa-solid fa-user-plus spani"></i><span class="menu-text">จัดการข้อมูลผู้ใช้ระบบ</span>
             </a>
         </li>
-        <li class="nav-item ms-3 me-1 py-1">
+        <!-- <li class="nav-item ms-3 me-1 py-1">
             <a class="nav-link d-inline-block" style="font-size: 18px;" href="#timeClockingDropdown" data-bs-toggle="collapse" aria-expanded="false">
                 <i class="fa-solid fa-user-plus spani"></i><span class="menu-text">จัดการระบบลงเวลาเข้า - ออกงาน</span>
             </a>
@@ -44,14 +44,34 @@
                             <span class="menu-text">เพิ่มข้อมูลลงเวลา เข้า - ออกงาน</span>
                         </a>
                     </li>
-                    <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/time_clocking_system?page=2') !== false ? 'active-menu' : ''; ?>">
-                        <a class=" nav-item ms-3 me-1 py-1 nav-link " href="./time_clocking_system.php?page=2" style="font-size: 18px;" ata-bs-toggle="collapse">
+                    <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/manage_work_hours?page=2') !== false ? 'active-menu' : ''; ?>">
+                        <a class=" nav-item ms-3 me-1 py-1 nav-link " href="./manage_work_hours.php?page=2" style="font-size: 18px;" ata-bs-toggle="collapse">
+                            <span class="menu-text">จัดการเวลาการลงเวลา เข้า - ออกงาน</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li> -->
+        <li class="nav-item ms-3 me-1 py-1">
+            <a class="nav-link d-inline-block" style="font-size: 18px;" href="#timeClockingDropdown" data-bs-toggle="collapse" aria-expanded="<?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/manage_work_hours') !== false || strpos($_SERVER['REQUEST_URI'], 'Project/admin/time_clocking_system') !== false ? 'true' : 'false'; ?>">
+                <i class="fa-solid fa-user-plus spani"></i><span class="menu-text">จัดการระบบลงเวลาเข้า - ออกงาน</span>
+            </a>
+            <div class="collapse <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/manage_work_hours') !== false || strpos($_SERVER['REQUEST_URI'], 'Project/admin/time_clocking_system') !== false ? 'show' : ''; ?>" id="timeClockingDropdown">
+                <ul class="list-unstyled ms-3">
+                    <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/time_clocking_system?page=1') !== false ? 'active-menu' : ''; ?>">
+                        <a class="nav-item ms-3 me-1 py-1 nav-link" href="./time_clocking_system.php?page=1" style="font-size: 18px;">
+                            <span class="menu-text">เพิ่มข้อมูลลงเวลา เข้า - ออกงาน</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/admin/manage_work_hours?page=2') !== false ? 'active-menu' : ''; ?>">
+                        <a class="nav-item ms-3 me-1 py-1 nav-link" href="./manage_work_hours.php?page=2" style="font-size: 18px;">
                             <span class="menu-text">จัดการเวลาการลงเวลา เข้า - ออกงาน</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </li>
+
     </ul>
 
 </aside>

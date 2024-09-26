@@ -45,12 +45,13 @@ include("../servers/connect.php"); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" id="hiddenIdField" value="">
+                                <input type="hidden" id="hiddenIdField" value=""> <!-- สมมุติว่ามีค่า id -->
                                 <iframe id="pdfViewer1" width="100%" height="500px" frameborder="0"></iframe>
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                                <!-- เพิ่ม event handler เพื่อส่งค่า id ไปยัง #exampleModal1 -->
+                                <button class="btn mr-2" id="disapproveButton" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
                             </div>
                         </div>
                     </div>
@@ -64,7 +65,7 @@ include("../servers/connect.php"); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <input type="hidden" id="hiddenIdField" value="">
+                                <input type="hidden" id="hiddenIdFieldModal8" value=""> <!-- สมมุติว่า id ถูกเซ็ตเป็น 1234 จาก backend -->
                                 <iframe id="pdfViewer2" width="100%" height="500px" frameborder="0"></iframe>
                                 <div class="row justify-content-center">
                                     <div class="col-md-4 text-center">
@@ -82,13 +83,14 @@ include("../servers/connect.php"); ?>
                             </div>
                             <div class="modal-footer justify-content-center">
                                 <button type="button" id="approveButton1" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                                <!-- เพิ่มการส่งค่า id ไปยัง Modal ไม่อนุมัติ -->
+                                <button class="btn mr-2" id="disapproveButton" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -96,10 +98,11 @@ include("../servers/connect.php"); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <input type="hidden" id="hiddenIdField1" value=""> <!-- ฟิลด์นี้จะรับค่า id -->
                                 <div class="mb-3">
                                     <label for="formGroupExampleInput" class="form-label">เหตุผลไม่อนุมัติคำร้อง</label>
                                     <input type="text" class="form-control" id="formGroupExampleInput" placeholder="เหตุผลไม่อนุมัติคำร้อง">
-                                    <input type="hidden" id="hiddenIdField" value="">
+
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-center">
@@ -108,6 +111,7 @@ include("../servers/connect.php"); ?>
                         </div>
                     </div>
                 </div>
+
                 <div class="modal fade" id="exampleModal10" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -144,6 +148,9 @@ include("../servers/connect.php"); ?>
         window.location.href = "../"
     }
     $(document).ready(function() {
+
+
+
 
         $('#checktherequest').on('click', '.manage-button', function() {
             var id = $(this).data('id');
@@ -201,14 +208,21 @@ include("../servers/connect.php"); ?>
                     id_subject_group: localStorage.getItem("id_subject_group"),
                 },
                 success: function(response) {
-                    console.log(response);
-                    if (response.status === 'success') {
-                        alert("อนุมัติคำร้องเรียบร้อยแล้ว");
-                        $('#exampleModal7').modal('hide');
-                        // Refresh or update the UI as necessary
+                    if (response.status === "success") {
+                        Swal.fire({
+                            title: "อนุมัติคำร้องสำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page after confirmation
+                            }
+                        });
+                        $('#exampleModal1').modal('hide'); // ซ่อน modal ที่ต้องการ
                         location.reload(); // or use a more targeted update method
                     } else {
-                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                        alert("เกิดข้อผิดพลาด: " + response.message);
                     }
                 },
                 error: function() {
@@ -305,47 +319,65 @@ include("../servers/connect.php"); ?>
         });
 
 
-        $('#exampleModal1').on('show.bs.modal', function() {
-            var id = $('#exampleModal7').data('id');
-            $('#hiddenIdField').val(id); // Transfer the id to a hidden input within the disapproval reason modal
+        // เมื่อโมดัล #exampleModal1 กำลังจะถูกเปิด
+        $('#exampleModal1').on('show.bs.modal', function(event) {
+            // ดึงค่า id จาก modal ก่อนหน้า
+            var id = $('#exampleModal7').data('action-id') || $('#exampleModal8').data('action-id') || $('#exampleModal10').data('action-id');
+
+            // ตั้งค่า id ให้กับ hidden field ใน #exampleModal1
+            if (id) {
+                $('#hiddenIdField1').val(id);
+            } else {
+                console.error('ไม่พบค่า id จาก modal ก่อนหน้า');
+            }
         });
 
-        // Handle the confirmation of disapproval
+        // เมื่อกดปุ่มยืนยันการไม่อนุมัติ
         $('#confirmDisapproval').click(function() {
-            var id = $('#hiddenIdField').val(); // Retrieve the id
-            var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
+            var id = $('#hiddenIdField1').val(); // ดึง id จาก hidden field
+            var reason = $('#formGroupExampleInput').val(); // ดึงเหตุผลที่กรอก
+
+            // ตรวจสอบว่ามีการกรอกเหตุผลหรือไม่
             if (!reason.trim()) {
-                alert("Please enter a reason for disapproval.");
+                alert("กรุณากรอกเหตุผลการไม่อนุมัติ");
                 return;
             }
-            var id_status = 6;
-            // AJAX call to update the reason and status to "Disapproved"
+
+            var id_status = 6; // กำหนดสถานะเป็นไม่อนุมัติ
+
+            // ทำการเรียก AJAX เพื่ออัปเดตข้อมูลในเซิร์ฟเวอร์
             $.ajax({
-                url: 'update_reason', // Adjust the URL as necessary
-                type: 'POST', // Make sure this is POST
+                url: 'update_reason',
+                type: 'POST',
                 data: {
-                    id: id, // Ensure these variables are correctly defined in your JS
+                    id: id,
                     reason: reason,
                     id_status: id_status
                 },
                 success: function(response) {
-                    Swal.fire({
-                        title: "สำเร็จ!",
-                        text: response.message,
-                        icon: "success",
-                        confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload(); // Reload the page after confirmation
-                        }
-                    });
-                    console.log('Success:', response);
+                    if (response.success) {
+                        Swal.fire({
+                            title: "สำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        alert('ไม่สามารถอัปเดตข้อมูลได้: ' + response.message);
+                    }
                 },
                 error: function(xhr, status, error) {
+                    alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');
                     console.error('Error:', error);
                 }
             });
         });
+
+
 
 
 
@@ -358,6 +390,7 @@ include("../servers/connect.php"); ?>
             dataType: 'json',
             success: function(data) {
                 console.log(data);
+
                 // Remove duplicates from the data array
                 data = $.unique(data);
 
@@ -372,18 +405,13 @@ include("../servers/connect.php"); ?>
                         {
                             data: 'request_type_name'
                         },
-
                         {
                             data: 'name_status',
                             createdCell: function(td, cellData, rowData, row, col) {
-                                if (cellData == "รอพิจารณา") {
-                                    $(td).addClass("status1");
-                                } else if (cellData == "รอรองผู้อำนวยการพิจารณา") {
-                                    $(td).addClass("status2");
-                                } else if (cellData == "รอผู้อำนวยการพิจารณา") {
-                                    $(td).addClass("status3");
-                                } else if (cellData == "อนุมัติแล้ว") {
-                                    $(td).addClass("status4");
+                                // ตรวจสอบว่า id_status เป็น 1, 2, 3 หรือ 4
+                                if ([1, 2, 3, 4].includes(parseInt(rowData.id_status))) {
+                                    // ถ้า id_status เป็น 1, 2, 3 หรือ 4 ให้ขึ้นว่า "อนุมัติแล้ว"
+                                    $(td).addClass("status4").text("อนุมัติแล้ว");
                                 } else if (cellData == "ไม่อนุมัติแล้ว") {
                                     $(td).addClass("status5");
                                 } else if (cellData == "ไม่ผ่านพิจารณา") {
@@ -411,6 +439,8 @@ include("../servers/connect.php"); ?>
                 console.error(xhr.responseText);
             }
         });
+
+
 
 
         $('input[name="decision"]').change(function() {

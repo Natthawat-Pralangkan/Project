@@ -240,12 +240,20 @@
                 },
                 success: function(response) {
                     if (response.status === "success") {
-                        alert("อนุมัติคำร้องเรียบร้อยแล้ว");
-                        $('#exampleModal7').modal('hide');
-                        // Refresh or update the UI as necessary
+                        Swal.fire({
+                            title: "อนุมัติคำร้องสำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน" // Change the text of the confirmation button
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page after confirmation
+                            }
+                        });
+                        $('#exampleModal7').modal('hide'); // ซ่อน modal ที่ต้องการ
                         location.reload(); // or use a more targeted update method
                     } else {
-                        alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
+                        alert("เกิดข้อผิดพลาด: " + response.message);
                     }
                 },
                 error: function(xhr, status, error) {
@@ -303,30 +311,46 @@
             var id = $('#hiddenIdField').val(); // Retrieve the id
             var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
             if (!reason.trim()) {
-                alert("Please enter a reason for disapproval.");
+                alert("กรุณาใส่เหตุผลสำหรับการไม่อนุมัติ.");
                 return;
             }
-            var id_status = 5;
+
+            var id_status = 5; // Define the status for disapproval
+
             // AJAX call to update the reason and status to "Disapproved"
             $.ajax({
                 url: 'update_reason', // Adjust the URL as necessary
                 type: 'POST', // Make sure this is POST
                 data: {
-                    id: id, // Ensure these variables are correctly defined in your JS
+                    id: id,
                     reason: reason,
                     id_status: id_status
                 },
                 success: function(response) {
-                    alert("อัปเดตข้อมูลเรียบร้อย");
-                    $('#exampleModal1').modal('hide');
-                    location.reload();
-                    console.log('Success:', response);
+                    // Assuming response.success is being returned by the server
+                    if (response.success) {
+                        Swal.fire({
+                            title: "บันทึกสำเร็จ!",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonText: "ยืนยัน"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload(); // Reload the page after confirmation
+                            }
+                        });
+                        $('#exampleModal1').modal('hide'); // Hide modal after successful submission
+                    } else {
+                        alert("เกิดข้อผิดพลาด: " + response.message);
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
+                    alert('เกิดข้อผิดพลาดในการอัปเดตข้อมูล');
                 }
             });
         });
+
 
         $('input[type="radio"][name="flexRadioDefault"]').change(function() {
             if ($(this).is(":checked")) {
@@ -368,6 +392,7 @@
                                 } else if (cellData == "อนุมัติแล้ว") {
                                     $(td).addClass("status4");
                                 } else if (cellData == "ไม่อนุมัติแล้ว") {
+                                    $(td).css('color', '#f71004'); // ใช้สีแดงแบบ inline
                                     $(td).addClass("status5");
                                 } else if (cellData == "ไม่ผ่านพิจารณา") {
                                     $(td).addClass("status6");
@@ -376,7 +401,8 @@
                                 } else if (cellData == "รอหัวหน้ากลุ่มสาระพิจารณา") {
                                     $(td).addClass("status8");
                                 }
-                            },
+                            }
+
                         },
                         {
                             data: null,
