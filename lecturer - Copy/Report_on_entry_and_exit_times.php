@@ -52,7 +52,7 @@
                             <th scope="col" class="align-middle pl-3 pr-3">ชื่อ-นามสกุล</th>
                             <th scope="col" class="align-middle pl-3 pr-3">เวลาเข้างาน</th>
                             <th scope="col" class="align-middle pl-3 pr-3">เวลาออกงาน</th>
-                            <th scope="col" class="align-middle pl-3 pr-3">หมายเกตุ</th>
+                            <th scope="col" class="align-middle pl-3 pr-3">หมายเหตุ</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -164,7 +164,7 @@
                         }
                     },
                     {
-                        title: "หมายเกตุ",
+                        title: "หมายเหตุ",
                         data: "attendance_status"
                     }
                 ],
