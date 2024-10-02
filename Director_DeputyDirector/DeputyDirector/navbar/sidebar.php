@@ -18,6 +18,11 @@
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ตรวจสอบ/พิจารณาและอนุมัติคำร้อง</span>
             </a>
         </li>
+        <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/Director_DeputyDirector/DeputyDirector/Petition_history') !== false ? 'active-menu' : ''; ?>">
+            <a class="nav-link d-inline-block" style="font-size: 16px;" href="./Petition_history.php">
+                <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">ประวัติคำร้อง</span>
+            </a>
+        </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/Director_DeputyDirector/DeputyDirector/Report_on_entry_and_exit_times') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link d-inline-block" style="font-size: 16px;" href="./Report_on_entry_and_exit_times.php">
                 <i class="fa-solid fa-file-lines spani"></i><span class="menu-text">รายงานการลง เวลาเข้า - ออกงาน</span>

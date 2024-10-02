@@ -276,9 +276,11 @@
                             data: 'petition_name'
                         },
                         {
-                            data: 'request_type_name'
+                            data: null, // เพราะเราจะจัดการข้อมูลด้วยการ render
+                            render: function(data, type, row) {
+                                return row.user_name + ' ' + row.last_name; // เชื่อมต่อชื่อและนามสกุล
+                            }
                         },
-
                         {
                             data: 'name_status',
                             createdCell: function(td, cellData, rowData, row, col) {
@@ -288,6 +290,8 @@
                                     $(td).addClass("status4").text("อนุมัติแล้ว");
                                 } else if (cellData == "ไม่อนุมัติ") {
                                     $(td).addClass("status5");
+                                } else if (cellData == "รอรองผู้อำนวยการพิจารณา") {
+                                    $(td).addClass("status2");
                                 } else if (cellData == "ไม่ผ่านพิจารณา") {
                                     $(td).addClass("status6");
                                 } else if (cellData == "ยกเลิก") {

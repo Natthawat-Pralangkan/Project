@@ -74,7 +74,7 @@
                             echo "</td>";
                             echo "</tr>";
                         }
-
+                        
                         ?>
                     </tbody>
                 </table>
@@ -1013,7 +1013,13 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เรื่อง</label>
-                                        <input type="text" class="form-control mt-2" placeholder="เรื่อง" id="subject" name="subject">
+                                       
+                                        <select class="form-select mt-2" id="subject" name="subject">
+                                            <option value="">เลือกสาหตุในการลา</option>
+                                            <option value="1">ป่วย</option>
+                                            <option value="2">กิจส่วนตัว</option>
+                                            <option value="3">คลอดบุตร</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -1031,12 +1037,8 @@
                                 <div class="col-3 mt-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">สาหตุในการลา</label>
-                                        <select class="form-select mt-2" id="reason_for_leave" name="reason_for_leave">
-                                            <option value="">เลือกสาหตุในการลา</option>
-                                            <option value="1">ป่วย</option>
-                                            <option value="2">กิจส่วนตัว</option>
-                                            <option value="3">คลอดบุตร</option>
-                                        </select>
+                                        <input type="text" class="form-control mt-2" placeholder="เรื่อง" id="reason_for_leave" name="reason_for_leave">
+
                                     </div>
                                 </div>
                                 <div class="col-4 mt-2" style="color: #000000; display: none;" id="personal_affairs_container">
