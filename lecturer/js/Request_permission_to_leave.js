@@ -82,52 +82,52 @@ $(document).ready(function () {
     });
   });
 
-  // นิยามฟังก์ชัน setUserId เพื่อเซ็ต user_id ให้กับปุ่ม
-  function setUserId(buttonId) {
-    var userId = localStorage.getItem('user_id'); // ดึงค่า user_id จาก localStorage
+//   // นิยามฟังก์ชัน setUserId เพื่อเซ็ต user_id ให้กับปุ่ม
+//   function setUserId(buttonId) {
+//     var userId = localStorage.getItem('user_id'); // ดึงค่า user_id จาก localStorage
 
-    if (userId) {
-        console.log("Setting user ID in modal button: " + userId);
-        document.getElementById(buttonId).setAttribute('data-user_id', userId); // เซ็ตค่า user_id ใน data attribute ของปุ่ม
-    } else {
-        console.error("User ID is missing from localStorage.");
-    }
-}
+//     if (userId) {
+//         console.log("Setting user ID in modal button: " + userId);
+//         document.getElementById(buttonId).setAttribute('data-user_id', userId); // เซ็ตค่า user_id ใน data attribute ของปุ่ม
+//     } else {
+//         console.error("User ID is missing from localStorage.");
+//     }
+// }
 
 
-// เมื่อเปิด Modal จะดึง user_id จาก data-user_id และดึงข้อมูลผู้ใช้จากเซิร์ฟเวอร์
-$('#exampleModal12').on('show.bs.modal', function (e) {
-  var button = $(e.relatedTarget); // ปุ่มที่ถูกคลิกเพื่อเปิด modal
-  var userId = button.data('user_id'); // ดึงค่า user_id จาก data attribute
+// // เมื่อเปิด Modal จะดึง user_id จาก data-user_id และดึงข้อมูลผู้ใช้จากเซิร์ฟเวอร์
+// $('#exampleModal12').on('show.bs.modal', function (e) {
+//   var button = $(e.relatedTarget); // ปุ่มที่ถูกคลิกเพื่อเปิด modal
+//   var userId = button.data('user_id'); // ดึงค่า user_id จาก data attribute
 
-  console.log("User ID: " + userId);  // ตรวจสอบว่า user_id ถูกดึงมาอย่างถูกต้องหรือไม่
+//   console.log("User ID: " + userId);  // ตรวจสอบว่า user_id ถูกดึงมาอย่างถูกต้องหรือไม่
 
-  // ตรวจสอบว่า user_id มีค่าและไม่เป็น null
-  if (userId) {
-      $.ajax({
-          url: 'get_user_data.php',
-          type: 'POST',
-          data: { user_id: userId },
-          success: function(response) {
-              console.log("Response from server: ", response);  // ตรวจสอบว่า PHP ตอบกลับอะไร
-              var data = JSON.parse(response);
+//   // ตรวจสอบว่า user_id มีค่าและไม่เป็น null
+//   if (userId) {
+//       $.ajax({
+//           url: 'get_user_data.php',
+//           type: 'POST',
+//           data: { user_id: userId },
+//           success: function(response) {
+//               console.log("Response from server: ", response);  // ตรวจสอบว่า PHP ตอบกลับอะไร
+//               var data = JSON.parse(response);
 
-              if (data.status === 'success') {
-                  $('#Name_Surname').val(data.user_name);
-                  $('#telephone_number_1').val(data.telephone_number);
-                  $('#position').val(data.position);
-              } else {
-                  alert(data.message);
-              }
-          },
-          error: function(error) {
-              console.error("AJAX error: ", error);
-          }
-      });
-  } else {
-      console.error("User ID is missing.");
-  }
-});
+//               if (data.status === 'success') {
+//                   $('#Name_Surname').val(data.user_name);
+//                   $('#telephone_number_1').val(data.telephone_number);
+//                   $('#position').val(data.position);
+//               } else {
+//                   alert(data.message);
+//               }
+//           },
+//           error: function(error) {
+//               console.error("AJAX error: ", error);
+//           }
+//       });
+//   } else {
+//       console.error("User ID is missing.");
+//   }
+// });
 
   
 
