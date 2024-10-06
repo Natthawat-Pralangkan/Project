@@ -24,7 +24,7 @@ try {
     $stmt->bindValue(2, "14");
     $stmt->bindValue(3, "4");
     $stmt->bindParam(4, $details);
-    $stmt->bindParam(5, $subject);
+    $stmt->bindParam(5, $reason_for_leave);
     $stmt->bindParam(6, $Personal_affairs); 
     $stmt->bindValue(7, "1");
 

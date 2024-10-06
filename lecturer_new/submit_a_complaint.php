@@ -74,7 +74,7 @@
                             echo "</td>";
                             echo "</tr>";
                         }
-
+                        
                         ?>
                     </tbody>
                 </table>
@@ -1013,7 +1013,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เรื่อง</label>
-
+                                       
                                         <select class="form-select mt-2" id="subject" name="subject">
                                             <option value="">เลือกสาหตุในการลา</option>
                                             <option value="1">ป่วย</option>
@@ -1102,7 +1102,7 @@
                                 <div class="col-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">การนิเทศครั้งที่</label>
-                                        <input type="text" class="form-control mt-2" placeholder="การนิเทศครั้งที่" id="Name_Surname_on" name="Name_Surname_on">
+                                        <input type="text" class="form-control mt-2" placeholder="การนิเทศครั้งที่" id="Name_Surname" name="Name_Surname">
                                     </div>
                                 </div>
                                 <div class="col-3">
@@ -1245,23 +1245,5 @@
         localStorage.clear()
         window.location.href = "../"
     }
-    $(document).ready(function() {
-        $.ajax({
-            url: "getuser_byid", // เปลี่ยนเป็น URL ที่ถูกต้องสำหรับไฟล์ PHP ที่จะใช้ในการเพิ่มข้อมูลสินค้า
-            method: "POST",
-            data: {
-                user_id: localStorage.getItem("user_id"),
-            },
-            success: function (response) {
-                var data = JSON.parse(response);
-                console.log(response);
-                // console.log(response);
-                $('#Name_Surname').val(data[0].user_name+data[0].last_name),
-                $('#position').val(data[0].name_type),
-                $('#telephone_number_1').val(data[0].telephone_number)
-                
-            }
-        })
-    })
 </script>
 <?php include("../footer.php") ?>
