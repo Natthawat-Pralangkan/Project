@@ -40,7 +40,7 @@
                     <div class="image-container">
                         <img id="picture" src="" alt="" style="width: 250px; height: 250px;">
                         <div class="edit-icon-container">
-                            <i class="fas fa-edit edit-icon mt-3" id="edit-picture"></i>
+                            <i class="fas fa-edit edit-icon mt-3" id="edit-picture" style='color: red;'></i>
                         </div>
                     </div>
                     <input type="file" id="file-input" accept="image/*" style="display: none;">
@@ -275,8 +275,8 @@
                 $("#date_month_yearofbirth").html("วัน เดือนปี เกิด :" + " " + data[0].date_month_yearofbirth);
                 $("#nationality").html("สัญชาติ :" + " " + data[0].nationality);
                 $("#age").html("อายุ :" + " " + data[0].age + " ปี");
-                $("#email").html("อีเมล์ :" + " " + data[0].email + " <i class='fas fa-edit edit-icon' data-email='" + data[0].email + "'></i>");
-                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " <i class='fas fa-edit edit-icon1' data-telephone_number='" + data[0].telephone_number + "'></i>");
+                $("#email").html("อีเมล์ :" + " " + data[0].email + " <i class='fas fa-edit edit-icon' style='color: red;' data-email='" + data[0].email + "'></i>");
+                $("#telephone_number").html("เบอร์โทรศัพท์ :" + " " + data[0].telephone_number + " <i class='fas fa-edit edit-icon1' style='color: red;' data-telephone_number='" + data[0].telephone_number + "'></i>");
                 $("#start_date").html("วันที่เริ่มทำงาน :" + " " + data[0].start_date);
                 $("#house_code").html("รหัสประจำบ้าน :" + " " + data[0].house_code);
                 $("#number_house").html("เลขที่ :" + " " + data[0].number_house);

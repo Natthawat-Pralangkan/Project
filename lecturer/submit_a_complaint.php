@@ -1025,13 +1025,13 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ชื่อ - นามสกุล</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ชื่อ - นามสกุล" id="Name_Surname" name="Name_Surname">
+                                        <input type="text" class="form-control mt-2" placeholder="ชื่อ - นามสกุล" id="Name_Surname" name="Name_Surname" style="background-color: #e9ecef;" readonly>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">ตำแหน่ง</label>
-                                        <input type="text" class="form-control mt-2" placeholder="ตำแหน่ง" id="position" name="position">
+                                        <input type="text" class="form-control mt-2" placeholder="ตำแหน่ง" id="position" name="position" style="background-color: #e9ecef;" readonly>
                                     </div>
                                 </div>
                                 <div class="col-3 mt-2">
@@ -1063,13 +1063,13 @@
                                 <div class="col-2 mt-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">มีกำหนด</label>
-                                        <input type="text" class="form-control mt-2" placeholder="จำนวนวัน" id="scheduled_2" name="scheduled_2">
+                                        <input type="text" class="form-control mt-2" placeholder="จำนวนวัน" id="scheduled_2" name="scheduled_2" style="background-color: #e9ecef;" readonly>
                                     </div>
                                 </div>
                                 <div class="col-2 mt-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">เบอร์โทรศัพท์</label>
-                                        <input type="text" class="form-control mt-2" placeholder="เบอร์โทรศัพท์" id="telephone_number_1" name="telephone_number_1">
+                                        <input type="text" class="form-control mt-2" placeholder="เบอร์โทรศัพท์" id="telephone_number_1" name="telephone_number_1" style="background-color: #e9ecef;" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -1256,7 +1256,7 @@
                 var data = JSON.parse(response);
                 console.log(response);
                 // console.log(response);
-                $('#Name_Surname').val(data[0].user_name+data[0].last_name),
+                $('#Name_Surname').val(data[0].user_name+" "+data[0].last_name),
                 $('#position').val(data[0].name_type),
                 $('#telephone_number_1').val(data[0].telephone_number)
                 

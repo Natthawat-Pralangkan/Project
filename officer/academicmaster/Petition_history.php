@@ -89,13 +89,15 @@
                                         <?php
                                         // ตรวจสอบค่า id_status ถ้าเป็น 2, 3, หรือ 4 ให้แสดงว่า "อนุมัติแล้ว"
                                         if (in_array($row['id_status'], [2, 3, 4])) {
-                                            echo "อนุมัติแล้ว";
-                                        } else {
+                                            echo "ผ่านพิจารณา";
+                                        } else { 
                                             echo $row['name_status'];
                                         }
                                         ?>
                                     </td>
-                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button></td>
+                                    <td>
+                                        <a href="check_the_request_pdf.php?id=<?php echo $row['id']; ?>" class="btn btn-primary" target="_blank">ดูรายละเอียด</a>
+                                    </td>
                                 </tr>
                         <?php
                             }

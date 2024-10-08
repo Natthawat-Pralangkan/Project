@@ -99,8 +99,8 @@
                                 <iframe id="pdfViewer" width="100%" height="500px" frameborder="0"></iframe>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                                <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">ผ่านพิจารณา</button>
+                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่ผ่านพิจารณา</button>
                             </div>
                         </div>
                     </div>

@@ -89,7 +89,7 @@
                                         <?php
                                         // ตรวจสอบค่า id_status และแสดงข้อความตามสถานะที่กำหนด
                                         if (in_array($row['id_status'], [2, 3, 4])) {
-                                            echo "อนุมัติแล้ว";
+                                            echo "ผ่านพิจารณา";
                                         } elseif ($row['id_status'] == 6) {
                                             echo "ไม่ผ่านพิจารณา";
                                         } elseif ($row['id_status'] == 7) {
@@ -102,7 +102,9 @@
                                         ?>
 
                                     </td>
-                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button></td>
+                                    <td>
+                                        <a href="check_the_request_pdf.php?id=<?php echo $row['id']; ?>" class="btn btn-primary" target="_blank">ดูรายละเอียด</a>
+                                    </td>
                                 </tr>
                         <?php
                             }
@@ -113,43 +115,6 @@
                     </tbody>
                 </table>
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal7" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">ข้อมูลคำร้อง</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <iframe id="pdfViewer" width="100%" height="500px" frameborder="0"></iframe>
-                            </div>
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" id="approveButton" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade " id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">เหตุผลไม่อนุมัติคำร้อง</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="formGroupExampleInput" class="form-label">เหตุผลไม่อนุมัติคำร้อง</label>
-                                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="เหตุผลไม่อนุมัติคำร้อง">
-                                    <input type="hidden" id="hiddenIdField" value="">
-                                </div>
-                            </div>
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" id="confirmDisapproval" class="btn text-center disapproveButton" data-bs-dismiss="modal" style="background-color: #8B39F4; color: #fcfafa;">ยืนยัน</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -179,92 +144,6 @@
             // Now open the modal
             $('#exampleModal7').modal('show');
         });
-
-        // Setup for handling clicks on "อนุมัติ" button
-        // $("#approveButton").on('click', function(event) {
-        //     event.preventDefault();
-        //     var id = $('#exampleModal7').data('id');
-        //     var id_status = 2; // Define and assign a value to id_status
-        //     console.log("Sending ID:", id, "Status:", id_status);
-
-        //     // AJAX call to update the status
-        //     $.ajax({
-        //         url: "update_status",
-        //         type: "POST",
-        //         data: {
-        //             id: id,
-        //             id_status: id_status
-        //         },
-        //         success: function(response) {
-        //             if (response.status === "success") {
-        //                 Swal.fire({
-        //                     title: "อนุมัติคำร้องสำเร็จ!",
-        //                     text: response.message,
-        //                     icon: "success",
-        //                     confirmButtonText: "ยืนยัน" // เปลี่ยนข้อความของปุ่มยืนยัน
-        //                 }).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload(); // รีเฟรชหน้าเว็บหลังจากกดยืนยัน
-        //                     }
-        //                 });
-        //                 $('#exampleModal7').modal('hide'); // ซ่อน modal ที่ต้องการ
-        //             } else {
-        //                 alert("เกิดข้อผิดพลาด: " + response.message);
-        //             }
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error('Error:', error); // แสดงข้อผิดพลาดในคอนโซล
-        //         }
-
-        //     });
-        // });
-
-        // $('#exampleModal1').on('show.bs.modal', function() {
-        //     var id = $('#exampleModal7').data('id');
-        //     $('#hiddenIdField').val(id); // Transfer the id to a hidden input within the disapproval reason modal
-        // });
-
-        // // Handle the confirmation of disapproval
-        // $('#confirmDisapproval').click(function() {
-        //     var id = $('#hiddenIdField').val(); // Retrieve the id
-        //     var reason = $('#formGroupExampleInput').val(); // Get the disapproval reason
-        //     if (!reason.trim()) {
-        //         alert("Please enter a reason for disapproval.");
-        //         return;
-        //     }
-        //     var id_status = 6;
-        //     // AJAX call to update the reason and status to "Disapproved"
-        //     $.ajax({
-        //         url: 'update_reason', // Adjust the URL as necessary
-        //         type: 'POST', // Make sure this is POST
-        //         data: {
-        //             id: id, // Ensure these variables are correctly defined in your JS
-        //             reason: reason,
-        //             id_status: id_status
-        //         },
-        //         success: function(response) {
-        //             if (response.status === "success") {
-        //                 Swal.fire({
-        //                     title: "บันทึกสำเร็จ!",
-        //                     text: response.message,
-        //                     icon: "success",
-        //                     confirmButtonText: "ยืนยัน" // เปลี่ยนข้อความของปุ่มยืนยัน
-        //                 }).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload(); // รีเฟรชหน้าเว็บหลังจากกดยืนยัน
-        //                     }
-        //                 });
-        //                 $('#exampleModal1').modal('hide'); // ซ่อน modal ที่ต้องการ
-        //             } else {
-        //                 alert("เกิดข้อผิดพลาด: " + response.message);
-        //             }
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error('Error:', error); // แสดงข้อผิดพลาดในคอนโซล
-        //         }
-
-        //     });
-        // });
     });
 </script>
 <?php include("../../footer.php") ?>

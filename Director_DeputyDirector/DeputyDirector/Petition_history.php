@@ -94,7 +94,9 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><button class="btn btn-primary manage-button" data-id="<?php echo $row['id']; ?>">จัดการ</button></td>
+                                    <td>
+                                        <a href="check_the_request_pdf.php?id=<?php echo $row['id']; ?>" class="btn btn-primary" target="_blank">ดูรายละเอียด</a>
+                                    </td>
                                 </tr>
                         <?php
                             }
