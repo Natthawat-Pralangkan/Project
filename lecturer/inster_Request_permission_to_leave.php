@@ -14,7 +14,7 @@ $telephone_number_1 = $_POST["telephone_number_1"];
 $user_id = $_POST["user_id"];
 
 // Prepared Statement
-$details = $subject.",".$Name_Surname.",".$position.",".$date_activity_12.",".$date_activity_13.",".$scheduled_2.",".$telephone_number_1;
+$details = $subject.",".$Name_Surname.",".$position.",".$date_activity_12.",".$date_activity_13.",".$scheduled_2.",".$telephone_number_1.",".$reason_for_leave;
 
 $query = "INSERT INTO details_ppetiton (user_id, petition_id, petition_type, details, leave_type,reason_for_leave, id_status) 
               VALUES (?, ?, ?, ?, ?, ?,?)";

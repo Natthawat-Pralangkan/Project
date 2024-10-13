@@ -1015,10 +1015,10 @@
                                         <label for="" style="font-size: 18px;">เรื่อง</label>
 
                                         <select class="form-select mt-2" id="subject" name="subject">
-                                            <option value="">เลือกสาหตุในการลา</option>
-                                            <option value="1">ป่วย</option>
-                                            <option value="2">กิจส่วนตัว</option>
-                                            <option value="3">คลอดบุตร</option>
+                                            <option value="">เลือกเรื่องในการลา</option>
+                                            <option value="1">ลาป่วย</option>
+                                            <option value="2">ลากิจส่วนตัว</option>
+                                            <option value="3">ลาคลอดบุตร</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1037,7 +1037,7 @@
                                 <div class="col-3 mt-2">
                                     <div class="form-group">
                                         <label for="" style="font-size: 18px;">สาหตุในการลา</label>
-                                        <input type="text" class="form-control mt-2" placeholder="เรื่อง" id="reason_for_leave" name="reason_for_leave">
+                                        <input type="text" class="form-control mt-2" placeholder="สาหตุในการลา" id="reason_for_leave" name="reason_for_leave">
 
                                     </div>
                                 </div>
@@ -1047,17 +1047,16 @@
                                         <input type="text" class="form-control mt-2" placeholder="เหตุผล" id="Personal_affairs" name="Personal_affairs">
                                     </div>
                                 </div>
-
                                 <div class="col-2 mt-2">
-                                    <div class="form-group ">
-                                        <label for="" style="font-size: 18px;">ตั้งแต่วันที่</label>
-                                        <input type="date" class="form-control mt-2" placeholder="วันที่" id="date_activity_12" name="date_activity_12">
+                                    <div class="form-group">
+                                        <label for="date_activity_12" style="font-size: 18px;">ตั้งแต่วันที่</label>
+                                        <input type="date" class="form-control mt-2" id="date_activity_12" name="date_activity_12">
                                     </div>
                                 </div>
                                 <div class="col-2 mt-2">
                                     <div class="form-group">
-                                        <label for="" style="font-size: 18px;">ถึงวันที่</label>
-                                        <input type="date" class="form-control mt-2" placeholder="เวลา" id="date_activity_13" name="date_activity_13">
+                                        <label for="date_activity_13" style="font-size: 18px;">ถึงวันที่</label>
+                                        <input type="date" class="form-control mt-2" id="date_activity_13" name="date_activity_13">
                                     </div>
                                 </div>
                                 <div class="col-2 mt-2">
@@ -1252,16 +1251,41 @@
             data: {
                 user_id: localStorage.getItem("user_id"),
             },
-            success: function (response) {
+            success: function(response) {
                 var data = JSON.parse(response);
                 console.log(response);
                 // console.log(response);
-                $('#Name_Surname').val(data[0].user_name+" "+data[0].last_name),
-                $('#position').val(data[0].name_type),
-                $('#telephone_number_1').val(data[0].telephone_number)
-                
+                $('#Name_Surname').val(data[0].user_name + " " + data[0].last_name),
+                    $('#position').val(data[0].name_type),
+                    $('#telephone_number_1').val(data[0].telephone_number)
+
             }
         })
     })
+
+    function formatDateToInput(date) {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0'); // เพิ่ม 0 ถ้าเดือนเป็นเลขหลักเดียว
+        const day = String(d.getDate()).padStart(2, '0'); // เพิ่ม 0 ถ้าวันเป็นเลขหลักเดียว
+        return `${year}-${month}-${day}`; // คืนค่าเป็น YYYY-MM-DD
+    }
+
+    // กำหนดวันที่ปัจจุบัน
+    const today = new Date();
+    // กำหนดวันที่ย้อนหลังไป 7 วัน
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - 7);
+
+    // ตั้งค่า value ให้กับ input[type="date"] โดยตั้งให้วันที่ปัจจุบันเป็นค่าเริ่มต้น
+    document.getElementById('date_activity_12').value = formatDateToInput(today);
+    document.getElementById('date_activity_13').value = formatDateToInput(today);
+
+    // ตั้งค่า min และ max ให้กับ input[type="date"]
+    document.getElementById('date_activity_12').max = formatDateToInput(today);
+    document.getElementById('date_activity_12').min = formatDateToInput(sevenDaysAgo);
+
+    document.getElementById('date_activity_13').max = formatDateToInput(today);
+    document.getElementById('date_activity_13').min = formatDateToInput(sevenDaysAgo);
 </script>
 <?php include("../footer.php") ?>

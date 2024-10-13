@@ -34,11 +34,11 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
 
 $user_id = $_POST["user_id"];
 
-$sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,details_ppetiton.id_status FROM `details_ppetiton`
+$sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,details_ppetiton.id_status,`details_ppetiton`.`date` FROM `details_ppetiton`
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        WHERE details_ppetiton.user_id = ? AND `details_ppetiton`.`id_status` IN (4, 5, 6, 7)  ORDER by details_ppetiton.date DESC ";
+                        WHERE details_ppetiton.user_id = ? AND `details_ppetiton`.`id_status` IN (4, 5, 6, 7)  ORDER BY  details_ppetiton.date DESC ";
 $result = $db->prepare($sql);
 $result->bindParam(1, $user_id);
 $result->execute();

@@ -110,23 +110,44 @@
                         </div>
                         <div class="modal-body">
                             <form id="myForm" action="" method="get">
-                                <div class="row align-items-center justify-content-center">
-                                    <div class="col-md-4 mb-0">
-                                        <label for="start_date" class="form-label mb-0">วันที่เริ่มต้น:</label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date">
-                                    </div>
-                                    <div class="col-md-2 mb-0 mt-5 text-center ">
-                                        <h4>ระหว่าง</h4>
-                                    </div>
-                                    <div class="col-md-4 mb-0">
-                                        <label for="end_date" class="form-label mb-0">วันที่สิ้นสุด:</label>
-                                        <input type="date" class="form-control" id="end_date" name="end_date">
-                                    </div>
+                                <div class="dropdown row justify-content-center">
+                                    <div class="col-md-6 mt-5 text-center">
+                                        <select class="form-select" id="type_select" name="id_type">
+                                            <option value="">-- เลือกคำแหน่ง --</option>
+                                            <option value="all">ทั้งหมด </option> <!-- เพิ่มตัวเลือกทั้งหมด -->
+                                            <?php
+                                            // Query to get the types
+                                            $sql = "SELECT id_type, name_type FROM type";
+                                            $result = $db->query($sql);
 
+                                            if ($result->rowCount() > 0) {
+                                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                                                    echo "<option value='{$row['id_type']}'>{$row['name_type']}</option>";
+                                                }
+                                            } else {
+                                                echo "<option value=''>ไม่มีข้อมูล</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="text-center mt-3">
-                                    <button id="pdfButton" onclick="createPDF()" class="btn btn-danger mt-3">พิมพ์รายงาน PDF</button>
-
+                                <div id="dateFields" style="display:none;">
+                                    <div class="row align-items-center justify-content-center">
+                                        <div class="col-md-4 mb-0">
+                                            <label for="start_date" class="form-label mb-0">วันที่เริ่มต้น:</label>
+                                            <input type="date" class="form-control" id="start_date" name="start_date">
+                                        </div>
+                                        <div class="col-md-2 mb-0 mt-5 text-center ">
+                                            <h4>ระหว่าง</h4>
+                                        </div>
+                                        <div class="col-md-4 mb-0">
+                                            <label for="end_date" class="form-label mb-0">วันที่สิ้นสุด:</label>
+                                            <input type="date" class="form-control" id="end_date" name="end_date">
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <button id="pdfButton" onclick="createPDF()" class="btn btn-danger mt-3">พิมพ์รายงาน PDF</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -142,12 +163,36 @@
         localStorage.clear()
         window.location.href = "../"
     }
+    document.getElementById("type_select").addEventListener("change", function() {
+        var selectedValue = this.value;
+        var dateFields = document.getElementById("dateFields");
+
+        if (selectedValue) {
+            dateFields.style.display = "block"; // แสดงฟิลด์วันที่เมื่อมีการเลือก
+        } else {
+            dateFields.style.display = "none"; // ซ่อนฟิลด์ถ้าไม่มีการเลือก
+        }
+    });
+
     function createPDF() {
-        var startDate = $('#start_date').val();
-        var endDate = $('#end_date').val();
-        // Include user_id in the URL parameters
-        window.open(`./Report_on_entry_and_exit_times_pdf.php?start_date=${startDate}&end_date=${endDate}`, '_blank');
+        var idType = document.getElementById('type_select').value;
+        var startDate = document.getElementById('start_date').value;
+        var endDate = document.getElementById('end_date').value;
+
+        // ตรวจสอบว่ามีการเลือก id_type ก่อนสร้าง PDF
+        if (idType) {
+            // เปิดหน้ารายงาน PDF โดยส่งค่า id_type, start_date และ end_date ไปด้วย
+            window.open(`./Report_on_entry_and_exit_times_pdf.php?id_type=${idType}&start_date=${startDate}&end_date=${endDate}`, '_blank');
+        } else {
+            alert("กรุณาเลือกประเภทก่อนพิมพ์รายงาน");
+        }
     }
+
+    $(document).ready(function() {
+        $('#myTable').DataTable(); // เปลี่ยน #myTable เป็น ID ของตารางของคุณ
+    });
+
+
     $(document).ready(function() {
         $('#myTable').DataTable(); // เปลี่ยน #myTable เป็น ID ของตารางของคุณ
     });

@@ -124,8 +124,8 @@
                                 <iframe id="pdfViewer14" width="100%" height="500px" frameborder="0"></iframe>
                                 <div class="form-group mt-3">
                                     <input type="hidden" id="hiddenIdField" value=""> <!-- สมมุติว่ามีค่า id -->
-                                    <label for="reasonInput" class="form-label">ความเห็นหัวหน้าหน่วยงาน:</label>
-                                    <textarea class="form-control" id="reasonInput" rows="3"></textarea>
+                                    <label for="reasonInput" class="form-label">ความเห็นเจ้าหน้าฝ่ายบุคคล:</label>
+                                    <textarea class="form-control" id="reasonInput" rows="3" style="background-color: GhostWhite;"></textarea>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-center">

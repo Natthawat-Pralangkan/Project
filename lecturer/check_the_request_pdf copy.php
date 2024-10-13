@@ -2498,6 +2498,306 @@ if ($row['petition_id'] == 7) {
 
 
     $pageCount = $pdf->setSourceFile($templatePath);
+    // for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+    //     // Import each page
+    //     $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    //     // Add a page to the new document
+    //     $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
+    //     $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
+
+    //     // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
+    //     $pdf->AddPage('P', array($standardWidth, $customHeight));
+
+    //     // Use the imported page
+    //     $pdf->useImportedPage($pageId);
+
+    //     // If you have specific content to add to each page, you can do so here.
+    //     // Note: You might need to adjust positions or content based on the page number if necessary.
+    //     if ($pageNo == 1) {
+    //         $details = explode(",", $row['details']);
+    //         $thai_month_arr = array(
+    //             "01" => "มกราคม",
+    //             "02" => "กุมภาพันธ์",
+    //             "03" => "มีนาคม",
+    //             "04" => "เมษายน",
+    //             "05" => "พฤษภาคม",
+    //             "06" => "มิถุนายน",
+    //             "07" => "กรกฎาคม",
+    //             "08" => "สิงหาคม",
+    //             "09" => "กันยายน",
+    //             "10" => "ตุลาคม",
+    //             "11" => "พฤศจิกายน",
+    //             "12" => "ธันวาคม"
+    //         );
+
+    //         list($year, $month, $day) = explode("-", $row['date']);
+    //         $thai_month = $thai_month_arr[$month];
+    //         // แปลงให้อยู่ในรูปแบบไทย
+    //         $newdate = date("d H:i:s", strtotime($row['date']));
+    //         $newdate = ConvertToThaiDate($row['date']);
+    //         $pdf->SetXY(140, 42);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date']))), 0, 1);
+    //         $pdf->SetXY(155, 42);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1);
+    //         $pdf->SetXY(185, 42);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+
+    //         $iconPositions_1 = [
+    //             '1' => ['x' => 25, 'y' => 85, 'icon' => './img/check-mark_5291043.png'],
+    //             '2' => ['x' => 25, 'y' => 93, 'icon' => './img/check-mark_5291043.png'],
+    //             '3' => ['x' => 25, 'y' => 100, 'icon' => './img/check-mark_5291043.png'],
+
+    //         ];
+    //         if (isset($row['leave_type']) && array_key_exists($row['leave_type'], $iconPositions_1)) {
+    //             // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
+    //             $icon = $iconPositions_1[$row['leave_type']]['icon'];
+
+
+    //             $x = $iconPositions_1[$row['leave_type']]['x'];
+
+    //             $y = $iconPositions_1[$row['leave_type']]['y'];
+    //             $pdf->Image($icon, $x, $y, 5, 5);
+    //         }
+
+    //         $pdf->SetXY(60, 90);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['reason_for_leave']), 0, 1);
+    //         $positions = [
+    //             [20, 60], [40, 75], [140, 75], [118, 105], [163, 105], [30, 113], [100, 113]
+
+    //         ];
+    //         foreach ($details as $index => $detail) {
+    //             if (isset($positions[$index])) {
+    //                 list($x, $y) = $positions[$index];
+    //                 $month_thai = $thai_month_arr[date("m", strtotime($detail))];
+
+    //                 // ตรวจสอบว่าข้อมูลที่ต้องการแสดงเป็นวันที่หรือไม่
+    //                 if ($index == 3) { // ตำแหน่งที่ 5 ของ $details เป็นวันที่ (เหมือนเดิม)
+    //                     // แยกวัน เดือน และปีออกจากกัน
+    //                     $date_components = explode('-', $detail);
+    //                     $day = $date_components[2];
+    //                     $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
+    //                     $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
+
+    //                     // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
+    //                     $pdf->SetXY($x, $y);
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
+    //                     $pdf->SetXY($x + 5, $y);
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
+    //                     $pdf->SetXY($x + 23, $y);
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
+    //                 } elseif ($index == 4) { // ตำแหน่งที่ 8 ของ $details เป็นวันที่ (ตำแหน่งใหม่)
+    //                     // แยกวัน เดือน และปีออกจากกัน
+    //                     $date_components = explode('-', $detail);
+    //                     $day = $date_components[2];
+    //                     $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
+    //                     $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
+
+    //                     // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
+    //                     $pdf->SetXY($x, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
+    //                     $pdf->SetXY($x + 5, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
+    //                     $pdf->SetXY($x + 23, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
+    //                 } else {
+    //                     // แสดงข้อมูลอื่นๆ ที่ไม่ใช่วันที่
+    //                     $pdf->SetXY($x, $y);
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+    //                 }
+    //             }
+    //         }
+    //         $pdf->SetXY(155, 158);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
+
+    //         $pdf->SetXY(20, 150);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['Officer_comments']), 0, 1);
+
+    //         $pdf->SetXY(23, 173);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_namein'] . ' ' . $row['last_namein']), 0, 1);
+
+    //         $pdf->SetXY(165, 173);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['name_type']), 0, 1);
+
+    //         $pdf->SetXY(150, 210);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
+
+
+    //         $pdf->SetXY(30, 210);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
+
+
+
+    //     }
+    // }
+
+    // for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+    //     // Import each page
+    //     $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+
+    //     // Add a page to the new document
+    //     $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
+    //     $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
+
+    //     // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
+    //     $pdf->AddPage('P', array($standardWidth, $customHeight));
+
+    //     // Use the imported page
+    //     $pdf->useImportedPage($pageId);
+
+    //     // If you have specific content to add to each page, you can do so here.
+    //     if ($pageNo == 1) {
+    //         $details = explode(",", $row['details']);
+    //         $thai_month_arr = array(
+    //             "01" => "มกราคม",
+    //             "02" => "กุมภาพันธ์",
+    //             "03" => "มีนาคม",
+    //             "04" => "เมษายน",
+    //             "05" => "พฤษภาคม",
+    //             "06" => "มิถุนายน",
+    //             "07" => "กรกฎาคม",
+    //             "08" => "สิงหาคม",
+    //             "09" => "กันยายน",
+    //             "10" => "ตุลาคม",
+    //             "11" => "พฤศจิกายน",
+    //             "12" => "ธันวาคม"
+    //         );
+
+    //         list($year, $month, $day) = explode("-", $row['date']);
+    //         $thai_month = $thai_month_arr[$month];
+    //         $newdate = ConvertToThaiDate($row['date']);
+    //         $pdf->SetXY(140, 42);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date']))), 0, 1);
+    //         $pdf->SetXY(155, 42);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1);
+    //         $pdf->SetXY(185, 42);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+
+    //         $iconPositions_1 = [
+    //             '1' => ['x' => 25, 'y' => 85, 'icon' => './img/check-mark_5291043.png'],
+    //             '2' => ['x' => 25, 'y' => 93, 'icon' => './img/check-mark_5291043.png'],
+    //             '3' => ['x' => 25, 'y' => 100, 'icon' => './img/check-mark_5291043.png'],
+    //         ];
+
+    //         if (isset($row['leave_type']) && array_key_exists($row['leave_type'], $iconPositions_1)) {
+    //             $icon = $iconPositions_1[$row['leave_type']]['icon'];
+    //             $x = $iconPositions_1[$row['leave_type']]['x'];
+    //             $y = $iconPositions_1[$row['leave_type']]['y'];
+    //             $pdf->Image($icon, $x, $y, 5, 5);
+    //         }
+
+    //         $pdf->SetXY(60, 90);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['reason_for_leave']), 0, 1);
+
+    //         // ตำแหน่งของข้อมูลแต่ละรายการใน $details
+    //         $positions = [
+    //             [20, 60], // ตำแหน่งสำหรับข้อมูลในลำดับที่ 0 ของอาร์เรย์
+    //             [40, 75], // ตำแหน่งสำหรับข้อมูลในลำดับที่ 1 ของอาร์เรย์
+    //             [140, 75], // ตำแหน่งสำหรับข้อมูลในลำดับที่ 2 ของอาร์เรย์
+    //             [118, 105],
+    //             [163, 105],
+    //             [30, 113],
+    //             [100, 113],
+    //             [50,83]
+    //             // [60,91]
+    //         ];
+
+    //         // สร้าง array ของสถานะ
+    //         $status_mapping = [
+    //             '1' => 'ลาป่วย',
+    //             '2' => 'ลากิจส่วนตัว',
+    //             '3' => 'ลาคลอดบุตร'
+    //         ];
+
+    //         // ตรวจสอบและแปลงเฉพาะข้อมูลในลำดับที่ 0 ของอาร์เรย์
+    //         if (isset($details[0]) && isset($positions[0])) {
+    //             list($x, $y) = $positions[0];
+
+    //             // ตรวจสอบว่าค่าใน $details[0] เป็น 1, 2 หรือ 3 และแสดงสถานะที่ถูกต้อง
+    //             if (isset($status_mapping[$details[0]])) {
+    //                 $status = $status_mapping[$details[0]]; // แปลงค่าเป็นสถานะ
+    //                 $pdf->SetXY($x, $y); // กำหนดตำแหน่งสำหรับข้อมูลตำแหน่งที่ 0
+    //                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $status), 0, 1); // แสดงสถานะใน PDF
+    //             } else {
+    //                 // กรณีที่ไม่ใช่สถานะ ให้แสดงค่าปกติ
+    //                 $pdf->SetXY($x, $y);
+    //                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $details[0]), 0, 1);
+    //             }
+    //         }
+
+    //         // ลูปผ่านข้อมูล $details ที่เหลือ แต่ไม่แปลงค่าในตำแหน่งที่ 0
+    //         foreach ($details as $index => $detail) {
+    //             if ($index > 0 && isset($positions[$index])) {
+    //                 list($x, $y) = $positions[$index];
+
+    //                 // ตรวจสอบว่าข้อมูลใน index เป็นวันที่หรือข้อมูลทั่วไป
+    //                 if ($index == 3) { // ตำแหน่งที่ 5 ของ $details เป็นวันที่ (ตำแหน่งเดิม)
+    //                     // แยกวัน เดือน และปีออกจากกัน
+    //                     $date_components = explode('-', $detail);
+    //                     if (count($date_components) === 3) { // ตรวจสอบว่ามีวันที่ถูกต้อง
+    //                         $day = $date_components[2];
+    //                         $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
+    //                         $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
+
+    //                         // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
+    //                         $pdf->SetXY($x, $y);
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
+    //                         $pdf->SetXY($x + 5, $y);
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
+    //                         $pdf->SetXY($x + 23, $y);
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
+    //                     } else {
+    //                         // หากข้อมูลไม่เป็นวันที่ที่ถูกต้อง ให้แสดงข้อมูลเดิม
+    //                         $pdf->SetXY($x, $y);
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+    //                     }
+    //                 } elseif ($index == 4) { // ตำแหน่งที่ 8 ของ $details เป็นวันที่ (ตำแหน่งใหม่)
+    //                     // แยกวัน เดือน และปีออกจากกัน
+    //                     $date_components = explode('-', $detail);
+    //                     if (count($date_components) === 3) { // ตรวจสอบว่ามีวันที่ถูกต้อง
+    //                         $day = $date_components[2];
+    //                         $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
+    //                         $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
+
+    //                         // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
+    //                         $pdf->SetXY($x, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
+    //                         $pdf->SetXY($x + 5, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
+    //                         $pdf->SetXY($x + 23, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
+    //                     } else {
+    //                         // หากข้อมูลไม่เป็นวันที่ที่ถูกต้อง ให้แสดงข้อมูลเดิม
+    //                         $pdf->SetXY($x, $y);
+    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+    //                     }
+    //                 } else {
+    //                     // แสดงข้อมูลอื่นๆ ที่ไม่ใช่วันที่
+    //                     $pdf->SetXY($x, $y);
+    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
+    //                 }
+    //             }
+    //         }
+
+    //         $pdf->SetXY(155, 158);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
+
+    //         $pdf->SetXY(20, 150);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['Officer_comments']), 0, 1);
+
+    //         $pdf->SetXY(23, 173);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_namein'] . ' ' . $row['last_namein']), 0, 1);
+
+    //         $pdf->SetXY(165, 173);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['name_type']), 0, 1);
+
+    //         $pdf->SetXY(150, 210);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
+
+    //         $pdf->SetXY(30, 210);
+    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
+    //     }
+    // }
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         // Import each page
         $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);

@@ -11,7 +11,7 @@
                 <div class="row">
                     <h2 class="m-0">หน้าหลัก</h2>
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="./home.php">หน้าหลัก</a></li>
+                        <!-- <li class="breadcrumb-item"><a href="./home.php">หน้าหลัก</a></li> -->
                     </ol>
                 </div>
             </div>
