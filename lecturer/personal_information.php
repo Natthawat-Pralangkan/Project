@@ -242,7 +242,7 @@
                 email: email
             },
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 var data = JSON.parse(response);
                 if (data.status === 200) {
                     alert("บันทึกข้อมูลสำเร็จ");
@@ -269,6 +269,8 @@
                 user_id: localStorage.getItem("user_id")
             },
             success: function(data) {
+                console.log(data[0]);
+                
                 $("#picture").attr('src', data[0].picture);
                 $("#name_type").html("ตำแหน่ง <span style='font-size: 20px;'>" + data[0].name_type + "</span>");
                 $("#user_name").html("ชื่อ-นามสกุล :" + " " + data[0].user_name);
@@ -320,7 +322,7 @@
             type: 'POST',
             data: formData,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 var data1 = JSON.parse(response);
                 if (data1.status === 200) {
                     alert("บันทึกข้อมูลสำเร็จ");
@@ -356,7 +358,7 @@
             contentType: false,
             data: formData,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 var data = JSON.parse(response);
                 if (data.status === 200) {
                     alert("บันทึกข้อมูลสำเร็จ");

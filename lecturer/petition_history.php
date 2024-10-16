@@ -113,7 +113,7 @@
                             data: null,
                             render: function(data, type, row) {
                                 var buttonHtml = '';
-                                if ([4, 5, 6,7].includes(row.id_status)) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
+                                if ([4, 5, 6,7,9].includes(row.id_status)) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
                                     buttonHtml = '<button class="btn btn-primary manage-button" data-id="' + row.id + '">ดูรายละเอียด</button>';
                                 } 
                                 return buttonHtml;
@@ -122,7 +122,7 @@
 
                     ],
                     order: [
-                        [0, 'DESC']
+                        [2, 'DESC']
                     ]
                 });
 

@@ -213,8 +213,8 @@
                 return;
             }
 
-            var id_status = 5; // Define the status for disapproval
-
+            var id_status = 9; // Define the status for disapproval
+            var idDeputy_Director = 2;
             // AJAX call to update the reason and status to "Disapproved"
             $.ajax({
                 url: 'update_reason', // Adjust the URL as necessary
@@ -222,7 +222,8 @@
                 data: {
                     id: id,
                     reason: reason,
-                    id_status: id_status
+                    id_status: id_status,
+                    idDeputy_Director:idDeputy_Director
                 },
                 success: function(response) {
                     // Assuming response.success is being returned by the server

@@ -7,7 +7,7 @@ include("../../servers/connect.php");
 
 $sql = "SELECT COUNT(position) AS count 
 FROM teacher_personnel_information 
-WHERE position IN (1, 2, 3, 4, 5, 6, 7)";
+WHERE position IN (1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13,14,15,16,17,18)";
 $stmt = $db->prepare($sql);
 $stmt->execute(); // Removed parameters as they are not used in your SQL.
 $result = $stmt->fetch();

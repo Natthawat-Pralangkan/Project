@@ -356,7 +356,7 @@
 
     $(document).ready(function() {
         // เรียกใช้ฟังก์ชันเพื่อดึงจำนวนคำร้องทั้งหมดที่มี id_status 1, 2, 3, 4, 5, หรือ 6
-        fetchTotalPetitions([1, 2, 3, 4, 5, 6,7]);
+        fetchTotalPetitions([1, 2, 3, 4, 5, 6,7,8,9]);
     });
 
     function fetchTotalPetitions(idStatusArray_0) {

@@ -25,7 +25,7 @@
         </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/addpersonnelinformation/addpersonnelinformation') !== false ? 'active-menu' : ''; ?>">
             <a class="nav-link active d-inline-block" style="font-size: 18px;" href="./addpersonnelinformation.php">
-                <i class="fa-solid fa-user-plus spani "></i><span id="text-d" class="menu-text">เพิ่มข้อมูลบุคลากรน</span>
+                <i class="fa-solid fa-user-plus spani "></i><span id="text-d" class="menu-text">เพิ่มข้อมูลบุคลากร</span>
             </a>
         </li>
         <li class="nav-item ms-3 me-1 py-1 <?php echo strpos($_SERVER['REQUEST_URI'], 'Project/officer/addpersonnelinformation/List_of_learning_subject_gros') !== false ? 'active-menu' : ''; ?>">

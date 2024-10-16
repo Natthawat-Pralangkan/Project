@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
@@ -111,6 +111,31 @@
                                     </thead>
                                     <tbody id="get_all_staff"> <!-- Ensure this ID matches your jQuery selector -->
                                         <!-- Data will be inserted here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">คำร้องทั้งหมด</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <table id="myTable" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">วันที่ยื่น</th>
+                                            <th scope="col">ชื่อ-นามสกุล</th>
+                                            <th scope="col">เรื่อง</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="all_requests">
+                                        <!-- ข้อมูลจะถูกแสดงที่นี่ -->
                                     </tbody>
                                 </table>
                             </div>
@@ -242,7 +267,7 @@
             url: 'get_count_all_staff', // Adjust this URL to the correct endpoint
             method: 'POST',
             data: {
-               
+
             },
             success: function(response) {
                 // Assuming response contains a 'count' property as per the PHP script

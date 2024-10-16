@@ -38,7 +38,7 @@ $sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,detail
                         JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
                         JOIN petition_type ON petition_name.id_petition = petition_type.id 
                         JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-                        WHERE details_ppetiton.user_id = ? AND `details_ppetiton`.`id_status` IN (4, 5, 6, 7)  ORDER BY  details_ppetiton.date DESC ";
+                        WHERE details_ppetiton.user_id = ? AND `details_ppetiton`.`id_status` IN (3, 4, 5, 6, 7, 8, 9)  ORDER BY  details_ppetiton.id DESC ";
 $result = $db->prepare($sql);
 $result->bindParam(1, $user_id);
 $result->execute();

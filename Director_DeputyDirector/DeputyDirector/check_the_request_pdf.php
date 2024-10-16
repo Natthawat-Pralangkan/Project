@@ -2946,6 +2946,23 @@ if ($row['petition_id'] == 7) {
 
             $pdf->SetXY(30, 210);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
+
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(160, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(38, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            }
         }
     }
 

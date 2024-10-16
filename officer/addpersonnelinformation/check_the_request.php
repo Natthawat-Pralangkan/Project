@@ -263,7 +263,7 @@
         $('#confirmDisapproval').click(function() {
             var id = $('#hiddenIdField1').val(); // ดึงค่า id จาก hidden field
             var reason = $('#formGroupExampleInput').val(); // ดึงเหตุผลที่กรอก
-
+            
             // ตรวจสอบว่ามีการกรอกเหตุผลหรือไม่
             if (!reason.trim()) {
                 alert("กรุณากรอกเหตุผลการไม่อนุมัติ");
@@ -271,7 +271,7 @@
             }
 
             var id_status = 6; // กำหนดสถานะเป็นไม่อนุมัติ
-
+            var id_officer = 6;
             // ทำการเรียก AJAX เพื่ออัปเดตข้อมูลในเซิร์ฟเวอร์
             $.ajax({
                 url: 'update_reason',
@@ -279,7 +279,8 @@
                 data: {
                     id: id,
                     reason: reason,
-                    id_status: id_status
+                    id_status: id_status,
+                    id_officer: id_officer
                 },
                 success: function(response) {
                     if (response.success) {
@@ -344,48 +345,6 @@
                 }
             });
         });
-        // $("#approveButton2").on('click', function(event) {
-        //     event.preventDefault();
-
-        //     // Retrieve the id from the appropriate modal
-        //     var id = $('#exampleModal14').data('id'); // Assuming the id is stored in the second modal
-        //     var id_status = 2; // Define and assign a value to id_status
-        //     var id_officer = 6; // Define and assign a value to id_status
-        //     var Officer_comments = $('#reasonInput').val(); // Read value from input field if present
-
-        //     console.log("Sending ID:", id, "Status:", id_status);
-        //     console.log(Officer_comments);
-        //     // AJAX call to update the status
-        //     $.ajax({
-        //         url: "update_status1",
-        //         type: "POST",
-        //         data: {
-        //             id: id,
-        //             id_status: id_status,
-        //             id_officer: id_officer,
-        //             Officer_comments: Officer_comments
-        //         },
-        //         success: function(response) {
-        //             // ตรวจสอบว่า response.status เป็น 200 หรือ 'success'
-        //             if (response.status === 200 || response.status === "success") {
-        //                 Swal.fire({
-        //                     title: "อนุมัติคำร้องสำเร็จ!",
-        //                     text: response.message,
-        //                     icon: "success",
-        //                     confirmButtonText: "ยืนยัน"
-        //                 }).then((result) => {
-        //                     if (result.isConfirmed) {
-        //                         location.reload(); // Reload the page after confirmation
-        //                     }
-        //                 });
-        //                 $('#exampleModal7').modal('hide'); // ซ่อน modal ที่ต้องการ
-        //             } else {
-        //                 alert("เกิดข้อผิดพลาดในการอนุมัติคำร้อง: " + response.message);
-        //             }
-        //         }
-
-        //     });
-        // });
     });
 </script>
 <?php include("../../footer.php") ?>

@@ -91,7 +91,7 @@ if (isset($_POST["user_id"]) && $_POST["user_id"]) {
         "educational_qualification" => $row['educational_qualification'],
         "name_type" => $row['name_type'],
         "id" => $row['id'],
-        "picture" => "../images/" . $row['picture'],
+        "picture" => "http://localhost/Project/images/" . $row['picture'],
     );
 
     echo json_encode($keeall); // ส่ง JSON กลับหลังจากวนลูปเสร็จสิ้นทั้งหมด
