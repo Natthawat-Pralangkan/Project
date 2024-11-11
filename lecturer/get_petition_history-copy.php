@@ -32,17 +32,15 @@ function ConvertToThaiDate($value, $short = '1', $need_time = '1', $need_time_se
         return "";
 }
 
-$id_subject_group = $_POST["id_subject_group"];
+$user_id = $_POST["user_id"];
 
-$sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,details_ppetiton.id_status FROM `details_ppetiton`
-JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
-JOIN petition_type ON petition_name.id_petition = petition_type.id 
-JOIN request_status ON details_ppetiton.id_status = request_status.id_status
-WHERE details_ppetiton.id_subject_group = ? and  details_ppetiton.id_status = 8 ORDER by details_ppetiton.date desc; ";
-//  JOIN user on details_ppetiton.id_subject_group = user.id_subject_group
+$sql = "SELECT *,`details_ppetiton`.`id`,`details_ppetiton`.`petition_id`,details_ppetiton.id_status,`details_ppetiton`.`date` FROM `details_ppetiton`
+                        JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
+                        JOIN petition_type ON petition_name.id_petition = petition_type.id 
+                        JOIN request_status ON details_ppetiton.id_status = request_status.id_status
+                        WHERE details_ppetiton.user_id = ? AND `details_ppetiton`.`id_status` IN (3, 4, 5, 6, 7, 9)  ORDER BY  details_ppetiton.id DESC ";
 $result = $db->prepare($sql);
-// $result->bindParam(1, $user_id);
-$result->bindParam(1, $id_subject_group);
+$result->bindParam(1, $user_id);
 $result->execute();
 $row = $result->fetchAll(PDO::FETCH_ASSOC);
 $keeall = array(); // สร้าง array เพื่อเก็บข้อมูลทั้งหมดก่อนส่ง JSON กลับ
@@ -58,7 +56,6 @@ foreach ($row as $kee) {
         "name_status" => $kee['name_status'],
         "reason" => $kee['reason'],
         "id_status" => $kee['id_status'],
-        "id_subject_group" => $kee['id_subject_group'],
     );
 }
 

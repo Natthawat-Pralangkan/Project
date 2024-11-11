@@ -12,7 +12,7 @@ $user_id = $_GET['user_id'] ?? ''; // ใส่ค่าเริ่มต้น
 use setasign\Fpdi\Fpdi;
 
 $pdf = new Fpdi();
-$pdf->AddPage("L");
+$pdf->AddPage("P");
 // ตรวจสอบว่าได้เรียกใช้ฟอนต์ที่ถูกต้อง
 $pdf->AddFont('THSarabunNew', '', 'THSarabunNew.php');
 $pdf->AddFont('THSarabunNew', 'BI', 'THSarabunNew_b.php');
@@ -67,19 +67,19 @@ $pdf->Image($imagePath, ($pdf->GetPageWidth() - $targetWidth) / 2, 10, $targetWi
 
 // แสดงข้อความที่ด้านบนและชิดขวา
 $pdf->SetXY(($pdf->GetPageWidth() - 200) / 2, 10);
-$pdf->MultiCell(235, 10, iconv('UTF-8', 'cp874', "โรงเรียนนันทบุรีวิทยา\nเลขที่ 13 ถนนสุริยพงษ์ตำบลในเวียง\nอำเภอเมืองน่าน จังหวัดน่าน 55000"), 0, 'R');
+$pdf->MultiCell(200, 10, iconv('UTF-8', 'cp874', "โรงเรียนนันทบุรีวิทยา\nเลขที่ 13 ถนนสุริยพงษ์ตำบลในเวียง\nอำเภอเมืองน่าน จังหวัดน่าน 55000"), 0, 'R');
 $pdf->Ln(10);
 $pdf->AddFont('THSarabunNew', '', 'THSarabunNew.php');
 $pdf->AddFont('THSarabunNew', 'BI', 'THSarabunNew_b.php');
 $pdf->SetFont('THSarabunNew', 'BI', 24);
 
 // $pdf->SetXY(45, 10); // 45 คือความกว้างของหน้าระดับความสูง 210 หาร 2 (หน่วยเป็น mm)
-$pdf->MultiCell(280, 10, iconv('UTF-8', 'cp874', "รายงาน เวลาเข้างาน - เวลาออกงาน"), 0, 'C');
+$pdf->MultiCell(200, 10, iconv('UTF-8', 'cp874', "รายงาน เวลาเข้างาน - เวลาออกงาน"), 0, 'C');
 
 $pdf->Ln(10);
 
-
-$pdf->MultiCell(280, 10, iconv('UTF-8', 'cp874', "ระหว่าง วันที่: " . ConvertToThaiDate($startDate) . " ถึง วันที่: " . ConvertToThaiDate($endDate)), 0, 'C');
+$pdf->SetFont('THSarabunNew', 'BI', 18);
+$pdf->MultiCell(200, 10, iconv('UTF-8', 'cp874', "ระหว่าง วันที่: " . ConvertToThaiDate($startDate) . " ถึง วันที่: " . ConvertToThaiDate($endDate)), 0, 'C');
 
 $tableWidth = 50 + 50 + 80 + 50 + 50 + 50; // รวมความกว้างของทุกคอลัมน์
 $startX = ($pdf->GetPageWidth() - $tableWidth) / 2; // คำนวณตำแหน่งเริ่มต้น X เพื่อให้ตารางอยู่ตรงกลาง
@@ -87,12 +87,12 @@ $pdf->SetX($startX);
 $pdf->Ln(10);
 $pdf->AddFont('THSarabunNew', '', 'THSarabunNew.php');
 $pdf->AddFont('THSarabunNew', 'BI', 'THSarabunNew_b.php');
-$pdf->SetFont('THSarabunNew', 'BI', 20);
+$pdf->SetFont('THSarabunNew', 'BI', 16);
 $pdf->Cell(15, 10, iconv('UTF-8', 'cp874', "ลำดับ"), 1, 0, 'C');
-$pdf->Cell(50, 10, iconv('UTF-8', 'cp874', "วันที่-เดือน-ปี"), 1, 0, 'C');
-$pdf->Cell(80, 10, iconv('UTF-8', 'cp874', "ชื่อ-นามสกุล"), 1, 0, 'C');
-$pdf->Cell(50, 10, iconv('UTF-8', 'cp874', "เวลาเข้างาน"), 1, 0, 'C');
-$pdf->Cell(50, 10, iconv('UTF-8', 'cp874', "เวลาออกงาน"), 1, 0, 'C');
+$pdf->Cell(30, 10, iconv('UTF-8', 'cp874', "วันที่-เดือน-ปี"), 1, 0, 'C');
+$pdf->Cell(60, 10, iconv('UTF-8', 'cp874', "ชื่อ-นามสกุล"), 1, 0, 'C');
+$pdf->Cell(30, 10, iconv('UTF-8', 'cp874', "เวลาเข้างาน"), 1, 0, 'C');
+$pdf->Cell(30, 10, iconv('UTF-8', 'cp874', "เวลาออกงาน"), 1, 0, 'C');
 $pdf->Cell(30, 10, iconv('UTF-8', 'cp874', "หมายเหตุ"), 1, 0, 'C');
 $pdf->Ln();
 

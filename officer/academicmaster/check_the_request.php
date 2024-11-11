@@ -18,8 +18,8 @@
             <a href=""></a>
         </div>
 
-        <div class="mx-3 mt-5">
-            <div class="mt-3">
+        <div class="">
+            <div class="mt-0">
                 <table id="checktherequest" class="table">
                     <thead>
                         <tr>
@@ -207,7 +207,7 @@
         return;
     }
     var id_status = 6; // Status for disapproval
-    
+    var id_officer = 3;
     // AJAX call to update the reason and status to "Disapproved"
     $.ajax({
         url: 'update_reason', // Adjust the URL as necessary
@@ -215,7 +215,8 @@
         data: {
             id: id, // Ensure these variables are correctly defined in your JS
             reason: reason,
-            id_status: id_status
+            id_status: id_status,
+            id_officer : id_officer
             
         },
         success: function(response) {

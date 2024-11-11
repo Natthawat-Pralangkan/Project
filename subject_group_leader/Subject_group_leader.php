@@ -20,7 +20,7 @@ include("../servers/connect.php"); ?>
             <a href=""></a>
         </div>
 
-        <div class="mx-3 mt-5">
+        <div class="">
             <div class="mt-3">
                 <table id="checktherequest" class="table">
                     <thead>
@@ -94,13 +94,13 @@ include("../servers/connect.php"); ?>
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">เหตุผลไม่อนุมัติคำร้อง</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">เหตุผลไม่ผ่านพิจารณา</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <input type="hidden" id="hiddenIdField1" value=""> <!-- ฟิลด์นี้จะรับค่า id -->
                                 <div class="mb-3">
-                                    <label for="formGroupExampleInput" class="form-label">เหตุผลไม่อนุมัติคำร้อง</label>
+                                    <label for="formGroupExampleInput" class="form-label">เหตุผลไม่ผ่านพิจารณา</label>
                                     <input type="text" class="form-control" id="formGroupExampleInput" placeholder="เหตุผลไม่อนุมัติคำร้อง">
 
                                 </div>
@@ -131,8 +131,8 @@ include("../servers/connect.php"); ?>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <button type="button" id="approveButton2" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">อนุมัติ</button>
-                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่อนุมัติ</button>
+                                <button type="button" id="approveButton2" class="btn text-center some-element" style="background-color: #8B39F4; color: #fcfafa;">ผ่านพิจารณา</button>
+                                <button class="btn mr-2" style="background-color: #ff0000; color: #fcfafa;" data-bs-toggle="modal" data-bs-target="#exampleModal1">ไม่ผ่านพิจารณา</button>
                             </div>
                         </div>
                     </div>

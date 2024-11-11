@@ -20,9 +20,47 @@
             <a href=""></a>
         </div>
         <div class="content">
-            <div class="mt-3">
-                <table id="follow_up_on_requests" class="table">
-                    <thead>
+            <!-- ฟิลเตอร์การกรอง -->
+            <div class="filter-container p-3 bg-light rounded mb-4 shadow-sm">
+                <div class="row gy-3">
+                    <div class="col-md-4">
+                        <label for="filterType" class="form-label">ประเภท</label>
+                        <select id="filterType" class="form-select">
+                            <option value="">ทั้งหมด</option>
+                            <option value="1">คำร้องวิชาการ</option>
+                            <option value="2">คำร้องทั่วไป</option>
+                            <option value="3">คำร้องงบประมาณ</option>
+                            <option value="4">คำร้องบุคคล</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="filterStatus" class="form-label">สถานะ</label>
+                        <select id="filterStatus" class="form-select">
+                            <option value="">ทั้งหมด</option>
+                            <option value="1">รอพิจารณา</option>
+                            <option value="2">รอรองผู้อำนวยการพิจารณา</option>
+                            <option value="3">รอผู้อำนวยการพิจารณา</option>
+                            <option value="4">อนุมัติแล้ว</option>
+                            <option value="5">ไม่อนุมัติ</option>
+                            <option value="6">ไม่ผ่านพิจารณา</option>
+                            <option value="7">ยกเลิก</option>
+                            <option value="8">รอหัวหน้ากลุ่มสาระพิจารณา</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="filterDate" class="form-label">ช่วงวันที่</label>
+                        <div class="d-flex gap-2">
+                            <input type="date" id="filterStartDate" class="form-control">
+                            <input type="date" id="filterEndDate" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ตารางข้อมูล -->
+            <div class="table-responsive">
+                <table id="follow_up_on_requests" class="table table-striped table-hover align-middle">
+                    <thead class="table">
                         <tr>
                             <th>วันที่ยื่นคำร้อง</th>
                             <th>ชื่อคำร้อง</th>
@@ -36,24 +74,24 @@
                     </tbody>
                 </table>
             </div>
-            <!-- Modal -->
-            <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-xl  modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="pdfModalLabel">PDF Title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <iframe src="" frameborder="0" style="width:100%; height:500px;"></iframe>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="pdfModalLabel">PDF Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="" frameborder="0" style="width:100%; height:500px;"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -63,122 +101,66 @@
         window.location.href = "../"
     }
     $(document).ready(function() {
+    // ฟังก์ชันเพื่อโหลดข้อมูลในตารางพร้อมการกรอง
+    function loadTableData() {
         $.ajax({
             url: "get_petition_history",
             type: "POST",
             data: {
-                user_id: localStorage.getItem("user_id")
+                user_id: localStorage.getItem("user_id"),
+                filterType: $('#filterType').val(),
+                filterStatus: $('#filterStatus').val(),
+                startDate: $('#filterStartDate').val(),
+                endDate: $('#filterEndDate').val()
             },
             dataType: 'json',
             success: function(data) {
-                console.log(data);
-                var table = $('#follow_up_on_requests').DataTable({
+                $('#follow_up_on_requests').DataTable().clear().destroy();
+                $('#follow_up_on_requests').DataTable({
                     data: data,
-                    columns: [{
-                            data: 'date'
-                        },
-                        {
-                            data: 'petition_name'
-                        },
-                        {
-                            data: 'request_type_name'
-                        },
-
+                    columns: [
+                        { data: 'date' },
+                        { data: 'petition_name' },
+                        { data: 'request_type_name' },
                         {
                             data: 'name_status',
-                            createdCell: function(td, cellData, rowData, row, col) {
-                                if (cellData == "รอพิจารณา") {
-                                    $(td).addClass("status1");
-                                } else if (cellData == "รอรองผู้อำนวยการพิจารณา") {
-                                    $(td).addClass("status2");
-                                } else if (cellData == "รอผู้อำนวยการพิจารณา") {
-                                    $(td).addClass("status3");
-                                } else if (cellData == "อนุมัติแล้ว") {
-                                    $(td).addClass("status4");
-                                } else if (cellData == "ไม่อนุมัติ") {
-                                    $(td).addClass("status5");
-                                } else if (cellData == "ไม่ผ่านพิจารณา") {
-                                    $(td).addClass("status6");
-                                } else if (cellData == "ยกเลิก") {
-                                    $(td).addClass("status7");
-                                } else if (cellData == "รอหัวหน้ากลุ่มสาระพิจารณา") {
-                                    $(td).addClass("status8");
-                                }
+                            createdCell: function(td, cellData, rowData) {
+                                $(td).addClass("status" + rowData.id_status);
                             },
                         },
-                        {
-                            data: 'reason'
-                        },
+                        { data: 'reason' },
                         {
                             data: null,
                             render: function(data, type, row) {
-                                var buttonHtml = '';
-                                if ([4, 5, 6,7,9].includes(row.id_status)) { // ตรวจสอบเฉพาะเมื่อ id_status เป็น 1
-                                    buttonHtml = '<button class="btn btn-primary manage-button" data-id="' + row.id + '">ดูรายละเอียด</button>';
-                                } 
-                                return buttonHtml;
+                                return (row.id_status > 3)
+                                    ? '<button class="btn btn-primary manage-button" data-id="' + row.id + '">ดูรายละเอียด</button>'
+                                    : '';
                             }
                         }
-
                     ],
-                    order: [
-                        [2, 'DESC']
-                    ]
+                    order: [[0, 'desc']]
                 });
 
-                // เพิ่มเหตุการณ์เมื่อคลิกที่ปุ่ม "จัดการ" เพื่อเปิด modal
-                $('#follow_up_on_requests tbody').on('click', 'button', function() {
-                    var data = table.row($(this).parents('tr')).data();
-                    var modalId = $(this).attr('data-id');
-                    $(modalId).modal('show');
+                $('#follow_up_on_requests tbody').on('click', '.manage-button', function() {
+                    var id = $(this).data('id');
+                    var pdfUrl = 'check_the_request_pdf.php?id=' + id;
+                    window.open(pdfUrl, '_blank');
                 });
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
-    });
-    // ตัวอย่างการใช้ event delegation เพื่อผูกเหตุการณ์กับปุ่มที่ถูกเพิ่มหลังจาก DOM ถูกโหลด
-    $('#follow_up_on_requests tbody').on('click', '.manage-button', function() {
-        var id = $(this).data('id');
-        var pdfUrl = 'check_the_request_pdf.php?id=' + id;
-        window.open(pdfUrl, '_blank');
-        // $('#pdfModal iframe').attr('src', pdfUrl);
-        // $('#pdfModal').modal('show');
+    }
+
+    // เรียกฟังก์ชัน loadTableData เมื่อค่าฟิลเตอร์เปลี่ยน
+    $('#filterType, #filterStatus, #filterStartDate, #filterEndDate').on('change input', function() {
+        loadTableData();
     });
 
-    // // ยืนยันก่อนทำการยกเลิก
-    // $(document).on('click', '.cancel-button', function() {
-    //     var id = $(this).data('id'); // รับค่า ID ของคำร้องที่จะยกเลิก
-
-    //     // ยืนยันก่อนทำการยกเลิก
-    //     $.ajax({
-    //         url: 'cancel_request', // URL ไปยังสคริปต์เซิร์ฟเวอร์ที่จะอัปเดตฐานข้อมูล
-    //         type: 'POST',
-    //         data: {
-    //             id: id,
-    //             id_status: 7
-    //         }, // ส่งข้อมูล ID และสถานะใหม่
-    //         success: function(response) {
-    //             // ทำอะไรก็ตามที่ต้องการหลังจากอัปเดตสำเร็จ, เช่น รีโหลดหน้าหรือแสดงข้อความ
-    //             Swal.fire({
-    //                 title: "ยกเลิกคำร้องสำเร็จ!",
-    //                 text: response.message,
-    //                 icon: "success",
-    //                 confirmButtonText: "ยืนยัน", // Change the text of the confirmation button
-    //             }).then((result) => {
-    //                 if (result.isConfirmed) {
-    //                     location.reload(); // Reload the page after confirmation
-    //                 }
-    //             });
-    //         },
-    //         error: function(xhr, status, error) {
-    //             // แสดงข้อความผิดพลาดหากมี
-    //             alert('ไม่สามารถยกเลิกคำร้องได้');
-    //         }
-    //     });
-
-    // });
+    // โหลดข้อมูลครั้งแรกเมื่อเริ่มต้น
+    loadTableData();
+});
 </script>
 
 <?php include("../footer.php") ?>

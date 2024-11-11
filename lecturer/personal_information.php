@@ -339,39 +339,37 @@
     });
 
     $('#edit-picture').click(function() {
-        $('#editPictureModal').modal('show');
-    });
+    $('#editPictureModal').modal('show');
+});
 
-    $("#edit_picture_1").click(function() {
-        var picture = $("#picture_1").prop('files')[0]; // Get the file object
-        var formData = new FormData();
-        formData.append('user_id', localStorage.getItem("user_id"));
-        formData.append('picture_1', picture); // Append the file object
+$("#edit_picture_1").click(function() {
+    var picture = $("#picture_1").prop('files')[0]; // Get the file object
+    var oldPicture = $("#picture").attr('src'); // ดึง URL ของรูปภาพเก่า
+    var formData = new FormData();
+    formData.append('user_id', localStorage.getItem("user_id"));
+    formData.append('picture_1', picture); // Append the file object
+    formData.append('old_picture', oldPicture); // Append the old picture URL for deletion
 
-        console.log("User ID:", localStorage.getItem("user_id"));
-        console.log(picture);
-
-        $.ajax({
-            url: "upload_picture",
-            method: "POST",
-            processData: false,
-            contentType: false,
-            data: formData,
-            success: function(response) {
-                // console.log(response);
-                var data = JSON.parse(response);
-                if (data.status === 200) {
-                    alert("บันทึกข้อมูลสำเร็จ");
-                    window.location.href = "personal_information";
-                } else {
-                    alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
-                    window.location.href = "personal_information";
-                }
-            },
-            error: function() {
-                alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+    $.ajax({
+        url: "upload_picture", // แก้ไข URL ของคุณให้ถูกต้อง
+        method: "POST",
+        processData: false,
+        contentType: false,
+        data: formData,
+        success: function(response) {
+            var data = JSON.parse(response);
+            if (data.status === 200) {
+                alert("บันทึกข้อมูลสำเร็จ");
+                window.location.href = "personal_information";
+            } else {
+                alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
             }
-        });
+        },
+        error: function() {
+            alert("เกิดข้อผิดพลาดในการส่งข้อมูล");
+        }
     });
+});
+
 </script>
 <?php include("../footer.php") ?>

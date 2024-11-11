@@ -171,7 +171,7 @@ html {
 }
 
 .status2 {
-  color: #5bcf03 !important;
+  color: #1310ec !important;
 }
 
 .status3 {
@@ -196,6 +196,9 @@ html {
 
 .status8 {
   color: #e3379e !important;
+}
+.status9 {
+  color: #f71004 !important; /* สีแดง */
 }
 
 /* Responsive Styles */
@@ -242,4 +245,39 @@ img,
 .box {
   max-width: 100%;
   height: auto;
+}
+/* ปรับระยะห่างของฟิลเตอร์และปุ่ม */
+.filter-container {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+
+/* สไตล์ปุ่ม */
+#applyFilters {
+  font-size: 1rem;
+  padding: 8px 16px;
+}
+
+/* ปรับขนาดของตาราง */
+.table-responsive {
+  margin-top: 20px;
+}
+
+/* สีและสไตล์ของหัวตาราง */
+.table thead th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* สไตล์การโฮเวอร์ */
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* สไตล์ของปุ่มจัดการ */
+.btn.manage-button {
+  font-size: 0.9rem;
+  padding: 4px 12px;
 }

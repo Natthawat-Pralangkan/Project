@@ -40,7 +40,7 @@
             </div>
             <a href=""></a>
         </div>
-        <div class="content">
+        <div class="">
             <div class="mt-3">
                 <table id="submit_a_complaint" class="table">
                     <thead>
@@ -55,7 +55,7 @@
                         <?php
                         // คำสั่ง SQL เพื่อดึงข้อมูล
                         $sql = "SELECT *FROM `petition_name`LEFT JOIN `petition_type` ON `petition_name`.`id_petition` = `petition_type`.`id`
-                        WHERE `petition_name`.`id_petition` IN (1, 2, 3, 4) ;";
+                        WHERE `petition_name`.`id_petition` IN (1, 2, 3, 4) AND petition_name.id in (1,2,3,4,5,6,7,8,9,10,11,12,13,14)  ;";
                         $result = $db->prepare($sql);
                         $result->execute();
                         // ตรวจสอบว่ามีข้อมูลในฐานข้อมูลหรือไม่
@@ -95,14 +95,14 @@
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <select class="form-select mt-2" id="id_subject_group" name="id_subject_group">
                                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                            <option value="1">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                            <option value="2">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                            <option value="3">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                            <option value="4">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                            <option value="5">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                            <option value="6">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                            <option value="7">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                            <option value="8">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -277,14 +277,14 @@
                                         <label for="" style="font-size: 18px;">กลุ่มสาระการเรียนรู้</label>
                                         <select class="form-select mt-2" id="id_subject_group_10" name="id_subject_group_10">
                                             <option value="">เลือกกลุ่มสาระการเรียนรู้</option>
-                                            <option value="3">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
-                                            <option value="4">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
-                                            <option value="5">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
-                                            <option value="6">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
-                                            <option value="7">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
-                                            <option value="8">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
-                                            <option value="9">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
-                                            <option value="10">กลุ่มสาระการเรียนรู้ศิลปะ</option>
+                                            <option value="8">กลุ่มสาระการเรียนรู้ภาษาไทย</option>
+                                            <option value="9">กลุ่มสาระการเรียนรู้คณิตศาสตร์</option>
+                                            <option value="10">กลุ่มสาระการเรียนรู้วิทยาศาตร์</option>
+                                            <option value="11">กลุ่มสาระการเรียนรู้การงานอาชีพ</option>
+                                            <option value="12">กลุ่มสาระการเรียนรู้สุขศึกษา</option>
+                                            <option value="13">กลุ่มสาระการเรียนรู้สังคมศึกษา</option>
+                                            <option value="14">กลุ่มสาระการเรียนรู้ภาษาต่างประเทศ</option>
+                                            <option value="15">กลุ่มสาระการเรียนรู้ศิลปะ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -1262,30 +1262,11 @@
             }
         })
     })
-
-    function formatDateToInput(date) {
-        const d = new Date(date);
-        const year = d.getFullYear();
-        const month = String(d.getMonth() + 1).padStart(2, '0'); // เพิ่ม 0 ถ้าเดือนเป็นเลขหลักเดียว
-        const day = String(d.getDate()).padStart(2, '0'); // เพิ่ม 0 ถ้าวันเป็นเลขหลักเดียว
-        return `${year}-${month}-${day}`; // คืนค่าเป็น YYYY-MM-DD
-    }
-
-    // กำหนดวันที่ปัจจุบัน
-    const today = new Date();
-    // กำหนดวันที่ย้อนหลังไป 7 วัน
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(today.getDate() - 7);
-
-    // ตั้งค่า value ให้กับ input[type="date"] โดยตั้งให้วันที่ปัจจุบันเป็นค่าเริ่มต้น
-    document.getElementById('date_activity_12').value = formatDateToInput(today);
-    document.getElementById('date_activity_13').value = formatDateToInput(today);
-
-    // ตั้งค่า min และ max ให้กับ input[type="date"]
-    document.getElementById('date_activity_12').max = formatDateToInput(today);
-    document.getElementById('date_activity_12').min = formatDateToInput(sevenDaysAgo);
-
-    document.getElementById('date_activity_13').max = formatDateToInput(today);
-    document.getElementById('date_activity_13').min = formatDateToInput(sevenDaysAgo);
+    // ฟังก์ชันในการตั้งค่า min date เป็นวันที่ปัจจุบัน
+    document.addEventListener("DOMContentLoaded", function() {
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("date_activity_12").setAttribute("min", today);
+        document.getElementById("date_activity_13").setAttribute("min", today);
+    });
 </script>
 <?php include("../footer.php") ?>

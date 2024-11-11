@@ -39,7 +39,8 @@ dDeputy.director_name AS DeputyDirectorName,
 dDirector.director_name AS DirectorName,
 infrom.user_name AS user_namein,
 infrom.last_name AS last_namein,
-officer_type.name_type AS name_officer_type
+officer_type.name_type AS name_officer_type,
+details_ppetiton.id_subject_group
 FROM details_ppetiton
 JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
 JOIN petition_type ON petition_name.id_petition = petition_type.id 
@@ -162,6 +163,7 @@ if ($row['petition_id'] == 7) {
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
 
+            
             $userName = $row['group_leader_name'];
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
@@ -173,7 +175,19 @@ if ($row['petition_id'] == 7) {
 
             $pdf->SetXY(125, 240);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['group_leader_name']), 0, 1);
+
+            // print_r($row['id_subject_group']);
+            // exit;
+            if  ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(135, 248);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
+
         }
+        
     }
     $pdf->Output('I', 'generated_pdf.pdf');
 } elseif ($row['petition_id'] == 6) {
@@ -497,6 +511,30 @@ if ($row['petition_id'] == 7) {
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(100, 35);
+                // $pdf->SetXY(160, 30);
+                // $pdf->SetXY(135, 255);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
+            elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(160, 30);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(105, 200);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
     $pdf->Output('I', 'แบบฟอร์มปะหน้า.docx.pdf');
@@ -798,34 +836,30 @@ if ($row['petition_id'] == 7) {
             }
 
 
-            // $thai_month_arr2 = array(
-            //     "01" => "ม.ค.",
-            //     "02" => "ก.พ.",
-            //     "03" => "มี.ค.",
-            //     "04" => "เม.ย.",
-            //     "05" => "พ.ค.",
-            //     "06" => "มิ.ย.",
-            //     "07" => "ก.ค.",
-            //     "08" => "ส.ค.",
-            //     "09" => "ก.ย.",
-            //     "10" => "ต.ค.",
-            //     "11" => "พ.ย.",
-            //     "12" => "ธ.ค."
-            // );
-
-            // list($year, $month2, $day) = explode("-", $row['date_director']);
-
-            // $thai_month2 = $thai_month_arr1[$month2];
-            // // แปลงให้อยู่ในรูปแบบไทย
-            // $newdate = date("d H:i:s", strtotime($row['date_director']));
-
-            // $newdate = ConvertToThaiDate($row['date_director']);
-            // $pdf->SetXY(138, 267);
-            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
-            // $pdf->SetXY(146, 267);
-            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
-            // $pdf->SetXY(155, 267);;
-            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
+            elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(60, 250);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
+            elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(140, 250);
+                // $pdf->SetXY(115, 190);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(115, 190);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
     $pdf->Output('I', 'generated_pdf.pdf');
@@ -974,8 +1008,9 @@ if ($row['petition_id'] == 7) {
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
 
 
-
+                   
             $userName = $row['user_name'];
+            
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr\.)/i', '', $userName);
@@ -1047,7 +1082,7 @@ if ($row['petition_id'] == 7) {
                 // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 $pdf->SetXY(165, 130);
-                $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
+                $pdf->Cell(0, 10, ' ', 0, 1);
             }
 
             $userName = $row['group_leader_name'];
@@ -1114,8 +1149,30 @@ if ($row['petition_id'] == 7) {
                 // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 $pdf->SetXY(165, 130);
-                $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
+                $pdf->Cell(0, 10, '', 0, 1);
             }
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(140, 165);
+            
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(225, 165);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            }elseif($row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(140, 107);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
         }
     }
 
@@ -1475,6 +1532,27 @@ if ($row['petition_id'] == 7) {
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(160, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(38, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            }elseif($row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(193, 18);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
         }
     }
 
@@ -1748,6 +1826,29 @@ if ($row['petition_id'] == 7) {
             }
             $pdf->SetXY(125, 251);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['save_a_message']), 0, 1);
+
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(70, 255);
+                // $pdf->SetXY(135, 255);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(38, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(38, 207);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
     $pdf->Output('I', 'generated_pdf.pdf');
@@ -2200,9 +2301,33 @@ if ($row['petition_id'] == 7) {
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
+            
         }
+       
+        
     }
-
+    if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+        // กรณี id_officer = 6 และ id_status = 6
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(20, 150);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+    } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+        // กรณี idDeputy_Director = 2 และ id_status = 5
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(65, 253);
+        // $pdf->SetXY(135, 255);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+    } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+        // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(143, 253);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+    } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+        // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(105, 200);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+    } 
     $pdf->Output('I', 'generated_pdf.pdf');
 } elseif ($row['petition_id'] == 10) {
     $templatePath = __DIR__ . '/file/แบบขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน.docx.pdf'; // Adjust path as necessary
@@ -2330,6 +2455,29 @@ if ($row['petition_id'] == 7) {
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr\.)/i', '', $userName);
             $pdf->SetXY(30, 252);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName . ' ' . $row['last_name']), 0, 1);
+
+            // if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+            //     // กรณี id_officer = 6 และ id_status = 6
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(20, 150);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            // } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+            //     // กรณี idDeputy_Director = 2 และ id_status = 5
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(65, 255);
+            //     // $pdf->SetXY(135, 255);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            // } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+            //     // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(143, 253);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            // } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+            //     // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(105, 200);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            // } 
         }
     }
     $pdf->Output('I', 'generated_pdf.pdf');
@@ -2483,6 +2631,29 @@ if ($row['petition_id'] == 7) {
 
             $pdf->SetXY(110, 165);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
+
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(65, 253);
+                // $pdf->SetXY(135, 255);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(120, 160);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(105, 200);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
 
@@ -2681,8 +2852,6 @@ if ($row['petition_id'] == 7) {
                 $pdf->SetXY(38, 205);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
             }
-            
-
         }
     }
 

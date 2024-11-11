@@ -1,5 +1,5 @@
-<?php include("../../servers/connect.php"); ?>
-<?php include("../../header.php"); ?>
+<?php include("../servers/connect.php");  ?>
+<?php include("../header.php"); ?>
 <div class="wrapper">
     <?php include('./navbar/sidebar.php'); ?>
 
@@ -121,7 +121,7 @@
                 // Handle click on manage buttons to open the modal
                 $('#follow_up_on_requests tbody').on('click', '.manage-button', function() {
                     var id = $(this).data('id');
-                    var pdfUrl = 'check_the_request_pdf.php?id=' + id;
+                    var pdfUrl = 'check_the_request_pdf_subject.php?id=' + id;
                     window.open(pdfUrl, '_blank');
                     // $('#pdfModal iframe').attr('src', pdfUrl);
                     // $('#pdfModal').modal('show');
@@ -134,4 +134,4 @@
     });
 </script>
 
-<?php include("../../footer.php") ?>
+<?php include("../footer.php") ?>

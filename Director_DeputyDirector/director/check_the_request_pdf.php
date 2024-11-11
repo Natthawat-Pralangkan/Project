@@ -40,7 +40,8 @@ dDeputy.director_name AS DeputyDirectorName,
 dDirector.director_name AS DirectorName,
 infrom.user_name AS user_namein,
 infrom.last_name AS last_namein,
-officer_type.name_type AS name_officer_type
+officer_type.name_type AS name_officer_type,
+details_ppetiton.id_subject_group
 FROM details_ppetiton
 JOIN petition_name ON details_ppetiton.petition_id = petition_name.id
 JOIN petition_type ON petition_name.id_petition = petition_type.id 
@@ -54,7 +55,7 @@ LEFT JOIN director AS dDeputy ON details_ppetiton.idDeputy_Director = dDeputy.id
 LEFT JOIN director AS dDirector ON details_ppetiton.id_Director = dDirector.id
 left JOIN teacher_personnel_information AS infrom ON details_ppetiton.id_officer = infrom.position
 left JOIN type AS officer_type ON details_ppetiton.id_officer = officer_type.id_type
-WHERE details_ppetiton.petition_type IN (1, 2, 3, 4) AND details_ppetiton.id = ?;
+WHERE details_ppetiton.petition_type IN (1, 2, 3, 4) AND details_ppetiton.id = ?;;
 ");
 $stmt->execute([$id]);
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -83,17 +84,11 @@ $pdf->SetFont('THSarabunNew', 'BI', 16);
 // $templatePath = __DIR__ . '/file/แบบสำรวจอัตรากำลังครู.pdf';
 if ($row['petition_id'] == 7) {
     $templatePath = __DIR__ . '/file/แบบสำรวจอัตรากำลังครู.pdf';
-    $details = explode(",", $row['details']);
+
 
     if (!file_exists($templatePath)) {
         exit('Template PDF not found at path: ' . $templatePath);
     }
-
-    // $pageCount = $pdf->setSourceFile($templatePath);
-    // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
-
-    // $pdf->addPage();
-    // $pdf->useImportedPage($pageId);
 
     $pageCount = $pdf->setSourceFile($templatePath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
@@ -109,10 +104,14 @@ if ($row['petition_id'] == 7) {
         // If you have specific content to add to each page, you can do so here.
         // Note: You might need to adjust positions or content based on the page number if necessary.
         if ($pageNo == 1) {
+            $details = explode(",", $row['details']);
             $pdf->SetXY(110, 57);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_name']), 0, 1);
             $positions = [
-                [100, 64],
+                [
+                    100,
+                    64
+                ],
                 [127, 64],
                 [65, 79],
                 [85, 86],
@@ -165,6 +164,7 @@ if ($row['petition_id'] == 7) {
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
 
+            
             $userName = $row['group_leader_name'];
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
@@ -176,9 +176,20 @@ if ($row['petition_id'] == 7) {
 
             $pdf->SetXY(125, 240);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['group_leader_name']), 0, 1);
-        }
-    }
 
+            // print_r($row['id_subject_group']);
+            // exit;
+            if  ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(135, 248);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
+
+        }
+        
+    }
     $pdf->Output('I', 'generated_pdf.pdf');
 } elseif ($row['petition_id'] == 6) {
     $templatePath = __DIR__ . '/file/แบบฟอร์มปะหน้า.docx.pdf'; // Adjust path as necessary
@@ -328,11 +339,11 @@ if ($row['petition_id'] == 7) {
 
             // การพิจารณาสั่งการของครู
             $iconPositions_1 = [
-                '1' => ['x' => 58, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 83, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '3' => ['x' => 108, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '4' => ['x' => 133, 'y' => 163, 'icon' => './img/8666665_check_icon.png'],
-                '5' => ['x' => 58, 'y' => 170, 'icon' => './img/8666665_check_icon.png']
+                '1' => ['x' => 58, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 83, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '3' => ['x' => 108, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '4' => ['x' => 133, 'y' => 163, 'icon' => './img/check-mark_5291043.png'],
+                '5' => ['x' => 58, 'y' => 170, 'icon' => './img/check-mark_5291043.png']
             ];
             if (isset($row['memo_id']) && array_key_exists($row['memo_id'], $iconPositions_1)) {
                 // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
@@ -349,11 +360,11 @@ if ($row['petition_id'] == 7) {
 
             // การพิจารณาสั่งการของโรงเรียน
             $iconPositions = [
-                '1' => ['x' => 145, 'y' => 242, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 172, 'y' => 242, 'icon' => './img/8666665_check_icon.png'],
-                '3' => ['x' => 145, 'y' => 250, 'icon' => './img/8666665_check_icon.png'],
-                '4' => ['x' => 172, 'y' => 250, 'icon' => './img/8666665_check_icon.png'],
-                '5' => ['x' => 145, 'y' => 258, 'icon' => './img/8666665_check_icon.png']
+                '1' => ['x' => 145, 'y' => 242, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 172, 'y' => 242, 'icon' => './img/check-mark_5291043.png'],
+                '3' => ['x' => 145, 'y' => 250, 'icon' => './img/check-mark_5291043.png'],
+                '4' => ['x' => 172, 'y' => 250, 'icon' => './img/check-mark_5291043.png'],
+                '5' => ['x' => 145, 'y' => 258, 'icon' => './img/check-mark_5291043.png']
             ];
             if (isset($row['memo_type']) && array_key_exists($row['memo_type'], $iconPositions)) {
                 // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
@@ -462,7 +473,6 @@ if ($row['petition_id'] == 7) {
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
-
             ///// ชื่อผอ
             $pdf->SetXY(88, 43);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
@@ -502,9 +512,33 @@ if ($row['petition_id'] == 7) {
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(100, 35);
+                // $pdf->SetXY(160, 30);
+                // $pdf->SetXY(135, 255);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
+            elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(160, 30);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(105, 200);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
-    $pdf->Output('I', '/file/generated_pdf.pdf');
+    $pdf->Output('I', 'แบบฟอร์มปะหน้า.docx.pdf');
 } elseif ($row['petition_id'] == 1) {
     $templatePath = __DIR__ . '/file/แบบรายงานผลการพานักเรียนไปนอกสถานศึกษา.docx.pdf'; // Adjust path as necessary
     // Process and display the details
@@ -703,8 +737,8 @@ if ($row['petition_id'] == 7) {
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_group_name']), 0, 1);
 
             $iconPositions_1 = [
-                '1' => ['x' => 113, 'y' => 230, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 113, 'y' => 237, 'icon' => './img/8666665_check_icon.png'],
+                '1' => ['x' => 113, 'y' => 230, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 113, 'y' => 237, 'icon' => './img/check-mark_5291043.png'],
 
             ];
             if (isset($row['consider_group_leader']) && array_key_exists($row['consider_group_leader'], $iconPositions_1)) {
@@ -787,7 +821,7 @@ if ($row['petition_id'] == 7) {
                 );
 
                 list($year, $month, $day) = explode("-", $row['date_director']); // Corrected $month2 to $month
-                $thai_month = $thai_month_arr2[$month]; // Use $month to access $thai_month_arr2
+                $thai_month2 = $thai_month_arr2[$month]; // Use $month to access $thai_month_arr2
 
                 // Assuming ConvertToThaiDate is a function you've defined to convert dates, it's not used here.
                 // $newdate = ConvertToThaiDate($row['date_director']); // This line seems unnecessary based on the code context.
@@ -795,41 +829,38 @@ if ($row['petition_id'] == 7) {
                 $pdf->SetXY(138, 267);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
                 $pdf->SetXY(146, 267);
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1); // Use $thai_month
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month2), 0, 1); // Use $thai_month
                 $pdf->SetXY(155, 267);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', (int)$year + 543), 0, 1); // Cast $year to int before adding 543
             } else {
                 // Handle the else condition if necessary
             }
 
-            // $thai_month_arr2 = array(
-            //     "01" => "ม.ค.",
-            //     "02" => "ก.พ.",
-            //     "03" => "มี.ค.",
-            //     "04" => "เม.ย.",
-            //     "05" => "พ.ค.",
-            //     "06" => "มิ.ย.",
-            //     "07" => "ก.ค.",
-            //     "08" => "ส.ค.",
-            //     "09" => "ก.ย.",
-            //     "10" => "ต.ค.",
-            //     "11" => "พ.ย.",
-            //     "12" => "ธ.ค."
-            // );
 
-            // list($year, $month2, $day) = explode("-", $row['date_director']);
-
-            // $thai_month2 = $thai_month_arr1[$month2];
-            // // แปลงให้อยู่ในรูปแบบไทย
-            // $newdate = date("d H:i:s", strtotime($row['date_director']));
-
-            // $newdate = ConvertToThaiDate($row['date_director']);
-            // $pdf->SetXY(138, 267);
-            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date_director']))), 0, 1);
-            // $pdf->SetXY(146, 267);
-            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
-            // $pdf->SetXY(155, 267);;
-            // $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
+            elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(60, 250);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
+            elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(140, 250);
+                // $pdf->SetXY(115, 190);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(115, 190);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
     $pdf->Output('I', 'generated_pdf.pdf');
@@ -842,23 +873,25 @@ if ($row['petition_id'] == 7) {
         exit('Template PDF not found at path: ' . $templatePath);
     }
 
+
     // $pageCount = $pdf->setSourceFile($templatePath);
     // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
-    // $pdf->addPage('L');
+
     // $pdf->useImportedPage($pageId);
+
     $pageCount = $pdf->setSourceFile($templatePath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         // Import each page
         $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
         // Add a page to the new document
+        // $pdf->addPage('L');
         $standardWidth = 220; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
         $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
 
         // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
         $pdf->AddPage('L', array($standardWidth, $customHeight));
-
         // Use the imported page
         $pdf->useImportedPage($pageId);
 
@@ -867,14 +900,21 @@ if ($row['petition_id'] == 7) {
         if ($pageNo == 1) {
             $details = explode(",", $row['details']);
             $positions = [
-                [220, 39],
-                [17, 58],
-                [27, 58],
-                [50, 58],
-                [105, 58],
-                [155, 58],
-                [217, 58],
-                [227, 58],
+                [220, 38],
+                [17, 57],
+                [27, 57],
+                [50, 57],
+                [105, 57],
+                [155, 57],
+                [217, 57],
+                [227, 57],
+                [17, 64],
+                [27, 64],
+                [50, 64],
+                [105, 64],
+                [155, 64],
+                [217, 64],
+                [227, 64],
                 [17, 70],
                 [27, 70],
                 [50, 70],
@@ -917,16 +957,9 @@ if ($row['petition_id'] == 7) {
                 [155, 103],
                 [217, 103],
                 [227, 103],
-                [17, 110],
-                [27, 110],
-                [50, 110],
-                [105, 110],
-                [155, 110],
-                [217, 110],
-                [227, 110],
             ];
             $datePositions = [2, 10, 17, 24, 31, 38, 45, 52];
-            $pdf->SetXY(163, 39);
+            $pdf->SetXY(163, 38);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_name']), 0, 1);
             foreach ($details as $index => $detail) {
                 $thai_month_arr1 = array(
@@ -956,7 +989,7 @@ if ($row['petition_id'] == 7) {
                             if (isset($thai_month_arr1[$month])) { // Ensure the month exists in your array
                                 $thaiMonth = $thai_month_arr1[$month]; // Use short month name
                                 // Reformat the date as desired, for example: "31 ม.ค. 2563"
-                                $formattedDate = $day . '' . $thaiMonth . '' . $year;
+                                $formattedDate = $day . ' ' . $thaiMonth . ' ' . $year;
 
                                 // Display the formatted date
                                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $formattedDate), 0, 1);
@@ -976,8 +1009,9 @@ if ($row['petition_id'] == 7) {
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
 
 
-
+                   
             $userName = $row['user_name'];
+            
             // Use preg_replace to remove titles, can be customized further as needed
             // Adding proper delimiters and escaping where necessary
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr\.)/i', '', $userName);
@@ -1019,7 +1053,7 @@ if ($row['petition_id'] == 7) {
 
 
             if (!empty($row['date_learning']) && $row['date_learning'] != '0000-00-00') {
-                $thai_month_arr1 = array(
+                $thai_month_arr3 = array(
                     "01" => "ม.ค.",
                     "02" => "ก.พ.",
                     "03" => "มี.ค.",
@@ -1033,22 +1067,23 @@ if ($row['petition_id'] == 7) {
                     "11" => "พ.ย.",
                     "12" => "ธ.ค."
                 );
-                list($year, $month1, $day) = explode("-", $row['date_learning']);
-                $thai_month1 = $thai_month_arr1[$month1];
+                list($year3, $month3, $day3) = explode("-", $row['date_learning']);
+                $thai_month3 = $thai_month_arr3[$month1];
                 // ปรับปรุงปีให้เป็นรูปแบบพุทธศักราช
-                $year = (int)$year + 543;
+                $year3 = (int)$year3 + 543;
 
                 // ตั้งค่าตำแหน่ง XY และแสดงวันที่
                 $pdf->SetXY(145, 130);
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day3), 0, 1);
                 $pdf->SetXY(155, 130);
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month3), 0, 1);
                 $pdf->SetXY(165, 130);
-                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year3), 0, 1);
             } else {
                 // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
-                // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
+                $pdf->SetXY(165, 130);
+                $pdf->Cell(0, 10, ' ', 0, 1);
             }
 
             $userName = $row['group_leader_name'];
@@ -1057,10 +1092,10 @@ if ($row['petition_id'] == 7) {
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr)/i', '', $userName);
 
             // Convert the cleaned name to a format usable in TCPDF
-            $pdf->SetXY(138, 115);
+            $pdf->SetXY(138, 107);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName), 0, 1);
 
-            $pdf->SetXY(132, 107);
+            $pdf->SetXY(132, 115);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['group_leader_name']), 0, 1);
 
             $pdf->SetXY(162, 123);
@@ -1068,7 +1103,7 @@ if ($row['petition_id'] == 7) {
 
             if ($row['id_status'] == 3) {
                 // Set the cursor position on the PDF for the Deputy Director's name
-                $pdf->SetXY(130, 168);
+                $pdf->SetXY(50, 260);
                 // Create a cell and insert the Deputy Director's name from the database
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
                 // The Director's name is not added when id_status is 3
@@ -1083,7 +1118,6 @@ if ($row['petition_id'] == 7) {
                 $pdf->SetXY(223, 163);
                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
             }
-
 
             if (!empty($row['date_deputydirector']) && $row['date_deputydirector'] != '0000-00-00') {
                 $thai_month_arr = array(
@@ -1116,11 +1150,32 @@ if ($row['petition_id'] == 7) {
                 // กรณีที่ไม่มีข้อมูล date_learning หรือข้อมูลเป็น 0000-00-00
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 $pdf->SetXY(165, 130);
-                $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
+                $pdf->Cell(0, 10, '', 0, 1);
             }
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(140, 165);
+            
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(225, 165);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            }elseif($row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(140, 107);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
         }
     }
-
 
     $pdf->Output('I', 'generated_pdf.pdf');
 } elseif ($row['petition_id'] == 3) {
@@ -1137,6 +1192,8 @@ if ($row['petition_id'] == 7) {
 
     // $pdf->addPage();
     // $pdf->useImportedPage($pageId);
+
+
     $pageCount = $pdf->setSourceFile($templatePath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         // Import each page
@@ -1151,6 +1208,7 @@ if ($row['petition_id'] == 7) {
         // If you have specific content to add to each page, you can do so here.
         // Note: You might need to adjust positions or content based on the page number if necessary.
         if ($pageNo == 1) {
+
             $details = explode(",", $row['details']);
             $positions = [
                 [110, 55],
@@ -1475,6 +1533,27 @@ if ($row['petition_id'] == 7) {
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(160, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(38, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            }elseif($row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(193, 18);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } 
         }
     }
 
@@ -1491,11 +1570,7 @@ if ($row['petition_id'] == 7) {
     // $pageCount = $pdf->setSourceFile($templatePath);
     // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
-    // $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
-    // $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
 
-    // // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
-    // $pdf->AddPage('P', array($standardWidth, $customHeight));
     // $pdf->useImportedPage($pageId);
     $pageCount = $pdf->setSourceFile($templatePath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
@@ -1508,7 +1583,6 @@ if ($row['petition_id'] == 7) {
 
         // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
         $pdf->AddPage('P', array($standardWidth, $customHeight));
-
         // Use the imported page
         $pdf->useImportedPage($pageId);
 
@@ -1516,7 +1590,6 @@ if ($row['petition_id'] == 7) {
         // Note: You might need to adjust positions or content based on the page number if necessary.
         if ($pageNo == 1) {
 
-            $details = explode(",", $row['details']);
             $positions = [
                 [45, 53],
                 [128, 53],
@@ -1620,7 +1693,6 @@ if ($row['petition_id'] == 7) {
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month1), 0, 1);
             $pdf->SetXY(160, 214);;
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
-
 
             $pdf->SetXY(135, 200);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
@@ -1739,8 +1811,8 @@ if ($row['petition_id'] == 7) {
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
             $iconPositions_1 = [
-                '1' => ['x' => 112, 'y' => 246, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 112, 'y' => 253, 'icon' => './img/8666665_check_icon.png'],
+                '1' => ['x' => 112, 'y' => 246, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 112, 'y' => 253, 'icon' => './img/check-mark_5291043.png'],
 
             ];
             if (isset($row['memo_type']) && array_key_exists($row['memo_type'], $iconPositions_1)) {
@@ -1755,6 +1827,29 @@ if ($row['petition_id'] == 7) {
             }
             $pdf->SetXY(125, 251);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['save_a_message']), 0, 1);
+
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+                // กรณี idDeputy_Director = 2 และ id_status = 5
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(70, 255);
+                // $pdf->SetXY(135, 255);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(38, 205);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(38, 207);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
     $pdf->Output('I', 'generated_pdf.pdf');
@@ -1790,9 +1885,8 @@ if ($row['petition_id'] == 7) {
         // Note: You might need to adjust positions or content based on the page number if necessary.
         if ($pageNo == 1) {
             $details = explode(",", $row['details']);
-            $pdf->SetXY(155, 43);
-            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['subject_name']), 0, 1);
             $positions = [
+                [155, 43],
                 [200, 43],
                 [230, 43],
                 [23, 79],
@@ -1921,6 +2015,7 @@ if ($row['petition_id'] == 7) {
     }
 
 
+
     $pdf->Output('I', 'generated_pdf.pdf');
 } elseif ($row['petition_id'] == 9) {
     $templatePath = __DIR__ . '/file/แบบขออนุญาตผู้บังคับบัญชาพานักเรียนไปนอกสถานศึกษา.docx.pdf'; // Adjust path as necessary
@@ -1934,24 +2029,21 @@ if ($row['petition_id'] == 7) {
     // $pageCount = $pdf->setSourceFile($templatePath);
     // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
-    // $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
-    // $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
-
-    // // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
-    // $pdf->AddPage('P', array($standardWidth, $customHeight));
     // $pdf->useImportedPage($pageId);
+
     $pageCount = $pdf->setSourceFile($templatePath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         // Import each page
         $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
         // Add a page to the new document
+        // $pdf->AddPage();
+
         $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
         $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
 
         // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
         $pdf->AddPage('P', array($standardWidth, $customHeight));
-
         // Use the imported page
         $pdf->useImportedPage($pageId);
 
@@ -2126,8 +2218,8 @@ if ($row['petition_id'] == 7) {
             }
             // การพิจารณาสั่งการของครู
             $iconPositions_1 = [
-                '1' => ['x' => 114, 'y' => 235, 'icon' => './img/8666665_check_icon.png'],
-                '2' => ['x' => 114, 'y' => 243, 'icon' => './img/8666665_check_icon.png'],
+                '1' => ['x' => 114, 'y' => 235, 'icon' => './img/check-mark_5291043.png'],
+                '2' => ['x' => 114, 'y' => 243, 'icon' => './img/check-mark_5291043.png'],
 
             ];
             if (isset($row['consider_group_leader']) && array_key_exists($row['consider_group_leader'], $iconPositions_1)) {
@@ -2142,6 +2234,7 @@ if ($row['petition_id'] == 7) {
             }
             $pdf->SetXY(135, 243);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['details_group_leader']), 0, 1);
+
 
 
             if (!empty($row['date_deputydirector']) && $row['date_deputydirector'] != '0000-00-00') {
@@ -2209,11 +2302,33 @@ if ($row['petition_id'] == 7) {
                 // คุณอาจจะเลือกที่จะแสดงข้อความว่าง หรือข้อความอื่นๆ
                 // $pdf->Cell(0, 10, 'ไม่ระบุ', 0, 1);
             }
+            
         }
+       
+        
     }
-
-
-
+    if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+        // กรณี id_officer = 6 และ id_status = 6
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(20, 150);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+    } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+        // กรณี idDeputy_Director = 2 และ id_status = 5
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(65, 253);
+        // $pdf->SetXY(135, 255);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+    } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+        // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(143, 253);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+    } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+        // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+        $pdf->SetTextColor(255, 0, 0);
+        $pdf->SetXY(105, 200);
+        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+    } 
     $pdf->Output('I', 'generated_pdf.pdf');
 } elseif ($row['petition_id'] == 10) {
     $templatePath = __DIR__ . '/file/แบบขออนุญาตนำนักเรียนเข้าร่วมกิจกรรมในเวลาเรียน.docx.pdf'; // Adjust path as necessary
@@ -2229,6 +2344,7 @@ if ($row['petition_id'] == 7) {
 
     // $pdf->addPage();
     // $pdf->useImportedPage($pageId);
+
     $pageCount = $pdf->setSourceFile($templatePath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         // Import each page
@@ -2291,13 +2407,7 @@ if ($row['petition_id'] == 7) {
                         $pdf->SetXY($x + 23, $y);
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
                         $pdf->SetXY($x + 50, $y);
-                        $pdf->Cell(
-                            0,
-                            10,
-                            iconv('UTF-8', 'cp874', $year),
-                            0,
-                            1
-                        );
+                        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
                     } else {
                         // แสดงข้อมูลอื่นๆ ที่ไม่ใช่วันที่
                         $pdf->SetXY($x, $y);
@@ -2309,13 +2419,7 @@ if ($row['petition_id'] == 7) {
             $userName = $row['user_name'];
             $cleanName = preg_replace('/(นาย|นางสาว|นาง|ดร\.|ผศ\.|รศ\.|ศ\.|Mr\.|Mrs\.|Ms\.|Dr\.)/i', '', $userName);
             $pdf->SetXY(100, 66);
-            $pdf->Cell(
-                0,
-                10,
-                iconv('UTF-8', 'cp874', $cleanName . ' ' . $row['last_name']),
-                0,
-                1
-            );
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName . ' ' . $row['last_name']), 0, 1);
 
 
             $thai_month_arr = array(
@@ -2334,14 +2438,7 @@ if ($row['petition_id'] == 7) {
             );
 
 
-            list(
-                $year,
-                $month,
-                $day
-            ) = explode(
-                "-",
-                $row['date']
-            );
+            list($year, $month, $day) = explode("-", $row['date']);
             $thai_month = $thai_month_arr[$month];
             // แปลงให้อยู่ในรูปแบบไทย
             $newdate = date("d H:i:s", strtotime($row['date']));
@@ -2360,44 +2457,122 @@ if ($row['petition_id'] == 7) {
             $pdf->SetXY(30, 252);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $cleanName . ' ' . $row['last_name']), 0, 1);
 
+            // if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+            //     // กรณี id_officer = 6 และ id_status = 6
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(20, 150);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            // } elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+            //     // กรณี idDeputy_Director = 2 และ id_status = 5
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(65, 255);
+            //     // $pdf->SetXY(135, 255);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            // } elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+            //     // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(143, 253);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            // } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+            //     // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(105, 200);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            // } 
+        }
+    }
+    $pdf->Output('I', 'generated_pdf.pdf');
+} elseif ($row['petition_id'] == 11) {
+    $templatePath = __DIR__ . '/file/ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ.docx.pdf'; // Adjust path as necessary
+    // Process and display the details
+    $details = explode(",", $row['details']);
+
+    if (!file_exists($templatePath)) {
+        exit('Template PDF not found at path: ' . $templatePath);
+    }
+
+    // $pageCount = $pdf->setSourceFile($templatePath);
+    // $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
 
+    // $pdf->useImportedPage($pageId);
 
-            $pdf->Output('I', 'generated_pdf.pdf');
-        } elseif ($row['petition_id'] == 11) {
-            $templatePath = __DIR__ . '/file/ขออนุญาตให้นักเรียนไปโรงเรียนเป็นกรณีพิเศษ.docx.pdf'; // Adjust path as necessary
-            // Process and display the details
-            $details = explode(",", $row['details']);
 
-            if (!file_exists($templatePath)) {
-                exit('Template PDF not found at path: ' . $templatePath);
-            }
+    $pageCount = $pdf->setSourceFile($templatePath);
+    for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+        // Import each page
+        $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
 
-            $pageCount = $pdf->setSourceFile($templatePath);
-            $pageId = $pdf->importPage(1, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
+        // Add a page to the new document
+        $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
+        $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
 
-            $pdf->addPage();
-            $pdf->useImportedPage($pageId);
+        // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
+        $pdf->AddPage('P', array($standardWidth, $customHeight));
+
+        // Use the imported page
+        $pdf->useImportedPage($pageId);
+
+        // If you have specific content to add to each page, you can do so here.
+        // Note: You might need to adjust positions or content based on the page number if necessary.
+        if ($pageNo == 1) {
             $details = explode(",", $row['details']);
             $positions = [
-                [115, 101],
+                [
+                    115,
+                    101
+                ],
                 [52, 108],
                 [60, 108],
                 [108, 108],
                 [40, 115],
-                [113, 115],
                 [
-                    145,
+                    113,
                     115
                 ],
+                [145, 115],
                 [70, 123],
                 [60, 233],
-                [73, 218],
+                [
+                    73,
+                    218
+                ],
                 [150, 218],
                 [73, 226],
                 [150, 226]
 
             ];
+
+            $thai_month_arr = array(
+                "01" => "มกราคม",
+                "02" => "กุมภาพันธ์",
+                "03" => "มีนาคม",
+                "04" => "เมษายน",
+                "05" => "พฤษภาคม",
+                "06" => "มิถุนายน",
+                "07" => "กรกฎาคม",
+                "08" => "สิงหาคม",
+                "09" => "กันยายน",
+                "10" => "ตุลาคม",
+                "11" => "พฤศจิกายน",
+                "12" => "ธันวาคม"
+            );
+
+
+            list($year, $month, $day) = explode("-", $row['date']);
+            $thai_month = $thai_month_arr[$month];
+            // แปลงให้อยู่ในรูปแบบไทย
+            $newdate = date("d H:i:s", strtotime($row['date']));
+            $newdate = ConvertToThaiDate($row['date']);
+            $pdf->SetXY(109, 73);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date']))), 0, 1);
+            $pdf->SetXY(116, 73);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1);
+            $pdf->SetXY(130, 73);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
+
+
+
             foreach ($details as $index => $detail) {
                 if (isset($positions[$index])) {
                     list($x, $y) = $positions[$index];
@@ -2416,30 +2591,16 @@ if ($row['petition_id'] == 7) {
                         "11" => "พฤศจิกายน",
                         "12" => "ธันวาคม"
                     );
-                    $days_in_thai = array(
-                        "อาทิตย์",
-                        "จันทร์",
-                        "อังคาร",
-                        "พุธ",
-                        "พฤหัสบดี",
-                        "ศุกร์",
-                        "เสาร์"
-                    );
+                    $days_in_thai = array("อาทิตย์", "จันทร์", "อังคาร", "พุธ", "พฤหัสบดี", "ศุกร์", "เสาร์");
                     // แปลงเดือนให้เป็นภาษาไทย
-                    $month_thai = $thai_month_arr[date(
-                        "m",
-                        strtotime($detail)
-                    )];
+                    $month_thai = $thai_month_arr[date("m", strtotime($detail))];
 
                     // ตรวจสอบว่าข้อมูลที่ต้องการแสดงเป็นวันที่หรือไม่
                     if ($index == 4) { // ตำแหน่งที่ 5 ของ $details เป็นวันที่ (เหมือนเดิม)
                         // แยกวัน เดือน และปีออกจากกัน
                         setlocale(LC_TIME, 'th_TH');
                         // $date = "2024-02-21"; // วันที่ต้องการแปลง
-                        $day_index = date(
-                            'w',
-                            strtotime($detail)
-                        );
+                        $day_index = date('w', strtotime($detail));
 
                         // รับชื่อวันภาษาไทยจาก array
                         $day_name_thai = $days_in_thai[$day_index];
@@ -2457,13 +2618,7 @@ if ($row['petition_id'] == 7) {
                         $pdf->SetXY($x + 30, $y);
                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
                         $pdf->SetXY($x + 54, $y);
-                        $pdf->Cell(
-                            0,
-                            10,
-                            iconv('UTF-8', 'cp874', $year),
-                            0,
-                            1
-                        );
+                        $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
                     } else {
                         // แสดงข้อมูลอื่นๆ ที่ไม่ใช่วันที่
                         $pdf->SetXY($x, $y);
@@ -2472,8 +2627,36 @@ if ($row['petition_id'] == 7) {
                 }
             }
             $newdate = ConvertToThaiDate($row['date']);
-            $pdf->SetXY(120, 276.5);
+            $pdf->SetXY(94, 283);
             $pdf->Cell(0, 0, iconv('UTF-8', 'cp874', $newdate), 0, 1);
+
+            $pdf->SetXY(110, 165);
+            $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
+
+            if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
+                // กรณี id_officer = 6 และ id_status = 6
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(20, 150);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
+            // elseif ($row['idDeputy_Director'] == 2 && $row['id_status'] == 9) {
+            //     // กรณี idDeputy_Director = 2 และ id_status = 5
+            //     $pdf->SetTextColor(255, 0, 0);
+            //     $pdf->SetXY(65, 253);
+            //     // $pdf->SetXY(135, 255);
+            //     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            // } 
+            elseif ($row['id_Director'] == 1 && $row['id_status'] == 5) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(120, 160);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่อนุมัติ'), 0, 1);
+            } elseif ($row['id_subject_group'] == 8 && $row['id_status'] == 6) {
+                // กรณี id_Director = 1 และ id_status = 5 แต่ idDeputy_Director ไม่เท่ากับ 2
+                $pdf->SetTextColor(255, 0, 0);
+                $pdf->SetXY(105, 200);
+                $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', 'ไม่ผ่านพิจารณา'), 0, 1);
+            } 
         }
     }
 
@@ -2489,296 +2672,6 @@ if ($row['petition_id'] == 7) {
 
 
     $pageCount = $pdf->setSourceFile($templatePath);
-    // for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-    //     // Import each page
-    //     $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
-
-    //     // Add a page to the new document
-    //     $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
-    //     $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
-
-    //     // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
-    //     $pdf->AddPage('P', array($standardWidth, $customHeight));
-
-    //     // Use the imported page
-    //     $pdf->useImportedPage($pageId);
-
-    //     // If you have specific content to add to each page, you can do so here.
-    //     // Note: You might need to adjust positions or content based on the page number if necessary.
-    //     if ($pageNo == 1) {
-    //         $details = explode(",", $row['details']);
-    //         $thai_month_arr = array(
-    //             "01" => "มกราคม",
-    //             "02" => "กุมภาพันธ์",
-    //             "03" => "มีนาคม",
-    //             "04" => "เมษายน",
-    //             "05" => "พฤษภาคม",
-    //             "06" => "มิถุนายน",
-    //             "07" => "กรกฎาคม",
-    //             "08" => "สิงหาคม",
-    //             "09" => "กันยายน",
-    //             "10" => "ตุลาคม",
-    //             "11" => "พฤศจิกายน",
-    //             "12" => "ธันวาคม"
-    //         );
-
-    //         list($year, $month, $day) = explode("-", $row['date']);
-    //         $thai_month = $thai_month_arr[$month];
-    //         // แปลงให้อยู่ในรูปแบบไทย
-    //         $newdate = date("d H:i:s", strtotime($row['date']));
-    //         $newdate = ConvertToThaiDate($row['date']);
-    //         $pdf->SetXY(140, 42);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date']))), 0, 1);
-    //         $pdf->SetXY(155, 42);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1);
-    //         $pdf->SetXY(185, 42);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
-
-    //         $iconPositions_1 = [
-    //             '1' => ['x' => 25, 'y' => 85, 'icon' => './img/check-mark_5291043.png'],
-    //             '2' => ['x' => 25, 'y' => 93, 'icon' => './img/check-mark_5291043.png'],
-    //             '3' => ['x' => 25, 'y' => 100, 'icon' => './img/check-mark_5291043.png'],
-
-    //         ];
-    //         if (isset($row['leave_type']) && array_key_exists($row['leave_type'], $iconPositions_1)) {
-    //             // หากมี memo_type ที่เป็นไปได้ใน $iconPositions จะแสดงไอคอน
-    //             $icon = $iconPositions_1[$row['leave_type']]['icon'];
-
-
-    //             $x = $iconPositions_1[$row['leave_type']]['x'];
-
-    //             $y = $iconPositions_1[$row['leave_type']]['y'];
-    //             $pdf->Image($icon, $x, $y, 5, 5);
-    //         }
-
-    //         $pdf->SetXY(60, 90);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['reason_for_leave']), 0, 1);
-    //         $positions = [
-    //             [20, 60], [40, 75], [140, 75], [118, 105], [163, 105], [30, 113], [100, 113]
-
-    //         ];
-    //         foreach ($details as $index => $detail) {
-    //             if (isset($positions[$index])) {
-    //                 list($x, $y) = $positions[$index];
-    //                 $month_thai = $thai_month_arr[date("m", strtotime($detail))];
-
-    //                 // ตรวจสอบว่าข้อมูลที่ต้องการแสดงเป็นวันที่หรือไม่
-    //                 if ($index == 3) { // ตำแหน่งที่ 5 ของ $details เป็นวันที่ (เหมือนเดิม)
-    //                     // แยกวัน เดือน และปีออกจากกัน
-    //                     $date_components = explode('-', $detail);
-    //                     $day = $date_components[2];
-    //                     $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
-    //                     $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
-
-    //                     // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
-    //                     $pdf->SetXY($x, $y);
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-    //                     $pdf->SetXY($x + 5, $y);
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
-    //                     $pdf->SetXY($x + 23, $y);
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
-    //                 } elseif ($index == 4) { // ตำแหน่งที่ 8 ของ $details เป็นวันที่ (ตำแหน่งใหม่)
-    //                     // แยกวัน เดือน และปีออกจากกัน
-    //                     $date_components = explode('-', $detail);
-    //                     $day = $date_components[2];
-    //                     $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
-    //                     $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
-
-    //                     // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
-    //                     $pdf->SetXY($x, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-    //                     $pdf->SetXY($x + 5, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
-    //                     $pdf->SetXY($x + 23, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
-    //                 } else {
-    //                     // แสดงข้อมูลอื่นๆ ที่ไม่ใช่วันที่
-    //                     $pdf->SetXY($x, $y);
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
-    //                 }
-    //             }
-    //         }
-    //         $pdf->SetXY(155, 158);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
-
-    //         $pdf->SetXY(165, 173);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['name_type']), 0, 1);
-
-    //         $pdf->SetXY(150, 210);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
-
-
-    //         $pdf->SetXY(30, 210);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
-
-
-    //     }
-    // }
-    // for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-    //     // Import each page
-    //     $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
-
-    //     // Add a page to the new document
-    //     $standardWidth = 215; // ความกว้างมาตรฐานของ A4 ในมิลลิเมตร
-    //     $customHeight = 305; // ตัวอย่างความสูงที่เพิ่มขึ้น, คุณสามารถปรับให้เหมาะสม
-
-    //     // กำหนดขนาดหน้าเมื่อเพิ่มหน้าใหม่
-    //     $pdf->AddPage('P', array($standardWidth, $customHeight));
-
-    //     // Use the imported page
-    //     $pdf->useImportedPage($pageId);
-
-    //     // If you have specific content to add to each page, you can do so here.
-    //     if ($pageNo == 1) {
-    //         $details = explode(",", $row['details']);
-    //         $thai_month_arr = array(
-    //             "01" => "มกราคม",
-    //             "02" => "กุมภาพันธ์",
-    //             "03" => "มีนาคม",
-    //             "04" => "เมษายน",
-    //             "05" => "พฤษภาคม",
-    //             "06" => "มิถุนายน",
-    //             "07" => "กรกฎาคม",
-    //             "08" => "สิงหาคม",
-    //             "09" => "กันยายน",
-    //             "10" => "ตุลาคม",
-    //             "11" => "พฤศจิกายน",
-    //             "12" => "ธันวาคม"
-    //         );
-
-    //         list($year, $month, $day) = explode("-", $row['date']);
-    //         $thai_month = $thai_month_arr[$month];
-    //         $newdate = ConvertToThaiDate($row['date']);
-    //         $pdf->SetXY(140, 42);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', date("d", strtotime($row['date']))), 0, 1);
-    //         $pdf->SetXY(155, 42);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $thai_month), 0, 1);
-    //         $pdf->SetXY(185, 42);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year + 543), 0, 1);
-
-    //         $iconPositions_1 = [
-    //             '1' => ['x' => 25, 'y' => 85, 'icon' => './img/check-mark_5291043.png'],
-    //             '2' => ['x' => 25, 'y' => 93, 'icon' => './img/check-mark_5291043.png'],
-    //             '3' => ['x' => 25, 'y' => 100, 'icon' => './img/check-mark_5291043.png'],
-    //         ];
-
-    //         if (isset($row['leave_type']) && array_key_exists($row['leave_type'], $iconPositions_1)) {
-    //             $icon = $iconPositions_1[$row['leave_type']]['icon'];
-    //             $x = $iconPositions_1[$row['leave_type']]['x'];
-    //             $y = $iconPositions_1[$row['leave_type']]['y'];
-    //             $pdf->Image($icon, $x, $y, 5, 5);
-    //         }
-
-    //         $pdf->SetXY(60, 90);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['reason_for_leave']), 0, 1);
-
-    //         // ตำแหน่งของข้อมูลแต่ละรายการใน $details
-    //         $positions = [
-    //             [20, 60], // ตำแหน่งสำหรับข้อมูลในลำดับที่ 0 ของอาร์เรย์
-    //             [40, 75], // ตำแหน่งสำหรับข้อมูลในลำดับที่ 1 ของอาร์เรย์
-    //             [140, 75], // ตำแหน่งสำหรับข้อมูลในลำดับที่ 2 ของอาร์เรย์
-    //             [118, 105],
-    //             [163, 105],
-    //             [30, 113],
-    //             [100, 113] // ตำแหน่งอื่น ๆ ...
-    //         ];
-
-    //         // สร้าง array ของสถานะ
-    //         $status_mapping = [
-    //             '1' => 'ป่วย',
-    //             '2' => 'กิจส่วนตัว',
-    //             '3' => 'คลอดบุตร'
-    //         ];
-
-    //         // ตรวจสอบและแปลงเฉพาะข้อมูลในลำดับที่ 0 ของอาร์เรย์
-    //         if (isset($details[0]) && isset($positions[0])) {
-    //             list($x, $y) = $positions[0];
-
-    //             // ตรวจสอบว่าค่าใน $details[0] เป็น 1, 2 หรือ 3 และแสดงสถานะที่ถูกต้อง
-    //             if (isset($status_mapping[$details[0]])) {
-    //                 $status = $status_mapping[$details[0]]; // แปลงค่าเป็นสถานะ
-    //                 $pdf->SetXY($x, $y); // กำหนดตำแหน่งสำหรับข้อมูลตำแหน่งที่ 0
-    //                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $status), 0, 1); // แสดงสถานะใน PDF
-    //             } else {
-    //                 // กรณีที่ไม่ใช่สถานะ ให้แสดงค่าปกติ
-    //                 $pdf->SetXY($x, $y);
-    //                 $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $details[0]), 0, 1);
-    //             }
-    //         }
-
-    //         // ลูปผ่านข้อมูล $details ที่เหลือ แต่ไม่แปลงค่าในตำแหน่งที่ 0
-    //         foreach ($details as $index => $detail) {
-    //             if ($index > 0 && isset($positions[$index])) {
-    //                 list($x, $y) = $positions[$index];
-
-    //                 // ตรวจสอบว่าข้อมูลใน index เป็นวันที่หรือข้อมูลทั่วไป
-    //                 if ($index == 3) { // ตำแหน่งที่ 5 ของ $details เป็นวันที่ (ตำแหน่งเดิม)
-    //                     // แยกวัน เดือน และปีออกจากกัน
-    //                     $date_components = explode('-', $detail);
-    //                     if (count($date_components) === 3) { // ตรวจสอบว่ามีวันที่ถูกต้อง
-    //                         $day = $date_components[2];
-    //                         $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
-    //                         $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
-
-    //                         // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
-    //                         $pdf->SetXY($x, $y);
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-    //                         $pdf->SetXY($x + 5, $y);
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
-    //                         $pdf->SetXY($x + 23, $y);
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
-    //                     } else {
-    //                         // หากข้อมูลไม่เป็นวันที่ที่ถูกต้อง ให้แสดงข้อมูลเดิม
-    //                         $pdf->SetXY($x, $y);
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
-    //                     }
-    //                 } elseif ($index == 4) { // ตำแหน่งที่ 8 ของ $details เป็นวันที่ (ตำแหน่งใหม่)
-    //                     // แยกวัน เดือน และปีออกจากกัน
-    //                     $date_components = explode('-', $detail);
-    //                     if (count($date_components) === 3) { // ตรวจสอบว่ามีวันที่ถูกต้อง
-    //                         $day = $date_components[2];
-    //                         $month_thai = $thai_month_arr[date("m", strtotime($detail))]; // เดือนภาษาไทย
-    //                         $year = date("Y", strtotime($detail)) + 543; // เพิ่ม 543 เพื่อแปลงเป็นปีไทย
-
-    //                         // แสดงข้อมูลในรูปแบบไทยและแยกออกเป็นวัน เดือน และปี
-    //                         $pdf->SetXY($x, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $day), 0, 1);
-    //                         $pdf->SetXY($x + 5, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $month_thai), 0, 1);
-    //                         $pdf->SetXY($x + 23, $y); // เปลี่ยนตำแหน่ง X เพื่อให้เหมือนเดิม
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $year), 0, 1);
-    //                     } else {
-    //                         // หากข้อมูลไม่เป็นวันที่ที่ถูกต้อง ให้แสดงข้อมูลเดิม
-    //                         $pdf->SetXY($x, $y);
-    //                         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
-    //                     }
-    //                 } else {
-    //                     // แสดงข้อมูลอื่นๆ ที่ไม่ใช่วันที่
-    //                     $pdf->SetXY($x, $y);
-    //                     $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $detail), 0, 1);
-    //                 }
-    //             }
-    //         }
-
-    //         $pdf->SetXY(155, 158);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_name'] . ' ' . $row['last_name']), 0, 1);
-
-    //         $pdf->SetXY(20, 150);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['Officer_comments']), 0, 1);
-
-    //         $pdf->SetXY(23, 173);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['user_namein'] . ' ' . $row['last_namein']), 0, 1);
-
-    //         $pdf->SetXY(165, 173);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['name_type']), 0, 1);
-
-    //         $pdf->SetXY(150, 210);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DeputyDirectorName']), 0, 1);
-
-    //         $pdf->SetXY(30, 210);
-    //         $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
-    //     }
-    // }
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         // Import each page
         $pageId = $pdf->importPage($pageNo, \setasign\Fpdi\PdfReader\PageBoundaries::MEDIA_BOX);
@@ -2945,7 +2838,7 @@ if ($row['petition_id'] == 7) {
 
             $pdf->SetXY(30, 210);
             $pdf->Cell(0, 10, iconv('UTF-8', 'cp874', $row['DirectorName']), 0, 1);
-            
+
             if ($row['id_officer'] == 6 && $row['id_status'] == 6) {
                 // กรณี id_officer = 6 และ id_status = 6
                 $pdf->SetTextColor(255, 0, 0);

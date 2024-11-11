@@ -10,10 +10,10 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row">
-                    <h2 class="m-0">จัดการข้อมูลผู้ใช้ระบบ</h2>
+                    <h2 class="m-0">เพิ่มข้อมูลลงเวลา เข้า - ออกงาน</h2>
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="./home.php">หน้าหลัก</a></li>
-                        <li class="breadcrumb-item active">จัดการข้อมูลผู้ใช้ระบบ</li>
+                        <li class="breadcrumb-item active">เพิ่มข้อมูลลงเวลา เข้า - ออกงาน</li>
                     </ol>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                                     <label for="picture" class="form-label" style="font-size: 18px;">รูปภาพ</label>
                                     <div>
                                         <img id="uploaded_image_edit" src="#" alt="Selected Image" style="display:none; width: 20%; height: 20%;">
-                                        <input type="file" id="picture" name="picture" class="form-control" onchange="displayImageEdit(this)">
+                                        <input type="file" id="picture" name="picture[]" class="form-control" multiple onchange="displayImageEdit(this)">
                                     </div>
                                 </div>
                             </div>

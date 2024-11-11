@@ -37,10 +37,10 @@ $timeLogs = $stmt->fetch(PDO::FETCH_ASSOC);
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row">
-                        <h2 class="m-0">จัดการข้อมูลผู้ใช้ระบบ</h2>
+                        <h2 class="m-0">จัดการเวลาการลงเวลา เข้า - ออกงาน</h2>
                         <ol class="breadcrumb float-sm-end">
                             <li class="breadcrumb-item"><a href="./home.php">หน้าหลัก</a></li>
-                            <li class="breadcrumb-item active">จัดการข้อมูลผู้ใช้ระบบ</li>
+                            <li class="breadcrumb-item active">จัดการเวลาการลงเวลา เข้า - ออกงาน</li>
                         </ol>
                     </div>
                 </div>
